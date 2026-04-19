@@ -1,5 +1,5 @@
 {
-  "name": "syngy-packages",
+  "name": "octopus-packages",
   "private": true,
   "workspaces": [
     "packages/*"
