@@ -628,8 +628,33 @@ export interface BasePinOKVoListTeamComputeImagesResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListTeamDevicesResponse {
+  data?: VoListTeamDevicesResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListTeamExternalUserTagsResponse {
   data?: VoListTeamExternalUserTagsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListTeamKbDirectoriesResponse {
+  data?: VoListTeamKbDirectoriesResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListTeamKbSyncBindingsResponse {
+  data?: VoListTeamKbSyncBindingsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListTeamMcpTunnelBindingsResponse {
+  data?: VoListTeamMcpTunnelBindingsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListTeamMcpTunnelsResponse {
+  data?: VoListTeamMcpTunnelsResponse;
   trace_id?: string;
 }
 
@@ -743,8 +768,28 @@ export interface BasePinOKVoTeamBillingSummaryResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamDevice {
+  data?: VoTeamDevice;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamIntegrationVO {
   data?: VoTeamIntegrationVO;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamKbDirectory {
+  data?: VoTeamKbDirectory;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamKbSyncBinding {
+  data?: VoTeamKbSyncBinding;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamMcpTunnel {
+  data?: VoTeamMcpTunnel;
   trace_id?: string;
 }
 
@@ -785,6 +830,11 @@ export interface BasePinOKVoTenantAdminDigiWorkerAutoCreateThresholdResponse {
 
 export interface BasePinOKVoTenantAdminSettlementConfig {
   data?: VoTenantAdminSettlementConfig;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoValidateTeamKbSyncTargetResponse {
+  data?: VoValidateTeamKbSyncTargetResponse;
   trace_id?: string;
 }
 
@@ -1753,6 +1803,25 @@ export interface VoCreateStationRequest {
   title?: string;
 }
 
+export interface VoCreateTeamKbDirectoryRequest {
+  path: string;
+}
+
+export interface VoCreateTeamKbSyncBindingRequest {
+  deviceId?: string;
+  sourceKind: string;
+  sourcePath: string;
+  targetDirectory: string;
+}
+
+export interface VoCreateTeamMcpTunnelRequest {
+  deviceId: string;
+  localEndpoint: string;
+  name: string;
+  provider: string;
+  publicEndpoint: string;
+}
+
 export interface VoCreateTeamRequest {
   bootstrapConversationId?: string;
   locale?: string;
@@ -2259,8 +2328,28 @@ export interface VoListTeamComputeImagesResponse {
   items?: VoTeamComputeImageItem[];
 }
 
+export interface VoListTeamDevicesResponse {
+  items?: VoTeamDevice[];
+}
+
 export interface VoListTeamExternalUserTagsResponse {
   tags?: string[];
+}
+
+export interface VoListTeamKbDirectoriesResponse {
+  items?: VoTeamKbDirectory[];
+}
+
+export interface VoListTeamKbSyncBindingsResponse {
+  items?: VoTeamKbSyncBinding[];
+}
+
+export interface VoListTeamMcpTunnelBindingsResponse {
+  items?: VoTeamMcpTunnelBinding[];
+}
+
+export interface VoListTeamMcpTunnelsResponse {
+  items?: VoTeamMcpTunnel[];
 }
 
 export interface VoListTeamMembersResponse {
@@ -2375,6 +2464,12 @@ export interface VoPatchSkillsetRequest {
   name?: string;
 }
 
+export interface VoPatchTeamMcpTunnelRequest {
+  localEndpoint?: string;
+  name?: string;
+  publicEndpoint?: string;
+}
+
 export interface VoPatchTeamMembershipProfileRequest {
   avatarSourceType?: string;
   avatarStorageKey?: string;
@@ -2413,6 +2508,13 @@ export interface VoPostConversationHumanTurnRequest {
 export interface VoPostConversationHumanTurnResponse {
   accepted?: boolean;
   turnId?: string;
+}
+
+export interface VoRegisterTeamDeviceRequest {
+  clientId: string;
+  clientType: string;
+  deviceName: string;
+  platformBaseUrl: string;
 }
 
 export interface VoRemoteTaskDeleteResponse {
@@ -2559,6 +2661,19 @@ export interface VoTeamDeleteRequest {
   scope?: VoTeamRootScope;
 }
 
+export interface VoTeamDevice {
+  boundMcpTunnelsCount?: number;
+  clientId?: string;
+  clientType?: string;
+  deviceName?: string;
+  lastSeenAt?: string;
+  platformBaseUrl?: string;
+  registeredAt?: string;
+  status?: string;
+  teamDeviceId?: string;
+  teamId?: string;
+}
+
 export interface VoTeamIntegrationVO {
   agentId?: string;
   appType?: string;
@@ -2575,6 +2690,46 @@ export interface VoTeamIntegrationVO {
   syncStatus?: string;
   teamId?: string;
   updatedAt?: string;
+}
+
+export interface VoTeamKbDirectory {
+  createdAt?: string;
+  id?: string;
+  name?: string;
+  parentPath?: string;
+  path?: string;
+}
+
+export interface VoTeamKbSyncBinding {
+  bindingId?: string;
+  createdAt?: string;
+  deviceId?: string;
+  sourceKind?: string;
+  sourcePath?: string;
+  targetDirectory?: string;
+  teamId?: string;
+}
+
+export interface VoTeamMcpTunnel {
+  activatedAt?: string;
+  boundAgentsCount?: number;
+  deactivatedAt?: string;
+  deviceId?: string;
+  localEndpoint?: string;
+  mcpTunnelId?: string;
+  name?: string;
+  provider?: string;
+  publicEndpoint?: string;
+  status?: string;
+  teamId?: string;
+  updatedAt?: string;
+}
+
+export interface VoTeamMcpTunnelBinding {
+  agentId?: string;
+  agentName?: string;
+  createdAt?: string;
+  id?: string;
 }
 
 export interface VoTeamMembership {
@@ -2884,6 +3039,16 @@ export interface VoUpsertFeishuIntegrationRequest {
   appId: string;
   /** 更新时留空表示保留原 Secret */
   appSecret?: string;
+}
+
+export interface VoValidateTeamKbSyncTargetRequest {
+  targetDirectory: string;
+}
+
+export interface VoValidateTeamKbSyncTargetResponse {
+  conflictPath?: string;
+  conflictReason?: string;
+  valid?: boolean;
 }
 
 export interface VoVerifyFeishuRequest {
@@ -6208,6 +6373,58 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Teams
+     * @name V1TeamsDevicesDetail
+     * @summary List team devices
+     * @request GET:/api/v1/teams/{teamId}/devices
+     */
+    v1TeamsDevicesDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListTeamDevicesResponse, any>({
+        path: `/api/v1/teams/${teamId}/devices`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsDevicesRegisterCreate
+     * @summary Register tentacle client in current team
+     * @request POST:/api/v1/teams/{teamId}/devices/register
+     */
+    v1TeamsDevicesRegisterCreate: (teamId: string, request: VoRegisterTeamDeviceRequest, params: RequestParams = {}) =>
+      this.request<VoTeamDevice, any>({
+        path: `/api/v1/teams/${teamId}/devices/register`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsDevicesDetail2
+     * @summary Get team device by id
+     * @request GET:/api/v1/teams/{teamId}/devices/{deviceId}
+     * @originalName v1TeamsDevicesDetail
+     * @duplicate
+     */
+    v1TeamsDevicesDetail2: (teamId: string, deviceId: string, params: RequestParams = {}) =>
+      this.request<VoTeamDevice, any>({
+        path: `/api/v1/teams/${teamId}/devices/${deviceId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Roster
      * @name V1TeamsDigiemployeesDetail
      * @summary List digiemployees
@@ -7009,6 +7226,116 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Teams
+     * @name V1TeamsKbDirectoriesDetail
+     * @summary List team kb directories
+     * @request GET:/api/v1/teams/{teamId}/kb/directories
+     */
+    v1TeamsKbDirectoriesDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListTeamKbDirectoriesResponse, any>({
+        path: `/api/v1/teams/${teamId}/kb/directories`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsKbDirectoriesCreate
+     * @summary Create team kb directory
+     * @request POST:/api/v1/teams/{teamId}/kb/directories
+     */
+    v1TeamsKbDirectoriesCreate: (teamId: string, request: VoCreateTeamKbDirectoryRequest, params: RequestParams = {}) =>
+      this.request<VoTeamKbDirectory, any>({
+        path: `/api/v1/teams/${teamId}/kb/directories`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsKbSyncBindingsDetail
+     * @summary List team kb sync bindings
+     * @request GET:/api/v1/teams/{teamId}/kb/sync-bindings
+     */
+    v1TeamsKbSyncBindingsDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListTeamKbSyncBindingsResponse, any>({
+        path: `/api/v1/teams/${teamId}/kb/sync-bindings`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsKbSyncBindingsCreate
+     * @summary Create team kb sync binding
+     * @request POST:/api/v1/teams/{teamId}/kb/sync-bindings
+     */
+    v1TeamsKbSyncBindingsCreate: (
+      teamId: string,
+      request: VoCreateTeamKbSyncBindingRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamKbSyncBinding, any>({
+        path: `/api/v1/teams/${teamId}/kb/sync-bindings`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsKbSyncBindingsValidateTargetCreate
+     * @summary Validate kb sync target directory
+     * @request POST:/api/v1/teams/{teamId}/kb/sync-bindings/validate-target
+     */
+    v1TeamsKbSyncBindingsValidateTargetCreate: (
+      teamId: string,
+      request: VoValidateTeamKbSyncTargetRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoValidateTeamKbSyncTargetResponse, any>({
+        path: `/api/v1/teams/${teamId}/kb/sync-bindings/validate-target`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsKbSyncBindingsDelete
+     * @summary Delete team kb sync binding
+     * @request DELETE:/api/v1/teams/{teamId}/kb/sync-bindings/{bindingId}
+     */
+    v1TeamsKbSyncBindingsDelete: (teamId: string, bindingId: string, params: RequestParams = {}) =>
+      this.request<VoSimpleOKResponse, any>({
+        path: `/api/v1/teams/${teamId}/kb/sync-bindings/${bindingId}`,
+        method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags User
      * @name V1TeamsLinktoolLoginCodesCreate
      * @summary Issue linktool login code for team scope
@@ -7019,6 +7346,129 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v1/teams/${teamId}/linktool-login/codes`,
         method: "POST",
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMcpTunnelsDetail
+     * @summary List team mcp tunnels
+     * @request GET:/api/v1/teams/{teamId}/mcp-tunnels
+     */
+    v1TeamsMcpTunnelsDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListTeamMcpTunnelsResponse, any>({
+        path: `/api/v1/teams/${teamId}/mcp-tunnels`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMcpTunnelsCreate
+     * @summary Create team mcp tunnel
+     * @request POST:/api/v1/teams/{teamId}/mcp-tunnels
+     */
+    v1TeamsMcpTunnelsCreate: (teamId: string, request: VoCreateTeamMcpTunnelRequest, params: RequestParams = {}) =>
+      this.request<VoTeamMcpTunnel, any>({
+        path: `/api/v1/teams/${teamId}/mcp-tunnels`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMcpTunnelsDetail2
+     * @summary Get team mcp tunnel by id
+     * @request GET:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}
+     * @originalName v1TeamsMcpTunnelsDetail
+     * @duplicate
+     */
+    v1TeamsMcpTunnelsDetail2: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
+      this.request<VoTeamMcpTunnel, any>({
+        path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMcpTunnelsPartialUpdate
+     * @summary Patch team mcp tunnel
+     * @request PATCH:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}
+     */
+    v1TeamsMcpTunnelsPartialUpdate: (
+      teamId: string,
+      mcpTunnelId: string,
+      request: VoPatchTeamMcpTunnelRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamMcpTunnel, any>({
+        path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMcpTunnelsActivateCreate
+     * @summary Activate team mcp tunnel
+     * @request POST:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}/activate
+     */
+    v1TeamsMcpTunnelsActivateCreate: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
+      this.request<VoTeamMcpTunnel, any>({
+        path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}/activate`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMcpTunnelsBindingsDetail
+     * @summary List team mcp tunnel bindings
+     * @request GET:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}/bindings
+     */
+    v1TeamsMcpTunnelsBindingsDetail: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
+      this.request<VoListTeamMcpTunnelBindingsResponse, any>({
+        path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}/bindings`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMcpTunnelsDeactivateCreate
+     * @summary Deactivate team mcp tunnel
+     * @request POST:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}/deactivate
+     */
+    v1TeamsMcpTunnelsDeactivateCreate: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
+      this.request<VoTeamMcpTunnel, any>({
+        path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}/deactivate`,
+        method: "POST",
         format: "json",
         ...params,
       }),
