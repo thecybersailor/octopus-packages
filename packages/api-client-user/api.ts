@@ -648,6 +648,11 @@ export interface BasePinOKVoListTeamKbSyncBindingsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListTeamKbSyncJobsResponse {
+  data?: VoListTeamKbSyncJobsResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListTeamMcpTunnelBindingsResponse {
   data?: VoListTeamMcpTunnelBindingsResponse;
   trace_id?: string;
@@ -2344,6 +2349,10 @@ export interface VoListTeamKbSyncBindingsResponse {
   items?: VoTeamKbSyncBinding[];
 }
 
+export interface VoListTeamKbSyncJobsResponse {
+  items?: VoTeamKbSyncJob[];
+}
+
 export interface VoListTeamMcpTunnelBindingsResponse {
   items?: VoTeamMcpTunnelBinding[];
 }
@@ -2708,6 +2717,15 @@ export interface VoTeamKbSyncBinding {
   sourcePath?: string;
   targetDirectory?: string;
   teamId?: string;
+}
+
+export interface VoTeamKbSyncJob {
+  bindingId?: string;
+  createdAt?: string;
+  filesChanged?: number;
+  id?: string;
+  status?: string;
+  summary?: string;
 }
 
 export interface VoTeamMcpTunnel {
@@ -7336,6 +7354,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Teams
+     * @name V1TeamsKbSyncJobsDetail
+     * @summary List team kb sync jobs
+     * @request GET:/api/v1/teams/{teamId}/kb/sync-jobs
+     */
+    v1TeamsKbSyncJobsDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListTeamKbSyncJobsResponse, any>({
+        path: `/api/v1/teams/${teamId}/kb/sync-jobs`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags User
      * @name V1TeamsLinktoolLoginCodesCreate
      * @summary Issue linktool login code for team scope
@@ -7398,6 +7432,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoTeamMcpTunnel, any>({
         path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMcpTunnelsDelete
+     * @summary Delete team mcp tunnel
+     * @request DELETE:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}
+     */
+    v1TeamsMcpTunnelsDelete: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
+      this.request<VoSimpleOKResponse, any>({
+        path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}`,
+        method: "DELETE",
         format: "json",
         ...params,
       }),
