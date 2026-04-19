@@ -1,0 +1,8 @@
+{
+  "name": "syngy-packages",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "packageManager": "pnpm@9.15.2"
+}
