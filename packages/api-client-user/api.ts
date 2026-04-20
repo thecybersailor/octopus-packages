@@ -413,6 +413,11 @@ export interface BasePinOKVoFileNode {
   trace_id?: string;
 }
 
+export interface BasePinOKVoGetDigiEmployeeTeamSkillsResponse {
+  data?: VoGetDigiEmployeeTeamSkillsResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoInboxSummary {
   data?: VoInboxSummary;
   trace_id?: string;
@@ -1907,6 +1912,13 @@ export interface VoDigiEmployeeKBAccess {
   mode?: string;
 }
 
+export interface VoDigiEmployeeTeamSkill {
+  description?: string;
+  id?: string;
+  name?: string;
+  title?: string;
+}
+
 export interface VoDigiWorker {
   allowDeployStation?: boolean;
   avatar?: string;
@@ -2055,6 +2067,10 @@ export interface VoFileNode {
   size?: number;
   type?: string;
   updated?: string;
+}
+
+export interface VoGetDigiEmployeeTeamSkillsResponse {
+  items?: VoDigiEmployeeTeamSkill[];
 }
 
 export interface VoHireDigiEmployeeRequest {
@@ -2555,6 +2571,10 @@ export interface VoPutDigiEmployeeKBAccessRequest {
 
 export interface VoPutDigiEmployeeReportingLineRequest {
   managerDigiEmployeeId?: string;
+}
+
+export interface VoPutDigiEmployeeTeamSkillsRequest {
+  skillIds?: string[];
 }
 
 export interface VoRegisterTeamDeviceRequest {
@@ -6733,6 +6753,45 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoStation, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/stations`,
         method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesTeamSkillsDetail
+     * @summary Get digiemployee team skills
+     * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/team-skills
+     */
+    v1TeamsDigiemployeesTeamSkillsDetail: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoGetDigiEmployeeTeamSkillsResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/team-skills`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesTeamSkillsUpdate
+     * @summary Put digiemployee team skills
+     * @request PUT:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/team-skills
+     */
+    v1TeamsDigiemployeesTeamSkillsUpdate: (
+      teamId: string,
+      digiEmployeeId: string,
+      request: VoPutDigiEmployeeTeamSkillsRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoGetDigiEmployeeTeamSkillsResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/team-skills`,
+        method: "PUT",
         body: request,
         type: ContentType.Json,
         format: "json",
