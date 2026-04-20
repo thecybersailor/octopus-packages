@@ -603,6 +603,11 @@ export interface BasePinOKVoListRecentsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListReportingNeighborsResponse {
+  data?: VoListReportingNeighborsResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListSelectableJobTagsResponse {
   data?: VoListSelectableJobTagsResponse;
   trace_id?: string;
@@ -1884,6 +1889,7 @@ export interface VoDigiEmployee {
   digiWorkerId?: string;
   hiredAt?: string;
   id?: string;
+  managerDigiEmployeeId?: string;
   skillsets?: VoSkillsetLite[];
   status?: string;
   teamId?: string;
@@ -2320,6 +2326,11 @@ export interface VoListRecentsResponse {
   items?: VoConversationMeta[];
 }
 
+export interface VoListReportingNeighborsResponse {
+  items?: VoReportingNeighborItem[];
+  self?: VoReportingNeighborSelf;
+}
+
 export interface VoListSelectableJobTagsResponse {
   items?: VoJobTagLite[];
 }
@@ -2537,6 +2548,10 @@ export interface VoPutDigiEmployeeKBAccessRequest {
   mode: string;
 }
 
+export interface VoPutDigiEmployeeReportingLineRequest {
+  managerDigiEmployeeId?: string;
+}
+
 export interface VoRegisterTeamDeviceRequest {
   clientId: string;
   clientType: string;
@@ -2547,6 +2562,21 @@ export interface VoRegisterTeamDeviceRequest {
 export interface VoRemoteTaskDeleteResponse {
   deleted?: boolean;
   id?: string;
+}
+
+export interface VoReportingNeighborItem {
+  avatar?: string;
+  digiEmployeeId?: string;
+  name?: string;
+  relationType?: string;
+  title?: string;
+}
+
+export interface VoReportingNeighborSelf {
+  avatar?: string;
+  digiEmployeeId?: string;
+  name?: string;
+  title?: string;
 }
 
 export interface VoRotateStationApiKeyResponse {
@@ -6585,6 +6615,49 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "PUT",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesReportingLineUpdate
+     * @summary Put digiemployee reporting line
+     * @request PUT:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/reporting-line
+     */
+    v1TeamsDigiemployeesReportingLineUpdate: (
+      teamId: string,
+      digiEmployeeId: string,
+      request: VoPutDigiEmployeeReportingLineRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoDigiEmployee, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/reporting-line`,
+        method: "PUT",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesReportingNeighborsDetail
+     * @summary Get digiemployee reporting neighbors
+     * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/reporting-neighbors
+     */
+    v1TeamsDigiemployeesReportingNeighborsDetail: (
+      teamId: string,
+      digiEmployeeId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoListReportingNeighborsResponse, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/reporting-neighbors`,
+        method: "GET",
         format: "json",
         ...params,
       }),
