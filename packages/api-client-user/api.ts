@@ -388,6 +388,11 @@ export interface BasePinOKVoDigiEmployee {
   trace_id?: string;
 }
 
+export interface BasePinOKVoDigiEmployeeKBAccess {
+  data?: VoDigiEmployeeKBAccess;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoEndpointTypeConfigSchemaResponse {
   data?: VoEndpointTypeConfigSchemaResponse;
   trace_id?: string;
@@ -1886,6 +1891,11 @@ export interface VoDigiEmployee {
   workloadUsed?: number;
 }
 
+export interface VoDigiEmployeeKBAccess {
+  kbPaths?: string[];
+  mode?: string;
+}
+
 export interface VoDigiWorker {
   allowDeployStation?: boolean;
   avatar?: string;
@@ -2242,6 +2252,9 @@ export interface VoListAdminStorageEntriesResponse {
 
 export interface VoListArtifactsResponse {
   items?: VoArtifactListItem[];
+  page?: number;
+  pageSize?: number;
+  total?: number;
 }
 
 export interface VoListCasesResponse {
@@ -2517,6 +2530,11 @@ export interface VoPostConversationHumanTurnRequest {
 export interface VoPostConversationHumanTurnResponse {
   accepted?: boolean;
   turnId?: string;
+}
+
+export interface VoPutDigiEmployeeKBAccessRequest {
+  kbPaths?: string[];
+  mode: string;
 }
 
 export interface VoRegisterTeamDeviceRequest {
@@ -5859,10 +5877,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List artifacts
      * @request GET:/api/v1/teams/{teamId}/artifacts
      */
-    v1TeamsArtifactsDetail: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsArtifactsDetail: (
+      teamId: string,
+      query?: {
+        /** Search artifact title */
+        q?: string;
+        /** Sort field, only completed_at is supported */
+        sort?: string;
+        /** Sort order, asc or desc */
+        order?: string;
+        /** Filter by generated digiEmployeeId */
+        employeeId?: string;
+        /** Page number, starting from 1 */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<VoListArtifactsResponse, any>({
         path: `/api/v1/teams/${teamId}/artifacts`,
         method: "GET",
+        query: query,
         format: "json",
         ...params,
       }),
@@ -6512,6 +6546,45 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<MapStringString, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/fire`,
         method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesKbAccessDetail
+     * @summary Get digiemployee knowledge base access
+     * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/kb-access
+     */
+    v1TeamsDigiemployeesKbAccessDetail: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
+      this.request<VoDigiEmployeeKBAccess, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/kb-access`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesKbAccessUpdate
+     * @summary Put digiemployee knowledge base access
+     * @request PUT:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/kb-access
+     */
+    v1TeamsDigiemployeesKbAccessUpdate: (
+      teamId: string,
+      digiEmployeeId: string,
+      request: VoPutDigiEmployeeKBAccessRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoDigiEmployeeKBAccess, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/kb-access`,
+        method: "PUT",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
