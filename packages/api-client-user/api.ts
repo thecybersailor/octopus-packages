@@ -803,6 +803,11 @@ export interface BasePinOKVoTeamKbSyncBinding {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamKbSyncBootstrapAccessResponse {
+  data?: VoTeamKbSyncBootstrapAccessResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamMcpTunnel {
   data?: VoTeamMcpTunnel;
   trace_id?: string;
@@ -2765,6 +2770,16 @@ export interface VoTeamKbSyncBinding {
   sourcePath?: string;
   targetDirectory?: string;
   teamId?: string;
+}
+
+export interface VoTeamKbSyncBootstrapAccessRequest {
+  deviceId: string;
+}
+
+export interface VoTeamKbSyncBootstrapAccessResponse {
+  accessToken?: string;
+  expiresAt?: string;
+  fileGatewayBaseUrl?: string;
 }
 
 export interface VoTeamKbSyncJob {
@@ -7493,6 +7508,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoSimpleOKResponse, any>({
         path: `/api/v1/teams/${teamId}/kb/sync-bindings/${bindingId}`,
         method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsKbSyncBootstrapAccessCreate
+     * @summary Issue file gateway bootstrap access for tentacle kb sync
+     * @request POST:/api/v1/teams/{teamId}/kb/sync-bootstrap-access
+     */
+    v1TeamsKbSyncBootstrapAccessCreate: (
+      teamId: string,
+      request: VoTeamKbSyncBootstrapAccessRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamKbSyncBootstrapAccessResponse, any>({
+        path: `/api/v1/teams/${teamId}/kb/sync-bootstrap-access`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
