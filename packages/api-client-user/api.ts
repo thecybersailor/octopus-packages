@@ -313,6 +313,11 @@ export interface BasePinOKVoArtifactDetail {
   trace_id?: string;
 }
 
+export interface BasePinOKVoArtifactDownloadURLResponse {
+  data?: VoArtifactDownloadURLResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoArtifactSummaryResponse {
   data?: VoArtifactSummaryResponse;
   trace_id?: string;
@@ -850,6 +855,11 @@ export interface BasePinOKVoTenantAdminDigiWorker {
 
 export interface BasePinOKVoTenantAdminDigiWorkerAutoCreateThresholdResponse {
   data?: VoTenantAdminDigiWorkerAutoCreateThresholdResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTenantAdminDigiworkerDebugConfig {
+  data?: VoTenantAdminDigiworkerDebugConfig;
   trace_id?: string;
 }
 
@@ -1451,6 +1461,11 @@ export interface VoArtifactDetail {
   status?: string;
   summary?: string;
   title?: string;
+}
+
+export interface VoArtifactDownloadURLResponse {
+  downloadUrl?: string;
+  expireAt?: string;
 }
 
 export interface VoArtifactItem {
@@ -3001,6 +3016,10 @@ export interface VoTenantAdminDigiWorkerAutoCreateThresholdResponse {
   n1?: number;
   n2?: number;
   overridden?: boolean;
+}
+
+export interface VoTenantAdminDigiworkerDebugConfig {
+  level?: string;
 }
 
 export interface VoTenantAdminLLMModelItem {
@@ -5996,6 +6015,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoArtifactDetail, any>({
         path: `/api/v1/teams/${teamId}/artifacts/${artifactId}`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Artifacts
+     * @name V1TeamsArtifactsItemsDownloadUrlCreate
+     * @summary Get artifact item download URL
+     * @request POST:/api/v1/teams/{teamId}/artifacts/{artifactId}/items/{itemId}/download-url
+     */
+    v1TeamsArtifactsItemsDownloadUrlCreate: (
+      teamId: string,
+      artifactId: string,
+      itemId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoArtifactDownloadURLResponse, any>({
+        path: `/api/v1/teams/${teamId}/artifacts/${artifactId}/items/${itemId}/download-url`,
+        method: "POST",
         format: "json",
         ...params,
       }),
@@ -9202,6 +9242,40 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/tenant-admin/v1/digiemployees/${id}/force-fire`,
         method: "POST",
         body: request,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1DigiworkerDebugConfigList
+     * @summary Get digiworker debug config (tenant admin, tenant-scoped)
+     * @request GET:/tenant-admin/v1/digiworker/debug-config
+     */
+    v1DigiworkerDebugConfigList: (params: RequestParams = {}) =>
+      this.request<BasePinOKVoTenantAdminDigiworkerDebugConfig, BasePinErr>({
+        path: `/tenant-admin/v1/digiworker/debug-config`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1DigiworkerDebugConfigUpdate
+     * @summary Put digiworker debug config (tenant admin, tenant-scoped)
+     * @request PUT:/tenant-admin/v1/digiworker/debug-config
+     */
+    v1DigiworkerDebugConfigUpdate: (request: VoTenantAdminDigiworkerDebugConfig, params: RequestParams = {}) =>
+      this.request<BasePinOKVoSimpleOKResponse, BasePinErr>({
+        path: `/tenant-admin/v1/digiworker/debug-config`,
+        method: "PUT",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
