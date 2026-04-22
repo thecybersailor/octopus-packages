@@ -223,6 +223,11 @@ export interface BasePinOKBaseRemoteTaskStartAuthResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKMapStringBool {
+  data?: MapStringBool;
+  trace_id?: string;
+}
+
 export interface BasePinOKMapStringString {
   data?: MapStringString;
   trace_id?: string;
@@ -230,6 +235,11 @@ export interface BasePinOKMapStringString {
 
 export interface BasePinOKServicesMcplinxVisibleProofRecord {
   data?: ServicesMcplinxVisibleProofRecord;
+  trace_id?: string;
+}
+
+export interface BasePinOKTenantAdminTenantAdminTeamDebugConfig {
+  data?: TenantAdminTenantAdminTeamDebugConfig;
   trace_id?: string;
 }
 
@@ -1119,6 +1129,8 @@ export interface LinktoolLoginAuthCompleteSessionRequest {
   teamId?: string;
 }
 
+export type MapStringBool = Record<string, boolean>;
+
 export type MapStringString = Record<string, string>;
 
 export interface ModelsPromptSpec {
@@ -1161,6 +1173,10 @@ export interface ServicesMcplinxVisibleProofRecord {
   status?: string;
   tag?: string;
   updatedAt?: string;
+}
+
+export interface TenantAdminTenantAdminTeamDebugConfig {
+  debugEnabled?: boolean;
 }
 
 export interface VoActRequest {
@@ -1907,6 +1923,7 @@ export interface VoCreateJobDependencyRequest {
 }
 
 export interface VoCreateJobNodeRequest {
+  assigneeDigiEmployeeId?: string;
   executionMode?: string;
   name: string;
   nodeKey: string;
@@ -2234,6 +2251,7 @@ export interface VoJobDependency {
 }
 
 export interface VoJobNode {
+  assigneeDigiEmployeeId?: string;
   executionMode?: string;
   id?: string;
   jobId?: string;
@@ -2823,6 +2841,7 @@ export interface VoTeam {
   balancePoints?: number;
   certificationStatus?: string;
   createdAt?: string;
+  debugEnabled?: boolean;
   digiEmployeeCount?: number;
   id?: string;
   llmTraceEnabled?: boolean;
@@ -10718,6 +10737,44 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<BasePinOKVoTeam, BasePinErr>({
         path: `/tenant-admin/v1/teams/${teamId}`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1TeamsDebugConfigDetail
+     * @summary Get team debug config (tenant admin, team-scoped)
+     * @request GET:/tenant-admin/v1/teams/{teamId}/debug-config
+     */
+    v1TeamsDebugConfigDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKTenantAdminTenantAdminTeamDebugConfig, BasePinErr>({
+        path: `/tenant-admin/v1/teams/${teamId}/debug-config`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1TeamsDebugConfigUpdate
+     * @summary Put team debug config (tenant admin, team-scoped)
+     * @request PUT:/tenant-admin/v1/teams/{teamId}/debug-config
+     */
+    v1TeamsDebugConfigUpdate: (
+      teamId: string,
+      request: TenantAdminTenantAdminTeamDebugConfig,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKMapStringBool, BasePinErr>({
+        path: `/tenant-admin/v1/teams/${teamId}/debug-config`,
+        method: "PUT",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),

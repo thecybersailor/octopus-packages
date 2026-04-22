@@ -57,19 +57,15 @@ function isPinErrorResponse(value: any): value is PinErrorResponse {
   return !!value && typeof value === 'object' && !!value.error && typeof value.error.message === 'string'
 }
 
-function extractStatusCode(value: any): number | undefined {
-  return typeof value?.status === 'number' ? value.status : undefined
-}
-
 function extractPinErrorPayload(error: any): { body: PinErrorResponse; statusCode?: number } | null {
   if (isPinErrorResponse(error)) {
-    return { body: error, statusCode: extractStatusCode(error) }
+    return { body: error, statusCode: typeof error?.status === 'number' ? error.status : undefined }
   }
   if (isPinErrorResponse(error?.error)) {
-    return { body: error.error, statusCode: extractStatusCode(error) }
+    return { body: error.error, statusCode: typeof error?.status === 'number' ? error.status : undefined }
   }
   if (isPinErrorResponse(error?.response?.data)) {
-    return { body: error.response.data, statusCode: extractStatusCode(error.response) }
+    return { body: error.response.data, statusCode: error.response.status }
   }
   return null
 }
