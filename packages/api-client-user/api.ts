@@ -313,11 +313,6 @@ export interface BasePinOKVoArtifactDetail {
   trace_id?: string;
 }
 
-export interface BasePinOKVoArtifactDownloadURLResponse {
-  data?: VoArtifactDownloadURLResponse;
-  trace_id?: string;
-}
-
 export interface BasePinOKVoArtifactSummaryResponse {
   data?: VoArtifactSummaryResponse;
   trace_id?: string;
@@ -370,11 +365,6 @@ export interface BasePinOKVoConversationTempUploadAuthorizeResponse {
 
 export interface BasePinOKVoConversationTempUploadFinalizeResponse {
   data?: VoConversationTempUploadFinalizeResponse;
-  trace_id?: string;
-}
-
-export interface BasePinOKVoConversationTurnLLMTraceCallDetail {
-  data?: VoConversationTurnLLMTraceCallDetail;
   trace_id?: string;
 }
 
@@ -555,11 +545,6 @@ export interface BasePinOKVoListConversationDesktopSnapshotsResponse {
 
 export interface BasePinOKVoListConversationRuntimeItemsResponse {
   data?: VoListConversationRuntimeItemsResponse;
-  trace_id?: string;
-}
-
-export interface BasePinOKVoListConversationTurnLLMTraceResponse {
-  data?: VoListConversationTurnLLMTraceResponse;
   trace_id?: string;
 }
 
@@ -805,6 +790,21 @@ export interface BasePinOKVoTeamBillingSummaryResponse {
 
 export interface BasePinOKVoTeamDevice {
   data?: VoTeamDevice;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamExternalDeviceBinding {
+  data?: VoTeamExternalDeviceBinding;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamExternalProviderBinding {
+  data?: VoTeamExternalProviderBinding;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamExternalProviderRuntimeConfig {
+  data?: VoTeamExternalProviderRuntimeConfig;
   trace_id?: string;
 }
 
@@ -1110,14 +1110,6 @@ export interface ModelsPromptSpec {
   script?: string;
   text?: string;
   type?: string;
-}
-
-export interface RuntimesnapshotHostLLMUsage {
-  cachedTokens?: number;
-  inputTokens?: number;
-  outputTokens?: number;
-  reasoningTokens?: number;
-  totalTokens?: number;
 }
 
 export interface ServicesMcplinxVisibleProofEvent {
@@ -1481,11 +1473,6 @@ export interface VoArtifactDetail {
   title?: string;
 }
 
-export interface VoArtifactDownloadURLResponse {
-  downloadUrl?: string;
-  expireAt?: string;
-}
-
 export interface VoArtifactItem {
   artifactId?: string;
   channel?: string;
@@ -1561,6 +1548,12 @@ export interface VoBillingSnapshot {
 
 export interface VoBillingWallet {
   balancePoints?: number;
+}
+
+export interface VoBindTeamDeviceExternalProviderRequest {
+  devicePassword: string;
+  externalDeviceId: string;
+  publicIp?: string;
 }
 
 export interface VoCase {
@@ -1778,48 +1771,6 @@ export interface VoConversationTempUploadFinalizeResponse {
   uploadId?: string;
 }
 
-export interface VoConversationTurnLLMTraceCallDetail {
-  apiMode?: string;
-  appliedHistoryMode?: string;
-  conversationId?: string;
-  durationMs?: number;
-  errorText?: string;
-  finishedAt?: string;
-  iter?: number;
-  modelId?: string;
-  previousResponseId?: string;
-  providerId?: string;
-  requestRawJson?: number[];
-  responseId?: string;
-  responseRawJson?: number[];
-  seq?: number;
-  startedAt?: string;
-  status?: string;
-  traceCallId?: string;
-  turnId?: string;
-  usage?: RuntimesnapshotHostLLMUsage;
-}
-
-export interface VoConversationTurnLLMTraceCallSummary {
-  apiMode?: string;
-  appliedHistoryMode?: string;
-  conversationId?: string;
-  durationMs?: number;
-  errorText?: string;
-  finishedAt?: string;
-  iter?: number;
-  modelId?: string;
-  previousResponseId?: string;
-  providerId?: string;
-  responseId?: string;
-  seq?: number;
-  startedAt?: string;
-  status?: string;
-  traceCallId?: string;
-  turnId?: string;
-  usage?: RuntimesnapshotHostLLMUsage;
-}
-
 export interface VoCreateAdminDigiWorkerRequest {
   allowDeployStation?: boolean;
   hireableCount: number;
@@ -1919,7 +1870,8 @@ export interface VoCreateTeamMcpTunnelRequest {
   localEndpoint: string;
   name: string;
   provider: string;
-  publicEndpoint: string;
+  transportType: string;
+  tunnelPath: string;
 }
 
 export interface VoCreateTeamRequest {
@@ -2373,10 +2325,6 @@ export interface VoListConversationRuntimeItemsResponse {
   items?: VoConversationRuntimeItem[];
 }
 
-export interface VoListConversationTurnLLMTraceResponse {
-  items?: VoConversationTurnLLMTraceCallSummary[];
-}
-
 export interface VoListCronTriggerRunsResponse {
   items?: VoCronTriggerRun[];
 }
@@ -2600,7 +2548,8 @@ export interface VoPatchSkillsetRequest {
 export interface VoPatchTeamMcpTunnelRequest {
   localEndpoint?: string;
   name?: string;
-  publicEndpoint?: string;
+  transportType?: string;
+  tunnelPath?: string;
 }
 
 export interface VoPatchTeamMembershipProfileRequest {
@@ -2791,7 +2740,6 @@ export interface VoTeam {
   createdAt?: string;
   digiEmployeeCount?: number;
   id?: string;
-  llmTraceEnabled?: boolean;
   localeDefault?: string;
   name?: string;
   organizationProfile?: VoTeamOrganizationProfile;
@@ -2834,6 +2782,34 @@ export interface VoTeamDevice {
   status?: string;
   teamDeviceId?: string;
   teamId?: string;
+}
+
+export interface VoTeamExternalDeviceBinding {
+  createdAt?: string;
+  deviceId?: string;
+  externalDeviceId?: string;
+  id?: string;
+  lastBoundAt?: string;
+  lastError?: string;
+  provider?: string;
+  status?: string;
+  teamId?: string;
+  updatedAt?: string;
+}
+
+export interface VoTeamExternalProviderBinding {
+  createdAt?: string;
+  id?: string;
+  provider?: string;
+  status?: string;
+  teamId?: string;
+  updatedAt?: string;
+}
+
+export interface VoTeamExternalProviderRuntimeConfig {
+  appId?: string;
+  appKey?: string;
+  provider?: string;
 }
 
 export interface VoTeamIntegrationVO {
@@ -2896,13 +2872,16 @@ export interface VoTeamMcpTunnel {
   boundAgentsCount?: number;
   deactivatedAt?: string;
   deviceId?: string;
+  externalMappingId?: string;
+  lastError?: string;
   localEndpoint?: string;
   mcpTunnelId?: string;
   name?: string;
-  provider?: string;
   publicEndpoint?: string;
   status?: string;
   teamId?: string;
+  transportType?: string;
+  tunnelPath?: string;
   updatedAt?: string;
 }
 
@@ -3085,7 +3064,6 @@ export interface VoTenantAdminDigiWorkerAutoCreateThresholdResponse {
 
 export interface VoTenantAdminDigiworkerDebugConfig {
   level?: string;
-  llmTraceEnabled?: boolean;
 }
 
 export interface VoTenantAdminLLMModelItem {
@@ -3141,6 +3119,10 @@ export interface VoTenantAdminUpsertDigiWorkerAutoCreateThresholdRequest {
 
 export interface VoTenantAdminUpsertHireEnabledRequest {
   enabled?: boolean;
+}
+
+export interface VoUnbindTeamDeviceExternalProviderRequest {
+  devicePassword: string;
 }
 
 export interface VoUpdateCaseRequest {
@@ -5668,45 +5650,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Conversations
-     * @name V1ConversationsTurnsLlmTraceDetail
-     * @summary List conversation turn LLM trace calls
-     * @request GET:/api/v1/conversations/{id}/turns/{turnId}/llm-trace
-     */
-    v1ConversationsTurnsLlmTraceDetail: (id: string, turnId: string, params: RequestParams = {}) =>
-      this.request<VoListConversationTurnLLMTraceResponse, any>({
-        path: `/api/v1/conversations/${id}/turns/${turnId}/llm-trace`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Conversations
-     * @name V1ConversationsTurnsLlmTraceDetail2
-     * @summary Get conversation turn LLM trace call detail
-     * @request GET:/api/v1/conversations/{id}/turns/{turnId}/llm-trace/{traceCallId}
-     * @originalName v1ConversationsTurnsLlmTraceDetail
-     * @duplicate
-     */
-    v1ConversationsTurnsLlmTraceDetail2: (
-      id: string,
-      turnId: string,
-      traceCallId: string,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoConversationTurnLLMTraceCallDetail, any>({
-        path: `/api/v1/conversations/${id}/turns/${turnId}/llm-trace/${traceCallId}`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
      * @tags EndpointTypes
      * @name V1EndpointTypesList
      * @summary List supported endpoint types (for Deploy)
@@ -6120,27 +6063,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoArtifactDetail, any>({
         path: `/api/v1/teams/${teamId}/artifacts/${artifactId}`,
         method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Artifacts
-     * @name V1TeamsArtifactsItemsDownloadUrlCreate
-     * @summary Get artifact item download URL
-     * @request POST:/api/v1/teams/{teamId}/artifacts/{artifactId}/items/{itemId}/download-url
-     */
-    v1TeamsArtifactsItemsDownloadUrlCreate: (
-      teamId: string,
-      artifactId: string,
-      itemId: string,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoArtifactDownloadURLResponse, any>({
-        path: `/api/v1/teams/${teamId}/artifacts/${artifactId}/items/${itemId}/download-url`,
-        method: "POST",
         format: "json",
         ...params,
       }),
@@ -6687,6 +6609,54 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Teams
+     * @name V1TeamsDevicesExternalProvidersBindCreate
+     * @summary Bind team device to external provider
+     * @request POST:/api/v1/teams/{teamId}/devices/{deviceId}/external-providers/{provider}/bind
+     */
+    v1TeamsDevicesExternalProvidersBindCreate: (
+      teamId: string,
+      deviceId: string,
+      provider: string,
+      request: VoBindTeamDeviceExternalProviderRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamExternalDeviceBinding, any>({
+        path: `/api/v1/teams/${teamId}/devices/${deviceId}/external-providers/${provider}/bind`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsDevicesExternalProvidersUnbindCreate
+     * @summary Unbind team device from external provider
+     * @request POST:/api/v1/teams/{teamId}/devices/{deviceId}/external-providers/{provider}/unbind
+     */
+    v1TeamsDevicesExternalProvidersUnbindCreate: (
+      teamId: string,
+      deviceId: string,
+      provider: string,
+      request: VoUnbindTeamDeviceExternalProviderRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamExternalDeviceBinding, any>({
+        path: `/api/v1/teams/${teamId}/devices/${deviceId}/external-providers/${provider}/unbind`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Roster
      * @name V1TeamsDigiemployeesDetail
      * @summary List digiemployees
@@ -6939,6 +6909,38 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "PUT",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsExternalProvidersEnsureCreate
+     * @summary Ensure team external provider ready
+     * @request POST:/api/v1/teams/{teamId}/external-providers/{provider}/ensure
+     */
+    v1TeamsExternalProvidersEnsureCreate: (teamId: string, provider: string, params: RequestParams = {}) =>
+      this.request<VoTeamExternalProviderBinding, any>({
+        path: `/api/v1/teams/${teamId}/external-providers/${provider}/ensure`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsExternalProvidersRuntimeConfigDetail
+     * @summary Get team external provider runtime config
+     * @request GET:/api/v1/teams/{teamId}/external-providers/{provider}/runtime-config
+     */
+    v1TeamsExternalProvidersRuntimeConfigDetail: (teamId: string, provider: string, params: RequestParams = {}) =>
+      this.request<VoTeamExternalProviderRuntimeConfig, any>({
+        path: `/api/v1/teams/${teamId}/external-providers/${provider}/runtime-config`,
+        method: "GET",
         format: "json",
         ...params,
       }),
