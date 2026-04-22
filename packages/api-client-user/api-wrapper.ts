@@ -26,9 +26,11 @@ export interface PinResponse<T> {
  */
 export interface PinErrorResponse {
   error: {
+    code?: string
     message: string
     type?: string
     key?: string
+    requestId?: string
   }
   trace_id?: string
 }
@@ -43,11 +45,29 @@ export class ApiError extends Error {
     public readonly meta?: Record<string, any>,
     public readonly status?: string,
     public readonly traceId?: string,
-    public readonly statusCode?: number
+    public readonly statusCode?: number,
+    public readonly body?: unknown
   ) {
     super(message)
     this.name = 'ApiError'
   }
+}
+
+function isPinErrorResponse(value: any): value is PinErrorResponse {
+  return !!value && typeof value === 'object' && !!value.error && typeof value.error.message === 'string'
+}
+
+function extractPinErrorPayload(error: any): { body: PinErrorResponse; statusCode?: number } | null {
+  if (isPinErrorResponse(error)) {
+    return { body: error, statusCode: typeof error?.status === 'number' ? error.status : undefined }
+  }
+  if (isPinErrorResponse(error?.error)) {
+    return { body: error.error, statusCode: typeof error?.status === 'number' ? error.status : undefined }
+  }
+  if (isPinErrorResponse(error?.response?.data)) {
+    return { body: error.response.data, statusCode: error.response.status }
+  }
+  return null
 }
 
 /**
@@ -63,22 +83,26 @@ function unwrapData<T>(promise: Promise<PinResponse<T>>): Promise<T> {
           responseData.data.error.key,
           undefined,
           responseData.data.error.type,
-          responseData.data.trace_id
+          responseData.data.trace_id,
+          undefined,
+          responseData.data
         )
       }
       return responseData.data
     })
     .catch(error => {
       if (error instanceof ApiError) throw error
-      if (error.response) {
-        const errorData = error.response.data
+      const payload = extractPinErrorPayload(error)
+      if (payload) {
+        const errorData = payload.body
         throw new ApiError(
           errorData?.error?.message || error.message || 'Unknown error',
           errorData?.error?.key,
           undefined,
           errorData?.error?.type,
           errorData?.trace_id,
-          error.response.status
+          payload.statusCode,
+          errorData
         )
       }
       throw new ApiError(error.message || 'Network error')
