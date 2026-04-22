@@ -373,6 +373,11 @@ export interface BasePinOKVoConversationTempUploadFinalizeResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoConversationTurnLLMTraceCallDetail {
+  data?: VoConversationTurnLLMTraceCallDetail;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoCronTrigger {
   data?: VoCronTrigger;
   trace_id?: string;
@@ -550,6 +555,11 @@ export interface BasePinOKVoListConversationDesktopSnapshotsResponse {
 
 export interface BasePinOKVoListConversationRuntimeItemsResponse {
   data?: VoListConversationRuntimeItemsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListConversationTurnLLMTraceResponse {
+  data?: VoListConversationTurnLLMTraceResponse;
   trace_id?: string;
 }
 
@@ -1100,6 +1110,14 @@ export interface ModelsPromptSpec {
   script?: string;
   text?: string;
   type?: string;
+}
+
+export interface RuntimesnapshotHostLLMUsage {
+  cachedTokens?: number;
+  inputTokens?: number;
+  outputTokens?: number;
+  reasoningTokens?: number;
+  totalTokens?: number;
 }
 
 export interface ServicesMcplinxVisibleProofEvent {
@@ -1760,6 +1778,48 @@ export interface VoConversationTempUploadFinalizeResponse {
   uploadId?: string;
 }
 
+export interface VoConversationTurnLLMTraceCallDetail {
+  apiMode?: string;
+  appliedHistoryMode?: string;
+  conversationId?: string;
+  durationMs?: number;
+  errorText?: string;
+  finishedAt?: string;
+  iter?: number;
+  modelId?: string;
+  previousResponseId?: string;
+  providerId?: string;
+  requestRawJson?: number[];
+  responseId?: string;
+  responseRawJson?: number[];
+  seq?: number;
+  startedAt?: string;
+  status?: string;
+  traceCallId?: string;
+  turnId?: string;
+  usage?: RuntimesnapshotHostLLMUsage;
+}
+
+export interface VoConversationTurnLLMTraceCallSummary {
+  apiMode?: string;
+  appliedHistoryMode?: string;
+  conversationId?: string;
+  durationMs?: number;
+  errorText?: string;
+  finishedAt?: string;
+  iter?: number;
+  modelId?: string;
+  previousResponseId?: string;
+  providerId?: string;
+  responseId?: string;
+  seq?: number;
+  startedAt?: string;
+  status?: string;
+  traceCallId?: string;
+  turnId?: string;
+  usage?: RuntimesnapshotHostLLMUsage;
+}
+
 export interface VoCreateAdminDigiWorkerRequest {
   allowDeployStation?: boolean;
   hireableCount: number;
@@ -2313,6 +2373,10 @@ export interface VoListConversationRuntimeItemsResponse {
   items?: VoConversationRuntimeItem[];
 }
 
+export interface VoListConversationTurnLLMTraceResponse {
+  items?: VoConversationTurnLLMTraceCallSummary[];
+}
+
 export interface VoListCronTriggerRunsResponse {
   items?: VoCronTriggerRun[];
 }
@@ -2727,6 +2791,7 @@ export interface VoTeam {
   createdAt?: string;
   digiEmployeeCount?: number;
   id?: string;
+  llmTraceEnabled?: boolean;
   localeDefault?: string;
   name?: string;
   organizationProfile?: VoTeamOrganizationProfile;
@@ -3020,6 +3085,7 @@ export interface VoTenantAdminDigiWorkerAutoCreateThresholdResponse {
 
 export interface VoTenantAdminDigiworkerDebugConfig {
   level?: string;
+  llmTraceEnabled?: boolean;
 }
 
 export interface VoTenantAdminLLMModelItem {
@@ -5595,6 +5661,45 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "POST",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Conversations
+     * @name V1ConversationsTurnsLlmTraceDetail
+     * @summary List conversation turn LLM trace calls
+     * @request GET:/api/v1/conversations/{id}/turns/{turnId}/llm-trace
+     */
+    v1ConversationsTurnsLlmTraceDetail: (id: string, turnId: string, params: RequestParams = {}) =>
+      this.request<VoListConversationTurnLLMTraceResponse, any>({
+        path: `/api/v1/conversations/${id}/turns/${turnId}/llm-trace`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Conversations
+     * @name V1ConversationsTurnsLlmTraceDetail2
+     * @summary Get conversation turn LLM trace call detail
+     * @request GET:/api/v1/conversations/{id}/turns/{turnId}/llm-trace/{traceCallId}
+     * @originalName v1ConversationsTurnsLlmTraceDetail
+     * @duplicate
+     */
+    v1ConversationsTurnsLlmTraceDetail2: (
+      id: string,
+      turnId: string,
+      traceCallId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoConversationTurnLLMTraceCallDetail, any>({
+        path: `/api/v1/conversations/${id}/turns/${turnId}/llm-trace/${traceCallId}`,
+        method: "GET",
         format: "json",
         ...params,
       }),
