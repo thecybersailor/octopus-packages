@@ -313,6 +313,11 @@ export interface BasePinOKVoArtifactDetail {
   trace_id?: string;
 }
 
+export interface BasePinOKVoArtifactDownloadURLResponse {
+  data?: VoArtifactDownloadURLResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoArtifactSummaryResponse {
   data?: VoArtifactSummaryResponse;
   trace_id?: string;
@@ -365,6 +370,11 @@ export interface BasePinOKVoConversationTempUploadAuthorizeResponse {
 
 export interface BasePinOKVoConversationTempUploadFinalizeResponse {
   data?: VoConversationTempUploadFinalizeResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoConversationTurnLLMTraceCallDetail {
+  data?: VoConversationTurnLLMTraceCallDetail;
   trace_id?: string;
 }
 
@@ -545,6 +555,11 @@ export interface BasePinOKVoListConversationDesktopSnapshotsResponse {
 
 export interface BasePinOKVoListConversationRuntimeItemsResponse {
   data?: VoListConversationRuntimeItemsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListConversationTurnLLMTraceResponse {
+  data?: VoListConversationTurnLLMTraceResponse;
   trace_id?: string;
 }
 
@@ -1112,6 +1127,25 @@ export interface ModelsPromptSpec {
   type?: string;
 }
 
+export interface ModelsReasoningCapability {
+  efforts?: string[];
+  supports?: boolean;
+  transportMode?: string;
+}
+
+export interface ModelsReasoningConfig {
+  effort?: string;
+  enabled?: boolean;
+}
+
+export interface RuntimesnapshotHostLLMUsage {
+  cachedTokens?: number;
+  inputTokens?: number;
+  outputTokens?: number;
+  reasoningTokens?: number;
+  totalTokens?: number;
+}
+
 export interface ServicesMcplinxVisibleProofEvent {
   at?: string;
   detail?: Record<string, any>;
@@ -1195,7 +1229,7 @@ export interface VoAdminBatchUpsertLLMModelsItem {
   outputCost?: number;
   provider: string;
   providerName: string;
-  reasoningEffort?: string;
+  reasoning?: ModelsReasoningCapability;
 }
 
 export interface VoAdminBatchUpsertLLMModelsRequest {
@@ -1265,7 +1299,7 @@ export interface VoAdminDigiWorker {
   model?: string;
   name?: string;
   promptSpec?: ModelsPromptSpec;
-  reasoningEffort?: string;
+  reasoningConfig?: ModelsReasoningConfig;
   salary?: number;
   score?: number;
   seedId?: string;
@@ -1329,7 +1363,7 @@ export interface VoAdminLLMModelItem {
   outputCost?: number;
   provider?: string;
   providerName?: string;
-  reasoningEffort?: string;
+  reasoning?: ModelsReasoningCapability;
   score?: number;
   updatedAt?: string;
 }
@@ -1471,6 +1505,11 @@ export interface VoArtifactDetail {
   status?: string;
   summary?: string;
   title?: string;
+}
+
+export interface VoArtifactDownloadURLResponse {
+  downloadUrl?: string;
+  expireAt?: string;
 }
 
 export interface VoArtifactItem {
@@ -1771,6 +1810,48 @@ export interface VoConversationTempUploadFinalizeResponse {
   uploadId?: string;
 }
 
+export interface VoConversationTurnLLMTraceCallDetail {
+  apiMode?: string;
+  appliedHistoryMode?: string;
+  conversationId?: string;
+  durationMs?: number;
+  errorText?: string;
+  finishedAt?: string;
+  iter?: number;
+  modelId?: string;
+  previousResponseId?: string;
+  providerId?: string;
+  requestRawJson?: number[];
+  responseId?: string;
+  responseRawJson?: number[];
+  seq?: number;
+  startedAt?: string;
+  status?: string;
+  traceCallId?: string;
+  turnId?: string;
+  usage?: RuntimesnapshotHostLLMUsage;
+}
+
+export interface VoConversationTurnLLMTraceCallSummary {
+  apiMode?: string;
+  appliedHistoryMode?: string;
+  conversationId?: string;
+  durationMs?: number;
+  errorText?: string;
+  finishedAt?: string;
+  iter?: number;
+  modelId?: string;
+  previousResponseId?: string;
+  providerId?: string;
+  responseId?: string;
+  seq?: number;
+  startedAt?: string;
+  status?: string;
+  traceCallId?: string;
+  turnId?: string;
+  usage?: RuntimesnapshotHostLLMUsage;
+}
+
 export interface VoCreateAdminDigiWorkerRequest {
   allowDeployStation?: boolean;
   hireableCount: number;
@@ -1781,7 +1862,7 @@ export interface VoCreateAdminDigiWorkerRequest {
   model?: string;
   name: string;
   promptSpec?: ModelsPromptSpec;
-  reasoningEffort?: string;
+  reasoningConfig?: ModelsReasoningConfig;
   skillsets?: VoSkillsetRef[];
   toolkitKeys?: string[];
 }
@@ -2325,6 +2406,10 @@ export interface VoListConversationRuntimeItemsResponse {
   items?: VoConversationRuntimeItem[];
 }
 
+export interface VoListConversationTurnLLMTraceResponse {
+  items?: VoConversationTurnLLMTraceCallSummary[];
+}
+
 export interface VoListCronTriggerRunsResponse {
   items?: VoCronTriggerRun[];
 }
@@ -2497,7 +2582,7 @@ export interface VoPatchAdminDigiWorkerRequest {
   model?: string;
   name?: string;
   promptSpec?: ModelsPromptSpec;
-  reasoningEffort?: string;
+  reasoningConfig?: ModelsReasoningConfig;
   skillsets?: VoSkillsetRef[];
   toolkitKeys?: string[];
 }
@@ -2740,6 +2825,7 @@ export interface VoTeam {
   createdAt?: string;
   digiEmployeeCount?: number;
   id?: string;
+  llmTraceEnabled?: boolean;
   localeDefault?: string;
   name?: string;
   organizationProfile?: VoTeamOrganizationProfile;
@@ -3011,7 +3097,7 @@ export interface VoTenantAdminCreateDigiWorkerRequest {
   meta?: Record<string, string>;
   name: string;
   promptSpec?: ModelsPromptSpec;
-  reasoningEffort?: string;
+  reasoningConfig?: ModelsReasoningConfig;
   skillsets?: VoSkillsetRef[];
   toolkitKeys?: string[];
 }
@@ -3046,7 +3132,7 @@ export interface VoTenantAdminDigiWorker {
   modelExternalName?: string;
   name?: string;
   promptSpec?: ModelsPromptSpec;
-  reasoningEffort?: string;
+  reasoningConfig?: ModelsReasoningConfig;
   salary?: number;
   score?: number;
   seedId?: string;
@@ -3064,13 +3150,14 @@ export interface VoTenantAdminDigiWorkerAutoCreateThresholdResponse {
 
 export interface VoTenantAdminDigiworkerDebugConfig {
   level?: string;
+  llmTraceEnabled?: boolean;
 }
 
 export interface VoTenantAdminLLMModelItem {
   id?: string;
   monthlyPoints?: number;
   name?: string;
-  reasoningEffort?: string;
+  reasoning?: ModelsReasoningCapability;
 }
 
 export interface VoTenantAdminPatchDigiWorkerRequest {
@@ -3083,7 +3170,7 @@ export interface VoTenantAdminPatchDigiWorkerRequest {
   meta?: Record<string, string>;
   name?: string;
   promptSpec?: ModelsPromptSpec;
-  reasoningEffort?: string;
+  reasoningConfig?: ModelsReasoningConfig;
   skillsets?: VoSkillsetRef[];
   toolkitKeys?: string[];
 }
@@ -5650,6 +5737,45 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Conversations
+     * @name V1ConversationsTurnsLlmTraceDetail
+     * @summary List conversation turn LLM trace calls
+     * @request GET:/api/v1/conversations/{id}/turns/{turnId}/llm-trace
+     */
+    v1ConversationsTurnsLlmTraceDetail: (id: string, turnId: string, params: RequestParams = {}) =>
+      this.request<VoListConversationTurnLLMTraceResponse, any>({
+        path: `/api/v1/conversations/${id}/turns/${turnId}/llm-trace`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Conversations
+     * @name V1ConversationsTurnsLlmTraceDetail2
+     * @summary Get conversation turn LLM trace call detail
+     * @request GET:/api/v1/conversations/{id}/turns/{turnId}/llm-trace/{traceCallId}
+     * @originalName v1ConversationsTurnsLlmTraceDetail
+     * @duplicate
+     */
+    v1ConversationsTurnsLlmTraceDetail2: (
+      id: string,
+      turnId: string,
+      traceCallId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoConversationTurnLLMTraceCallDetail, any>({
+        path: `/api/v1/conversations/${id}/turns/${turnId}/llm-trace/${traceCallId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags EndpointTypes
      * @name V1EndpointTypesList
      * @summary List supported endpoint types (for Deploy)
@@ -6063,6 +6189,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoArtifactDetail, any>({
         path: `/api/v1/teams/${teamId}/artifacts/${artifactId}`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Artifacts
+     * @name V1TeamsArtifactsItemsDownloadUrlCreate
+     * @summary Get artifact item download URL
+     * @request POST:/api/v1/teams/{teamId}/artifacts/{artifactId}/items/{itemId}/download-url
+     */
+    v1TeamsArtifactsItemsDownloadUrlCreate: (
+      teamId: string,
+      artifactId: string,
+      itemId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoArtifactDownloadURLResponse, any>({
+        path: `/api/v1/teams/${teamId}/artifacts/${artifactId}/items/${itemId}/download-url`,
+        method: "POST",
         format: "json",
         ...params,
       }),
