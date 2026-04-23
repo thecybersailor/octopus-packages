@@ -333,11 +333,6 @@ export interface BasePinOKVoArtifactSummaryResponse {
   trace_id?: string;
 }
 
-export interface BasePinOKVoCase {
-  data?: VoCase;
-  trace_id?: string;
-}
-
 export interface BasePinOKVoConnectionAuthTaskCreateResponse {
   data?: VoConnectionAuthTaskCreateResponse;
   trace_id?: string;
@@ -410,6 +405,11 @@ export interface BasePinOKVoDigiEmployee {
 
 export interface BasePinOKVoDigiEmployeeKBAccess {
   data?: VoDigiEmployeeKBAccess;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoDigiEmployeeWorkspaceAccess {
+  data?: VoDigiEmployeeWorkspaceAccess;
   trace_id?: string;
 }
 
@@ -550,11 +550,6 @@ export interface BasePinOKVoListAdminStorageEntriesResponse {
 
 export interface BasePinOKVoListArtifactsResponse {
   data?: VoListArtifactsResponse;
-  trace_id?: string;
-}
-
-export interface BasePinOKVoListCasesResponse {
-  data?: VoListCasesResponse;
   trace_id?: string;
 }
 
@@ -743,6 +738,11 @@ export interface BasePinOKVoListWecomContactsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListWorkspacesResponse {
+  data?: VoListWorkspacesResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoMeResponse {
   data?: VoMeResponse;
   trace_id?: string;
@@ -915,6 +915,11 @@ export interface BasePinOKVoVerifyFeishuResponse {
 
 export interface BasePinOKVoVerifyWecomResponse {
   data?: VoVerifyWecomResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWorkspace {
+  data?: VoWorkspace;
   trace_id?: string;
 }
 
@@ -1511,7 +1516,6 @@ export interface VoAdminUpsertSiteConfigRequest {
 export interface VoArtifactDetail {
   artifactCount?: number;
   artifacts?: VoArtifactItem[];
-  caseId?: string;
   completedAt?: string;
   date?: string;
   id?: string;
@@ -1543,11 +1547,11 @@ export interface VoArtifactItem {
   id?: string;
   sourceType?: string;
   stationId?: string;
+  workspaceId?: string;
 }
 
 export interface VoArtifactListItem {
   artifactCount?: number;
-  caseId?: string;
   completedAt?: string;
   date?: string;
   id?: string;
@@ -1609,18 +1613,6 @@ export interface VoBindTeamDeviceExternalProviderRequest {
   devicePassword: string;
   externalDeviceId: string;
   publicIp?: string;
-}
-
-export interface VoCase {
-  createdAt?: string;
-  description?: string;
-  fileCount?: number;
-  id?: string;
-  ident?: string;
-  name?: string;
-  status?: string;
-  storageUsage?: number;
-  updatedAt?: string;
 }
 
 export interface VoConnectionAuthTaskAuthField {
@@ -1747,16 +1739,15 @@ export interface VoConversationDesktopTodoItem {
 }
 
 export interface VoConversationFileGrantsResponse {
-  defaultCaseId?: string;
+  defaultWorkspaceId?: string;
   grants?: VoFileGrant[];
 }
 
 export interface VoConversationMeta {
   assistant?: VoConversationAssistant;
-  caseId?: string;
   channel?: string;
   channelUserId?: string;
-  defaultCaseId?: string;
+  defaultWorkspaceId?: string;
   digiEmployeeId?: string;
   externalUserId?: string;
   id?: string;
@@ -1768,6 +1759,7 @@ export interface VoConversationMeta {
   s3Prefix?: string;
   teamId?: string;
   title?: string;
+  workspaceId?: string;
 }
 
 export interface VoConversationRuntimeItem {
@@ -1891,18 +1883,13 @@ export interface VoCreateAdminDigiWorkerSeedRequest {
   weight?: number;
 }
 
-export interface VoCreateCaseRequest {
-  description?: string;
-  name: string;
-}
-
 export interface VoCreateConversationRequest {
-  caseId?: string;
-  defaultCaseId?: string;
+  defaultWorkspaceId?: string;
   digiEmployeeId: string;
   jobId?: string;
   teamId?: string;
   title?: string;
+  workspaceId?: string;
 }
 
 export interface VoCreateCronTriggerRequest {
@@ -1985,6 +1972,11 @@ export interface VoCreateWecomIntegrationRequest {
   corpsecret: string;
 }
 
+export interface VoCreateWorkspaceRequest {
+  description?: string;
+  name: string;
+}
+
 export interface VoCronTrigger {
   actionType?: string;
   createdById?: string;
@@ -2042,6 +2034,15 @@ export interface VoDigiEmployeeTeamSkill {
   id?: string;
   name?: string;
   title?: string;
+}
+
+export interface VoDigiEmployeeWorkspaceAccess {
+  items?: VoDigiEmployeeWorkspaceAccessItem[];
+}
+
+export interface VoDigiEmployeeWorkspaceAccessItem {
+  permission?: string;
+  workspaceId?: string;
 }
 
 export interface VoDigiWorker {
@@ -2410,10 +2411,6 @@ export interface VoListArtifactsResponse {
   total?: number;
 }
 
-export interface VoListCasesResponse {
-  items?: VoCase[];
-}
-
 export interface VoListConversationDesktopSnapshotsResponse {
   hasMore?: boolean;
   items?: VoConversationDesktopSnapshot[];
@@ -2577,6 +2574,10 @@ export interface VoListWecomContactsResponse {
   total?: number;
 }
 
+export interface VoListWorkspacesResponse {
+  items?: VoWorkspace[];
+}
+
 export interface VoMeResponse {
   memberships?: VoTeamMembership[];
   user?: VoHumanUser;
@@ -2708,6 +2709,10 @@ export interface VoPutDigiEmployeeTeamSkillsRequest {
   skillIds?: string[];
 }
 
+export interface VoPutDigiEmployeeWorkspaceAccessRequest {
+  items?: VoDigiEmployeeWorkspaceAccessItem[];
+}
+
 export interface VoRegisterTeamDeviceRequest {
   clientId: string;
   clientType: string;
@@ -2776,10 +2781,9 @@ export interface VoStation {
   createdAt?: string;
   digiEmployeeId?: string;
   endpointType?: string;
-  fileAccess?: VoStationFileAccess;
-  fileGrantTemplate?: VoStationFileGrantTemplate;
   id?: string;
   openaiCompat?: VoStationOpenAICompat;
+  runtimeStatus?: VoStationRuntimeStatus;
   status?: string;
   teamId?: string;
   title?: string;
@@ -2792,21 +2796,6 @@ export interface VoStationApiKeyItem {
   prefix?: string;
   revokedAt?: string;
   status?: string;
-}
-
-export interface VoStationFileAccess {
-  allowOtherUserDirsReadWrite?: boolean;
-  allowOwnUserDirReadWrite?: boolean;
-  cases?: VoStationFileAccessCase[];
-}
-
-export interface VoStationFileAccessCase {
-  caseId?: string;
-  permission?: string;
-}
-
-export interface VoStationFileGrantTemplate {
-  grants?: VoFileGrant[];
 }
 
 export interface VoStationOpenAICompat {
@@ -2828,6 +2817,11 @@ export interface VoStationResponsesResult {
   outputText?: string;
   responseId?: string;
   toolTrace?: VoStationToolTrace[];
+}
+
+export interface VoStationRuntimeStatus {
+  connectionState?: string;
+  lastInboundEventAt?: string;
 }
 
 export interface VoStationToolTrace {
@@ -3058,10 +3052,10 @@ export interface VoTeamPresignResponse {
 }
 
 export interface VoTeamRootScope {
-  caseIdent?: string;
   conversationId?: string;
   externalUserId?: string;
   uploadId?: string;
+  workspaceIdent?: string;
 }
 
 export interface VoTeamStorageEntry {
@@ -3231,13 +3225,8 @@ export interface VoUnbindTeamDeviceExternalProviderRequest {
   devicePassword: string;
 }
 
-export interface VoUpdateCaseRequest {
-  description?: string;
-  name?: string;
-}
-
 export interface VoUpdateConversationFileGrantsRequest {
-  defaultCaseId?: string;
+  defaultWorkspaceId?: string;
   grants?: VoFileGrant[];
 }
 
@@ -3255,16 +3244,6 @@ export interface VoUpdateStationChannelConfigRequest {
   channelConfig: Record<string, any>;
 }
 
-export interface VoUpdateStationFileAccessRequest {
-  allowOtherUserDirsReadWrite?: boolean;
-  allowOwnUserDirReadWrite?: boolean;
-  cases?: VoStationFileAccessCase[];
-}
-
-export interface VoUpdateStationFileGrantTemplateRequest {
-  grants?: VoFileGrant[];
-}
-
 export interface VoUpdateStationRequest {
   title?: string;
 }
@@ -3273,6 +3252,11 @@ export interface VoUpdateWecomIntegrationRequest {
   agentId?: string;
   corpid?: string;
   corpsecret?: string;
+}
+
+export interface VoUpdateWorkspaceRequest {
+  description?: string;
+  name?: string;
 }
 
 export interface VoUpsertAdminOctopusClusterRequest {
@@ -3357,6 +3341,18 @@ export interface VoWecomContactVO {
   name?: string;
   position?: string;
   userid?: string;
+}
+
+export interface VoWorkspace {
+  createdAt?: string;
+  description?: string;
+  fileCount?: number;
+  id?: string;
+  ident?: string;
+  name?: string;
+  status?: string;
+  storageUsage?: number;
+  updatedAt?: string;
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -5205,8 +5201,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         teamId: string;
         /** root kind */
         rootKind: string;
-        /** case ident */
-        caseIdent?: string;
+        /** workspace ident */
+        workspaceIdent?: string;
         /** external user id */
         externalUserId?: string;
         /** conversation id */
@@ -6252,137 +6248,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Cases
-     * @name V1TeamsCasesDetail
-     * @summary List cases
-     * @request GET:/api/v1/teams/{teamId}/cases
-     */
-    v1TeamsCasesDetail: (
-      teamId: string,
-      query?: {
-        /** Case status */
-        status?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<VoListCasesResponse, any>({
-        path: `/api/v1/teams/${teamId}/cases`,
-        method: "GET",
-        query: query,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Cases
-     * @name V1TeamsCasesCreate
-     * @summary Create case
-     * @request POST:/api/v1/teams/{teamId}/cases
-     */
-    v1TeamsCasesCreate: (teamId: string, request: VoCreateCaseRequest, params: RequestParams = {}) =>
-      this.request<VoCase, any>({
-        path: `/api/v1/teams/${teamId}/cases`,
-        method: "POST",
-        body: request,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Cases
-     * @name V1TeamsCasesDetail2
-     * @summary Get case
-     * @request GET:/api/v1/teams/{teamId}/cases/{caseId}
-     * @originalName v1TeamsCasesDetail
-     * @duplicate
-     */
-    v1TeamsCasesDetail2: (teamId: string, caseId: string, params: RequestParams = {}) =>
-      this.request<VoCase, any>({
-        path: `/api/v1/teams/${teamId}/cases/${caseId}`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Cases
-     * @name V1TeamsCasesPartialUpdate
-     * @summary Update case
-     * @request PATCH:/api/v1/teams/{teamId}/cases/{caseId}
-     */
-    v1TeamsCasesPartialUpdate: (
-      teamId: string,
-      caseId: string,
-      request: VoUpdateCaseRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoCase, any>({
-        path: `/api/v1/teams/${teamId}/cases/${caseId}`,
-        method: "PATCH",
-        body: request,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Cases
-     * @name V1TeamsCasesArchiveCreate
-     * @summary Archive case
-     * @request POST:/api/v1/teams/{teamId}/cases/{caseId}/archive
-     */
-    v1TeamsCasesArchiveCreate: (teamId: string, caseId: string, params: RequestParams = {}) =>
-      this.request<VoCase, any>({
-        path: `/api/v1/teams/${teamId}/cases/${caseId}/archive`,
-        method: "POST",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Cases
-     * @name V1TeamsCasesDeleteCreate
-     * @summary Delete case
-     * @request POST:/api/v1/teams/{teamId}/cases/{caseId}/delete
-     */
-    v1TeamsCasesDeleteCreate: (teamId: string, caseId: string, params: RequestParams = {}) =>
-      this.request<VoCase, any>({
-        path: `/api/v1/teams/${teamId}/cases/${caseId}/delete`,
-        method: "POST",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Cases
-     * @name V1TeamsCasesRestoreCreate
-     * @summary Restore case
-     * @request POST:/api/v1/teams/{teamId}/cases/{caseId}/restore
-     */
-    v1TeamsCasesRestoreCreate: (teamId: string, caseId: string, params: RequestParams = {}) =>
-      this.request<VoCase, any>({
-        path: `/api/v1/teams/${teamId}/cases/${caseId}/restore`,
-        method: "POST",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
      * @tags Teams
      * @name V1TeamsComputeImagesDetail
      * @summary List visible compute images for team
@@ -7082,6 +6947,45 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesWorkspaceAccessDetail
+     * @summary Get digiemployee workspace access
+     * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/workspace-access
+     */
+    v1TeamsDigiemployeesWorkspaceAccessDetail: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
+      this.request<VoDigiEmployeeWorkspaceAccess, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/workspace-access`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesWorkspaceAccessUpdate
+     * @summary Put digiemployee workspace access
+     * @request PUT:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/workspace-access
+     */
+    v1TeamsDigiemployeesWorkspaceAccessUpdate: (
+      teamId: string,
+      digiEmployeeId: string,
+      request: VoPutDigiEmployeeWorkspaceAccessRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoDigiEmployeeWorkspaceAccess, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/workspace-access`,
+        method: "PUT",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Teams
      * @name V1TeamsExternalProvidersEnsureCreate
      * @summary Ensure team external provider ready
@@ -7313,8 +7217,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       query: {
         /** root kind */
         rootKind: string;
-        /** case ident */
-        caseIdent?: string;
+        /** workspace ident */
+        workspaceIdent?: string;
         /** external user id */
         externalUserId?: string;
         /** conversation id */
@@ -7353,8 +7257,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       query: {
         /** root kind */
         rootKind: string;
-        /** case ident */
-        caseIdent?: string;
+        /** workspace ident */
+        workspaceIdent?: string;
         /** external user id */
         externalUserId?: string;
         /** conversation id */
@@ -9088,19 +8992,54 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name V1TeamsStationsFileAccessUpdate
-     * @summary Update station file access
-     * @request PUT:/api/v1/teams/{teamId}/stations/{stationId}/file-access
+     * @name V1TeamsStationsEnableCreate
+     * @summary Enable station
+     * @request POST:/api/v1/teams/{teamId}/stations/{stationId}/enable
      */
-    v1TeamsStationsFileAccessUpdate: (
+    v1TeamsStationsEnableCreate: (teamId: string, stationId: string, params: RequestParams = {}) =>
+      this.request<VoStation, any>({
+        path: `/api/v1/teams/${teamId}/stations/${stationId}/enable`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workspaces
+     * @name V1TeamsWorkspacesDetail
+     * @summary List workspaces
+     * @request GET:/api/v1/teams/{teamId}/workspaces
+     */
+    v1TeamsWorkspacesDetail: (
       teamId: string,
-      stationId: string,
-      request: VoUpdateStationFileAccessRequest,
+      query?: {
+        /** Workspace status */
+        status?: string;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<VoStation, any>({
-        path: `/api/v1/teams/${teamId}/stations/${stationId}/file-access`,
-        method: "PUT",
+      this.request<VoListWorkspacesResponse, any>({
+        path: `/api/v1/teams/${teamId}/workspaces`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workspaces
+     * @name V1TeamsWorkspacesCreate
+     * @summary Create workspace
+     * @request POST:/api/v1/teams/{teamId}/workspaces
+     */
+    v1TeamsWorkspacesCreate: (teamId: string, request: VoCreateWorkspaceRequest, params: RequestParams = {}) =>
+      this.request<VoWorkspace, any>({
+        path: `/api/v1/teams/${teamId}/workspaces`,
+        method: "POST",
         body: request,
         type: ContentType.Json,
         format: "json",
@@ -9110,14 +9049,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Stations
-     * @name V1TeamsStationsFileGrantTemplateDetail
-     * @summary Get station file grant template
-     * @request GET:/api/v1/teams/{teamId}/stations/{stationId}/file-grant-template
+     * @tags Workspaces
+     * @name V1TeamsWorkspacesDetail2
+     * @summary Get workspace
+     * @request GET:/api/v1/teams/{teamId}/workspaces/{workspaceId}
+     * @originalName v1TeamsWorkspacesDetail
+     * @duplicate
      */
-    v1TeamsStationsFileGrantTemplateDetail: (teamId: string, stationId: string, params: RequestParams = {}) =>
-      this.request<VoStation, any>({
-        path: `/api/v1/teams/${teamId}/stations/${stationId}/file-grant-template`,
+    v1TeamsWorkspacesDetail2: (teamId: string, workspaceId: string, params: RequestParams = {}) =>
+      this.request<VoWorkspace, any>({
+        path: `/api/v1/teams/${teamId}/workspaces/${workspaceId}`,
         method: "GET",
         format: "json",
         ...params,
@@ -9126,22 +9067,70 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Stations
-     * @name V1TeamsStationsFileGrantTemplateUpdate
-     * @summary Update station file grant template
-     * @request PUT:/api/v1/teams/{teamId}/stations/{stationId}/file-grant-template
+     * @tags Workspaces
+     * @name V1TeamsWorkspacesPartialUpdate
+     * @summary Update workspace
+     * @request PATCH:/api/v1/teams/{teamId}/workspaces/{workspaceId}
      */
-    v1TeamsStationsFileGrantTemplateUpdate: (
+    v1TeamsWorkspacesPartialUpdate: (
       teamId: string,
-      stationId: string,
-      request: VoUpdateStationFileGrantTemplateRequest,
+      workspaceId: string,
+      request: VoUpdateWorkspaceRequest,
       params: RequestParams = {},
     ) =>
-      this.request<VoStation, any>({
-        path: `/api/v1/teams/${teamId}/stations/${stationId}/file-grant-template`,
-        method: "PUT",
+      this.request<VoWorkspace, any>({
+        path: `/api/v1/teams/${teamId}/workspaces/${workspaceId}`,
+        method: "PATCH",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workspaces
+     * @name V1TeamsWorkspacesArchiveCreate
+     * @summary Archive workspace
+     * @request POST:/api/v1/teams/{teamId}/workspaces/{workspaceId}/archive
+     */
+    v1TeamsWorkspacesArchiveCreate: (teamId: string, workspaceId: string, params: RequestParams = {}) =>
+      this.request<VoWorkspace, any>({
+        path: `/api/v1/teams/${teamId}/workspaces/${workspaceId}/archive`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workspaces
+     * @name V1TeamsWorkspacesDeleteCreate
+     * @summary Delete workspace
+     * @request POST:/api/v1/teams/{teamId}/workspaces/{workspaceId}/delete
+     */
+    v1TeamsWorkspacesDeleteCreate: (teamId: string, workspaceId: string, params: RequestParams = {}) =>
+      this.request<VoWorkspace, any>({
+        path: `/api/v1/teams/${teamId}/workspaces/${workspaceId}/delete`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workspaces
+     * @name V1TeamsWorkspacesRestoreCreate
+     * @summary Restore workspace
+     * @request POST:/api/v1/teams/{teamId}/workspaces/{workspaceId}/restore
+     */
+    v1TeamsWorkspacesRestoreCreate: (teamId: string, workspaceId: string, params: RequestParams = {}) =>
+      this.request<VoWorkspace, any>({
+        path: `/api/v1/teams/${teamId}/workspaces/${workspaceId}/restore`,
+        method: "POST",
         format: "json",
         ...params,
       }),
@@ -10607,8 +10596,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         teamId: string;
         /** root kind */
         rootKind: string;
-        /** case ident */
-        caseIdent?: string;
+        /** workspace ident */
+        workspaceIdent?: string;
         /** external user id */
         externalUserId?: string;
         /** directory prefix */
@@ -10790,7 +10779,6 @@ export type ArrayBaseRemoteTaskPackageVersion = BaseRemoteTaskPackageVersion[];
 
 
 // --- swagger type aliases ---
-export type Case = VoCase;
 export type InboxItem = VoInboxItem;
 export type FileNode = VoFileNode;
 export type Team = VoTeam;

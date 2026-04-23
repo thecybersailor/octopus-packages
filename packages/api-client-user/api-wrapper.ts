@@ -59,10 +59,10 @@ function isPinErrorResponse(value: any): value is PinErrorResponse {
 
 function extractPinErrorPayload(error: any): { body: PinErrorResponse; statusCode?: number } | null {
   if (isPinErrorResponse(error)) {
-    return { body: error, statusCode: typeof error?.status === 'number' ? error.status : undefined }
+    return { body: error }
   }
   if (isPinErrorResponse(error?.error)) {
-    return { body: error.error, statusCode: typeof error?.status === 'number' ? error.status : undefined }
+    return { body: error.error }
   }
   if (isPinErrorResponse(error?.response?.data)) {
     return { body: error.response.data, statusCode: error.response.status }
