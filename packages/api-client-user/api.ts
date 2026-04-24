@@ -863,6 +863,11 @@ export interface BasePinOKVoTeamMembershipProfile {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamMembershipProfileAvatarUploadURLResponse {
+  data?: VoTeamMembershipProfileAvatarUploadURLResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamPresignResponse {
   data?: VoTeamPresignResponse;
   trace_id?: string;
@@ -2783,7 +2788,6 @@ export interface VoStation {
   endpointType?: string;
   id?: string;
   openaiCompat?: VoStationOpenAICompat;
-  runtimeStatus?: VoStationRuntimeStatus;
   status?: string;
   teamId?: string;
   title?: string;
@@ -2817,11 +2821,6 @@ export interface VoStationResponsesResult {
   outputText?: string;
   responseId?: string;
   toolTrace?: VoStationToolTrace[];
-}
-
-export interface VoStationRuntimeStatus {
-  connectionState?: string;
-  lastInboundEventAt?: string;
 }
 
 export interface VoStationToolTrace {
@@ -3007,6 +3006,18 @@ export interface VoTeamMembershipProfile {
   teamId?: string;
   updatedAt?: string;
   userId?: string;
+}
+
+export interface VoTeamMembershipProfileAvatarUploadURLRequest {
+  contentType?: string;
+}
+
+export interface VoTeamMembershipProfileAvatarUploadURLResponse {
+  expireAt?: string;
+  method?: string;
+  publicUrl?: string;
+  storageKey?: string;
+  uploadUrl?: string;
 }
 
 export interface VoTeamMoveRequest {
@@ -8024,6 +8035,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
+     * @name V1TeamsMeProfileAvatarUploadUrlCreate
+     * @summary Create current user team display avatar upload url
+     * @request POST:/api/v1/teams/{teamId}/me/profile/avatar:upload-url
+     */
+    v1TeamsMeProfileAvatarUploadUrlCreate: (
+      teamId: string,
+      request: VoTeamMembershipProfileAvatarUploadURLRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamMembershipProfileAvatarUploadURLResponse, any>({
+        path: `/api/v1/teams/${teamId}/me/profile/avatar:upload-url`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
      * @name V1TeamsMembersDetail
      * @summary List team members
      * @request GET:/api/v1/teams/{teamId}/members
@@ -8983,22 +9016,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v1TeamsStationsDisableCreate: (teamId: string, stationId: string, params: RequestParams = {}) =>
       this.request<VoStation, any>({
         path: `/api/v1/teams/${teamId}/stations/${stationId}/disable`,
-        method: "POST",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Stations
-     * @name V1TeamsStationsEnableCreate
-     * @summary Enable station
-     * @request POST:/api/v1/teams/{teamId}/stations/{stationId}/enable
-     */
-    v1TeamsStationsEnableCreate: (teamId: string, stationId: string, params: RequestParams = {}) =>
-      this.request<VoStation, any>({
-        path: `/api/v1/teams/${teamId}/stations/${stationId}/enable`,
         method: "POST",
         format: "json",
         ...params,
