@@ -923,6 +923,21 @@ export interface BasePinOKVoVerifyWecomResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoWebSession {
+  data?: VoWebSession;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWebSessionAckResponse {
+  data?: VoWebSessionAckResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWebSessionMessageResponse {
+  data?: VoWebSessionMessageResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoWorkspace {
   data?: VoWorkspace;
   trace_id?: string;
@@ -1970,6 +1985,12 @@ export interface VoCreateTeamRequest {
   name?: string;
 }
 
+export interface VoCreateWebSessionRequest {
+  externalConversationId?: string;
+  hostTools?: VoHostToolDescriptor[];
+  origin: string;
+}
+
 export interface VoCreateWecomIntegrationRequest {
   agentId?: string;
   appType?: string;
@@ -2076,6 +2097,7 @@ export interface VoEndpointConfigField {
   pattern?: string;
   placeholder?: string;
   required?: boolean;
+  /** "string" | "secret" | "boolean" | "select" | "json" */
   type?: string;
 }
 
@@ -2206,6 +2228,13 @@ export interface VoGetDigiEmployeeTeamSkillsResponse {
 
 export interface VoHireDigiEmployeeRequest {
   digiWorkerId: string;
+}
+
+export interface VoHostToolDescriptor {
+  description?: string;
+  inputSchema?: Record<string, any>;
+  name?: string;
+  outputSchema?: Record<string, any>;
 }
 
 export interface VoHumanUser {
@@ -2788,6 +2817,7 @@ export interface VoStation {
   endpointType?: string;
   id?: string;
   openaiCompat?: VoStationOpenAICompat;
+  runtimeStatus?: VoStationRuntimeStatus;
   status?: string;
   teamId?: string;
   title?: string;
@@ -2821,6 +2851,11 @@ export interface VoStationResponsesResult {
   outputText?: string;
   responseId?: string;
   toolTrace?: VoStationToolTrace[];
+}
+
+export interface VoStationRuntimeStatus {
+  connectionState?: string;
+  lastInboundEventAt?: string;
 }
 
 export interface VoStationToolTrace {
@@ -3340,6 +3375,34 @@ export interface VoVerifyWecomResponse {
   errcode?: number;
   errmsg?: string;
   valid?: boolean;
+}
+
+export interface VoWebSession {
+  accessToken?: string;
+  conversationId?: string;
+  externalConversationId?: string;
+  id?: string;
+}
+
+export interface VoWebSessionAckResponse {
+  status?: string;
+  webSessionId?: string;
+}
+
+export interface VoWebSessionMessageRequest {
+  message: Record<string, any>;
+  metadata?: Record<string, string>;
+}
+
+export interface VoWebSessionMessageResponse {
+  conversationId?: string;
+  status?: string;
+  webSessionId?: string;
+}
+
+export interface VoWebSessionToolResultRequest {
+  result?: any;
+  toolCallId: string;
 }
 
 export interface VoWecomContactVO {
@@ -6099,6 +6162,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v1/site-config/public`,
         method: "GET",
         query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1StationsWebSessionsCreate
+     * @summary Create web session for a web-application station
+     * @request POST:/api/v1/stations/{stationId}/web-sessions
+     */
+    v1StationsWebSessionsCreate: (stationId: string, request: VoCreateWebSessionRequest, params: RequestParams = {}) =>
+      this.request<VoWebSession, any>({
+        path: `/api/v1/stations/${stationId}/web-sessions`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
@@ -9024,6 +9105,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Stations
+     * @name V1TeamsStationsEnableCreate
+     * @summary Enable station
+     * @request POST:/api/v1/teams/{teamId}/stations/{stationId}/enable
+     */
+    v1TeamsStationsEnableCreate: (teamId: string, stationId: string, params: RequestParams = {}) =>
+      this.request<VoStation, any>({
+        path: `/api/v1/teams/${teamId}/stations/${stationId}/enable`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Workspaces
      * @name V1TeamsWorkspacesDetail
      * @summary List workspaces
@@ -9148,6 +9245,82 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoWorkspace, any>({
         path: `/api/v1/teams/${teamId}/workspaces/${workspaceId}/restore`,
         method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1WebSessionsCloseCreate
+     * @summary Close a web session
+     * @request POST:/api/v1/web-sessions/{webSessionId}/close
+     */
+    v1WebSessionsCloseCreate: (webSessionId: string, params: RequestParams = {}) =>
+      this.request<VoWebSessionAckResponse, any>({
+        path: `/api/v1/web-sessions/${webSessionId}/close`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1WebSessionsEventsDetail
+     * @summary Get web session events
+     * @request GET:/api/v1/web-sessions/{webSessionId}/events
+     */
+    v1WebSessionsEventsDetail: (webSessionId: string, params: RequestParams = {}) =>
+      this.request<VoWebSessionAckResponse, any>({
+        path: `/api/v1/web-sessions/${webSessionId}/events`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1WebSessionsMessagesCreate
+     * @summary Post message to a web session
+     * @request POST:/api/v1/web-sessions/{webSessionId}/messages
+     */
+    v1WebSessionsMessagesCreate: (
+      webSessionId: string,
+      request: VoWebSessionMessageRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWebSessionMessageResponse, any>({
+        path: `/api/v1/web-sessions/${webSessionId}/messages`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1WebSessionsToolResultsCreate
+     * @summary Post tool result to a web session
+     * @request POST:/api/v1/web-sessions/{webSessionId}/tool-results
+     */
+    v1WebSessionsToolResultsCreate: (
+      webSessionId: string,
+      request: VoWebSessionToolResultRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWebSessionAckResponse, any>({
+        path: `/api/v1/web-sessions/${webSessionId}/tool-results`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
