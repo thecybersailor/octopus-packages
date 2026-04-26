@@ -1986,9 +1986,9 @@ export interface VoCreateTeamRequest {
 }
 
 export interface VoCreateWebSessionRequest {
+  embedAccessToken: string;
   externalConversationId?: string;
   hostTools?: VoHostToolDescriptor[];
-  origin: string;
 }
 
 export interface VoCreateWecomIntegrationRequest {
@@ -2040,9 +2040,11 @@ export interface VoDeleteExternalUserVerificationFlowResponse {
 export interface VoDigiEmployee {
   digiWorker?: VoDigiWorker;
   digiWorkerId?: string;
+  externalAgentBinding?: VoExternalAgentBindingSummary;
   hiredAt?: string;
   id?: string;
   managerDigiEmployeeId?: string;
+  runtimeKind?: string;
   skillsets?: VoSkillsetLite[];
   status?: string;
   teamId?: string;
@@ -2109,6 +2111,12 @@ export interface VoEndpointTypeItem {
   description?: string;
   id?: string;
   name?: string;
+}
+
+export interface VoExternalAgentBindingSummary {
+  provider?: string;
+  providerEmployeeRef?: string;
+  providerTeamRef?: string;
 }
 
 export interface VoExternalUserConversationItem {
