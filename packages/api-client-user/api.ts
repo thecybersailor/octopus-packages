@@ -1920,6 +1920,7 @@ export interface VoCreateCronTriggerRequest {
   initialPromptTemplate?: string;
   messageTemplate?: string;
   targetConversationId?: string;
+  timezone: string;
   titleTemplate?: string;
 }
 
@@ -2017,20 +2018,24 @@ export interface VoCronTrigger {
   messageTemplate?: string;
   targetConversationId?: string;
   teamId?: string;
+  timezone?: string;
   titleTemplate?: string;
 }
 
 export interface VoCronTriggerRun {
   actionType?: string;
+  bucket?: string;
   createdConversationId?: string;
   errorMessage?: string;
   finishedAt?: string;
   id?: string;
+  responseId?: string;
   startedAt?: string;
   status?: string;
   targetConversationId?: string;
   teamId?: string;
   triggerId?: string;
+  turnId?: string;
 }
 
 export interface VoDeleteExternalUserVerificationFlowResponse {
@@ -2116,6 +2121,7 @@ export interface VoEndpointTypeItem {
 export interface VoExternalAgentBindingSummary {
   provider?: string;
   providerEmployeeRef?: string;
+  providerSpecRef?: string;
   providerTeamRef?: string;
 }
 
@@ -3291,6 +3297,7 @@ export interface VoUpdateCronTriggerRequest {
   initialPromptTemplate?: string;
   messageTemplate?: string;
   targetConversationId?: string;
+  timezone?: string;
   titleTemplate?: string;
 }
 
@@ -6554,10 +6561,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List schedule triggers
      * @request GET:/api/v1/teams/{teamId}/cron-triggers
      */
-    v1TeamsCronTriggersDetail: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsCronTriggersDetail: (
+      teamId: string,
+      query?: {
+        /** Filter triggers that fire on the given local day (YYYY-MM-DD) */
+        day?: string;
+        /** IANA timezone used together with day */
+        tz?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<VoListCronTriggersResponse, any>({
         path: `/api/v1/teams/${teamId}/cron-triggers`,
         method: "GET",
+        query: query,
         format: "json",
         ...params,
       }),
