@@ -458,6 +458,11 @@ export interface BasePinOKVoInboxSummary {
   trace_id?: string;
 }
 
+export interface BasePinOKVoIssueStationEmbedAccessTokenResponse {
+  data?: VoIssueStationEmbedAccessTokenResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoJob {
   data?: VoJob;
   trace_id?: string;
@@ -2357,6 +2362,19 @@ export interface VoInboxSummary {
   incident?: number;
   question?: number;
   review?: number;
+}
+
+export interface VoIssueStationEmbedAccessTokenRequest {
+  externalConversationId?: string;
+  subject?: string;
+  tenantId?: string;
+  ttlSeconds?: number;
+  userId?: string;
+}
+
+export interface VoIssueStationEmbedAccessTokenResponse {
+  embedAccessToken?: string;
+  expiresAt?: string;
 }
 
 export interface VoJob {
@@ -6272,6 +6290,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v1/site-config/public`,
         method: "GET",
         query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1StationsEmbedAccessTokensCreate
+     * @summary Issue embed access token for a web-application station
+     * @request POST:/api/v1/stations/{stationId}/embed-access-tokens
+     */
+    v1StationsEmbedAccessTokensCreate: (
+      stationId: string,
+      request: VoIssueStationEmbedAccessTokenRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoIssueStationEmbedAccessTokenResponse, any>({
+        path: `/api/v1/stations/${stationId}/embed-access-tokens`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
