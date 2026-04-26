@@ -233,6 +233,16 @@ export interface BasePinOKMapStringString {
   trace_id?: string;
 }
 
+export interface BasePinOKServicesArcubaseRowDetail {
+  data?: ServicesArcubaseRowDetail;
+  trace_id?: string;
+}
+
+export interface BasePinOKServicesArcubaseRowsQueryResponse {
+  data?: ServicesArcubaseRowsQueryResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKServicesMcplinxVisibleProofRecord {
   data?: ServicesMcplinxVisibleProofRecord;
   trace_id?: string;
@@ -403,6 +413,11 @@ export interface BasePinOKVoDigiEmployee {
   trace_id?: string;
 }
 
+export interface BasePinOKVoDigiEmployeeArcubaseBinding {
+  data?: VoDigiEmployeeArcubaseBinding;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoDigiEmployeeKBAccess {
   data?: VoDigiEmployeeKBAccess;
   trace_id?: string;
@@ -545,6 +560,16 @@ export interface BasePinOKVoListAdminSkillsResponse {
 
 export interface BasePinOKVoListAdminStorageEntriesResponse {
   data?: VoListAdminStorageEntriesResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListArcubaseAppsResponse {
+  data?: VoListArcubaseAppsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListArcubaseTablesResponse {
+  data?: VoListArcubaseTablesResponse;
   trace_id?: string;
 }
 
@@ -805,6 +830,11 @@ export interface BasePinOKVoStationResponsesResult {
 
 export interface BasePinOKVoTeam {
   data?: VoTeam;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamArcubaseBinding {
+  data?: VoTeamArcubaseBinding;
   trace_id?: string;
 }
 
@@ -1183,6 +1213,19 @@ export interface RuntimesnapshotHostLLMUsage {
   totalTokens?: number;
 }
 
+export interface ServicesArcubaseRowDetail {
+  additional?: Record<string, any>;
+  item?: Record<string, any>;
+}
+
+export interface ServicesArcubaseRowsQueryResponse {
+  additional?: Record<string, any>;
+  items?: Record<string, any>[];
+  limit?: number;
+  offset?: number;
+  total?: number;
+}
+
 export interface ServicesMcplinxVisibleProofEvent {
   at?: string;
   detail?: Record<string, any>;
@@ -1531,6 +1574,31 @@ export interface VoAdminUpsertSiteConfigRequest {
   scope?: string;
   tenantId?: string;
   value?: number[];
+}
+
+export interface VoArcubaseAppItem {
+  id?: string;
+  name?: string;
+}
+
+export interface VoArcubaseBindingSummary {
+  arcubaseServiceAccountId?: string;
+  arcubaseTenantId?: string;
+  bindingStatus?: string;
+  lastError?: string;
+}
+
+export interface VoArcubaseRowsQueryRequest {
+  limit?: number;
+  offset?: number;
+  sorts?: any[];
+  viewMode?: string;
+}
+
+export interface VoArcubaseTableItem {
+  id?: string;
+  name?: string;
+  totalNumber?: number;
 }
 
 export interface VoArtifactDetail {
@@ -2043,6 +2111,7 @@ export interface VoDeleteExternalUserVerificationFlowResponse {
 }
 
 export interface VoDigiEmployee {
+  arcubaseBinding?: VoArcubaseBindingSummary;
   digiWorker?: VoDigiWorker;
   digiWorkerId?: string;
   externalAgentBinding?: VoExternalAgentBindingSummary;
@@ -2055,6 +2124,15 @@ export interface VoDigiEmployee {
   teamId?: string;
   workloadCap?: number;
   workloadUsed?: number;
+}
+
+export interface VoDigiEmployeeArcubaseBinding {
+  arcubaseServiceAccountId?: string;
+  arcubaseTenantId?: string;
+  bindingStatus?: string;
+  digiEmployeeId?: string;
+  lastError?: string;
+  teamId?: string;
 }
 
 export interface VoDigiEmployeeKBAccess {
@@ -2450,6 +2528,14 @@ export interface VoListAdminStorageEntriesResponse {
   hasMore?: boolean;
   nextCursor?: string;
   prefix?: string;
+}
+
+export interface VoListArcubaseAppsResponse {
+  items?: VoArcubaseAppItem[];
+}
+
+export interface VoListArcubaseTablesResponse {
+  items?: VoArcubaseTableItem[];
 }
 
 export interface VoListArtifactsResponse {
@@ -2892,6 +2978,15 @@ export interface VoTeam {
   organizationProfile?: VoTeamOrganizationProfile;
   registrationName?: string;
   tags?: string[];
+}
+
+export interface VoTeamArcubaseBinding {
+  arcubaseInstanceId?: string;
+  arcubaseTenantId?: string;
+  arcubaseTenantSlug?: string;
+  bindingStatus?: string;
+  lastError?: string;
+  teamId?: string;
 }
 
 export interface VoTeamBillingSummaryResponse {
@@ -6252,6 +6347,100 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Teams
+     * @name V1TeamsArcubaseDetail
+     * @summary Get team Arcubase binding
+     * @request GET:/api/v1/teams/{teamId}/arcubase
+     */
+    v1TeamsArcubaseDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoTeamArcubaseBinding, any>({
+        path: `/api/v1/teams/${teamId}/arcubase`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsArcubaseAppsDetail
+     * @summary List Arcubase apps for team
+     * @request GET:/api/v1/teams/{teamId}/arcubase/apps
+     */
+    v1TeamsArcubaseAppsDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListArcubaseAppsResponse, any>({
+        path: `/api/v1/teams/${teamId}/arcubase/apps`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsArcubaseAppsTablesDetail
+     * @summary List Arcubase tables by app
+     * @request GET:/api/v1/teams/{teamId}/arcubase/apps/{appId}/tables
+     */
+    v1TeamsArcubaseAppsTablesDetail: (teamId: string, appId: string, params: RequestParams = {}) =>
+      this.request<VoListArcubaseTablesResponse, any>({
+        path: `/api/v1/teams/${teamId}/arcubase/apps/${appId}/tables`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsArcubaseAppsTablesRowsQueryCreate
+     * @summary Query Arcubase rows
+     * @request POST:/api/v1/teams/{teamId}/arcubase/apps/{appId}/tables/{tableId}/rows/query
+     */
+    v1TeamsArcubaseAppsTablesRowsQueryCreate: (
+      teamId: string,
+      appId: string,
+      tableId: string,
+      request: VoArcubaseRowsQueryRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<ServicesArcubaseRowsQueryResponse, any>({
+        path: `/api/v1/teams/${teamId}/arcubase/apps/${appId}/tables/${tableId}/rows/query`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsArcubaseAppsTablesRowsDetail
+     * @summary Get Arcubase row detail
+     * @request GET:/api/v1/teams/{teamId}/arcubase/apps/{appId}/tables/{tableId}/rows/{rowId}
+     */
+    v1TeamsArcubaseAppsTablesRowsDetail: (
+      teamId: string,
+      appId: string,
+      tableId: string,
+      rowId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<ServicesArcubaseRowDetail, any>({
+        path: `/api/v1/teams/${teamId}/arcubase/apps/${appId}/tables/${tableId}/rows/${rowId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Artifacts
      * @name V1TeamsArtifactsDetail
      * @summary List artifacts
@@ -6858,6 +7047,38 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoDigiEmployee, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesArcubaseDetail
+     * @summary Get digiemployee Arcubase binding
+     * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/arcubase
+     */
+    v1TeamsDigiemployeesArcubaseDetail: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
+      this.request<VoDigiEmployeeArcubaseBinding, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/arcubase`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesArcubaseEnsureCreate
+     * @summary Ensure digiemployee Arcubase binding
+     * @request POST:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/arcubase/ensure
+     */
+    v1TeamsDigiemployeesArcubaseEnsureCreate: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
+      this.request<VoDigiEmployeeArcubaseBinding, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/arcubase/ensure`,
+        method: "POST",
         format: "json",
         ...params,
       }),
