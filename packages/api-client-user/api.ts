@@ -133,11 +133,6 @@ export interface BasePinOKArrayBaseRemoteTaskPackageVersion {
   trace_id?: string;
 }
 
-export interface BasePinOKArrayVoWPSCallbackUser {
-  data?: VoWPSCallbackUser[];
-  trace_id?: string;
-}
-
 export interface BasePinOKArrayVoGroupSessionMember {
   data?: VoGroupSessionMember[];
   trace_id?: string;
@@ -150,6 +145,11 @@ export interface BasePinOKArrayVoGroupSessionTimelineMessage {
 
 export interface BasePinOKArrayVoJoinedGroupSessionItem {
   data?: VoJoinedGroupSessionItem[];
+  trace_id?: string;
+}
+
+export interface BasePinOKArrayVoWPSCallbackUser {
+  data?: VoWPSCallbackUser[];
   trace_id?: string;
 }
 
@@ -11995,10 +11995,10 @@ export type ArrayBaseConnectorRegistryPackage = BaseConnectorRegistryPackage[];
 export type ArrayBaseConnectorRegistryVersion = BaseConnectorRegistryVersion[];
 export type ArrayBaseRemoteTaskConnectorInstance = BaseRemoteTaskConnectorInstance[];
 export type ArrayBaseRemoteTaskPackageVersion = BaseRemoteTaskPackageVersion[];
-export type ArrayVoWPSCallbackUser = VoWPSCallbackUser[];
 export type ArrayVoGroupSessionMember = VoGroupSessionMember[];
 export type ArrayVoGroupSessionTimelineMessage = VoGroupSessionTimelineMessage[];
 export type ArrayVoJoinedGroupSessionItem = VoJoinedGroupSessionItem[];
+export type ArrayVoWPSCallbackUser = VoWPSCallbackUser[];
 
 
 // --- swagger type aliases ---
