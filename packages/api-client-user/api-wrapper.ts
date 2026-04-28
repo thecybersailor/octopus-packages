@@ -159,6 +159,14 @@ export function createApi(config: ConstructorParameters<typeof GeneratedApi<any>
     }
   }
   
+  wrappedApi.open = {}
+  for (const key in rawApi.open) {
+    const method = (rawApi.open as any)[key]
+    if (typeof method === 'function') {
+      wrappedApi.open[key] = (...args: any[]) => unwrapData(method.apply(rawApi.open, args))
+    }
+  }
+  
   wrappedApi.tenantAdmin = {}
   for (const key in rawApi.tenantAdmin) {
     const method = (rawApi.tenantAdmin as any)[key]

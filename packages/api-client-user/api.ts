@@ -133,6 +133,11 @@ export interface BasePinOKArrayBaseRemoteTaskPackageVersion {
   trace_id?: string;
 }
 
+export interface BasePinOKArrayVoWPSCallbackUser {
+  data?: VoWPSCallbackUser[];
+  trace_id?: string;
+}
+
 export interface BasePinOKBaseConnectorConfigListResponse {
   data?: BaseConnectorConfigListResponse;
   trace_id?: string;
@@ -383,6 +388,11 @@ export interface BasePinOKVoConversationTurnLLMTraceCallDetail {
   trace_id?: string;
 }
 
+export interface BasePinOKVoCreateOfficePreviewSessionResponse {
+  data?: VoCreateOfficePreviewSessionResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoCronTrigger {
   data?: VoCronTrigger;
   trace_id?: string;
@@ -430,6 +440,11 @@ export interface BasePinOKVoExternalUserVerificationFlowDetail {
 
 export interface BasePinOKVoFileNode {
   data?: VoFileNode;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoFilePreviewSessionResponse {
+  data?: VoFilePreviewSessionResponse;
   trace_id?: string;
 }
 
@@ -748,6 +763,11 @@ export interface BasePinOKVoMeResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoOfficePreviewSessionResponse {
+  data?: VoOfficePreviewSessionResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoPortalBrand {
   data?: VoPortalBrand;
   trace_id?: string;
@@ -863,6 +883,11 @@ export interface BasePinOKVoTeamMembershipProfile {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamMembershipProfileAvatarUploadURLResponse {
+  data?: VoTeamMembershipProfileAvatarUploadURLResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamPresignResponse {
   data?: VoTeamPresignResponse;
   trace_id?: string;
@@ -915,6 +940,21 @@ export interface BasePinOKVoVerifyFeishuResponse {
 
 export interface BasePinOKVoVerifyWecomResponse {
   data?: VoVerifyWecomResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWPSCallbackDownloadResponse {
+  data?: VoWPSCallbackDownloadResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWPSCallbackFileResponse {
+  data?: VoWPSCallbackFileResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWPSCallbackPermissionResponse {
+  data?: VoWPSCallbackPermissionResponse;
   trace_id?: string;
 }
 
@@ -1903,6 +1943,12 @@ export interface VoCreateCronTriggerRequest {
   titleTemplate?: string;
 }
 
+export interface VoCreateFilePreviewSessionRequest {
+  logicalPath: string;
+  sourceKind: string;
+  sourceRef?: VoOfficePreviewSourceRef;
+}
+
 export interface VoCreateJobDependencyRequest {
   fromNodeKey: string;
   isHard?: boolean;
@@ -1922,6 +1968,17 @@ export interface VoCreateJobRequest {
   edges?: VoCreateJobDependencyRequest[];
   name: string;
   nodes: VoCreateJobNodeRequest[];
+}
+
+export interface VoCreateOfficePreviewSessionRequest {
+  logicalPath: string;
+  sourceKind: string;
+  sourceRef?: VoOfficePreviewSourceRef;
+}
+
+export interface VoCreateOfficePreviewSessionResponse {
+  previewUrl?: string;
+  sessionId?: string;
 }
 
 export interface VoCreateSkillsetRequest {
@@ -2193,6 +2250,19 @@ export interface VoFileNode {
   size?: number;
   type?: string;
   updated?: string;
+}
+
+export interface VoFilePreviewSessionResponse {
+  assetUrl?: string;
+  fileExt?: string;
+  fileName?: string;
+  logicalPath?: string;
+  mimeType?: string;
+  officeSession?: VoOfficePreviewSessionResponse;
+  previewKind?: string;
+  sourceKind?: string;
+  sourceRef?: VoOfficePreviewSourceRef;
+  textContent?: string;
 }
 
 export interface VoGetDigiEmployeeTeamSkillsResponse {
@@ -2581,6 +2651,29 @@ export interface VoListWorkspacesResponse {
 export interface VoMeResponse {
   memberships?: VoTeamMembership[];
   user?: VoHumanUser;
+}
+
+export interface VoOfficePreviewSessionResponse {
+  customArgs?: Record<string, string>;
+  expireAt?: string;
+  fileExt?: string;
+  fileId?: string;
+  fileName?: string;
+  logicalPath?: string;
+  mode?: string;
+  sdkInitConfig?: Record<string, any>;
+  sessionId?: string;
+  sourceKind?: string;
+  sourceRef?: VoOfficePreviewSourceRef;
+  token?: string;
+  wpsAppId?: string;
+}
+
+export interface VoOfficePreviewSourceRef {
+  artifactId?: string;
+  artifactItemId?: string;
+  workspaceId?: string;
+  workspaceIdent?: string;
 }
 
 export interface VoPatchAdminComputeImageRequest {
@@ -3009,6 +3102,18 @@ export interface VoTeamMembershipProfile {
   userId?: string;
 }
 
+export interface VoTeamMembershipProfileAvatarUploadURLRequest {
+  contentType?: string;
+}
+
+export interface VoTeamMembershipProfileAvatarUploadURLResponse {
+  expireAt?: string;
+  method?: string;
+  publicUrl?: string;
+  storageKey?: string;
+  uploadUrl?: string;
+}
+
 export interface VoTeamMoveRequest {
   destPrefix?: string;
   mountId?: string;
@@ -3329,6 +3434,36 @@ export interface VoVerifyWecomResponse {
   errcode?: number;
   errmsg?: string;
   valid?: boolean;
+}
+
+export interface VoWPSCallbackDownloadResponse {
+  url?: string;
+}
+
+export interface VoWPSCallbackFileResponse {
+  create_time?: number;
+  creator_id?: string;
+  id?: string;
+  modifier_id?: string;
+  modify_time?: number;
+  name?: string;
+  size?: number;
+  version?: number;
+}
+
+export interface VoWPSCallbackPermissionResponse {
+  download?: number;
+  history?: number;
+  read?: number;
+  rename?: number;
+  update?: number;
+  user_id?: string;
+}
+
+export interface VoWPSCallbackUser {
+  avatar_url?: string;
+  id?: string;
+  name?: string;
 }
 
 export interface VoWecomContactVO {
@@ -6041,6 +6176,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
+     * No description
+     *
+     * @tags OfficePreview
+     * @name V1OfficePreviewSessionsDetail
+     * @summary Get office preview session init payload
+     * @request GET:/api/v1/office-preview-sessions/{sessionId}
+     */
+    v1OfficePreviewSessionsDetail: (sessionId: string, params: RequestParams = {}) =>
+      this.request<VoOfficePreviewSessionResponse, any>({
+        path: `/api/v1/office-preview-sessions/${sessionId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
      * @description Resolve tenant portal brand from current request host. `host` query is allowed only for local development/testing override.
      *
      * @tags PortalBrand
@@ -6161,6 +6312,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         order?: string;
         /** Filter by generated digiEmployeeId */
         employeeId?: string;
+        /** Filter by workspace id */
+        workspaceId?: string;
+        /** Filter by conversation id */
+        conversationId?: string;
         /** Page number, starting from 1 */
         page?: number;
       },
@@ -6182,10 +6337,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Get artifact summary
      * @request GET:/api/v1/teams/{teamId}/artifacts/summary
      */
-    v1TeamsArtifactsSummaryDetail: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsArtifactsSummaryDetail: (
+      teamId: string,
+      query?: {
+        /** Filter by workspace id */
+        workspaceId?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<VoArtifactSummaryResponse, any>({
         path: `/api/v1/teams/${teamId}/artifacts/summary`,
         method: "GET",
+        query: query,
         format: "json",
         ...params,
       }),
@@ -7189,6 +7352,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags FilePreview
+     * @name V1TeamsFilePreviewSessionsCreate
+     * @summary Create file preview session
+     * @request POST:/api/v1/teams/{teamId}/file-preview-sessions
+     */
+    v1TeamsFilePreviewSessionsCreate: (
+      teamId: string,
+      request: VoCreateFilePreviewSessionRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoFilePreviewSessionResponse, any>({
+        path: `/api/v1/teams/${teamId}/file-preview-sessions`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Teams
      * @name V1TeamsFilesDeleteCreate
      * @summary Delete team root files (team user)
@@ -8024,6 +8209,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
+     * @name V1TeamsMeProfileAvatarUploadUrlCreate
+     * @summary Create current user team display avatar upload url
+     * @request POST:/api/v1/teams/{teamId}/me/profile/avatar:upload-url
+     */
+    v1TeamsMeProfileAvatarUploadUrlCreate: (
+      teamId: string,
+      request: VoTeamMembershipProfileAvatarUploadURLRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamMembershipProfileAvatarUploadURLResponse, any>({
+        path: `/api/v1/teams/${teamId}/me/profile/avatar:upload-url`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
      * @name V1TeamsMembersDetail
      * @summary List team members
      * @request GET:/api/v1/teams/{teamId}/members
@@ -8069,6 +8276,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoTeamMembershipProfile, any>({
         path: `/api/v1/teams/${teamId}/members/${userId}/profile`,
         method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags OfficePreview
+     * @name V1TeamsOfficePreviewSessionsCreate
+     * @summary Create office preview session
+     * @request POST:/api/v1/teams/{teamId}/office-preview-sessions
+     */
+    v1TeamsOfficePreviewSessionsCreate: (
+      teamId: string,
+      request: VoCreateOfficePreviewSessionRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCreateOfficePreviewSessionResponse, any>({
+        path: `/api/v1/teams/${teamId}/office-preview-sessions`,
+        method: "POST",
         body: request,
         type: ContentType.Json,
         format: "json",
@@ -9173,6 +9402,80 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "POST",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+  };
+  open = {
+    /**
+     * No description
+     *
+     * @tags WPSOpen
+     * @name WpsV33rdFilesDetail
+     * @summary WPS callback get file metadata
+     * @request GET:/open/wps/v3/3rd/files/{fileId}
+     */
+    wpsV33rdFilesDetail: (fileId: string, params: RequestParams = {}) =>
+      this.request<VoWPSCallbackFileResponse, any>({
+        path: `/open/wps/v3/3rd/files/${fileId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags WPSOpen
+     * @name WpsV33rdFilesDownloadDetail
+     * @summary WPS callback get file download url
+     * @request GET:/open/wps/v3/3rd/files/{fileId}/download
+     */
+    wpsV33rdFilesDownloadDetail: (fileId: string, params: RequestParams = {}) =>
+      this.request<VoWPSCallbackDownloadResponse, any>({
+        path: `/open/wps/v3/3rd/files/${fileId}/download`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags WPSOpen
+     * @name WpsV33rdFilesPermissionDetail
+     * @summary WPS callback get file permission
+     * @request GET:/open/wps/v3/3rd/files/{fileId}/permission
+     */
+    wpsV33rdFilesPermissionDetail: (fileId: string, params: RequestParams = {}) =>
+      this.request<VoWPSCallbackPermissionResponse, any>({
+        path: `/open/wps/v3/3rd/files/${fileId}/permission`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags WPSOpen
+     * @name WpsV33rdUsersList
+     * @summary WPS callback get user metadata
+     * @request GET:/open/wps/v3/3rd/users
+     */
+    wpsV33rdUsersList: (
+      query: {
+        /** File ID */
+        file_id?: string;
+        /** Repeatable user IDs */
+        user_ids: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<ArrayVoWPSCallbackUser, any>({
+        path: `/open/wps/v3/3rd/users`,
+        method: "GET",
+        query: query,
         format: "json",
         ...params,
       }),
@@ -10776,6 +11079,7 @@ export type ArrayBaseConnectorRegistryPackage = BaseConnectorRegistryPackage[];
 export type ArrayBaseConnectorRegistryVersion = BaseConnectorRegistryVersion[];
 export type ArrayBaseRemoteTaskConnectorInstance = BaseRemoteTaskConnectorInstance[];
 export type ArrayBaseRemoteTaskPackageVersion = BaseRemoteTaskPackageVersion[];
+export type ArrayVoWPSCallbackUser = VoWPSCallbackUser[];
 
 
 // --- swagger type aliases ---
