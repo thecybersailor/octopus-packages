@@ -2603,7 +2603,6 @@ export interface VoJobTagLite {
 }
 
 export interface VoJoinGroupSessionRequest {
-  humanUserId?: string;
   nickName?: string;
   passphrase?: string;
 }
