@@ -2177,6 +2177,7 @@ export interface VoCreateTeamRequest {
 export interface VoCreateWebSessionRequest {
   embedAccessToken: string;
   externalConversationId?: string;
+  hostOrigin?: string;
   hostTools?: VoHostToolDescriptor[];
 }
 
