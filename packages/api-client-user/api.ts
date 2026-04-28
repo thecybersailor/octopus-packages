@@ -1952,6 +1952,7 @@ export interface VoConversationRuntimeItem {
   createdAt?: string;
   kind?: string;
   messageId?: string;
+  metadata?: Record<string, string>;
   payload?: Record<string, any>;
   receiptPolicy?: string;
   role?: string;
@@ -3072,6 +3073,7 @@ export interface VoPortalBrandResolution {
 
 export interface VoPostConversationHumanTurnRequest {
   content?: string;
+  metadata?: Record<string, string>;
   tempFiles?: VoConversationTempFileRef[];
   uiReceipt?: Record<string, any>;
 }
