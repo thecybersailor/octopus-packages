@@ -133,6 +133,21 @@ export interface BasePinOKArrayBaseRemoteTaskPackageVersion {
   trace_id?: string;
 }
 
+export interface BasePinOKArrayVoGroupSessionMember {
+  data?: VoGroupSessionMember[];
+  trace_id?: string;
+}
+
+export interface BasePinOKArrayVoGroupSessionTimelineMessage {
+  data?: VoGroupSessionTimelineMessage[];
+  trace_id?: string;
+}
+
+export interface BasePinOKArrayVoJoinedGroupSessionItem {
+  data?: VoJoinedGroupSessionItem[];
+  trace_id?: string;
+}
+
 export interface BasePinOKBaseConnectorConfigListResponse {
   data?: BaseConnectorConfigListResponse;
   trace_id?: string;
@@ -230,6 +245,16 @@ export interface BasePinOKMapStringBool {
 
 export interface BasePinOKMapStringString {
   data?: MapStringString;
+  trace_id?: string;
+}
+
+export interface BasePinOKServicesArcubaseRowDetail {
+  data?: ServicesArcubaseRowDetail;
+  trace_id?: string;
+}
+
+export interface BasePinOKServicesArcubaseRowsQueryResponse {
+  data?: ServicesArcubaseRowsQueryResponse;
   trace_id?: string;
 }
 
@@ -403,6 +428,11 @@ export interface BasePinOKVoDigiEmployee {
   trace_id?: string;
 }
 
+export interface BasePinOKVoDigiEmployeeArcubaseBinding {
+  data?: VoDigiEmployeeArcubaseBinding;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoDigiEmployeeKBAccess {
   data?: VoDigiEmployeeKBAccess;
   trace_id?: string;
@@ -438,8 +468,38 @@ export interface BasePinOKVoGetDigiEmployeeTeamSkillsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoGroupSessionBootstrapResponse {
+  data?: VoGroupSessionBootstrapResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoGroupSessionMember {
+  data?: VoGroupSessionMember;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoGroupSessionMessageResponse {
+  data?: VoGroupSessionMessageResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoGroupSessionStopResponse {
+  data?: VoGroupSessionStopResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoGroupSessionSummary {
+  data?: VoGroupSessionSummary;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoInboxSummary {
   data?: VoInboxSummary;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoIssueStationEmbedAccessTokenResponse {
+  data?: VoIssueStationEmbedAccessTokenResponse;
   trace_id?: string;
 }
 
@@ -450,6 +510,11 @@ export interface BasePinOKVoJob {
 
 export interface BasePinOKVoJobTagItem {
   data?: VoJobTagItem;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoJoinGroupSessionResponse {
+  data?: VoJoinGroupSessionResponse;
   trace_id?: string;
 }
 
@@ -545,6 +610,16 @@ export interface BasePinOKVoListAdminSkillsResponse {
 
 export interface BasePinOKVoListAdminStorageEntriesResponse {
   data?: VoListAdminStorageEntriesResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListArcubaseAppsResponse {
+  data?: VoListArcubaseAppsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListArcubaseTablesResponse {
+  data?: VoListArcubaseTablesResponse;
   trace_id?: string;
 }
 
@@ -723,6 +798,16 @@ export interface BasePinOKVoListTenantAdminDigiWorkersResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListTenantAdminExternalAgentProvidersResponse {
+  data?: VoListTenantAdminExternalAgentProvidersResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListTenantAdminExternalAgentSpecsResponse {
+  data?: VoListTenantAdminExternalAgentSpecsResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListTenantAdminJobTagsResponse {
   data?: VoListTenantAdminJobTagsResponse;
   trace_id?: string;
@@ -805,6 +890,11 @@ export interface BasePinOKVoStationResponsesResult {
 
 export interface BasePinOKVoTeam {
   data?: VoTeam;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamArcubaseBinding {
+  data?: VoTeamArcubaseBinding;
   trace_id?: string;
 }
 
@@ -920,6 +1010,21 @@ export interface BasePinOKVoVerifyFeishuResponse {
 
 export interface BasePinOKVoVerifyWecomResponse {
   data?: VoVerifyWecomResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWebSession {
+  data?: VoWebSession;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWebSessionAckResponse {
+  data?: VoWebSessionAckResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWebSessionMessageResponse {
+  data?: VoWebSessionMessageResponse;
   trace_id?: string;
 }
 
@@ -1166,6 +1271,19 @@ export interface RuntimesnapshotHostLLMUsage {
   outputTokens?: number;
   reasoningTokens?: number;
   totalTokens?: number;
+}
+
+export interface ServicesArcubaseRowDetail {
+  additional?: Record<string, any>;
+  item?: Record<string, any>;
+}
+
+export interface ServicesArcubaseRowsQueryResponse {
+  additional?: Record<string, any>;
+  items?: Record<string, any>[];
+  limit?: number;
+  offset?: number;
+  total?: number;
 }
 
 export interface ServicesMcplinxVisibleProofEvent {
@@ -1516,6 +1634,31 @@ export interface VoAdminUpsertSiteConfigRequest {
   scope?: string;
   tenantId?: string;
   value?: number[];
+}
+
+export interface VoArcubaseAppItem {
+  id?: string;
+  name?: string;
+}
+
+export interface VoArcubaseBindingSummary {
+  arcubaseServiceAccountId?: string;
+  arcubaseTenantId?: string;
+  bindingStatus?: string;
+  lastError?: string;
+}
+
+export interface VoArcubaseRowsQueryRequest {
+  limit?: number;
+  offset?: number;
+  sorts?: any[];
+  viewMode?: string;
+}
+
+export interface VoArcubaseTableItem {
+  id?: string;
+  name?: string;
+  totalNumber?: number;
 }
 
 export interface VoArtifactDetail {
@@ -1905,7 +2048,16 @@ export interface VoCreateCronTriggerRequest {
   initialPromptTemplate?: string;
   messageTemplate?: string;
   targetConversationId?: string;
+  timezone: string;
   titleTemplate?: string;
+}
+
+export interface VoCreateGroupSessionRequest {
+  accessPolicy: string;
+  passphrase?: string;
+  replyPolicy: string;
+  replyTargetIds?: string[];
+  title?: string;
 }
 
 export interface VoCreateJobDependencyRequest {
@@ -1970,6 +2122,12 @@ export interface VoCreateTeamRequest {
   name?: string;
 }
 
+export interface VoCreateWebSessionRequest {
+  embedAccessToken: string;
+  externalConversationId?: string;
+  hostTools?: VoHostToolDescriptor[];
+}
+
 export interface VoCreateWecomIntegrationRequest {
   agentId?: string;
   appType?: string;
@@ -1996,20 +2154,24 @@ export interface VoCronTrigger {
   messageTemplate?: string;
   targetConversationId?: string;
   teamId?: string;
+  timezone?: string;
   titleTemplate?: string;
 }
 
 export interface VoCronTriggerRun {
   actionType?: string;
+  bucket?: string;
   createdConversationId?: string;
   errorMessage?: string;
   finishedAt?: string;
   id?: string;
+  responseId?: string;
   startedAt?: string;
   status?: string;
   targetConversationId?: string;
   teamId?: string;
   triggerId?: string;
+  turnId?: string;
 }
 
 export interface VoDeleteExternalUserVerificationFlowResponse {
@@ -2017,16 +2179,28 @@ export interface VoDeleteExternalUserVerificationFlowResponse {
 }
 
 export interface VoDigiEmployee {
+  arcubaseBinding?: VoArcubaseBindingSummary;
   digiWorker?: VoDigiWorker;
   digiWorkerId?: string;
+  externalAgentBinding?: VoExternalAgentBindingSummary;
   hiredAt?: string;
   id?: string;
   managerDigiEmployeeId?: string;
+  runtimeKind?: string;
   skillsets?: VoSkillsetLite[];
   status?: string;
   teamId?: string;
   workloadCap?: number;
   workloadUsed?: number;
+}
+
+export interface VoDigiEmployeeArcubaseBinding {
+  arcubaseServiceAccountId?: string;
+  arcubaseTenantId?: string;
+  bindingStatus?: string;
+  digiEmployeeId?: string;
+  lastError?: string;
+  teamId?: string;
 }
 
 export interface VoDigiEmployeeKBAccess {
@@ -2076,6 +2250,7 @@ export interface VoEndpointConfigField {
   pattern?: string;
   placeholder?: string;
   required?: boolean;
+  /** "string" | "secret" | "boolean" | "select" | "json" */
   type?: string;
 }
 
@@ -2087,6 +2262,12 @@ export interface VoEndpointTypeItem {
   description?: string;
   id?: string;
   name?: string;
+}
+
+export interface VoExternalAgentBindingSummary {
+  provider?: string;
+  providerEmployeeRef?: string;
+  providerSpecRef?: string;
 }
 
 export interface VoExternalUserConversationItem {
@@ -2204,8 +2385,68 @@ export interface VoGetDigiEmployeeTeamSkillsResponse {
   items?: VoDigiEmployeeTeamSkill[];
 }
 
+export interface VoGroupSessionBootstrapResponse {
+  currentMember?: VoGroupSessionMember;
+  members?: VoGroupSessionMember[];
+  session?: VoGroupSessionSummary;
+}
+
+export interface VoGroupSessionMember {
+  displayName?: string;
+  id?: string;
+  isMuted?: boolean;
+  isOwner?: boolean;
+  isReplyTarget?: boolean;
+  memberType?: string;
+}
+
+export interface VoGroupSessionMessageRequest {
+  content: string;
+}
+
+export interface VoGroupSessionMessageResponse {
+  agentLoopId?: string;
+  groupSessionTurnId?: string;
+  messageId?: string;
+  triggered?: boolean;
+}
+
+export interface VoGroupSessionStopResponse {
+  status?: string;
+}
+
+export interface VoGroupSessionSummary {
+  accessPolicy?: string;
+  conversationId?: string;
+  currentAgentLoopId?: string;
+  digiEmployeeId?: string;
+  id?: string;
+  passphraseRequired?: boolean;
+  replyPolicy?: string;
+  teamId?: string;
+  title?: string;
+}
+
+export interface VoGroupSessionTimelineMessage {
+  content?: string;
+  createdAt?: string;
+  id?: string;
+  role?: string;
+  senderDisplayName?: string;
+  senderMemberId?: string;
+  seq?: number;
+  turnId?: string;
+}
+
 export interface VoHireDigiEmployeeRequest {
   digiWorkerId: string;
+}
+
+export interface VoHostToolDescriptor {
+  description?: string;
+  inputSchema?: Record<string, any>;
+  name?: string;
+  outputSchema?: Record<string, any>;
 }
 
 export interface VoHumanUser {
@@ -2236,6 +2477,19 @@ export interface VoInboxSummary {
   incident?: number;
   question?: number;
   review?: number;
+}
+
+export interface VoIssueStationEmbedAccessTokenRequest {
+  externalConversationId?: string;
+  subject?: string;
+  tenantId?: string;
+  ttlSeconds?: number;
+  userId?: string;
+}
+
+export interface VoIssueStationEmbedAccessTokenResponse {
+  embedAccessToken?: string;
+  expiresAt?: string;
 }
 
 export interface VoJob {
@@ -2280,6 +2534,28 @@ export interface VoJobTagLite {
   code?: string;
   id?: string;
   label?: string;
+}
+
+export interface VoJoinGroupSessionRequest {
+  humanUserId?: string;
+  nickName?: string;
+  passphrase?: string;
+}
+
+export interface VoJoinGroupSessionResponse {
+  accessToken?: string;
+  member?: VoGroupSessionMember;
+  members?: VoGroupSessionMember[];
+  session?: VoGroupSessionSummary;
+}
+
+export interface VoJoinedGroupSessionItem {
+  accessPolicy?: string;
+  digiEmployeeId?: string;
+  id?: string;
+  replyPolicy?: string;
+  teamId?: string;
+  title?: string;
 }
 
 export interface VoLinktoolConnectionsRuntimeResponse {
@@ -2407,6 +2683,14 @@ export interface VoListAdminStorageEntriesResponse {
   hasMore?: boolean;
   nextCursor?: string;
   prefix?: string;
+}
+
+export interface VoListArcubaseAppsResponse {
+  items?: VoArcubaseAppItem[];
+}
+
+export interface VoListArcubaseTablesResponse {
+  items?: VoArcubaseTableItem[];
 }
 
 export interface VoListArtifactsResponse {
@@ -2563,6 +2847,14 @@ export interface VoListTeamsResponse {
 export interface VoListTenantAdminDigiWorkersResponse {
   items?: VoTenantAdminDigiWorker[];
   nextCursor?: string;
+}
+
+export interface VoListTenantAdminExternalAgentProvidersResponse {
+  items?: VoTenantAdminExternalAgentProviderSummary[];
+}
+
+export interface VoListTenantAdminExternalAgentSpecsResponse {
+  items?: VoTenantAdminExternalAgentSpec[];
 }
 
 export interface VoListTenantAdminJobTagsResponse {
@@ -2788,6 +3080,7 @@ export interface VoStation {
   endpointType?: string;
   id?: string;
   openaiCompat?: VoStationOpenAICompat;
+  runtimeStatus?: VoStationRuntimeStatus;
   status?: string;
   teamId?: string;
   title?: string;
@@ -2823,6 +3116,11 @@ export interface VoStationResponsesResult {
   toolTrace?: VoStationToolTrace[];
 }
 
+export interface VoStationRuntimeStatus {
+  connectionState?: string;
+  lastInboundEventAt?: string;
+}
+
 export interface VoStationToolTrace {
   callId?: string;
   input?: Record<string, any>;
@@ -2843,6 +3141,15 @@ export interface VoTeam {
   organizationProfile?: VoTeamOrganizationProfile;
   registrationName?: string;
   tags?: string[];
+}
+
+export interface VoTeamArcubaseBinding {
+  arcubaseInstanceId?: string;
+  arcubaseTenantId?: string;
+  arcubaseTenantSlug?: string;
+  bindingStatus?: string;
+  lastError?: string;
+  teamId?: string;
 }
 
 export interface VoTeamBillingSummaryResponse {
@@ -3113,15 +3420,18 @@ export interface VoTenantAdminCreateDigiWorkerRequest {
   allowDeployStation?: boolean;
   autohire?: boolean;
   bootstrapTeamCreate?: boolean;
+  externalAgentProvider?: string;
+  externalAgentSpecId?: string;
   hireableCount: number;
   id?: string;
   jobTagIds?: string[];
-  llmModelId: string;
+  llmModelId?: string;
   marketVisible?: boolean;
   meta?: Record<string, string>;
   name: string;
   promptSpec?: ModelsPromptSpec;
   reasoningConfig?: ModelsReasoningConfig;
+  runtimeKind?: string;
   skillsets?: VoSkillsetRef[];
   toolkitKeys?: string[];
 }
@@ -3146,6 +3456,8 @@ export interface VoTenantAdminDigiWorker {
   autohire?: boolean;
   avatar?: string;
   avatarId?: number;
+  externalAgentProvider?: string;
+  externalAgentSpecId?: string;
   hireableCount?: number;
   hiredCount?: number;
   id?: string;
@@ -3157,6 +3469,7 @@ export interface VoTenantAdminDigiWorker {
   name?: string;
   promptSpec?: ModelsPromptSpec;
   reasoningConfig?: ModelsReasoningConfig;
+  runtimeKind?: string;
   salary?: number;
   score?: number;
   seedId?: string;
@@ -3177,6 +3490,22 @@ export interface VoTenantAdminDigiworkerDebugConfig {
   llmTraceEnabled?: boolean;
 }
 
+export interface VoTenantAdminExternalAgentProviderSummary {
+  enabled?: boolean;
+  health?: string;
+  lastSyncedAt?: string;
+  provider?: string;
+}
+
+export interface VoTenantAdminExternalAgentSpec {
+  allocatable?: boolean;
+  description?: string;
+  displayName?: string;
+  provider?: string;
+  providerSpecName?: string;
+  specId?: string;
+}
+
 export interface VoTenantAdminLLMModelItem {
   id?: string;
   monthlyPoints?: number;
@@ -3187,6 +3516,8 @@ export interface VoTenantAdminLLMModelItem {
 export interface VoTenantAdminPatchDigiWorkerRequest {
   allowDeployStation?: boolean;
   autohire?: boolean;
+  externalAgentProvider?: string;
+  externalAgentSpecId?: string;
   hireableCount?: number;
   jobTagIds?: string[];
   llmModelId?: string;
@@ -3195,6 +3526,7 @@ export interface VoTenantAdminPatchDigiWorkerRequest {
   name?: string;
   promptSpec?: ModelsPromptSpec;
   reasoningConfig?: ModelsReasoningConfig;
+  runtimeKind?: string;
   skillsets?: VoSkillsetRef[];
   toolkitKeys?: string[];
 }
@@ -3248,7 +3580,19 @@ export interface VoUpdateCronTriggerRequest {
   initialPromptTemplate?: string;
   messageTemplate?: string;
   targetConversationId?: string;
+  timezone?: string;
   titleTemplate?: string;
+}
+
+export interface VoUpdateGroupSessionReplyTargetsRequest {
+  replyTargetMemberIds?: string[];
+}
+
+export interface VoUpdateGroupSessionSettingsRequest {
+  accessPolicy?: string;
+  passphrase?: string;
+  replyPolicy?: string;
+  title?: string;
 }
 
 export interface VoUpdateStationChannelConfigRequest {
@@ -3340,6 +3684,34 @@ export interface VoVerifyWecomResponse {
   errcode?: number;
   errmsg?: string;
   valid?: boolean;
+}
+
+export interface VoWebSession {
+  accessToken?: string;
+  conversationId?: string;
+  externalConversationId?: string;
+  id?: string;
+}
+
+export interface VoWebSessionAckResponse {
+  status?: string;
+  webSessionId?: string;
+}
+
+export interface VoWebSessionMessageRequest {
+  message: Record<string, any>;
+  metadata?: Record<string, string>;
+}
+
+export interface VoWebSessionMessageResponse {
+  conversationId?: string;
+  status?: string;
+  webSessionId?: string;
+}
+
+export interface VoWebSessionToolResultRequest {
+  result?: any;
+  toolCallId: string;
 }
 
 export interface VoWecomContactVO {
@@ -5832,6 +6204,233 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
+     * No description
+     *
+     * @tags PublicGroupSessions
+     * @name V1GroupSessionsAgentloopsStopCreate
+     * @summary Stop current group session agent loop
+     * @request POST:/api/v1/group-sessions/{groupSessionId}/agentloops/{agentLoopId}/stop
+     */
+    v1GroupSessionsAgentloopsStopCreate: (groupSessionId: string, agentLoopId: string, params: RequestParams = {}) =>
+      this.request<VoGroupSessionStopResponse, any>({
+        path: `/api/v1/group-sessions/${groupSessionId}/agentloops/${agentLoopId}/stop`,
+        method: "POST",
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PublicGroupSessions
+     * @name V1GroupSessionsBootstrapDetail
+     * @summary Bootstrap group session page
+     * @request GET:/api/v1/group-sessions/{groupSessionId}/bootstrap
+     */
+    v1GroupSessionsBootstrapDetail: (groupSessionId: string, params: RequestParams = {}) =>
+      this.request<VoGroupSessionBootstrapResponse, any>({
+        path: `/api/v1/group-sessions/${groupSessionId}/bootstrap`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PublicGroupSessions
+     * @name V1GroupSessionsEventsDetail
+     * @summary Stream group session events
+     * @request GET:/api/v1/group-sessions/{groupSessionId}/events
+     */
+    v1GroupSessionsEventsDetail: (groupSessionId: string, params: RequestParams = {}) =>
+      this.request<string, any>({
+        path: `/api/v1/group-sessions/${groupSessionId}/events`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PublicGroupSessions
+     * @name V1GroupSessionsJoinCreate
+     * @summary Join group session
+     * @request POST:/api/v1/group-sessions/{groupSessionId}/join
+     */
+    v1GroupSessionsJoinCreate: (
+      groupSessionId: string,
+      request: VoJoinGroupSessionRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoJoinGroupSessionResponse, any>({
+        path: `/api/v1/group-sessions/${groupSessionId}/join`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PublicGroupSessions
+     * @name V1GroupSessionsMembersDetail
+     * @summary List group session members
+     * @request GET:/api/v1/group-sessions/{groupSessionId}/members
+     */
+    v1GroupSessionsMembersDetail: (groupSessionId: string, params: RequestParams = {}) =>
+      this.request<ArrayVoGroupSessionMember, any>({
+        path: `/api/v1/group-sessions/${groupSessionId}/members`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PublicGroupSessions
+     * @name V1GroupSessionsMembersMuteCreate
+     * @summary Mute group session member
+     * @request POST:/api/v1/group-sessions/{groupSessionId}/members/{memberId}/mute
+     */
+    v1GroupSessionsMembersMuteCreate: (groupSessionId: string, memberId: string, params: RequestParams = {}) =>
+      this.request<VoGroupSessionMember, any>({
+        path: `/api/v1/group-sessions/${groupSessionId}/members/${memberId}/mute`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PublicGroupSessions
+     * @name V1GroupSessionsMembersMuteDelete
+     * @summary Unmute group session member
+     * @request DELETE:/api/v1/group-sessions/{groupSessionId}/members/{memberId}/mute
+     */
+    v1GroupSessionsMembersMuteDelete: (groupSessionId: string, memberId: string, params: RequestParams = {}) =>
+      this.request<VoGroupSessionMember, any>({
+        path: `/api/v1/group-sessions/${groupSessionId}/members/${memberId}/mute`,
+        method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PublicGroupSessions
+     * @name V1GroupSessionsMessagesDetail
+     * @summary List group session timeline messages
+     * @request GET:/api/v1/group-sessions/{groupSessionId}/messages
+     */
+    v1GroupSessionsMessagesDetail: (
+      groupSessionId: string,
+      query?: {
+        /** Limit */
+        limit?: number;
+        /** After Seq */
+        seq?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<ArrayVoGroupSessionTimelineMessage, any>({
+        path: `/api/v1/group-sessions/${groupSessionId}/messages`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PublicGroupSessions
+     * @name V1GroupSessionsMessagesCreate
+     * @summary Post group session message
+     * @request POST:/api/v1/group-sessions/{groupSessionId}/messages
+     */
+    v1GroupSessionsMessagesCreate: (
+      groupSessionId: string,
+      request: VoGroupSessionMessageRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoGroupSessionMessageResponse, any>({
+        path: `/api/v1/group-sessions/${groupSessionId}/messages`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PublicGroupSessions
+     * @name V1GroupSessionsReplyTargetsUpdate
+     * @summary Update group session reply targets
+     * @request PUT:/api/v1/group-sessions/{groupSessionId}/reply-targets
+     */
+    v1GroupSessionsReplyTargetsUpdate: (
+      groupSessionId: string,
+      request: VoUpdateGroupSessionReplyTargetsRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<ArrayVoGroupSessionMember, any>({
+        path: `/api/v1/group-sessions/${groupSessionId}/reply-targets`,
+        method: "PUT",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PublicGroupSessions
+     * @name V1GroupSessionsSettingsDetail
+     * @summary Get group session settings
+     * @request GET:/api/v1/group-sessions/{groupSessionId}/settings
+     */
+    v1GroupSessionsSettingsDetail: (groupSessionId: string, params: RequestParams = {}) =>
+      this.request<VoGroupSessionSummary, any>({
+        path: `/api/v1/group-sessions/${groupSessionId}/settings`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PublicGroupSessions
+     * @name V1GroupSessionsSettingsPartialUpdate
+     * @summary Patch group session settings
+     * @request PATCH:/api/v1/group-sessions/{groupSessionId}/settings
+     */
+    v1GroupSessionsSettingsPartialUpdate: (
+      groupSessionId: string,
+      request: VoUpdateGroupSessionSettingsRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoGroupSessionSummary, any>({
+        path: `/api/v1/group-sessions/${groupSessionId}/settings`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
      * @description Liveness probe
      *
      * @tags Health
@@ -6106,6 +6705,46 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Stations
+     * @name V1StationsEmbedAccessTokensCreate
+     * @summary Issue embed access token for a web-application station
+     * @request POST:/api/v1/stations/{stationId}/embed-access-tokens
+     */
+    v1StationsEmbedAccessTokensCreate: (
+      stationId: string,
+      request: VoIssueStationEmbedAccessTokenRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoIssueStationEmbedAccessTokenResponse, any>({
+        path: `/api/v1/stations/${stationId}/embed-access-tokens`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1StationsWebSessionsCreate
+     * @summary Create web session for a web-application station
+     * @request POST:/api/v1/stations/{stationId}/web-sessions
+     */
+    v1StationsWebSessionsCreate: (stationId: string, request: VoCreateWebSessionRequest, params: RequestParams = {}) =>
+      this.request<VoWebSession, any>({
+        path: `/api/v1/stations/${stationId}/web-sessions`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Teams
      * @name V1TeamsList
      * @summary List teams
@@ -6148,6 +6787,100 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v1TeamsDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoTeam, any>({
         path: `/api/v1/teams/${teamId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsArcubaseDetail
+     * @summary Get team Arcubase binding
+     * @request GET:/api/v1/teams/{teamId}/arcubase
+     */
+    v1TeamsArcubaseDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoTeamArcubaseBinding, any>({
+        path: `/api/v1/teams/${teamId}/arcubase`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsArcubaseAppsDetail
+     * @summary List Arcubase apps for team
+     * @request GET:/api/v1/teams/{teamId}/arcubase/apps
+     */
+    v1TeamsArcubaseAppsDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListArcubaseAppsResponse, any>({
+        path: `/api/v1/teams/${teamId}/arcubase/apps`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsArcubaseAppsTablesDetail
+     * @summary List Arcubase tables by app
+     * @request GET:/api/v1/teams/{teamId}/arcubase/apps/{appId}/tables
+     */
+    v1TeamsArcubaseAppsTablesDetail: (teamId: string, appId: string, params: RequestParams = {}) =>
+      this.request<VoListArcubaseTablesResponse, any>({
+        path: `/api/v1/teams/${teamId}/arcubase/apps/${appId}/tables`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsArcubaseAppsTablesRowsQueryCreate
+     * @summary Query Arcubase rows
+     * @request POST:/api/v1/teams/{teamId}/arcubase/apps/{appId}/tables/{tableId}/rows/query
+     */
+    v1TeamsArcubaseAppsTablesRowsQueryCreate: (
+      teamId: string,
+      appId: string,
+      tableId: string,
+      request: VoArcubaseRowsQueryRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<ServicesArcubaseRowsQueryResponse, any>({
+        path: `/api/v1/teams/${teamId}/arcubase/apps/${appId}/tables/${tableId}/rows/query`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsArcubaseAppsTablesRowsDetail
+     * @summary Get Arcubase row detail
+     * @request GET:/api/v1/teams/{teamId}/arcubase/apps/{appId}/tables/{tableId}/rows/{rowId}
+     */
+    v1TeamsArcubaseAppsTablesRowsDetail: (
+      teamId: string,
+      appId: string,
+      tableId: string,
+      rowId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<ServicesArcubaseRowDetail, any>({
+        path: `/api/v1/teams/${teamId}/arcubase/apps/${appId}/tables/${tableId}/rows/${rowId}`,
         method: "GET",
         format: "json",
         ...params,
@@ -6465,10 +7198,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary List schedule triggers
      * @request GET:/api/v1/teams/{teamId}/cron-triggers
      */
-    v1TeamsCronTriggersDetail: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsCronTriggersDetail: (
+      teamId: string,
+      query?: {
+        /** Filter triggers that fire on the given local day (YYYY-MM-DD) */
+        day?: string;
+        /** IANA timezone used together with day */
+        tz?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<VoListCronTriggersResponse, any>({
         path: `/api/v1/teams/${teamId}/cron-triggers`,
         method: "GET",
+        query: query,
         format: "json",
         ...params,
       }),
@@ -6760,6 +7503,38 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
+     * @name V1TeamsDigiemployeesArcubaseDetail
+     * @summary Get digiemployee Arcubase binding
+     * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/arcubase
+     */
+    v1TeamsDigiemployeesArcubaseDetail: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
+      this.request<VoDigiEmployeeArcubaseBinding, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/arcubase`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesArcubaseEnsureCreate
+     * @summary Ensure digiemployee Arcubase binding
+     * @request POST:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/arcubase/ensure
+     */
+    v1TeamsDigiemployeesArcubaseEnsureCreate: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
+      this.request<VoDigiEmployeeArcubaseBinding, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/arcubase/ensure`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
      * @name V1TeamsDigiemployeesFireCreate
      * @summary Fire digiemployee
      * @request POST:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/fire
@@ -6768,6 +7543,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<MapStringString, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/fire`,
         method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags User
+     * @name V1TeamsDigiemployeesGroupSessionsCreate
+     * @summary Create group session
+     * @request POST:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/group-sessions
+     */
+    v1TeamsDigiemployeesGroupSessionsCreate: (
+      teamId: string,
+      digiEmployeeId: string,
+      request: VoCreateGroupSessionRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoGroupSessionSummary, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/group-sessions`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
@@ -7357,6 +8155,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "POST",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags User
+     * @name V1TeamsGroupSessionsJoinedDetail
+     * @summary List joined group sessions
+     * @request GET:/api/v1/teams/{teamId}/group-sessions/joined
+     */
+    v1TeamsGroupSessionsJoinedDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<ArrayVoJoinedGroupSessionItem, any>({
+        path: `/api/v1/teams/${teamId}/group-sessions/joined`,
+        method: "GET",
         format: "json",
         ...params,
       }),
@@ -9024,6 +9838,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Stations
+     * @name V1TeamsStationsEnableCreate
+     * @summary Enable station
+     * @request POST:/api/v1/teams/{teamId}/stations/{stationId}/enable
+     */
+    v1TeamsStationsEnableCreate: (teamId: string, stationId: string, params: RequestParams = {}) =>
+      this.request<VoStation, any>({
+        path: `/api/v1/teams/${teamId}/stations/${stationId}/enable`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Workspaces
      * @name V1TeamsWorkspacesDetail
      * @summary List workspaces
@@ -9148,6 +9978,82 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoWorkspace, any>({
         path: `/api/v1/teams/${teamId}/workspaces/${workspaceId}/restore`,
         method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1WebSessionsCloseCreate
+     * @summary Close a web session
+     * @request POST:/api/v1/web-sessions/{webSessionId}/close
+     */
+    v1WebSessionsCloseCreate: (webSessionId: string, params: RequestParams = {}) =>
+      this.request<VoWebSessionAckResponse, any>({
+        path: `/api/v1/web-sessions/${webSessionId}/close`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1WebSessionsEventsDetail
+     * @summary Get web session events
+     * @request GET:/api/v1/web-sessions/{webSessionId}/events
+     */
+    v1WebSessionsEventsDetail: (webSessionId: string, params: RequestParams = {}) =>
+      this.request<VoWebSessionAckResponse, any>({
+        path: `/api/v1/web-sessions/${webSessionId}/events`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1WebSessionsMessagesCreate
+     * @summary Post message to a web session
+     * @request POST:/api/v1/web-sessions/{webSessionId}/messages
+     */
+    v1WebSessionsMessagesCreate: (
+      webSessionId: string,
+      request: VoWebSessionMessageRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWebSessionMessageResponse, any>({
+        path: `/api/v1/web-sessions/${webSessionId}/messages`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1WebSessionsToolResultsCreate
+     * @summary Post tool result to a web session
+     * @request POST:/api/v1/web-sessions/{webSessionId}/tool-results
+     */
+    v1WebSessionsToolResultsCreate: (
+      webSessionId: string,
+      request: VoWebSessionToolResultRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWebSessionAckResponse, any>({
+        path: `/api/v1/web-sessions/${webSessionId}/tool-results`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
@@ -9786,6 +10692,38 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<BasePinOKVoTenantAdminDigiWorker, BasePinErr>({
         path: `/tenant-admin/v1/digiworkers/${id}/refresh-avatar`,
         method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1ExternalAgentProvidersList
+     * @summary List external agent providers (tenant admin, tenant-scoped)
+     * @request GET:/tenant-admin/v1/external-agent-providers
+     */
+    v1ExternalAgentProvidersList: (params: RequestParams = {}) =>
+      this.request<BasePinOKVoListTenantAdminExternalAgentProvidersResponse, BasePinErr>({
+        path: `/tenant-admin/v1/external-agent-providers`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1ExternalAgentProvidersSpecsDetail
+     * @summary List external agent specs by provider (tenant admin, tenant-scoped)
+     * @request GET:/tenant-admin/v1/external-agent-providers/{provider}/specs
+     */
+    v1ExternalAgentProvidersSpecsDetail: (provider: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoListTenantAdminExternalAgentSpecsResponse, BasePinErr>({
+        path: `/tenant-admin/v1/external-agent-providers/${provider}/specs`,
+        method: "GET",
         format: "json",
         ...params,
       }),
@@ -10793,6 +11731,9 @@ export type ArrayBaseConnectorRegistryPackage = BaseConnectorRegistryPackage[];
 export type ArrayBaseConnectorRegistryVersion = BaseConnectorRegistryVersion[];
 export type ArrayBaseRemoteTaskConnectorInstance = BaseRemoteTaskConnectorInstance[];
 export type ArrayBaseRemoteTaskPackageVersion = BaseRemoteTaskPackageVersion[];
+export type ArrayVoGroupSessionMember = VoGroupSessionMember[];
+export type ArrayVoGroupSessionTimelineMessage = VoGroupSessionTimelineMessage[];
+export type ArrayVoJoinedGroupSessionItem = VoJoinedGroupSessionItem[];
 
 
 // --- swagger type aliases ---
