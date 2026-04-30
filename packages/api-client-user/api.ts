@@ -1478,6 +1478,7 @@ export interface VoAdminDigiWorker {
   model?: string;
   name?: string;
   promptSpec?: ModelsPromptSpec;
+  providerBadgeUrl?: string;
   reasoningConfig?: ModelsReasoningConfig;
   salary?: number;
   score?: number;
@@ -2309,11 +2310,17 @@ export interface VoEndpointConfigField {
   type?: string;
 }
 
+export interface VoEndpointTypeCapabilities {
+  outboundProvider?: string;
+  supportsDirectOutbound?: boolean;
+}
+
 export interface VoEndpointTypeConfigSchemaResponse {
   fields?: VoEndpointConfigField[];
 }
 
 export interface VoEndpointTypeItem {
+  capabilities?: VoEndpointTypeCapabilities;
   description?: string;
   id?: string;
   name?: string;
@@ -3563,6 +3570,7 @@ export interface VoTenantAdminDigiWorker {
   modelExternalName?: string;
   name?: string;
   promptSpec?: ModelsPromptSpec;
+  providerBadgeUrl?: string;
   reasoningConfig?: ModelsReasoningConfig;
   runtimeKind?: string;
   salary?: number;
@@ -3597,6 +3605,7 @@ export interface VoTenantAdminExternalAgentSpec {
   description?: string;
   displayName?: string;
   provider?: string;
+  providerBadgeUrl?: string;
   providerSpecName?: string;
   specId?: string;
 }
