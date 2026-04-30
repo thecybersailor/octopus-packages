@@ -1478,7 +1478,6 @@ export interface VoAdminDigiWorker {
   model?: string;
   name?: string;
   promptSpec?: ModelsPromptSpec;
-  providerBadgeUrl?: string;
   reasoningConfig?: ModelsReasoningConfig;
   salary?: number;
   score?: number;
@@ -2290,7 +2289,6 @@ export interface VoDigiWorker {
   meta?: Record<string, string>;
   modelExternalName?: string;
   name?: string;
-  providerBadgeUrl?: string;
   reasoningEffort?: string;
   salary?: number;
   score?: number;
@@ -2322,7 +2320,6 @@ export interface VoEndpointTypeItem {
 
 export interface VoExternalAgentBindingSummary {
   provider?: string;
-  providerBadgeUrl?: string;
   providerEmployeeRef?: string;
   providerSpecRef?: string;
 }
@@ -2367,6 +2364,9 @@ export interface VoExternalUserListItem {
   firstChannelUserId?: string;
   identityCount?: number;
   lastActiveAt?: string;
+  meta?: Record<string, string>;
+  status?: string;
+  tags?: string[];
 }
 
 export interface VoExternalUserVerificationActionToolDefinitionItem {
@@ -3561,7 +3561,6 @@ export interface VoTenantAdminDigiWorker {
   modelExternalName?: string;
   name?: string;
   promptSpec?: ModelsPromptSpec;
-  providerBadgeUrl?: string;
   reasoningConfig?: ModelsReasoningConfig;
   runtimeKind?: string;
   salary?: number;
@@ -3596,7 +3595,6 @@ export interface VoTenantAdminExternalAgentSpec {
   description?: string;
   displayName?: string;
   provider?: string;
-  providerBadgeUrl?: string;
   providerSpecName?: string;
   specId?: string;
 }
@@ -8103,6 +8101,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         query?: string;
         /** Filter by channel */
         channel?: string;
+        /** Filter by external user status */
+        status?: string[];
+        /** Match any tag */
+        tagAny?: string[];
+        /** Match all tags */
+        tagAll?: string[];
+        /** Require meta keys to exist */
+        metaExists?: string[];
+        /** Require exact meta value for tier */
+        metaEqualsTier?: string;
+        /** Filter by RFC3339 last active lower bound */
+        lastActiveAfter?: string;
+        /** Filter by RFC3339 last active upper bound */
+        lastActiveBefore?: string;
       },
       params: RequestParams = {},
     ) =>
