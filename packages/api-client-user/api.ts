@@ -2289,6 +2289,7 @@ export interface VoDigiWorker {
   meta?: Record<string, string>;
   modelExternalName?: string;
   name?: string;
+  providerBadgeUrl?: string;
   reasoningEffort?: string;
   salary?: number;
   score?: number;
@@ -2320,6 +2321,7 @@ export interface VoEndpointTypeItem {
 
 export interface VoExternalAgentBindingSummary {
   provider?: string;
+  providerBadgeUrl?: string;
   providerEmployeeRef?: string;
   providerSpecRef?: string;
 }
