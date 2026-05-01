@@ -1283,6 +1283,11 @@ export type MapStringBool = Record<string, boolean>;
 
 export type MapStringString = Record<string, string>;
 
+export interface ModelsModalitiesCapability {
+  input?: string[];
+  output?: string[];
+}
+
 export interface ModelsPromptSpec {
   script?: string;
   text?: string;
@@ -1298,6 +1303,10 @@ export interface ModelsReasoningCapability {
 export interface ModelsReasoningConfig {
   effort?: string;
   enabled?: boolean;
+}
+
+export interface ModelsVisionCapability {
+  supports?: boolean;
 }
 
 export interface RuntimesnapshotHostLLMUsage {
@@ -1402,6 +1411,7 @@ export interface VoAdminBatchUpsertComputeImagesResponse {
 export interface VoAdminBatchUpsertLLMModelsItem {
   cacheReadCost?: number;
   inputCost?: number;
+  modalities?: ModelsModalitiesCapability;
   model: string;
   modelExternalName: string;
   name: string;
@@ -1536,6 +1546,7 @@ export interface VoAdminLLMModelItem {
   createdAt?: string;
   id?: string;
   inputCost?: number;
+  modalities?: ModelsModalitiesCapability;
   model?: string;
   modelExternalName?: string;
   monthlyPoints?: number;
@@ -1546,6 +1557,7 @@ export interface VoAdminLLMModelItem {
   reasoning?: ModelsReasoningCapability;
   score?: number;
   updatedAt?: string;
+  vision?: ModelsVisionCapability;
 }
 
 export interface VoAdminModelCostItem {
@@ -1927,6 +1939,27 @@ export interface VoConversationFileGrantsResponse {
   grants?: VoFileGrant[];
 }
 
+export interface VoConversationMessageFileRef {
+  contentType?: string;
+  downloadUrl?: string;
+  fileName?: string;
+  logicalPath?: string;
+  runtimePath?: string;
+  sizeBytes?: number;
+  uploadId?: string;
+}
+
+export interface VoConversationMessagePart {
+  altText?: string;
+  fileRef?: VoConversationMessageFileRef;
+  height?: number;
+  llmImageUrl?: string;
+  mimeType?: string;
+  text?: string;
+  type?: string;
+  width?: number;
+}
+
 export interface VoConversationMeta {
   assistant?: VoConversationAssistant;
   channel?: string;
@@ -1954,6 +1987,7 @@ export interface VoConversationRuntimeItem {
   kind?: string;
   messageId?: string;
   metadata?: Record<string, string>;
+  parts?: VoConversationMessagePart[];
   payload?: Record<string, any>;
   receiptPolicy?: string;
   role?: string;
@@ -3086,6 +3120,7 @@ export interface VoPortalBrandResolution {
 export interface VoPostConversationHumanTurnRequest {
   content?: string;
   metadata?: Record<string, string>;
+  parts?: VoConversationMessagePart[];
   tempFiles?: VoConversationTempFileRef[];
   uiReceipt?: Record<string, any>;
 }
@@ -3247,6 +3282,7 @@ export interface VoTeam {
 
 export interface VoTeamArcubaseBinding {
   arcubaseInstanceId?: string;
+  arcubaseServiceAccountId?: string;
   arcubaseTenantId?: string;
   arcubaseTenantSlug?: string;
   bindingStatus?: string;
@@ -3612,9 +3648,11 @@ export interface VoTenantAdminExternalAgentSpec {
 
 export interface VoTenantAdminLLMModelItem {
   id?: string;
+  modalities?: ModelsModalitiesCapability;
   monthlyPoints?: number;
   name?: string;
   reasoning?: ModelsReasoningCapability;
+  vision?: ModelsVisionCapability;
 }
 
 export interface VoTenantAdminPatchDigiWorkerRequest {
