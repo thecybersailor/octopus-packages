@@ -803,6 +803,11 @@ export interface BasePinOKVoListTeamStorageMountsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListTeamUsageRollupsResponse {
+  data?: VoListTeamUsageRollupsResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListTeamsResponse {
   data?: VoListTeamsResponse;
   trace_id?: string;
@@ -2953,6 +2958,10 @@ export interface VoListTeamStorageMountsResponse {
   items?: VoTeamStorageMount[];
 }
 
+export interface VoListTeamUsageRollupsResponse {
+  items?: VoTeamUsageRollupItem[];
+}
+
 export interface VoListTeamsResponse {
   items?: VoTeam[];
   nextCursor?: string;
@@ -3546,6 +3555,14 @@ export interface VoTeamUploadFinalizeResponse {
   fileName?: string;
   logicalPath?: string;
   sizeBytes?: number;
+}
+
+export interface VoTeamUsageRollupItem {
+  date?: string;
+  metric?: string;
+  unit?: string;
+  usageType?: string;
+  value?: number;
 }
 
 export interface VoTenantAdminAssistantEnsureRequest {
@@ -10107,6 +10124,32 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoStation, any>({
         path: `/api/v1/teams/${teamId}/stations/${stationId}/enable`,
         method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Usage
+     * @name V1TeamsUsageRollupsDetail
+     * @summary List team usage rollups
+     * @request GET:/api/v1/teams/{teamId}/usage-rollups
+     */
+    v1TeamsUsageRollupsDetail: (
+      teamId: string,
+      query: {
+        /** Start date (YYYY-MM-DD) */
+        from: string;
+        /** End date (YYYY-MM-DD) */
+        to: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoListTeamUsageRollupsResponse, any>({
+        path: `/api/v1/teams/${teamId}/usage-rollups`,
+        method: "GET",
+        query: query,
         format: "json",
         ...params,
       }),
