@@ -1946,6 +1946,7 @@ export interface VoConversationMessageFileRef {
   logicalPath?: string;
   runtimePath?: string;
   sizeBytes?: number;
+  teamId?: string;
   uploadId?: string;
 }
 
@@ -1953,6 +1954,7 @@ export interface VoConversationMessagePart {
   altText?: string;
   fileRef?: VoConversationMessageFileRef;
   height?: number;
+  llmAssetRef?: string;
   llmImageUrl?: string;
   mimeType?: string;
   text?: string;
@@ -10359,6 +10361,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
   };
   open = {
+    /**
+     * No description
+     *
+     * @tags LLMAssetsOpen
+     * @name LlmAssetsDetail
+     * @summary Get stable LLM attachment asset
+     * @request GET:/open/llm-assets/{assetRef}
+     */
+    llmAssetsDetail: (assetRef: string, params: RequestParams = {}) =>
+      this.request<File, any>({
+        path: `/open/llm-assets/${assetRef}`,
+        method: "GET",
+        ...params,
+      }),
+
     /**
      * No description
      *
