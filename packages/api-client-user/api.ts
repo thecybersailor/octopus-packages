@@ -10364,21 +10364,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags LLMAssetsOpen
-     * @name LlmAssetsDetail
-     * @summary Get stable LLM attachment asset
-     * @request GET:/open/llm-assets/{assetRef}
-     */
-    llmAssetsDetail: (assetRef: string, params: RequestParams = {}) =>
-      this.request<File, any>({
-        path: `/open/llm-assets/${assetRef}`,
-        method: "GET",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
      * @tags WPSOpen
      * @name WpsV33rdFilesDetail
      * @summary WPS callback get file metadata
