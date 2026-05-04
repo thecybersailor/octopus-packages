@@ -2047,6 +2047,7 @@ export interface VoConversationTempUploadFinalizeResponse {
 export interface VoConversationTurnLLMTraceCallDetail {
   apiMode?: string;
   appliedHistoryMode?: string;
+  contextLengthLimit?: number;
   conversationId?: string;
   durationMs?: number;
   errorText?: string;
@@ -2069,6 +2070,7 @@ export interface VoConversationTurnLLMTraceCallDetail {
 export interface VoConversationTurnLLMTraceCallSummary {
   apiMode?: string;
   appliedHistoryMode?: string;
+  contextLengthLimit?: number;
   conversationId?: string;
   durationMs?: number;
   errorText?: string;
