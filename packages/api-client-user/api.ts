@@ -4089,6 +4089,8 @@ export interface VoWorkbenchTaskCreateResponse {
 export interface VoWorkbenchTaskDetailItem {
   archivedAt?: string;
   assigneeTaskActorId?: string;
+  comments?: VoWorkbenchTaskCommentItem[];
+  coordinationThreads?: VoWorkbenchTaskCoordinationThreadItem[];
   doNotStartUntilAt?: string;
   executionRefSummary?: VoWorkbenchTaskExecutionRefSummary;
   id?: string;
@@ -4096,6 +4098,7 @@ export interface VoWorkbenchTaskDetailItem {
   labelIds?: string[];
   priority?: string;
   projectId?: string;
+  reports?: VoWorkbenchTaskReportItem[];
   state?: string;
   title?: string;
 }
