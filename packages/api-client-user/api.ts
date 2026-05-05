@@ -1068,6 +1068,81 @@ export interface BasePinOKVoWebSessionMessageResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoWorkbenchTaskArchiveResponse {
+  data?: VoWorkbenchTaskArchiveResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWorkbenchTaskAssignResponse {
+  data?: VoWorkbenchTaskAssignResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWorkbenchTaskClaimResponse {
+  data?: VoWorkbenchTaskClaimResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWorkbenchTaskCommentResponse {
+  data?: VoWorkbenchTaskCommentResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWorkbenchTaskCoordinationReplyResponse {
+  data?: VoWorkbenchTaskCoordinationReplyResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWorkbenchTaskCoordinationResolveResponse {
+  data?: VoWorkbenchTaskCoordinationResolveResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWorkbenchTaskCoordinationThreadListResponse {
+  data?: VoWorkbenchTaskCoordinationThreadListResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWorkbenchTaskCoordinationThreadResponse {
+  data?: VoWorkbenchTaskCoordinationThreadResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWorkbenchTaskCreateResponse {
+  data?: VoWorkbenchTaskCreateResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWorkbenchTaskDetailResponse {
+  data?: VoWorkbenchTaskDetailResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWorkbenchTaskLabelListResponse {
+  data?: VoWorkbenchTaskLabelListResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWorkbenchTaskListResponse {
+  data?: VoWorkbenchTaskListResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWorkbenchTaskReportResponse {
+  data?: VoWorkbenchTaskReportResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWorkbenchTaskRestoreResponse {
+  data?: VoWorkbenchTaskRestoreResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWorkbenchTaskStateResponse {
+  data?: VoWorkbenchTaskStateResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoWorkspace {
   data?: VoWorkspace;
   trace_id?: string;
@@ -3919,6 +3994,190 @@ export interface VoWecomContactVO {
   userid?: string;
 }
 
+export interface VoWorkbenchTaskArchiveItem {
+  archivedAt?: string;
+  taskId?: string;
+}
+
+export interface VoWorkbenchTaskArchiveResponse {
+  item?: VoWorkbenchTaskArchiveItem;
+}
+
+export interface VoWorkbenchTaskAssignResponse {
+  item?: VoWorkbenchTaskAssignmentItem;
+}
+
+export interface VoWorkbenchTaskAssignmentItem {
+  assigneeTaskActorId?: string;
+  assignmentMode?: string;
+  taskId?: string;
+}
+
+export interface VoWorkbenchTaskClaimResponse {
+  item?: VoWorkbenchTaskAssignmentItem;
+}
+
+export interface VoWorkbenchTaskCommentItem {
+  authorTaskActorId?: string;
+  body?: string;
+  createdAt?: string;
+  id?: string;
+  taskId?: string;
+}
+
+export interface VoWorkbenchTaskCommentResponse {
+  item?: VoWorkbenchTaskCommentItem;
+}
+
+export interface VoWorkbenchTaskCoordinationMessageItem {
+  authorTaskActorId?: string;
+  body?: string;
+  createdAt?: string;
+  id?: string;
+  messageType?: string;
+  taskId?: string;
+  threadId?: string;
+}
+
+export interface VoWorkbenchTaskCoordinationReplyItem {
+  message?: VoWorkbenchTaskCoordinationMessageItem;
+  messageId?: string;
+  resumeExecutionRequested?: boolean;
+  status?: string;
+  threadId?: string;
+}
+
+export interface VoWorkbenchTaskCoordinationReplyResponse {
+  item?: VoWorkbenchTaskCoordinationReplyItem;
+}
+
+export interface VoWorkbenchTaskCoordinationResolveItem {
+  note?: string;
+  status?: string;
+  threadId?: string;
+}
+
+export interface VoWorkbenchTaskCoordinationResolveResponse {
+  item?: VoWorkbenchTaskCoordinationResolveItem;
+}
+
+export interface VoWorkbenchTaskCoordinationThreadItem {
+  blocking?: boolean;
+  createdAt?: string;
+  id?: string;
+  initiatorTaskActorId?: string;
+  messages?: VoWorkbenchTaskCoordinationMessageItem[];
+  resumeExecutionRequested?: boolean;
+  status?: string;
+  targetTaskActorId?: string;
+  taskId?: string;
+  updatedAt?: string;
+}
+
+export interface VoWorkbenchTaskCoordinationThreadListResponse {
+  items?: VoWorkbenchTaskCoordinationThreadItem[];
+}
+
+export interface VoWorkbenchTaskCoordinationThreadResponse {
+  item?: VoWorkbenchTaskCoordinationThreadItem;
+}
+
+export interface VoWorkbenchTaskCreateResponse {
+  item?: VoWorkbenchTaskListItem;
+}
+
+export interface VoWorkbenchTaskDetailItem {
+  archivedAt?: string;
+  assigneeTaskActorId?: string;
+  doNotStartUntilAt?: string;
+  executionRefSummary?: VoWorkbenchTaskExecutionRefSummary;
+  id?: string;
+  instructions?: string;
+  labelIds?: string[];
+  priority?: string;
+  projectId?: string;
+  state?: string;
+  title?: string;
+}
+
+export interface VoWorkbenchTaskDetailResponse {
+  item?: VoWorkbenchTaskDetailItem;
+}
+
+export interface VoWorkbenchTaskExecutionRefSummary {
+  hasExecutionRef?: boolean;
+  provider?: string;
+  resumable?: boolean;
+  updatedAt?: string;
+}
+
+export interface VoWorkbenchTaskLabelItem {
+  children?: VoWorkbenchTaskLabelItem[];
+  groupPolicy?: string;
+  isGroup?: boolean;
+  labelId?: string;
+  name?: string;
+}
+
+export interface VoWorkbenchTaskLabelListResponse {
+  items?: VoWorkbenchTaskLabelItem[];
+}
+
+export interface VoWorkbenchTaskListItem {
+  archivedAt?: string;
+  assigneeTaskActorId?: string;
+  doNotStartUntilAt?: string;
+  id?: string;
+  labelIds?: string[];
+  priority?: string;
+  projectId?: string;
+  state?: string;
+  title?: string;
+}
+
+export interface VoWorkbenchTaskListResponse {
+  hasNextPage?: boolean;
+  hasPreviousPage?: boolean;
+  items?: VoWorkbenchTaskListItem[];
+  nextCursor?: string;
+  prevCursor?: string;
+}
+
+export interface VoWorkbenchTaskReportItem {
+  authorTaskActorId?: string;
+  body?: string;
+  createdAt?: string;
+  id?: string;
+  statusSuggestion?: string;
+  summary?: string;
+  taskId?: string;
+}
+
+export interface VoWorkbenchTaskReportResponse {
+  item?: VoWorkbenchTaskReportItem;
+}
+
+export interface VoWorkbenchTaskRestoreResponse {
+  item?: VoWorkbenchTaskArchiveItem;
+}
+
+export interface VoWorkbenchTaskStateItem {
+  state?: string;
+  taskId?: string;
+}
+
+export interface VoWorkbenchTaskStateResponse {
+  item?: VoWorkbenchTaskStateItem;
+}
+
+export interface VoWorkbenchTaskUpdateRequest {
+  description?: string;
+  labelIds?: string[];
+  priority?: string;
+  spaceId?: string;
+  title?: string;
+}
+
 export interface VoWorkspace {
   createdAt?: string;
   description?: string;
@@ -3929,6 +4188,51 @@ export interface VoWorkspace {
   status?: string;
   storageUsage?: number;
   updatedAt?: string;
+}
+
+export interface WorkbenchTasksAssignWorkbenchTaskRequest {
+  assigneeTaskActorId?: string;
+  assignmentMode?: string;
+}
+
+export interface WorkbenchTasksChangeWorkbenchTaskStateRequest {
+  state?: string;
+}
+
+export interface WorkbenchTasksCreateTaskCommentRequest {
+  body?: string;
+}
+
+export interface WorkbenchTasksCreateTaskCoordinationThreadRequest {
+  blocking?: boolean;
+  question?: string;
+  targetTaskActorId?: string;
+}
+
+export interface WorkbenchTasksCreateTaskReportRequest {
+  body?: string;
+  statusSuggestion?: string;
+  summary?: string;
+}
+
+export interface WorkbenchTasksCreateWorkbenchTaskRequest {
+  assigneeTaskActorId?: string;
+  assignmentMode?: string;
+  doNotStartForSeconds?: number;
+  instructions?: string;
+  labelIds?: string[];
+  priority?: string;
+  spaceId?: string;
+  title?: string;
+}
+
+export interface WorkbenchTasksReplyTaskCoordinationThreadRequest {
+  body?: string;
+}
+
+export interface WorkbenchTasksResolveTaskCoordinationThreadRequest {
+  note?: string;
+  resolution?: string;
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -10152,6 +10456,377 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v1/teams/${teamId}/usage-rollups`,
         method: "GET",
         query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTaskLabelsDetail
+     * @summary List workbench task labels
+     * @request GET:/api/v1/teams/{teamId}/workbench/task-labels
+     */
+    v1TeamsWorkbenchTaskLabelsDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoWorkbenchTaskLabelListResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/task-labels`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksDetail
+     * @summary List workbench tasks
+     * @request GET:/api/v1/teams/{teamId}/workbench/tasks
+     */
+    v1TeamsWorkbenchTasksDetail: (
+      teamId: string,
+      query?: {
+        /** Keyword query */
+        q?: string;
+        /** Workspace filter */
+        space?: string;
+        /** Display mode */
+        view?: string;
+        /** Grouping mode */
+        groupBy?: string;
+        /** Repeated sort field:order */
+        sort?: string[];
+        /** Repeated state filter */
+        state?: string[];
+        /** Assignee task actor ID */
+        assignee?: string;
+        /** Creator task actor ID */
+        creator?: string;
+        /** Repeated label ID filter */
+        label?: string[];
+        /** Repeated label group ID filter */
+        labelGroup?: string[];
+        /** Repeated priority filter */
+        priority?: string[];
+        /** Only tasks assigned to the current task actor */
+        mine?: boolean;
+        /** Only unbound tasks */
+        unbound?: boolean;
+        /** Only tasks that can start now */
+        startable?: boolean;
+        /** Archive scope: active|include|only */
+        archive?: string;
+        /** Forward cursor */
+        after?: string;
+        /** Backward cursor */
+        before?: string;
+        /** Forward page size */
+        first?: number;
+        /** Backward page size */
+        last?: number;
+        /** Opaque filter token */
+        filter?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWorkbenchTaskListResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksCreate
+     * @summary Create workbench task
+     * @request POST:/api/v1/teams/{teamId}/workbench/tasks
+     */
+    v1TeamsWorkbenchTasksCreate: (
+      teamId: string,
+      request: WorkbenchTasksCreateWorkbenchTaskRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWorkbenchTaskCreateResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksDetail2
+     * @summary Get workbench task detail
+     * @request GET:/api/v1/teams/{teamId}/workbench/tasks/{taskId}
+     * @originalName v1TeamsWorkbenchTasksDetail
+     * @duplicate
+     */
+    v1TeamsWorkbenchTasksDetail2: (teamId: string, taskId: string, params: RequestParams = {}) =>
+      this.request<VoWorkbenchTaskDetailResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks/${taskId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksPartialUpdate
+     * @summary Update workbench task
+     * @request PATCH:/api/v1/teams/{teamId}/workbench/tasks/{taskId}
+     */
+    v1TeamsWorkbenchTasksPartialUpdate: (
+      teamId: string,
+      taskId: string,
+      request: VoWorkbenchTaskUpdateRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWorkbenchTaskDetailResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks/${taskId}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksArchiveCreate
+     * @summary Archive workbench task
+     * @request POST:/api/v1/teams/{teamId}/workbench/tasks/{taskId}/archive
+     */
+    v1TeamsWorkbenchTasksArchiveCreate: (teamId: string, taskId: string, params: RequestParams = {}) =>
+      this.request<VoWorkbenchTaskArchiveResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks/${taskId}/archive`,
+        method: "POST",
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksAssignmentUpdate
+     * @summary Assign workbench task
+     * @request PUT:/api/v1/teams/{teamId}/workbench/tasks/{taskId}/assignment
+     */
+    v1TeamsWorkbenchTasksAssignmentUpdate: (
+      teamId: string,
+      taskId: string,
+      request: WorkbenchTasksAssignWorkbenchTaskRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWorkbenchTaskAssignResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks/${taskId}/assignment`,
+        method: "PUT",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksClaimCreate
+     * @summary Claim workbench task
+     * @request POST:/api/v1/teams/{teamId}/workbench/tasks/{taskId}/claim
+     */
+    v1TeamsWorkbenchTasksClaimCreate: (teamId: string, taskId: string, params: RequestParams = {}) =>
+      this.request<VoWorkbenchTaskClaimResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks/${taskId}/claim`,
+        method: "POST",
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksCommentsCreate
+     * @summary Create workbench task comment
+     * @request POST:/api/v1/teams/{teamId}/workbench/tasks/{taskId}/comments
+     */
+    v1TeamsWorkbenchTasksCommentsCreate: (
+      teamId: string,
+      taskId: string,
+      request: WorkbenchTasksCreateTaskCommentRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWorkbenchTaskCommentResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks/${taskId}/comments`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksCoordinationThreadsDetail
+     * @summary List workbench task coordination threads
+     * @request GET:/api/v1/teams/{teamId}/workbench/tasks/{taskId}/coordination-threads
+     */
+    v1TeamsWorkbenchTasksCoordinationThreadsDetail: (teamId: string, taskId: string, params: RequestParams = {}) =>
+      this.request<VoWorkbenchTaskCoordinationThreadListResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks/${taskId}/coordination-threads`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksCoordinationThreadsCreate
+     * @summary Create workbench task coordination thread
+     * @request POST:/api/v1/teams/{teamId}/workbench/tasks/{taskId}/coordination-threads
+     */
+    v1TeamsWorkbenchTasksCoordinationThreadsCreate: (
+      teamId: string,
+      taskId: string,
+      request: WorkbenchTasksCreateTaskCoordinationThreadRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWorkbenchTaskCoordinationThreadResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks/${taskId}/coordination-threads`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksCoordinationThreadsMessagesCreate
+     * @summary Reply workbench task coordination thread
+     * @request POST:/api/v1/teams/{teamId}/workbench/tasks/{taskId}/coordination-threads/{threadId}/messages
+     */
+    v1TeamsWorkbenchTasksCoordinationThreadsMessagesCreate: (
+      teamId: string,
+      taskId: string,
+      threadId: string,
+      request: WorkbenchTasksReplyTaskCoordinationThreadRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWorkbenchTaskCoordinationReplyResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks/${taskId}/coordination-threads/${threadId}/messages`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksCoordinationThreadsResolveCreate
+     * @summary Resolve workbench task coordination thread
+     * @request POST:/api/v1/teams/{teamId}/workbench/tasks/{taskId}/coordination-threads/{threadId}/resolve
+     */
+    v1TeamsWorkbenchTasksCoordinationThreadsResolveCreate: (
+      teamId: string,
+      taskId: string,
+      threadId: string,
+      request: WorkbenchTasksResolveTaskCoordinationThreadRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWorkbenchTaskCoordinationResolveResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks/${taskId}/coordination-threads/${threadId}/resolve`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksReportsCreate
+     * @summary Create workbench task report
+     * @request POST:/api/v1/teams/{teamId}/workbench/tasks/{taskId}/reports
+     */
+    v1TeamsWorkbenchTasksReportsCreate: (
+      teamId: string,
+      taskId: string,
+      request: WorkbenchTasksCreateTaskReportRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWorkbenchTaskReportResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks/${taskId}/reports`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksRestoreCreate
+     * @summary Restore workbench task
+     * @request POST:/api/v1/teams/{teamId}/workbench/tasks/{taskId}/restore
+     */
+    v1TeamsWorkbenchTasksRestoreCreate: (teamId: string, taskId: string, params: RequestParams = {}) =>
+      this.request<VoWorkbenchTaskRestoreResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks/${taskId}/restore`,
+        method: "POST",
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksStateCreate
+     * @summary Change workbench task state
+     * @request POST:/api/v1/teams/{teamId}/workbench/tasks/{taskId}/state
+     */
+    v1TeamsWorkbenchTasksStateCreate: (
+      teamId: string,
+      taskId: string,
+      request: WorkbenchTasksChangeWorkbenchTaskStateRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWorkbenchTaskStateResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks/${taskId}/state`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
