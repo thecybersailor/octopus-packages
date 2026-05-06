@@ -518,11 +518,6 @@ export interface BasePinOKVoIssueStationEmbedAccessTokenResponse {
   trace_id?: string;
 }
 
-export interface BasePinOKVoJob {
-  data?: VoJob;
-  trace_id?: string;
-}
-
 export interface BasePinOKVoJobTagItem {
   data?: VoJobTagItem;
   trace_id?: string;
@@ -695,11 +690,6 @@ export interface BasePinOKVoListExternalUsersResponse {
 
 export interface BasePinOKVoListIntegrationsResponse {
   data?: VoListIntegrationsResponse;
-  trace_id?: string;
-}
-
-export interface BasePinOKVoListJobsResponse {
-  data?: VoListJobsResponse;
   trace_id?: string;
 }
 
@@ -2221,27 +2211,6 @@ export interface VoCreateGroupSessionRequest {
   title?: string;
 }
 
-export interface VoCreateJobDependencyRequest {
-  fromNodeKey: string;
-  isHard?: boolean;
-  toNodeKey: string;
-}
-
-export interface VoCreateJobNodeRequest {
-  assigneeDigiEmployeeId?: string;
-  executionMode?: string;
-  name: string;
-  nodeKey: string;
-  prompt?: string;
-}
-
-export interface VoCreateJobRequest {
-  digiEmployeeId?: string;
-  edges?: VoCreateJobDependencyRequest[];
-  name: string;
-  nodes: VoCreateJobNodeRequest[];
-}
-
 export interface VoCreateOfficePreviewSessionRequest {
   logicalPath: string;
   sourceKind: string;
@@ -2689,35 +2658,6 @@ export interface VoIssueStationEmbedAccessTokenResponse {
   expiresAt?: string;
 }
 
-export interface VoJob {
-  digiEmployeeId?: string;
-  edges?: VoJobDependency[];
-  id?: string;
-  name?: string;
-  nodes?: VoJobNode[];
-  state?: string;
-  teamId?: string;
-}
-
-export interface VoJobDependency {
-  fromNodeId?: string;
-  id?: string;
-  isHard?: boolean;
-  jobId?: string;
-  toNodeId?: string;
-}
-
-export interface VoJobNode {
-  assigneeDigiEmployeeId?: string;
-  executionMode?: string;
-  id?: string;
-  jobId?: string;
-  name?: string;
-  nodeKey?: string;
-  prompt?: string;
-  state?: string;
-}
-
 export interface VoJobTagItem {
   code?: string;
   enabled?: boolean;
@@ -2941,10 +2881,6 @@ export interface VoListExternalUsersResponse {
 
 export interface VoListIntegrationsResponse {
   items?: VoTeamIntegrationVO[];
-}
-
-export interface VoListJobsResponse {
-  items?: VoJob[];
 }
 
 export interface VoListMarketDigiWorkersResponse {
@@ -8979,90 +8915,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<BasePinOKVoListSelectableJobTagsResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/job-tags/selectable`,
         method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Jobs
-     * @name V1TeamsJobsDetail
-     * @summary List jobs
-     * @request GET:/api/v1/teams/{teamId}/jobs
-     */
-    v1TeamsJobsDetail: (teamId: string, params: RequestParams = {}) =>
-      this.request<VoListJobsResponse, any>({
-        path: `/api/v1/teams/${teamId}/jobs`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Jobs
-     * @name V1TeamsJobsCreate
-     * @summary Create job
-     * @request POST:/api/v1/teams/{teamId}/jobs
-     */
-    v1TeamsJobsCreate: (teamId: string, request: VoCreateJobRequest, params: RequestParams = {}) =>
-      this.request<VoJob, any>({
-        path: `/api/v1/teams/${teamId}/jobs`,
-        method: "POST",
-        body: request,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Jobs
-     * @name V1TeamsJobsDetail2
-     * @summary Get job
-     * @request GET:/api/v1/teams/{teamId}/jobs/{jobId}
-     * @originalName v1TeamsJobsDetail
-     * @duplicate
-     */
-    v1TeamsJobsDetail2: (teamId: string, jobId: string, params: RequestParams = {}) =>
-      this.request<VoJob, any>({
-        path: `/api/v1/teams/${teamId}/jobs/${jobId}`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Jobs
-     * @name V1TeamsJobsCancelCreate
-     * @summary Cancel job
-     * @request POST:/api/v1/teams/{teamId}/jobs/{jobId}/cancel
-     */
-    v1TeamsJobsCancelCreate: (teamId: string, jobId: string, params: RequestParams = {}) =>
-      this.request<VoJob, any>({
-        path: `/api/v1/teams/${teamId}/jobs/${jobId}/cancel`,
-        method: "POST",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Jobs
-     * @name V1TeamsJobsStartCreate
-     * @summary Start job
-     * @request POST:/api/v1/teams/{teamId}/jobs/{jobId}/start
-     */
-    v1TeamsJobsStartCreate: (teamId: string, jobId: string, params: RequestParams = {}) =>
-      this.request<VoJob, any>({
-        path: `/api/v1/teams/${teamId}/jobs/${jobId}/start`,
-        method: "POST",
         format: "json",
         ...params,
       }),
