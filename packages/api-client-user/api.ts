@@ -1364,15 +1364,16 @@ export interface ModelsPromptSpec {
   type?: string;
 }
 
-export interface ModelsReasoningCapability {
+export interface ModelsThinkingCapability {
   efforts?: string[];
   supports?: boolean;
   transportMode?: string;
+  types?: string[];
 }
 
-export interface ModelsReasoningConfig {
+export interface ModelsThinkingConfig {
   effort?: string;
-  enabled?: boolean;
+  type?: string;
 }
 
 export interface ModelsVisionCapability {
@@ -1427,6 +1428,13 @@ export interface VoActRequest {
 
 export interface VoActResponse {
   item?: VoInboxItem;
+}
+
+export interface VoActorSummary {
+  avatarUrl?: string;
+  displayName?: string;
+  id?: string;
+  type?: string;
 }
 
 export interface VoAdminAssistantEnsureRequest {
@@ -1488,7 +1496,7 @@ export interface VoAdminBatchUpsertLLMModelsItem {
   outputCost?: number;
   provider: string;
   providerName: string;
-  reasoning?: ModelsReasoningCapability;
+  thinking?: ModelsThinkingCapability;
 }
 
 export interface VoAdminBatchUpsertLLMModelsRequest {
@@ -1559,11 +1567,11 @@ export interface VoAdminDigiWorker {
   name?: string;
   promptSpec?: ModelsPromptSpec;
   providerBadgeUrl?: string;
-  reasoningConfig?: ModelsReasoningConfig;
   salary?: number;
   score?: number;
   seedId?: string;
   skillsets?: VoSkillsetLite[];
+  thinkingConfig?: ModelsThinkingConfig;
   toolkitKeys?: string[];
 }
 
@@ -1624,8 +1632,8 @@ export interface VoAdminLLMModelItem {
   outputCost?: number;
   provider?: string;
   providerName?: string;
-  reasoning?: ModelsReasoningCapability;
   score?: number;
+  thinking?: ModelsThinkingCapability;
   updatedAt?: string;
   vision?: ModelsVisionCapability;
 }
@@ -2163,8 +2171,8 @@ export interface VoCreateAdminDigiWorkerRequest {
   model?: string;
   name: string;
   promptSpec?: ModelsPromptSpec;
-  reasoningConfig?: ModelsReasoningConfig;
   skillsets?: VoSkillsetRef[];
+  thinkingConfig?: ModelsThinkingConfig;
   toolkitKeys?: string[];
 }
 
@@ -2285,9 +2293,11 @@ export interface VoCreateWorkspaceRequest {
 export interface VoCronTrigger {
   actionType?: string;
   createdById?: string;
+  creatorActor?: VoActorSummary;
   cronSpec?: string;
   digiEmployeeId?: string;
   enabled?: boolean;
+  executorActor?: VoActorSummary;
   id?: string;
   initialPromptTemplate?: string;
   lastError?: string;
@@ -3057,8 +3067,8 @@ export interface VoPatchAdminDigiWorkerRequest {
   model?: string;
   name?: string;
   promptSpec?: ModelsPromptSpec;
-  reasoningConfig?: ModelsReasoningConfig;
   skillsets?: VoSkillsetRef[];
+  thinkingConfig?: ModelsThinkingConfig;
   toolkitKeys?: string[];
 }
 
@@ -3600,9 +3610,9 @@ export interface VoTenantAdminCreateDigiWorkerRequest {
   meta?: Record<string, string>;
   name: string;
   promptSpec?: ModelsPromptSpec;
-  reasoningConfig?: ModelsReasoningConfig;
   runtimeKind?: string;
   skillsets?: VoSkillsetRef[];
+  thinkingConfig?: ModelsThinkingConfig;
   toolkitKeys?: string[];
 }
 
@@ -3639,12 +3649,12 @@ export interface VoTenantAdminDigiWorker {
   name?: string;
   promptSpec?: ModelsPromptSpec;
   providerBadgeUrl?: string;
-  reasoningConfig?: ModelsReasoningConfig;
   runtimeKind?: string;
   salary?: number;
   score?: number;
   seedId?: string;
   skillsets?: VoSkillsetLite[];
+  thinkingConfig?: ModelsThinkingConfig;
   toolkitKeys?: string[];
 }
 
@@ -3683,7 +3693,7 @@ export interface VoTenantAdminLLMModelItem {
   modalities?: ModelsModalitiesCapability;
   monthlyPoints?: number;
   name?: string;
-  reasoning?: ModelsReasoningCapability;
+  thinking?: ModelsThinkingCapability;
   vision?: ModelsVisionCapability;
 }
 
@@ -3699,9 +3709,9 @@ export interface VoTenantAdminPatchDigiWorkerRequest {
   meta?: Record<string, string>;
   name?: string;
   promptSpec?: ModelsPromptSpec;
-  reasoningConfig?: ModelsReasoningConfig;
   runtimeKind?: string;
   skillsets?: VoSkillsetRef[];
+  thinkingConfig?: ModelsThinkingConfig;
   toolkitKeys?: string[];
 }
 
