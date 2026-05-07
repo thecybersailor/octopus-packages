@@ -3136,6 +3136,7 @@ export interface VoPortalBrand {
   logoDarkUrl?: string;
   logoStorageKey?: string;
   logoUrl?: string;
+  primaryColorHex?: string;
   tagline?: string;
 }
 
