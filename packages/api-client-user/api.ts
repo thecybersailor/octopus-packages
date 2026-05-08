@@ -3941,6 +3941,13 @@ export interface VoWecomContactVO {
   userid?: string;
 }
 
+export interface VoWorkbenchTaskActorSummary {
+  displayName?: string;
+  id?: string;
+  labels?: string[];
+  type?: string;
+}
+
 export interface VoWorkbenchTaskArchiveItem {
   archivedAt?: string;
   taskId?: string;
@@ -3957,7 +3964,27 @@ export interface VoWorkbenchTaskAssignResponse {
 export interface VoWorkbenchTaskAssignmentItem {
   assigneeTaskActorId?: string;
   assignmentMode?: string;
+  assignmentPolicy?: string;
+  selector?: VoWorkbenchTaskAssignmentSelector;
   taskId?: string;
+}
+
+export interface VoWorkbenchTaskAssignmentSelector {
+  matchExpressions?: VoWorkbenchTaskAssignmentSelectorExpression[];
+  matchLabels?: Record<string, string>;
+}
+
+export interface VoWorkbenchTaskAssignmentSelectorExpression {
+  key?: string;
+  operator?: string;
+  values?: string[];
+}
+
+export interface VoWorkbenchTaskAssignmentSummary {
+  assigneeTaskActorId?: string;
+  mode?: string;
+  policy?: string;
+  selector?: VoWorkbenchTaskAssignmentSelector;
 }
 
 export interface VoWorkbenchTaskClaimResponse {
@@ -4015,6 +4042,7 @@ export interface VoWorkbenchTaskCoordinationThreadItem {
   initiatorTaskActorId?: string;
   messages?: VoWorkbenchTaskCoordinationMessageItem[];
   resumeExecutionRequested?: boolean;
+  resumeTaskState?: string;
   status?: string;
   targetTaskActorId?: string;
   taskId?: string;
@@ -4034,20 +4062,28 @@ export interface VoWorkbenchTaskCreateResponse {
 }
 
 export interface VoWorkbenchTaskDetailItem {
+  actorDirectory?: Record<string, VoWorkbenchTaskActorSummary>;
   archivedAt?: string;
   assigneeTaskActorId?: string;
+  assignment?: VoWorkbenchTaskAssignmentSummary;
   comments?: VoWorkbenchTaskCommentItem[];
   coordinationThreads?: VoWorkbenchTaskCoordinationThreadItem[];
+  createdAt?: string;
+  creatorTaskActorId?: string;
   doNotStartUntilAt?: string;
   executionRefSummary?: VoWorkbenchTaskExecutionRefSummary;
   id?: string;
   instructions?: string;
   labelIds?: string[];
+  labels?: VoWorkbenchTaskResolvedLabelItem[];
   priority?: string;
+  project?: VoWorkbenchTaskProjectSummary;
   projectId?: string;
+  relationships?: VoWorkbenchTaskRelationshipSummary;
   reports?: VoWorkbenchTaskReportItem[];
   state?: string;
   title?: string;
+  updatedAt?: string;
 }
 
 export interface VoWorkbenchTaskDetailResponse {
@@ -4073,6 +4109,13 @@ export interface VoWorkbenchTaskLabelListResponse {
   items?: VoWorkbenchTaskLabelItem[];
 }
 
+export interface VoWorkbenchTaskLinkSummary {
+  id?: string;
+  priority?: string;
+  state?: string;
+  title?: string;
+}
+
 export interface VoWorkbenchTaskListItem {
   archivedAt?: string;
   assigneeTaskActorId?: string;
@@ -4093,6 +4136,19 @@ export interface VoWorkbenchTaskListResponse {
   prevCursor?: string;
 }
 
+export interface VoWorkbenchTaskProjectSummary {
+  botworksWorkspaceId?: string;
+  id?: string;
+  name?: string;
+}
+
+export interface VoWorkbenchTaskRelationshipSummary {
+  blocks?: VoWorkbenchTaskLinkSummary[];
+  dependsOn?: VoWorkbenchTaskLinkSummary[];
+  parentTask?: VoWorkbenchTaskLinkSummary;
+  subtasks?: VoWorkbenchTaskLinkSummary[];
+}
+
 export interface VoWorkbenchTaskReportItem {
   authorTaskActorId?: string;
   body?: string;
@@ -4105,6 +4161,14 @@ export interface VoWorkbenchTaskReportItem {
 
 export interface VoWorkbenchTaskReportResponse {
   item?: VoWorkbenchTaskReportItem;
+}
+
+export interface VoWorkbenchTaskResolvedLabelItem {
+  groupId?: string;
+  groupName?: string;
+  isGroup?: boolean;
+  labelId?: string;
+  name?: string;
 }
 
 export interface VoWorkbenchTaskRestoreResponse {
@@ -4122,6 +4186,7 @@ export interface VoWorkbenchTaskStateResponse {
 
 export interface VoWorkbenchTaskUpdateRequest {
   description?: string;
+  doNotStartUntilAt?: string;
   labelIds?: string[];
   priority?: string;
   spaceId?: string;
@@ -4143,6 +4208,8 @@ export interface VoWorkspace {
 export interface WorkbenchTasksAssignWorkbenchTaskRequest {
   assigneeTaskActorId?: string;
   assignmentMode?: string;
+  assignmentPolicy?: string;
+  selector?: VoWorkbenchTaskAssignmentSelector;
 }
 
 export interface WorkbenchTasksChangeWorkbenchTaskStateRequest {
@@ -4183,6 +4250,11 @@ export interface WorkbenchTasksReplyTaskCoordinationThreadRequest {
 export interface WorkbenchTasksResolveTaskCoordinationThreadRequest {
   note?: string;
   resolution?: string;
+}
+
+export interface WorkbenchTasksUpdateWorkbenchTaskRelationshipsRequest {
+  dependsOnTaskIds?: string[];
+  parentTaskId?: string;
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -10628,6 +10700,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoWorkbenchTaskCoordinationResolveResponse, any>({
         path: `/api/v1/teams/${teamId}/workbench/tasks/${taskId}/coordination-threads/${threadId}/resolve`,
         method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workbench Tasks
+     * @name V1TeamsWorkbenchTasksRelationshipsUpdate
+     * @summary Update workbench task relationships
+     * @request PUT:/api/v1/teams/{teamId}/workbench/tasks/{taskId}/relationships
+     */
+    v1TeamsWorkbenchTasksRelationshipsUpdate: (
+      teamId: string,
+      taskId: string,
+      request: WorkbenchTasksUpdateWorkbenchTaskRelationshipsRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWorkbenchTaskDetailResponse, any>({
+        path: `/api/v1/teams/${teamId}/workbench/tasks/${taskId}/relationships`,
+        method: "PUT",
         body: request,
         type: ContentType.Json,
         format: "json",
