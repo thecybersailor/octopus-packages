@@ -443,6 +443,11 @@ export interface BasePinOKVoDigiEmployeeArcubaseBinding {
   trace_id?: string;
 }
 
+export interface BasePinOKVoDigiEmployeeConversationActivityHeatmapResponse {
+  data?: VoDigiEmployeeConversationActivityHeatmapResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoDigiEmployeeKBAccess {
   data?: VoDigiEmployeeKBAccess;
   trace_id?: string;
@@ -2332,6 +2337,7 @@ export interface VoDeleteExternalUserVerificationFlowResponse {
 
 export interface VoDigiEmployee {
   arcubaseBinding?: VoArcubaseBindingSummary;
+  conversationStats7d?: VoDigiEmployeeConversationStats7D;
   digiWorker?: VoDigiWorker;
   digiWorkerId?: string;
   externalAgentBinding?: VoExternalAgentBindingSummary;
@@ -2353,6 +2359,26 @@ export interface VoDigiEmployeeArcubaseBinding {
   digiEmployeeId?: string;
   lastError?: string;
   teamId?: string;
+}
+
+export interface VoDigiEmployeeConversationActivityHeatmapDay {
+  date?: string;
+  hourBuckets?: VoDigiEmployeeConversationActivityHeatmapHourBucket[];
+  weekday?: number;
+}
+
+export interface VoDigiEmployeeConversationActivityHeatmapHourBucket {
+  conversationCount?: number;
+  hour?: number;
+}
+
+export interface VoDigiEmployeeConversationActivityHeatmapResponse {
+  days?: VoDigiEmployeeConversationActivityHeatmapDay[];
+}
+
+export interface VoDigiEmployeeConversationStats7D {
+  activeConversationCount?: number;
+  servedAudienceCount?: number;
 }
 
 export interface VoDigiEmployeeKBAccess {
@@ -3136,6 +3162,7 @@ export interface VoPortalBrand {
   logoDarkUrl?: string;
   logoStorageKey?: string;
   logoUrl?: string;
+  primaryColorHex?: string;
   tagline?: string;
 }
 
@@ -8001,6 +8028,31 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoDigiEmployeeArcubaseBinding, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/arcubase/ensure`,
         method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesConversationActivityHeatmapDetail
+     * @summary Get digiemployee conversation activity heatmap
+     * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/conversation-activity-heatmap
+     */
+    v1TeamsDigiemployeesConversationActivityHeatmapDetail: (
+      teamId: string,
+      digiEmployeeId: string,
+      query?: {
+        /** Browser timezone offset in minutes (same sign as Date.getTimezoneOffset()) */
+        tzOffsetMinutes?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoDigiEmployeeConversationActivityHeatmapResponse, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/conversation-activity-heatmap`,
+        method: "GET",
+        query: query,
         format: "json",
         ...params,
       }),
