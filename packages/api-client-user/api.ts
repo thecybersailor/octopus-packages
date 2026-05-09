@@ -363,6 +363,11 @@ export interface BasePinOKVoArtifactSummaryResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoAssemblableSkill {
+  data?: VoAssemblableSkill;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoConnectionAuthTaskCreateResponse {
   data?: VoConnectionAuthTaskCreateResponse;
   trace_id?: string;
@@ -440,6 +445,11 @@ export interface BasePinOKVoDigiEmployee {
 
 export interface BasePinOKVoDigiEmployeeArcubaseBinding {
   data?: VoDigiEmployeeArcubaseBinding;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoDigiEmployeeConversationActivityHeatmapResponse {
+  data?: VoDigiEmployeeConversationActivityHeatmapResponse;
   trace_id?: string;
 }
 
@@ -635,6 +645,11 @@ export interface BasePinOKVoListArcubaseTablesResponse {
 
 export interface BasePinOKVoListArtifactsResponse {
   data?: VoListArtifactsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListAssemblableSkillsResponse {
+  data?: VoListAssemblableSkillsResponse;
   trace_id?: string;
 }
 
@@ -1701,6 +1716,7 @@ export interface VoAdminSkill {
   name?: string;
   s3Key?: string;
   skillsetId?: string;
+  skillsetName?: string;
   teamId?: string;
   tenantId?: string;
   title?: string;
@@ -1852,6 +1868,15 @@ export interface VoArtifactSummaryResponse {
   recentUpdates?: VoArtifactRecentUpdate[];
   totalArtifactItems?: number;
   totalArtifacts?: number;
+}
+
+export interface VoAssemblableSkill {
+  description?: string;
+  displayName?: string;
+  name?: string;
+  skillId?: string;
+  skillsetId?: string;
+  title?: string;
 }
 
 export interface VoAttachConversationTeamRequest {
@@ -2332,6 +2357,7 @@ export interface VoDeleteExternalUserVerificationFlowResponse {
 
 export interface VoDigiEmployee {
   arcubaseBinding?: VoArcubaseBindingSummary;
+  conversationStats7d?: VoDigiEmployeeConversationStats7D;
   digiWorker?: VoDigiWorker;
   digiWorkerId?: string;
   externalAgentBinding?: VoExternalAgentBindingSummary;
@@ -2353,6 +2379,26 @@ export interface VoDigiEmployeeArcubaseBinding {
   digiEmployeeId?: string;
   lastError?: string;
   teamId?: string;
+}
+
+export interface VoDigiEmployeeConversationActivityHeatmapDay {
+  date?: string;
+  hourBuckets?: VoDigiEmployeeConversationActivityHeatmapHourBucket[];
+  weekday?: number;
+}
+
+export interface VoDigiEmployeeConversationActivityHeatmapHourBucket {
+  conversationCount?: number;
+  hour?: number;
+}
+
+export interface VoDigiEmployeeConversationActivityHeatmapResponse {
+  days?: VoDigiEmployeeConversationActivityHeatmapDay[];
+}
+
+export interface VoDigiEmployeeConversationStats7D {
+  activeConversationCount?: number;
+  servedAudienceCount?: number;
 }
 
 export interface VoDigiEmployeeKBAccess {
@@ -2393,6 +2439,10 @@ export interface VoDigiWorker {
   score?: number;
   skillsets?: VoSkillsetLite[];
   toolkitKeys?: string[];
+}
+
+export interface VoEnableAssemblableSkillRequest {
+  displayName?: string;
 }
 
 export interface VoEndpointConfigField {
@@ -2844,6 +2894,10 @@ export interface VoListArtifactsResponse {
   page?: number;
   pageSize?: number;
   total?: number;
+}
+
+export interface VoListAssemblableSkillsResponse {
+  items?: VoAssemblableSkill[];
 }
 
 export interface VoListConversationDesktopSnapshotsResponse {
@@ -7523,6 +7577,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Teams
+     * @name V1TeamsAssemblableSkillsDetail
+     * @summary List team assemblable skills (team user, team-scoped)
+     * @request GET:/api/v1/teams/{teamId}/assemblable-skills
+     */
+    v1TeamsAssemblableSkillsDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoListAssemblableSkillsResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/assemblable-skills`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Billing
      * @name V1TeamsBillingSummaryDetail
      * @summary Get team billing summary
@@ -8074,6 +8144,31 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoDigiEmployeeArcubaseBinding, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/arcubase/ensure`,
         method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesConversationActivityHeatmapDetail
+     * @summary Get digiemployee conversation activity heatmap
+     * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/conversation-activity-heatmap
+     */
+    v1TeamsDigiemployeesConversationActivityHeatmapDetail: (
+      teamId: string,
+      digiEmployeeId: string,
+      query?: {
+        /** Browser timezone offset in minutes (same sign as Date.getTimezoneOffset()) */
+        tzOffsetMinutes?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoDigiEmployeeConversationActivityHeatmapResponse, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/conversation-activity-heatmap`,
+        method: "GET",
+        query: query,
         format: "json",
         ...params,
       }),
@@ -10140,6 +10235,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v1/teams/${teamId}/skills/${id}`,
         method: "PATCH",
         body: request,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsSkillsEnableAssemblyCreate
+     * @summary Enable team skill assembly (team user, team-scoped)
+     * @request POST:/api/v1/teams/{teamId}/skills/{id}/enable-assembly
+     */
+    v1TeamsSkillsEnableAssemblyCreate: (
+      teamId: string,
+      id: string,
+      request: VoEnableAssemblableSkillRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoAssemblableSkill, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/skills/${id}/enable-assembly`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
