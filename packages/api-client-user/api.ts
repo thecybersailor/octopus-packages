@@ -713,6 +713,16 @@ export interface BasePinOKVoListMarketDigiWorkersResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListMarketPlansResponse {
+  data?: VoListMarketPlansResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListMarketWorkersResponse {
+  data?: VoListMarketWorkersResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListPinnedDigiEmployeesResponse {
   data?: VoListPinnedDigiEmployeesResponse;
   trace_id?: string;
@@ -843,6 +853,16 @@ export interface BasePinOKVoListTenantAdminLLMModelsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListTenantAdminMarketPlansResponse {
+  data?: VoListTenantAdminMarketPlansResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListTenantAdminMarketWorkersResponse {
+  data?: VoListTenantAdminMarketWorkersResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListWecomContactsResponse {
   data?: VoListWecomContactsResponse;
   trace_id?: string;
@@ -850,6 +870,31 @@ export interface BasePinOKVoListWecomContactsResponse {
 
 export interface BasePinOKVoListWorkspacesResponse {
   data?: VoListWorkspacesResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoMarketLandingResponse {
+  data?: VoMarketLandingResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoMarketPlanDetail {
+  data?: VoMarketPlanDetail;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoMarketPlanOrderResponse {
+  data?: VoMarketPlanOrderResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoMarketWorkerDetail {
+  data?: VoMarketWorkerDetail;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoMarketWorkerOrderResponse {
+  data?: VoMarketWorkerOrderResponse;
   trace_id?: string;
 }
 
@@ -1020,6 +1065,26 @@ export interface BasePinOKVoTenantAdminDigiWorkerAutoCreateThresholdResponse {
 
 export interface BasePinOKVoTenantAdminDigiworkerDebugConfig {
   data?: VoTenantAdminDigiworkerDebugConfig;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTenantAdminMarketConfig {
+  data?: VoTenantAdminMarketConfig;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTenantAdminMarketPlan {
+  data?: VoTenantAdminMarketPlan;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTenantAdminMarketPublishCheckResponse {
+  data?: VoTenantAdminMarketPublishCheckResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTenantAdminMarketWorker {
+  data?: VoTenantAdminMarketWorker;
   trace_id?: string;
 }
 
@@ -1367,6 +1432,54 @@ export interface LinktoolLoginAuthCompleteSessionRequest {
 export type MapStringBool = Record<string, boolean>;
 
 export type MapStringString = Record<string, string>;
+
+export interface ModelsMarketCapabilityHighlight {
+  iconKey?: string;
+  oneLiner?: string;
+  sortOrder?: number;
+  title?: string;
+}
+
+export interface ModelsMarketConfigFAQItem {
+  answerMd?: string;
+  question?: string;
+  sortOrder?: number;
+}
+
+export interface ModelsMarketConfigMetric {
+  deltaText?: string;
+  label?: string;
+  maxStep?: number;
+  sortOrder?: number;
+  startValue?: number;
+  tickMaxMs?: number;
+  tickMinMs?: number;
+  value?: string;
+}
+
+export interface ModelsMarketConfigProcessStep {
+  description?: string;
+  items?: ModelsMarketConfigProcessStepItem[];
+  sortOrder?: number;
+  title?: string;
+}
+
+export interface ModelsMarketConfigProcessStepItem {
+  description?: string;
+  sortOrder?: number;
+  title?: string;
+}
+
+export interface ModelsMarketConfigTicker {
+  sortOrder?: number;
+  text?: string;
+}
+
+export interface ModelsMarketPlanResult {
+  descriptionMd?: string;
+  label?: string;
+  sortOrder?: number;
+}
 
 export interface ModelsModalitiesCapability {
   input?: string[];
@@ -2244,6 +2357,14 @@ export interface VoCreateGroupSessionRequest {
   title?: string;
 }
 
+export interface VoCreateMarketPlanOrderRequest {
+  marketPlanId: string;
+}
+
+export interface VoCreateMarketWorkerOrderRequest {
+  marketWorkerId: string;
+}
+
 export interface VoCreateOfficePreviewSessionRequest {
   logicalPath: string;
   sourceKind: string;
@@ -2951,6 +3072,16 @@ export interface VoListMarketDigiWorkersResponse {
   items?: VoDigiWorker[];
 }
 
+export interface VoListMarketPlansResponse {
+  items?: VoMarketPlanCard[];
+  nextCursor?: string;
+}
+
+export interface VoListMarketWorkersResponse {
+  items?: VoMarketWorkerCard[];
+  nextCursor?: string;
+}
+
 export interface VoListPinnedDigiEmployeesResponse {
   items?: string[];
 }
@@ -3066,6 +3197,16 @@ export interface VoListTenantAdminLLMModelsResponse {
   nextCursor?: string;
 }
 
+export interface VoListTenantAdminMarketPlansResponse {
+  items?: VoTenantAdminMarketPlan[];
+  nextCursor?: string;
+}
+
+export interface VoListTenantAdminMarketWorkersResponse {
+  items?: VoTenantAdminMarketWorker[];
+  nextCursor?: string;
+}
+
 export interface VoListWecomContactsResponse {
   items?: VoWecomContactVO[];
   total?: number;
@@ -3073,6 +3214,190 @@ export interface VoListWecomContactsResponse {
 
 export interface VoListWorkspacesResponse {
   items?: VoWorkspace[];
+}
+
+export interface VoMarketAvatar {
+  imageUrl?: string;
+}
+
+export interface VoMarketFAQItem {
+  answerMd?: string;
+  question?: string;
+}
+
+export interface VoMarketHero {
+  liveBadgeText?: string;
+  liveHeadMeta?: string;
+  metrics?: ModelsMarketConfigMetric[];
+  primaryCtaLabel?: string;
+  primaryMetric?: VoMarketHeroPrimaryMetric;
+  secondaryCtaLabel?: string;
+  subtitle?: string;
+  tickerLines?: string[];
+  title?: string;
+}
+
+export interface VoMarketHeroPrimaryMetric {
+  label?: string;
+  maxStep?: number;
+  startValue?: number;
+  sublabel?: string;
+  tickMaxMs?: number;
+  tickMinMs?: number;
+  value?: string;
+}
+
+export interface VoMarketLandingResponse {
+  faq?: VoMarketFAQItem[];
+  featuredPlans?: VoMarketPlanCard[];
+  hero?: VoMarketHero;
+  jobTags?: VoJobTagLite[];
+  process?: VoMarketProcessBlock;
+  workers?: VoMarketWorkerCard[];
+}
+
+export interface VoMarketPlanCard {
+  ctaLabel?: string;
+  goalOneLiner?: string;
+  id?: string;
+  memberCount?: number;
+  memberPreview?: VoMarketPlanMemberPreview[];
+  name?: string;
+  orderable?: boolean;
+  pricing?: VoMarketPricing;
+  purchaseModeLabel?: string;
+  scenes?: string[];
+  stageCount?: number;
+}
+
+export interface VoMarketPlanDetail {
+  applicableTeamMd?: string;
+  goalOneLiner?: string;
+  id?: string;
+  memberCount?: number;
+  members?: VoMarketPlanDetailMember[];
+  name?: string;
+  orderable?: boolean;
+  pricing?: VoMarketPricing;
+  primaryCtaLabel?: string;
+  purchaseMode?: string;
+  purchaseModeLabel?: string;
+  results?: ModelsMarketPlanResult[];
+  scenes?: string[];
+  secondaryNote?: string;
+  stages?: VoMarketPlanStage[];
+  summaryMd?: string;
+  whyPackOnlyMd?: string;
+}
+
+export interface VoMarketPlanDetailMember {
+  avatar?: VoMarketAvatar;
+  ctaLabel?: string;
+  displayName?: string;
+  oneLinerDuty?: string;
+  roleTitle?: string;
+  workerId?: string;
+}
+
+export interface VoMarketPlanMemberPreview {
+  avatar?: VoMarketAvatar;
+  displayName?: string;
+  phaseTitle?: string;
+  roleTitle?: string;
+  workerId?: string;
+}
+
+export interface VoMarketPlanOrderResponse {
+  employeeIds?: string[];
+}
+
+export interface VoMarketPlanStage {
+  descriptionMd?: string;
+  order?: number;
+  ownerDisplayName?: string;
+  ownerWorkerId?: string;
+  phaseKey?: string;
+  phaseTitle?: string;
+  title?: string;
+}
+
+export interface VoMarketPricing {
+  currentPrice?: number;
+  originalPrice?: number;
+  unitLabel?: string;
+}
+
+export interface VoMarketProcessBlock {
+  description?: string;
+  items?: VoMarketProcessStepItem[];
+  title?: string;
+}
+
+export interface VoMarketProcessStepItem {
+  description?: string;
+  title?: string;
+}
+
+export interface VoMarketWorkerCard {
+  avatar?: VoMarketAvatar;
+  ctaLabel?: string;
+  displayName?: string;
+  existingEmployeeId?: string;
+  hireState?: string;
+  id?: string;
+  oneLinerDuty?: string;
+  orderable?: boolean;
+  planSummary?: VoMarketWorkerCardPlanSummary;
+  pricing?: VoMarketPricing;
+  purchaseMode?: string;
+  purchaseModeLabel?: string;
+  roleTitle?: string;
+  scenes?: string[];
+}
+
+export interface VoMarketWorkerCardPlanSummary {
+  id?: string;
+  name?: string;
+}
+
+export interface VoMarketWorkerDetail {
+  avatar?: VoMarketAvatar;
+  capabilityHighlights?: ModelsMarketCapabilityHighlight[];
+  detailIntroMd?: string;
+  digiWorkerId?: string;
+  displayName?: string;
+  existingEmployeeId?: string;
+  hireState?: string;
+  id?: string;
+  oneLinerDuty?: string;
+  orderable?: boolean;
+  planContext?: VoMarketWorkerPlanContext;
+  pricing?: VoMarketPricing;
+  primaryCta?: VoMarketWorkerPrimaryCta;
+  purchaseMode?: string;
+  purchaseModeLabel?: string;
+  roleTitle?: string;
+  scenes?: string[];
+  toolkitKeys?: string[];
+}
+
+export interface VoMarketWorkerOrderResponse {
+  employeeId?: string;
+}
+
+export interface VoMarketWorkerPlanContext {
+  downstreamWorkerIds?: string[];
+  planId?: string;
+  planName?: string;
+  ruleNotice?: string;
+  stageOrder?: number;
+  upstreamWorkerId?: string;
+}
+
+export interface VoMarketWorkerPrimaryCta {
+  kind?: string;
+  label?: string;
+  targetId?: string;
 }
 
 export interface VoMeResponse {
@@ -3234,6 +3559,10 @@ export interface VoPutDigiEmployeeTeamSkillsRequest {
 
 export interface VoPutDigiEmployeeWorkspaceAccessRequest {
   items?: VoDigiEmployeeWorkspaceAccessItem[];
+}
+
+export interface VoPutTenantAdminMarketPlanMembersRequest {
+  members?: VoTenantAdminMarketPlanMember[];
 }
 
 export interface VoRegisterTeamDeviceRequest {
@@ -3752,6 +4081,86 @@ export interface VoTenantAdminLLMModelItem {
   vision?: ModelsVisionCapability;
 }
 
+export interface VoTenantAdminMarketConfig {
+  faqItems?: ModelsMarketConfigFAQItem[];
+  heroMetrics?: ModelsMarketConfigMetric[];
+  heroSubtitle?: string;
+  heroTickers?: ModelsMarketConfigTicker[];
+  heroTitle?: string;
+  id?: string;
+  liveBadgeText?: string;
+  liveHeadMeta?: string;
+  primaryCtaLabel?: string;
+  primaryMetricLabel?: string;
+  primaryMetricMaxStep?: number;
+  primaryMetricStartValue?: number;
+  primaryMetricSub?: string;
+  primaryMetricTickMaxMs?: number;
+  primaryMetricTickMinMs?: number;
+  primaryMetricValue?: string;
+  processSteps?: ModelsMarketConfigProcessStep[];
+  secondaryCtaLabel?: string;
+  status?: string;
+}
+
+export interface VoTenantAdminMarketPlan {
+  applicableTeamMd?: string;
+  currentPrice?: number;
+  goalOneLiner?: string;
+  id?: string;
+  members?: VoTenantAdminMarketPlanMember[];
+  name?: string;
+  originalPrice?: number;
+  results?: ModelsMarketPlanResult[];
+  sceneTags?: string[];
+  sortOrder?: number;
+  status?: string;
+  summaryMd?: string;
+  unitLabel?: string;
+  whyPackOnlyMd?: string;
+}
+
+export interface VoTenantAdminMarketPlanMember {
+  id?: string;
+  marketWorkerId: string;
+  phaseDescriptionMd?: string;
+  phaseKey: string;
+  phaseTitle: string;
+  sortOrder?: number;
+  stageOrder?: number;
+  upstreamMemberId?: string;
+}
+
+export interface VoTenantAdminMarketPublishCheckResponse {
+  id?: string;
+  issues?: VoTenantAdminMarketPublishIssue[];
+  kind?: string;
+  ok?: boolean;
+}
+
+export interface VoTenantAdminMarketPublishIssue {
+  code?: string;
+  message?: string;
+}
+
+export interface VoTenantAdminMarketWorker {
+  capabilityHighlights?: ModelsMarketCapabilityHighlight[];
+  detailIntroMd?: string;
+  detailVisible?: boolean;
+  digiWorkerId?: string;
+  digiWorkerName?: string;
+  displayName?: string;
+  id?: string;
+  oneLinerDuty?: string;
+  planId?: string;
+  purchaseMode?: string;
+  roleTitle?: string;
+  salary?: number;
+  sceneTags?: string[];
+  sortOrder?: number;
+  status?: string;
+}
+
 export interface VoTenantAdminPatchDigiWorkerRequest {
   allowDeployStation?: boolean;
   autohire?: boolean;
@@ -3801,6 +4210,58 @@ export interface VoTenantAdminUpsertDigiWorkerAutoCreateThresholdRequest {
 
 export interface VoTenantAdminUpsertHireEnabledRequest {
   enabled?: boolean;
+}
+
+export interface VoTenantAdminUpsertMarketConfigRequest {
+  faqItems?: ModelsMarketConfigFAQItem[];
+  heroMetrics?: ModelsMarketConfigMetric[];
+  heroSubtitle?: string;
+  heroTickers?: ModelsMarketConfigTicker[];
+  heroTitle?: string;
+  id?: string;
+  liveBadgeText?: string;
+  liveHeadMeta?: string;
+  primaryCtaLabel?: string;
+  primaryMetricLabel?: string;
+  primaryMetricMaxStep?: number;
+  primaryMetricStartValue?: number;
+  primaryMetricSub?: string;
+  primaryMetricTickMaxMs?: number;
+  primaryMetricTickMinMs?: number;
+  primaryMetricValue?: string;
+  processSteps?: ModelsMarketConfigProcessStep[];
+  secondaryCtaLabel?: string;
+  status?: string;
+}
+
+export interface VoTenantAdminUpsertMarketPlanRequest {
+  applicableTeamMd?: string;
+  currentPrice?: number;
+  goalOneLiner: string;
+  name: string;
+  originalPrice?: number;
+  results?: ModelsMarketPlanResult[];
+  sceneTags?: string[];
+  sortOrder?: number;
+  status?: string;
+  summaryMd?: string;
+  unitLabel?: string;
+  whyPackOnlyMd?: string;
+}
+
+export interface VoTenantAdminUpsertMarketWorkerRequest {
+  capabilityHighlights?: ModelsMarketCapabilityHighlight[];
+  detailIntroMd?: string;
+  detailVisible?: boolean;
+  digiWorkerId: string;
+  displayName: string;
+  oneLinerDuty: string;
+  planId?: string;
+  purchaseMode?: string;
+  roleTitle: string;
+  sceneTags?: string[];
+  sortOrder?: number;
+  status?: string;
 }
 
 export interface VoUnbindTeamDeviceExternalProviderRequest {
@@ -9265,6 +9726,150 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Market
+     * @name V1TeamsMarketJobTagsDetail
+     * @summary List selectable market job tags for a team
+     * @request GET:/api/v1/teams/{teamId}/market/job-tags
+     */
+    v1TeamsMarketJobTagsDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListSelectableJobTagsResponse, any>({
+        path: `/api/v1/teams/${teamId}/market/job-tags`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Market
+     * @name V1TeamsMarketLandingDetail
+     * @summary Get team hire market landing page
+     * @request GET:/api/v1/teams/{teamId}/market/landing
+     */
+    v1TeamsMarketLandingDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoMarketLandingResponse, any>({
+        path: `/api/v1/teams/${teamId}/market/landing`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Market
+     * @name V1TeamsMarketOrdersPlanCreate
+     * @summary Hire a market plan
+     * @request POST:/api/v1/teams/{teamId}/market/orders/plan
+     */
+    v1TeamsMarketOrdersPlanCreate: (
+      teamId: string,
+      request: VoCreateMarketPlanOrderRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoMarketPlanOrderResponse, any>({
+        path: `/api/v1/teams/${teamId}/market/orders/plan`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Market
+     * @name V1TeamsMarketOrdersWorkerCreate
+     * @summary Hire a standalone market worker
+     * @request POST:/api/v1/teams/{teamId}/market/orders/worker
+     */
+    v1TeamsMarketOrdersWorkerCreate: (
+      teamId: string,
+      request: VoCreateMarketWorkerOrderRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoMarketWorkerOrderResponse, any>({
+        path: `/api/v1/teams/${teamId}/market/orders/worker`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Market
+     * @name V1TeamsMarketPlansDetail
+     * @summary List market plans for a team
+     * @request GET:/api/v1/teams/{teamId}/market/plans
+     */
+    v1TeamsMarketPlansDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListMarketPlansResponse, any>({
+        path: `/api/v1/teams/${teamId}/market/plans`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Market
+     * @name V1TeamsMarketPlansDetail2
+     * @summary Get market plan detail for a team
+     * @request GET:/api/v1/teams/{teamId}/market/plans/{planId}
+     * @originalName v1TeamsMarketPlansDetail
+     * @duplicate
+     */
+    v1TeamsMarketPlansDetail2: (teamId: string, planId: string, params: RequestParams = {}) =>
+      this.request<VoMarketPlanDetail, any>({
+        path: `/api/v1/teams/${teamId}/market/plans/${planId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Market
+     * @name V1TeamsMarketWorkersDetail
+     * @summary List market workers for a team
+     * @request GET:/api/v1/teams/{teamId}/market/workers
+     */
+    v1TeamsMarketWorkersDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListMarketWorkersResponse, any>({
+        path: `/api/v1/teams/${teamId}/market/workers`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Market
+     * @name V1TeamsMarketWorkersDetail2
+     * @summary Get market worker detail for a team
+     * @request GET:/api/v1/teams/{teamId}/market/workers/{workerId}
+     * @originalName v1TeamsMarketWorkersDetail
+     * @duplicate
+     */
+    v1TeamsMarketWorkersDetail2: (teamId: string, workerId: string, params: RequestParams = {}) =>
+      this.request<VoMarketWorkerDetail, any>({
+        path: `/api/v1/teams/${teamId}/market/workers/${workerId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Teams
      * @name V1TeamsMcpTunnelsDetail
      * @summary List team mcp tunnels
@@ -11985,6 +12590,240 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/tenant-admin/v1/llm-models`,
         method: "GET",
         query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1MarketConfigList
+     * @summary Get market config (tenant admin, tenant-scoped)
+     * @request GET:/tenant-admin/v1/market/config
+     */
+    v1MarketConfigList: (params: RequestParams = {}) =>
+      this.request<VoTenantAdminMarketConfig, any>({
+        path: `/tenant-admin/v1/market/config`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1MarketConfigUpdate
+     * @summary Upsert market config (tenant admin, tenant-scoped)
+     * @request PUT:/tenant-admin/v1/market/config
+     */
+    v1MarketConfigUpdate: (request: VoTenantAdminUpsertMarketConfigRequest, params: RequestParams = {}) =>
+      this.request<VoTenantAdminMarketConfig, any>({
+        path: `/tenant-admin/v1/market/config`,
+        method: "PUT",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1MarketPlansList
+     * @summary List market plans (tenant admin, tenant-scoped)
+     * @request GET:/tenant-admin/v1/market/plans
+     */
+    v1MarketPlansList: (
+      query?: {
+        /** Page size */
+        limit?: number;
+        /** Pagination cursor */
+        cursor?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoListTenantAdminMarketPlansResponse, any>({
+        path: `/tenant-admin/v1/market/plans`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1MarketPlansCreate
+     * @summary Create market plan (tenant admin, tenant-scoped)
+     * @request POST:/tenant-admin/v1/market/plans
+     */
+    v1MarketPlansCreate: (request: VoTenantAdminUpsertMarketPlanRequest, params: RequestParams = {}) =>
+      this.request<VoTenantAdminMarketPlan, any>({
+        path: `/tenant-admin/v1/market/plans`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1MarketPlansDetail
+     * @summary Get market plan detail (tenant admin, tenant-scoped)
+     * @request GET:/tenant-admin/v1/market/plans/{id}
+     */
+    v1MarketPlansDetail: (id: string, params: RequestParams = {}) =>
+      this.request<VoTenantAdminMarketPlan, any>({
+        path: `/tenant-admin/v1/market/plans/${id}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1MarketPlansPartialUpdate
+     * @summary Patch market plan (tenant admin, tenant-scoped)
+     * @request PATCH:/tenant-admin/v1/market/plans/{id}
+     */
+    v1MarketPlansPartialUpdate: (
+      id: string,
+      request: VoTenantAdminUpsertMarketPlanRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTenantAdminMarketPlan, any>({
+        path: `/tenant-admin/v1/market/plans/${id}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1MarketPlansMembersUpdate
+     * @summary Replace market plan members (tenant admin, tenant-scoped)
+     * @request PUT:/tenant-admin/v1/market/plans/{id}/members
+     */
+    v1MarketPlansMembersUpdate: (
+      id: string,
+      request: VoPutTenantAdminMarketPlanMembersRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTenantAdminMarketPlan, any>({
+        path: `/tenant-admin/v1/market/plans/${id}/members`,
+        method: "PUT",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1MarketPublishChecksDetail
+     * @summary Get market publish check (tenant admin, tenant-scoped)
+     * @request GET:/tenant-admin/v1/market/publish-checks/{kind}/{id}
+     */
+    v1MarketPublishChecksDetail: (kind: string, id: string, params: RequestParams = {}) =>
+      this.request<VoTenantAdminMarketPublishCheckResponse, any>({
+        path: `/tenant-admin/v1/market/publish-checks/${kind}/${id}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1MarketWorkersList
+     * @summary List market workers (tenant admin, tenant-scoped)
+     * @request GET:/tenant-admin/v1/market/workers
+     */
+    v1MarketWorkersList: (
+      query?: {
+        /** Page size */
+        limit?: number;
+        /** Pagination cursor */
+        cursor?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoListTenantAdminMarketWorkersResponse, any>({
+        path: `/tenant-admin/v1/market/workers`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1MarketWorkersCreate
+     * @summary Create market worker (tenant admin, tenant-scoped)
+     * @request POST:/tenant-admin/v1/market/workers
+     */
+    v1MarketWorkersCreate: (request: VoTenantAdminUpsertMarketWorkerRequest, params: RequestParams = {}) =>
+      this.request<VoTenantAdminMarketWorker, any>({
+        path: `/tenant-admin/v1/market/workers`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1MarketWorkersDetail
+     * @summary Get market worker detail (tenant admin, tenant-scoped)
+     * @request GET:/tenant-admin/v1/market/workers/{id}
+     */
+    v1MarketWorkersDetail: (id: string, params: RequestParams = {}) =>
+      this.request<VoTenantAdminMarketWorker, any>({
+        path: `/tenant-admin/v1/market/workers/${id}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1MarketWorkersPartialUpdate
+     * @summary Patch market worker (tenant admin, tenant-scoped)
+     * @request PATCH:/tenant-admin/v1/market/workers/{id}
+     */
+    v1MarketWorkersPartialUpdate: (
+      id: string,
+      request: VoTenantAdminUpsertMarketWorkerRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTenantAdminMarketWorker, any>({
+        path: `/tenant-admin/v1/market/workers/${id}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
