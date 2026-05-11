@@ -3345,6 +3345,7 @@ export interface VoMarketWorkerCard {
   existingEmployeeId?: string;
   hireState?: string;
   id?: string;
+  jobTags?: VoJobTagLite[];
   oneLinerDuty?: string;
   orderable?: boolean;
   planSummary?: VoMarketWorkerCardPlanSummary;
@@ -3369,6 +3370,7 @@ export interface VoMarketWorkerDetail {
   existingEmployeeId?: string;
   hireState?: string;
   id?: string;
+  jobTags?: VoJobTagLite[];
   oneLinerDuty?: string;
   orderable?: boolean;
   planContext?: VoMarketWorkerPlanContext;
