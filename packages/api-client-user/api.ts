@@ -273,6 +273,16 @@ export interface BasePinOKTenantAdminTenantAdminTeamDebugConfig {
   trace_id?: string;
 }
 
+export interface BasePinOKVoAccountInboxActResponse {
+  data?: VoAccountInboxActResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoAccountInboxSummary {
+  data?: VoAccountInboxSummary;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoActResponse {
   data?: VoActResponse;
   trace_id?: string;
@@ -575,6 +585,11 @@ export interface BasePinOKVoLinktoolTestAuthRuntimeResponse {
 
 export interface BasePinOKVoLinktoolTunnelSessionRuntimeResponse {
   data?: VoLinktoolTunnelSessionRuntimeResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListAccountInboxItemsResponse {
+  data?: VoListAccountInboxItemsResponse;
   trace_id?: string;
 }
 
@@ -1473,6 +1488,35 @@ export interface ServicesMcplinxVisibleProofRecord {
 
 export interface TenantAdminTenantAdminTeamDebugConfig {
   debugEnabled?: boolean;
+}
+
+export interface VoAccountInboxActRequest {
+  action?: string;
+}
+
+export interface VoAccountInboxActResponse {
+  item?: VoAccountInboxItem;
+}
+
+export interface VoAccountInboxItem {
+  actionKind?: string;
+  actionPayload?: Record<string, any>;
+  body?: string;
+  createdAt?: string;
+  id?: string;
+  payload?: Record<string, any>;
+  readAt?: string;
+  sourceId?: string;
+  sourceType?: string;
+  status?: string;
+  title?: string;
+  type?: string;
+  updatedAt?: string;
+}
+
+export interface VoAccountInboxSummary {
+  total?: number;
+  unread?: number;
 }
 
 export interface VoActRequest {
@@ -2871,6 +2915,10 @@ export interface VoLinktoolTunnelSessionRuntimeResponse {
   sessionBody?: Record<string, any>;
   tunnelPrefix?: string;
   userHashId?: string;
+}
+
+export interface VoListAccountInboxItemsResponse {
+  items?: VoAccountInboxItem[];
 }
 
 export interface VoListAdminAuditLogsResponse {
@@ -6436,6 +6484,63 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "POST",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Inbox
+     * @name V1AccountInboxItemsList
+     * @summary List account inbox message items
+     * @request GET:/api/v1/account/inbox/items
+     */
+    v1AccountInboxItemsList: (
+      query?: {
+        /** Include read items when set to 1 */
+        includeRead?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoListAccountInboxItemsResponse, any>({
+        path: `/api/v1/account/inbox/items`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Inbox
+     * @name V1AccountInboxItemsActCreate
+     * @summary Act on account inbox message item
+     * @request POST:/api/v1/account/inbox/items/{itemId}/act
+     */
+    v1AccountInboxItemsActCreate: (itemId: string, request: VoAccountInboxActRequest, params: RequestParams = {}) =>
+      this.request<VoAccountInboxActResponse, any>({
+        path: `/api/v1/account/inbox/items/${itemId}/act`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Inbox
+     * @name V1AccountInboxSummaryList
+     * @summary Get account inbox summary
+     * @request GET:/api/v1/account/inbox/summary
+     */
+    v1AccountInboxSummaryList: (params: RequestParams = {}) =>
+      this.request<VoAccountInboxSummary, any>({
+        path: `/api/v1/account/inbox/summary`,
+        method: "GET",
         format: "json",
         ...params,
       }),
