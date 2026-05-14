@@ -383,6 +383,11 @@ export interface BasePinOKVoAssemblableSkill {
   trace_id?: string;
 }
 
+export interface BasePinOKVoBioPictureUploadURLResponse {
+  data?: VoBioPictureUploadURLResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoConnectionAuthTaskCreateResponse {
   data?: VoConnectionAuthTaskCreateResponse;
   trace_id?: string;
@@ -1684,6 +1689,7 @@ export interface VoAdminDigiWorker {
   avatar?: string;
   avatarId?: number;
   bio?: string;
+  bioPicture?: string;
   hireableCount?: number;
   hiredCount?: number;
   id?: string;
@@ -1694,6 +1700,7 @@ export interface VoAdminDigiWorker {
   name?: string;
   promptSpec?: ModelsPromptSpec;
   providerBadgeUrl?: string;
+  quickStartPrompts?: string[];
   salary?: number;
   score?: number;
   seedId?: string;
@@ -2026,6 +2033,18 @@ export interface VoBindTeamDeviceExternalProviderRequest {
   publicIp?: string;
 }
 
+export interface VoBioPictureUploadURLRequest {
+  contentType: string;
+}
+
+export interface VoBioPictureUploadURLResponse {
+  expireAt?: string;
+  method?: string;
+  publicUrl?: string;
+  storageKey?: string;
+  uploadUrl?: string;
+}
+
 export interface VoConnectionAuthTaskAuthField {
   helpText?: string;
   key?: string;
@@ -2301,6 +2320,7 @@ export interface VoConversationTurnLLMTraceCallSummary {
 export interface VoCreateAdminDigiWorkerRequest {
   allowDeployStation?: boolean;
   bio?: string;
+  bioPicture?: string;
   hireableCount: number;
   id?: string;
   jobTagIds?: string[];
@@ -2309,6 +2329,7 @@ export interface VoCreateAdminDigiWorkerRequest {
   model?: string;
   name: string;
   promptSpec?: ModelsPromptSpec;
+  quickStartPrompts?: string[];
   skillsets?: VoSkillsetRef[];
   thinkingConfig?: ModelsThinkingConfig;
   toolkitKeys?: string[];
@@ -2480,6 +2501,7 @@ export interface VoDigiEmployee {
   allowAutoDelegate?: boolean;
   arcubaseBinding?: VoArcubaseBindingSummary;
   bio?: string;
+  bioPicture?: string;
   conversationStats7d?: VoDigiEmployeeConversationStats7D;
   digiWorker?: VoDigiWorker;
   digiWorkerId?: string;
@@ -2487,6 +2509,7 @@ export interface VoDigiEmployee {
   hiredAt?: string;
   id?: string;
   managerDigiEmployeeId?: string;
+  quickStartPrompts?: string[];
   resolvedBio?: string;
   runtimeKind?: string;
   skillsets?: VoSkillsetLite[];
@@ -2550,6 +2573,7 @@ export interface VoDigiWorker {
   allowDeployStation?: boolean;
   avatar?: string;
   bio?: string;
+  bioPicture?: string;
   hireableCount?: number;
   hiredCount?: number;
   id?: string;
@@ -2559,6 +2583,7 @@ export interface VoDigiWorker {
   modelExternalName?: string;
   name?: string;
   providerBadgeUrl?: string;
+  quickStartPrompts?: string[];
   reasoningEffort?: string;
   salary?: number;
   score?: number;
@@ -3458,6 +3483,7 @@ export interface VoPatchAdminComputeImageRequest {
 export interface VoPatchAdminDigiWorkerRequest {
   allowDeployStation?: boolean;
   bio?: string;
+  bioPicture?: string;
   hireableCount?: number;
   jobTagIds?: string[];
   marketVisible?: boolean;
@@ -3465,6 +3491,7 @@ export interface VoPatchAdminDigiWorkerRequest {
   model?: string;
   name?: string;
   promptSpec?: ModelsPromptSpec;
+  quickStartPrompts?: string[];
   skillsets?: VoSkillsetRef[];
   thinkingConfig?: ModelsThinkingConfig;
   toolkitKeys?: string[];
@@ -3498,6 +3525,8 @@ export interface VoPatchAdminOctopusClusterRequest {
 export interface VoPatchDigiEmployeeProfileRequest {
   allowAutoDelegate?: boolean;
   bio?: string;
+  bioPicture?: string;
+  quickStartPrompts?: string[];
 }
 
 export interface VoPatchDigiEmployeeSkillsetsRequest {
@@ -4016,6 +4045,7 @@ export interface VoTenantAdminCreateDigiWorkerRequest {
   allowDeployStation?: boolean;
   autohire?: boolean;
   bio?: string;
+  bioPicture?: string;
   bootstrapTeamCreate?: boolean;
   externalAgentProvider?: string;
   externalAgentSpecId?: string;
@@ -4027,6 +4057,7 @@ export interface VoTenantAdminCreateDigiWorkerRequest {
   meta?: Record<string, string>;
   name: string;
   promptSpec?: ModelsPromptSpec;
+  quickStartPrompts?: string[];
   runtimeKind?: string;
   skillsets?: VoSkillsetRef[];
   thinkingConfig?: ModelsThinkingConfig;
@@ -4054,6 +4085,7 @@ export interface VoTenantAdminDigiWorker {
   avatar?: string;
   avatarId?: number;
   bio?: string;
+  bioPicture?: string;
   externalAgentProvider?: string;
   externalAgentSpecId?: string;
   hireableCount?: number;
@@ -4067,6 +4099,7 @@ export interface VoTenantAdminDigiWorker {
   name?: string;
   promptSpec?: ModelsPromptSpec;
   providerBadgeUrl?: string;
+  quickStartPrompts?: string[];
   runtimeKind?: string;
   salary?: number;
   score?: number;
@@ -4199,6 +4232,7 @@ export interface VoTenantAdminPatchDigiWorkerRequest {
   allowDeployStation?: boolean;
   autohire?: boolean;
   bio?: string;
+  bioPicture?: string;
   externalAgentProvider?: string;
   externalAgentSpecId?: string;
   hireableCount?: number;
@@ -4208,6 +4242,7 @@ export interface VoTenantAdminPatchDigiWorkerRequest {
   meta?: Record<string, string>;
   name?: string;
   promptSpec?: ModelsPromptSpec;
+  quickStartPrompts?: string[];
   runtimeKind?: string;
   skillsets?: VoSkillsetRef[];
   thinkingConfig?: ModelsThinkingConfig;
@@ -5239,6 +5274,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<BasePinOKVoAdminDigiWorker, BasePinErr>({
         path: `/admin/v1/digiworkers/${id}`,
         method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Admin
+     * @name V1DigiworkersBioPictureUploadUrlCreate
+     * @summary Create digiworker bio picture upload url (platform admin)
+     * @request POST:/admin/v1/digiworkers/{id}/bio-picture:upload-url
+     */
+    v1DigiworkersBioPictureUploadUrlCreate: (
+      id: string,
+      request: VoBioPictureUploadURLRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoBioPictureUploadURLResponse, BasePinErr>({
+        path: `/admin/v1/digiworkers/${id}/bio-picture:upload-url`,
+        method: "POST",
         body: request,
         type: ContentType.Json,
         format: "json",
@@ -8560,6 +8617,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
+     * @name V1TeamsDigiemployeesProfileBioPictureUploadUrlCreate
+     * @summary Create digiemployee bio picture upload url
+     * @request POST:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/profile/bio-picture:upload-url
+     */
+    v1TeamsDigiemployeesProfileBioPictureUploadUrlCreate: (
+      teamId: string,
+      digiEmployeeId: string,
+      request: VoBioPictureUploadURLRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoBioPictureUploadURLResponse, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/profile/bio-picture:upload-url`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
      * @name V1TeamsDigiemployeesReportingLineUpdate
      * @summary Put digiemployee reporting line
      * @request PUT:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/reporting-line
@@ -11868,6 +11948,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<BasePinOKVoTenantAdminDigiWorker, BasePinErr>({
         path: `/tenant-admin/v1/digiworkers/${id}`,
         method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1DigiworkersBioPictureUploadUrlCreate
+     * @summary Create digiworker bio picture upload url (tenant admin, tenant-scoped)
+     * @request POST:/tenant-admin/v1/digiworkers/{id}/bio-picture:upload-url
+     */
+    v1DigiworkersBioPictureUploadUrlCreate: (
+      id: string,
+      request: VoBioPictureUploadURLRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoBioPictureUploadURLResponse, BasePinErr>({
+        path: `/tenant-admin/v1/digiworkers/${id}/bio-picture:upload-url`,
+        method: "POST",
         body: request,
         type: ContentType.Json,
         format: "json",
