@@ -288,6 +288,11 @@ export interface BasePinOKVoActResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoActorProfilesResponse {
+  data?: VoActorProfilesResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoAdminAssistantEnsureResponse {
   data?: VoAdminAssistantEnsureResponse;
   trace_id?: string;
@@ -530,6 +535,11 @@ export interface BasePinOKVoGroupSessionSummary {
 
 export interface BasePinOKVoInboxSummary {
   data?: VoInboxSummary;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoInviteTeamMembersResponse {
+  data?: VoInviteTeamMembersResponse;
   trace_id?: string;
 }
 
@@ -1496,6 +1506,7 @@ export interface VoAccountInboxActRequest {
 
 export interface VoAccountInboxActResponse {
   item?: VoAccountInboxItem;
+  teamId?: string;
 }
 
 export interface VoAccountInboxItem {
@@ -1525,6 +1536,24 @@ export interface VoActRequest {
 
 export interface VoActResponse {
   item?: VoInboxItem;
+}
+
+export interface VoActorProfileItem {
+  avatarUrl?: string;
+  displayName?: string;
+  id?: string;
+  taskActorId?: string;
+  type?: string;
+}
+
+export interface VoActorProfilesRequest {
+  /** TaskActorIDs are public taskboard task actor IDs from task actor directory/detail responses. */
+  taskActorIds?: string[];
+}
+
+export interface VoActorProfilesResponse {
+  /** Profiles is keyed by public task actor ID. */
+  profiles?: Record<string, VoActorProfileItem>;
 }
 
 export interface VoActorSummary {
@@ -2801,6 +2830,14 @@ export interface VoInboxSummary {
   review?: number;
 }
 
+export interface VoInviteTeamMembersRequest {
+  phones: string[];
+}
+
+export interface VoInviteTeamMembersResponse {
+  items?: VoTeamMemberInvitationResult[];
+}
+
 export interface VoIssueStationEmbedAccessTokenRequest {
   externalConversationId?: string;
   subject?: string;
@@ -3838,6 +3875,14 @@ export interface VoTeamMcpTunnelBinding {
   agentName?: string;
   createdAt?: string;
   id?: string;
+}
+
+export interface VoTeamMemberInvitationResult {
+  inboxItemId?: string;
+  membershipStatus?: string;
+  phone?: string;
+  result?: string;
+  userId?: string;
 }
 
 export interface VoTeamMembership {
@@ -7604,6 +7649,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
+     * @name V1TeamsActorProfilesCreate
+     * @summary Batch resolve task actor profiles (avatar, display name) for human users and digi employees
+     * @request POST:/api/v1/teams/{teamId}/actor-profiles
+     */
+    v1TeamsActorProfilesCreate: (teamId: string, request: VoActorProfilesRequest, params: RequestParams = {}) =>
+      this.request<VoActorProfilesResponse, any>({
+        path: `/api/v1/teams/${teamId}/actor-profiles`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
      * @name V1TeamsArcubaseDetail
      * @summary Get team Arcubase binding
      * @request GET:/api/v1/teams/{teamId}/arcubase
@@ -9896,6 +9959,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoTeamMembershipProfile, any>({
         path: `/api/v1/teams/${teamId}/members/${userId}/profile`,
         method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMembersInviteCreate
+     * @summary Invite team members by phone
+     * @request POST:/api/v1/teams/{teamId}/members:invite
+     */
+    v1TeamsMembersInviteCreate: (
+      teamId: string,
+      invite: string,
+      request: VoInviteTeamMembersRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoInviteTeamMembersResponse, any>({
+        path: `/api/v1/teams/${teamId}/members${invite}`,
+        method: "POST",
         body: request,
         type: ContentType.Json,
         format: "json",
