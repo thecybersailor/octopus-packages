@@ -513,6 +513,26 @@ export interface BasePinOKVoGetDigiEmployeeTeamSkillsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoGitSkillSource {
+  data?: VoGitSkillSource;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoGitSkillSourceAnonymousProbeResponse {
+  data?: VoGitSkillSourceAnonymousProbeResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoGitSkillSourceSyncRun {
+  data?: VoGitSkillSourceSyncRun;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoGitSkillSourceTestConnectionResponse {
+  data?: VoGitSkillSourceTestConnectionResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoGroupSessionBootstrapResponse {
   data?: VoGroupSessionBootstrapResponse;
   trace_id?: string;
@@ -733,6 +753,16 @@ export interface BasePinOKVoListExternalUsersResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListGitSkillSourceSyncRunsResponse {
+  data?: VoListGitSkillSourceSyncRunsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListGitSkillSourcesResponse {
+  data?: VoListGitSkillSourcesResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListIntegrationsResponse {
   data?: VoListIntegrationsResponse;
   trace_id?: string;
@@ -883,8 +913,18 @@ export interface BasePinOKVoListTenantAdminLLMModelsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListTenantAdminMarketPlanMemberCandidatesResponse {
+  data?: VoListTenantAdminMarketPlanMemberCandidatesResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListTenantAdminMarketPlansResponse {
   data?: VoListTenantAdminMarketPlansResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListTenantAdminMarketWorkerCandidatesResponse {
+  data?: VoListTenantAdminMarketWorkerCandidatesResponse;
   trace_id?: string;
 }
 
@@ -955,6 +995,11 @@ export interface BasePinOKVoPortalBrandResolution {
 
 export interface BasePinOKVoPostConversationHumanTurnResponse {
   data?: VoPostConversationHumanTurnResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoPostConversationTurnSteerResponse {
+  data?: VoPostConversationTurnSteerResponse;
   trace_id?: string;
 }
 
@@ -1832,10 +1877,13 @@ export interface VoAdminSkill {
   description?: string;
   filePath?: string;
   id?: string;
+  managed?: boolean;
   name?: string;
   s3Key?: string;
   skillsetId?: string;
   skillsetName?: string;
+  sourceId?: string;
+  sourceType?: string;
   teamId?: string;
   tenantId?: string;
   title?: string;
@@ -2370,6 +2418,17 @@ export interface VoCreateFilePreviewSessionRequest {
   sourceRef?: VoOfficePreviewSourceRef;
 }
 
+export interface VoCreateGitSkillSourceRequest {
+  authType?: string;
+  branch?: string;
+  directoryName?: string;
+  name?: string;
+  repoUrl?: string;
+  subPath?: string;
+  token?: string;
+  username?: string;
+}
+
 export interface VoCreateGroupSessionRequest {
   accessPolicy: string;
   passphrase?: string;
@@ -2495,6 +2554,10 @@ export interface VoCronTriggerRun {
 
 export interface VoDeleteExternalUserVerificationFlowResponse {
   id?: string;
+}
+
+export interface VoDeleteGitSkillSourceRequest {
+  purgeManagedFiles?: boolean;
 }
 
 export interface VoDigiEmployee {
@@ -2759,6 +2822,49 @@ export interface VoFilePreviewSessionResponse {
 
 export interface VoGetDigiEmployeeTeamSkillsResponse {
   items?: VoDigiEmployeeTeamSkill[];
+}
+
+export interface VoGitSkillSource {
+  authType?: string;
+  branch?: string;
+  directoryName?: string;
+  id?: string;
+  lastSyncAt?: string;
+  lastSyncError?: string;
+  lastSyncedCommit?: string;
+  managedPrefix?: string;
+  name?: string;
+  repoUrl?: string;
+  status?: string;
+  subPath?: string;
+  updatedAt?: string;
+  username?: string;
+}
+
+export interface VoGitSkillSourceAnonymousProbeResponse {
+  requiresAuth?: boolean;
+  resolvedCommit?: string;
+}
+
+export interface VoGitSkillSourceSyncRun {
+  addedFiles?: number;
+  deletedFiles?: number;
+  errorCode?: string;
+  errorMessage?: string;
+  finishedAt?: string;
+  id?: string;
+  resolvedCommit?: string;
+  scanDeleted?: number;
+  scanScanned?: number;
+  scanUpserted?: number;
+  sourceId?: string;
+  startedAt?: string;
+  status?: string;
+  updatedFiles?: number;
+}
+
+export interface VoGitSkillSourceTestConnectionResponse {
+  resolvedCommit?: string;
 }
 
 export interface VoGroupSessionBootstrapResponse {
@@ -3105,6 +3211,14 @@ export interface VoListExternalUsersResponse {
   items?: VoExternalUserListItem[];
 }
 
+export interface VoListGitSkillSourceSyncRunsResponse {
+  items?: VoGitSkillSourceSyncRun[];
+}
+
+export interface VoListGitSkillSourcesResponse {
+  items?: VoGitSkillSource[];
+}
+
 export interface VoListIntegrationsResponse {
   items?: VoTeamIntegrationVO[];
 }
@@ -3238,9 +3352,17 @@ export interface VoListTenantAdminLLMModelsResponse {
   nextCursor?: string;
 }
 
+export interface VoListTenantAdminMarketPlanMemberCandidatesResponse {
+  items?: VoTenantAdminMarketPlanMemberCandidate[];
+}
+
 export interface VoListTenantAdminMarketPlansResponse {
   items?: VoTenantAdminMarketPlan[];
   nextCursor?: string;
+}
+
+export interface VoListTenantAdminMarketWorkerCandidatesResponse {
+  items?: VoTenantAdminMarketWorkerCandidate[];
 }
 
 export interface VoListTenantAdminMarketWorkersResponse {
@@ -3533,6 +3655,16 @@ export interface VoPatchDigiEmployeeSkillsetsRequest {
   skillsets?: VoSkillsetRef[];
 }
 
+export interface VoPatchGitSkillSourceRequest {
+  authType?: string;
+  branch?: string;
+  name?: string;
+  repoUrl?: string;
+  subPath?: string;
+  token?: string;
+  username?: string;
+}
+
 export interface VoPatchMeRequest {
   name?: string;
 }
@@ -3595,6 +3727,30 @@ export interface VoPostConversationHumanTurnRequest {
 export interface VoPostConversationHumanTurnResponse {
   accepted?: boolean;
   turnId?: string;
+}
+
+export interface VoPostConversationTurnSteerRequest {
+  applyPolicy?: string;
+  content?: string;
+  intentType?: string;
+  priority?: string;
+  sourceRef?: Record<string, any>;
+  sourceType?: string;
+  visibility?: string;
+}
+
+export interface VoPostConversationTurnSteerResponse {
+  accepted?: boolean;
+  steerId?: string;
+  turnId?: string;
+}
+
+export interface VoProbeGitSkillSourceRequest {
+  authType?: string;
+  branch?: string;
+  repoUrl?: string;
+  token?: string;
+  username?: string;
 }
 
 export interface VoPutDigiEmployeeKBAccessRequest {
@@ -4094,6 +4250,7 @@ export interface VoTenantAdminDigiWorker {
   jobTags?: VoJobTagLite[];
   llmModelId?: string;
   marketVisible?: boolean;
+  marketWorker?: VoTenantAdminMarketWorkerSummary;
   meta?: Record<string, string>;
   modelExternalName?: string;
   name?: string;
@@ -4198,6 +4355,16 @@ export interface VoTenantAdminMarketPlanMember {
   upstreamMemberId?: string;
 }
 
+export interface VoTenantAdminMarketPlanMemberCandidate {
+  detailVisible?: boolean;
+  digiWorkerId?: string;
+  digiWorkerName?: string;
+  displayName?: string;
+  id?: string;
+  roleTitle?: string;
+  status?: string;
+}
+
 export interface VoTenantAdminMarketPublishCheckResponse {
   id?: string;
   issues?: VoTenantAdminMarketPublishIssue[];
@@ -4225,6 +4392,21 @@ export interface VoTenantAdminMarketWorker {
   salary?: number;
   sceneTags?: string[];
   sortOrder?: number;
+  status?: string;
+}
+
+export interface VoTenantAdminMarketWorkerCandidate {
+  hireableCount?: number;
+  hiredCount?: number;
+  id?: string;
+  marketVisible?: boolean;
+  name?: string;
+}
+
+export interface VoTenantAdminMarketWorkerSummary {
+  displayName?: string;
+  id?: string;
+  purchaseMode?: string;
   status?: string;
 }
 
@@ -7046,6 +7228,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoConversationTurnLLMTraceCallDetail, any>({
         path: `/api/v1/conversations/${id}/turns/${turnId}/llm-trace/${traceCallId}`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Conversations
+     * @name V1ConversationsTurnsSteerCreate
+     * @summary Post conversation turn steer
+     * @request POST:/api/v1/conversations/{id}/turns/{turnId}/steer
+     */
+    v1ConversationsTurnsSteerCreate: (
+      id: string,
+      turnId: string,
+      request: VoPostConversationTurnSteerRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoPostConversationTurnSteerResponse, any>({
+        path: `/api/v1/conversations/${id}/turns/${turnId}/steer`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
@@ -12045,6 +12250,158 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags TenantAdmin
+     * @name V1GitSkillSourcesList
+     * @summary List git skill sources (tenant admin, tenant-scoped)
+     * @request GET:/tenant-admin/v1/git-skill-sources
+     */
+    v1GitSkillSourcesList: (params: RequestParams = {}) =>
+      this.request<BasePinOKVoListGitSkillSourcesResponse, BasePinErr>({
+        path: `/tenant-admin/v1/git-skill-sources`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1GitSkillSourcesCreate
+     * @summary Create git skill source (tenant admin, tenant-scoped)
+     * @request POST:/tenant-admin/v1/git-skill-sources
+     */
+    v1GitSkillSourcesCreate: (request: VoCreateGitSkillSourceRequest, params: RequestParams = {}) =>
+      this.request<BasePinOKVoGitSkillSource, BasePinErr>({
+        path: `/tenant-admin/v1/git-skill-sources`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1GitSkillSourcesProbeCreate
+     * @summary Probe git skill source anonymous access (tenant admin, tenant-scoped)
+     * @request POST:/tenant-admin/v1/git-skill-sources/probe
+     */
+    v1GitSkillSourcesProbeCreate: (request: VoProbeGitSkillSourceRequest, params: RequestParams = {}) =>
+      this.request<BasePinOKVoGitSkillSourceAnonymousProbeResponse, BasePinErr>({
+        path: `/tenant-admin/v1/git-skill-sources/probe`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1GitSkillSourcesPartialUpdate
+     * @summary Patch git skill source (tenant admin, tenant-scoped)
+     * @request PATCH:/tenant-admin/v1/git-skill-sources/{id}
+     */
+    v1GitSkillSourcesPartialUpdate: (id: string, request: VoPatchGitSkillSourceRequest, params: RequestParams = {}) =>
+      this.request<BasePinOKVoGitSkillSource, BasePinErr>({
+        path: `/tenant-admin/v1/git-skill-sources/${id}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1GitSkillSourcesDeleteCreate
+     * @summary Delete git skill source (tenant admin, tenant-scoped)
+     * @request POST:/tenant-admin/v1/git-skill-sources/{id}/delete
+     */
+    v1GitSkillSourcesDeleteCreate: (id: string, request: VoDeleteGitSkillSourceRequest, params: RequestParams = {}) =>
+      this.request<BasePinOKVoSimpleOKResponse, BasePinErr>({
+        path: `/tenant-admin/v1/git-skill-sources/${id}/delete`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1GitSkillSourcesDisableCreate
+     * @summary Disable git skill source (tenant admin, tenant-scoped)
+     * @request POST:/tenant-admin/v1/git-skill-sources/{id}/disable
+     */
+    v1GitSkillSourcesDisableCreate: (id: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoGitSkillSource, BasePinErr>({
+        path: `/tenant-admin/v1/git-skill-sources/${id}/disable`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1GitSkillSourcesSyncCreate
+     * @summary Sync git skill source (tenant admin, tenant-scoped)
+     * @request POST:/tenant-admin/v1/git-skill-sources/{id}/sync
+     */
+    v1GitSkillSourcesSyncCreate: (id: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoGitSkillSourceSyncRun, BasePinErr>({
+        path: `/tenant-admin/v1/git-skill-sources/${id}/sync`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1GitSkillSourcesSyncRunsDetail
+     * @summary List git skill source sync runs (tenant admin, tenant-scoped)
+     * @request GET:/tenant-admin/v1/git-skill-sources/{id}/sync-runs
+     */
+    v1GitSkillSourcesSyncRunsDetail: (id: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoListGitSkillSourceSyncRunsResponse, BasePinErr>({
+        path: `/tenant-admin/v1/git-skill-sources/${id}/sync-runs`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1GitSkillSourcesTestConnectionCreate
+     * @summary Test git skill source connection (tenant admin, tenant-scoped)
+     * @request POST:/tenant-admin/v1/git-skill-sources/{id}/test-connection
+     */
+    v1GitSkillSourcesTestConnectionCreate: (id: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoGitSkillSourceTestConnectionResponse, BasePinErr>({
+        path: `/tenant-admin/v1/git-skill-sources/${id}/test-connection`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
      * @name V1HireEnabledUpdate
      * @summary Upsert hire.enabled (tenant admin, tenant-scoped, public site-config)
      * @request PUT:/tenant-admin/v1/hire/enabled
@@ -12207,6 +12564,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags TenantAdmin
+     * @name V1MarketPlanMemberCandidatesList
+     * @summary List market plan member candidates (tenant admin, tenant-scoped)
+     * @request GET:/tenant-admin/v1/market/plan-member-candidates
+     */
+    v1MarketPlanMemberCandidatesList: (params: RequestParams = {}) =>
+      this.request<VoListTenantAdminMarketPlanMemberCandidatesResponse, any>({
+        path: `/tenant-admin/v1/market/plan-member-candidates`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
      * @name V1MarketPlansList
      * @summary List market plans (tenant admin, tenant-scoped)
      * @request GET:/tenant-admin/v1/market/plans
@@ -12258,6 +12631,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoTenantAdminMarketPlan, any>({
         path: `/tenant-admin/v1/market/plans/${id}`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1MarketPlansDelete
+     * @summary Delete market plan (tenant admin, tenant-scoped)
+     * @request DELETE:/tenant-admin/v1/market/plans/{id}
+     */
+    v1MarketPlansDelete: (id: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoSimpleOKResponse, BasePinErr>({
+        path: `/tenant-admin/v1/market/plans/${id}`,
+        method: "DELETE",
         format: "json",
         ...params,
       }),
@@ -12326,6 +12715,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags TenantAdmin
+     * @name V1MarketWorkerCandidatesList
+     * @summary List market worker candidates (tenant admin, tenant-scoped)
+     * @request GET:/tenant-admin/v1/market/worker-candidates
+     */
+    v1MarketWorkerCandidatesList: (params: RequestParams = {}) =>
+      this.request<VoListTenantAdminMarketWorkerCandidatesResponse, any>({
+        path: `/tenant-admin/v1/market/worker-candidates`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
      * @name V1MarketWorkersList
      * @summary List market workers (tenant admin, tenant-scoped)
      * @request GET:/tenant-admin/v1/market/workers
@@ -12369,6 +12774,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags TenantAdmin
+     * @name V1MarketWorkersByDigiworkerDetail
+     * @summary Get market worker by digiworker id (tenant admin, tenant-scoped)
+     * @request GET:/tenant-admin/v1/market/workers/by-digiworker/{digiWorkerId}
+     */
+    v1MarketWorkersByDigiworkerDetail: (digiWorkerId: string, params: RequestParams = {}) =>
+      this.request<VoTenantAdminMarketWorker, any>({
+        path: `/tenant-admin/v1/market/workers/by-digiworker/${digiWorkerId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
      * @name V1MarketWorkersDetail
      * @summary Get market worker detail (tenant admin, tenant-scoped)
      * @request GET:/tenant-admin/v1/market/workers/{id}
@@ -12377,6 +12798,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoTenantAdminMarketWorker, any>({
         path: `/tenant-admin/v1/market/workers/${id}`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1MarketWorkersDelete
+     * @summary Delete market worker (tenant admin, tenant-scoped)
+     * @request DELETE:/tenant-admin/v1/market/workers/{id}
+     */
+    v1MarketWorkersDelete: (id: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoSimpleOKResponse, BasePinErr>({
+        path: `/tenant-admin/v1/market/workers/${id}`,
+        method: "DELETE",
         format: "json",
         ...params,
       }),
