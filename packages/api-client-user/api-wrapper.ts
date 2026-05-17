@@ -76,19 +76,20 @@ function extractPinErrorPayload(error: any): { body: PinErrorResponse; statusCod
 function unwrapData<T>(promise: Promise<PinResponse<T>>): Promise<T> {
   return promise
     .then(response => {
-      const responseData = response as any
-      if (responseData.data?.error) {
+      const httpResponse = response as any
+      const pinPayload = httpResponse?.data
+      if (pinPayload?.error) {
         throw new ApiError(
-          responseData.data.error.message,
-          responseData.data.error.key,
+          pinPayload.error.message,
+          pinPayload.error.key,
           undefined,
-          responseData.data.error.type,
-          responseData.data.trace_id,
+          pinPayload.error.type,
+          pinPayload.trace_id,
           undefined,
-          responseData.data
+          pinPayload
         )
       }
-      return responseData.data
+      return pinPayload?.data ?? pinPayload
     })
     .catch(error => {
       if (error instanceof ApiError) throw error
