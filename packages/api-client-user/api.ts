@@ -4279,6 +4279,7 @@ export interface VoUpdateCronTriggerRequest {
   actionType?: string;
   cronSpec?: string;
   digiEmployeeId?: string;
+  enabled?: boolean;
   initialPromptTemplate?: string;
   messageTemplate?: string;
   targetConversationId?: string;
