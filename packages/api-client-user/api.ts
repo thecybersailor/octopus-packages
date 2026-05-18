@@ -2221,6 +2221,18 @@ export interface VoConversationFileGrantsResponse {
   grants?: VoFileGrant[];
 }
 
+export interface VoConversationMessageArtifact {
+  artifactId?: string;
+  artifactItemId?: string;
+  downloadable?: boolean;
+  fileName?: string;
+  mediaType?: string;
+  previewable?: boolean;
+  sizeBytes?: number;
+  summary?: string;
+  title?: string;
+}
+
 export interface VoConversationMessageFileRef {
   contentType?: string;
   downloadUrl?: string;
@@ -2265,6 +2277,7 @@ export interface VoConversationMeta {
 
 export interface VoConversationRuntimeItem {
   actionId?: string;
+  artifacts?: VoConversationMessageArtifact[];
   content?: string;
   conversationId?: string;
   createdAt?: string;
@@ -3589,6 +3602,8 @@ export interface VoOfficePreviewSessionResponse {
 export interface VoOfficePreviewSourceRef {
   artifactId?: string;
   artifactItemId?: string;
+  conversationId?: string;
+  uploadId?: string;
   workspaceId?: string;
   workspaceIdent?: string;
 }
