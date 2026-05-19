@@ -1163,6 +1163,11 @@ export interface BasePinOKVoTenantAdminMarketWorker {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTenantAdminOfficePreviewConfig {
+  data?: VoTenantAdminOfficePreviewConfig;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTenantAdminSettlementConfig {
   data?: VoTenantAdminSettlementConfig;
   trace_id?: string;
@@ -2222,6 +2227,18 @@ export interface VoConversationFileGrantsResponse {
   grants?: VoFileGrant[];
 }
 
+export interface VoConversationMessageArtifact {
+  artifactId?: string;
+  artifactItemId?: string;
+  downloadable?: boolean;
+  fileName?: string;
+  mediaType?: string;
+  previewable?: boolean;
+  sizeBytes?: number;
+  summary?: string;
+  title?: string;
+}
+
 export interface VoConversationMessageFileRef {
   contentType?: string;
   downloadUrl?: string;
@@ -2266,6 +2283,7 @@ export interface VoConversationMeta {
 
 export interface VoConversationRuntimeItem {
   actionId?: string;
+  artifacts?: VoConversationMessageArtifact[];
   content?: string;
   conversationId?: string;
   createdAt?: string;
@@ -3572,24 +3590,22 @@ export interface VoMeResponse {
 }
 
 export interface VoOfficePreviewSessionResponse {
-  customArgs?: Record<string, string>;
-  expireAt?: string;
   fileExt?: string;
-  fileId?: string;
   fileName?: string;
   logicalPath?: string;
   mode?: string;
-  sdkInitConfig?: Record<string, any>;
+  provider?: string;
+  providerPayload?: Record<string, any>;
   sessionId?: string;
   sourceKind?: string;
   sourceRef?: VoOfficePreviewSourceRef;
-  token?: string;
-  wpsAppId?: string;
 }
 
 export interface VoOfficePreviewSourceRef {
   artifactId?: string;
   artifactItemId?: string;
+  conversationId?: string;
+  uploadId?: string;
   workspaceId?: string;
   workspaceIdent?: string;
 }
@@ -4409,6 +4425,10 @@ export interface VoTenantAdminMarketWorkerSummary {
   id?: string;
   purchaseMode?: string;
   status?: string;
+}
+
+export interface VoTenantAdminOfficePreviewConfig {
+  provider?: string;
 }
 
 export interface VoTenantAdminPatchDigiWorkerRequest {
@@ -12836,6 +12856,40 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoTenantAdminMarketWorker, any>({
         path: `/tenant-admin/v1/market/workers/${id}`,
         method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1OfficePreviewConfigList
+     * @summary Get office preview config (tenant admin, tenant-scoped)
+     * @request GET:/tenant-admin/v1/office-preview/config
+     */
+    v1OfficePreviewConfigList: (params: RequestParams = {}) =>
+      this.request<BasePinOKVoTenantAdminOfficePreviewConfig, BasePinErr>({
+        path: `/tenant-admin/v1/office-preview/config`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1OfficePreviewConfigUpdate
+     * @summary Put office preview config (tenant admin, tenant-scoped)
+     * @request PUT:/tenant-admin/v1/office-preview/config
+     */
+    v1OfficePreviewConfigUpdate: (request: VoTenantAdminOfficePreviewConfig, params: RequestParams = {}) =>
+      this.request<BasePinOKVoSimpleOKResponse, BasePinErr>({
+        path: `/tenant-admin/v1/office-preview/config`,
+        method: "PUT",
         body: request,
         type: ContentType.Json,
         format: "json",
