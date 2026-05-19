@@ -1992,6 +1992,7 @@ export interface VoArtifactDownloadURLResponse {
 export interface VoArtifactItem {
   artifactId?: string;
   channel?: string;
+  contentType?: string;
   conversationId?: string;
   conversationKind?: string;
   createdAt?: string;
