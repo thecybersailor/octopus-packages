@@ -11355,6 +11355,45 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Stations
+     * @name V1TeamsWeixinClawbotBindingSessionsDetail
+     * @summary Get weixin clawbot binding session detail
+     * @request GET:/api/v1/teams/{teamId}/weixin-clawbot-binding-sessions/{bindingSessionId}
+     */
+    v1TeamsWeixinClawbotBindingSessionsDetail: (teamId: string, bindingSessionId: string, params: RequestParams = {}) =>
+      this.request<VoWeixinClawBotBindingSessionResponse, any>({
+        path: `/api/v1/teams/${teamId}/weixin-clawbot-binding-sessions/${bindingSessionId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1TeamsWeixinClawbotBindingSessionsVerifyCodeCreate
+     * @summary Submit weixin clawbot binding session verify code
+     * @request POST:/api/v1/teams/{teamId}/weixin-clawbot-binding-sessions/{bindingSessionId}/verify-code
+     */
+    v1TeamsWeixinClawbotBindingSessionsVerifyCodeCreate: (
+      teamId: string,
+      bindingSessionId: string,
+      request: VoSubmitWeixinClawBotVerifyCodeRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWeixinClawBotBindingSessionResponse, any>({
+        path: `/api/v1/teams/${teamId}/weixin-clawbot-binding-sessions/${bindingSessionId}/verify-code`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Workspaces
      * @name V1TeamsWorkspacesDetail
      * @summary List workspaces
@@ -11552,44 +11591,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<VoWebSessionAckResponse, any>({
         path: `/api/v1/web-sessions/${webSessionId}/tool-results`,
-        method: "POST",
-        body: request,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Stations
-     * @name V1WeixinClawbotBindingSessionsDetail
-     * @summary Get weixin clawbot binding session detail
-     * @request GET:/api/v1/weixin-clawbot-binding-sessions/{bindingSessionId}
-     */
-    v1WeixinClawbotBindingSessionsDetail: (bindingSessionId: string, params: RequestParams = {}) =>
-      this.request<VoWeixinClawBotBindingSessionResponse, any>({
-        path: `/api/v1/weixin-clawbot-binding-sessions/${bindingSessionId}`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Stations
-     * @name V1WeixinClawbotBindingSessionsVerifyCodeCreate
-     * @summary Submit weixin clawbot binding session verify code
-     * @request POST:/api/v1/weixin-clawbot-binding-sessions/{bindingSessionId}/verify-code
-     */
-    v1WeixinClawbotBindingSessionsVerifyCodeCreate: (
-      bindingSessionId: string,
-      request: VoSubmitWeixinClawBotVerifyCodeRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoWeixinClawBotBindingSessionResponse, any>({
-        path: `/api/v1/weixin-clawbot-binding-sessions/${bindingSessionId}/verify-code`,
         method: "POST",
         body: request,
         type: ContentType.Json,
