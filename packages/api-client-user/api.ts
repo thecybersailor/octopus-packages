@@ -438,6 +438,11 @@ export interface BasePinOKVoConversationTurnLLMTraceCallDetail {
   trace_id?: string;
 }
 
+export interface BasePinOKVoCountTeamSkillsResponse {
+  data?: VoCountTeamSkillsResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoCreateOfficePreviewSessionResponse {
   data?: VoCreateOfficePreviewSessionResponse;
   trace_id?: string;
@@ -2392,6 +2397,10 @@ export interface VoConversationTurnLLMTraceCallSummary {
   traceCallId?: string;
   turnId?: string;
   usage?: RuntimesnapshotHostLLMUsage;
+}
+
+export interface VoCountTeamSkillsResponse {
+  count?: number;
 }
 
 export interface VoCreateAdminDigiWorkerRequest {
@@ -11033,6 +11042,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v1/teams/${teamId}/skills`,
         method: "GET",
         query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsSkillsCountDetail
+     * @summary Count skills (team user, team-scoped)
+     * @request GET:/api/v1/teams/{teamId}/skills/count
+     */
+    v1TeamsSkillsCountDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoCountTeamSkillsResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/skills/count`,
+        method: "GET",
         format: "json",
         ...params,
       }),
