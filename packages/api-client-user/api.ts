@@ -443,6 +443,11 @@ export interface BasePinOKVoCreateOfficePreviewSessionResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoCreateWeixinClawBotBindingSessionResponse {
+  data?: VoCreateWeixinClawBotBindingSessionResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoCronTrigger {
   data?: VoCronTrigger;
   trace_id?: string;
@@ -1215,6 +1220,11 @@ export interface BasePinOKVoWebSessionAckResponse {
 
 export interface BasePinOKVoWebSessionMessageResponse {
   data?: VoWebSessionMessageResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWeixinClawBotBindingSessionResponse {
+  data?: VoWeixinClawBotBindingSessionResponse;
   trace_id?: string;
 }
 
@@ -2530,6 +2540,16 @@ export interface VoCreateWecomIntegrationRequest {
   corpsecret: string;
 }
 
+export type VoCreateWeixinClawBotBindingSessionRequest = object;
+
+export interface VoCreateWeixinClawBotBindingSessionResponse {
+  bindingSessionId?: string;
+  expireAt?: string;
+  qrcode?: string;
+  qrcodeImageUrl?: string;
+  status?: string;
+}
+
 export interface VoCreateWorkspaceRequest {
   description?: string;
   name: string;
@@ -2590,6 +2610,7 @@ export interface VoDigiEmployee {
   externalAgentBinding?: VoExternalAgentBindingSummary;
   hiredAt?: string;
   id?: string;
+  lastActiveAt?: string;
   managerDigiEmployeeId?: string;
   quickStartPrompts?: string[];
   resolvedBio?: string;
@@ -3909,6 +3930,10 @@ export interface VoStationToolTrace {
   toolKey?: string;
 }
 
+export interface VoSubmitWeixinClawBotVerifyCodeRequest {
+  verifyCode: string;
+}
+
 export interface VoTeam {
   balancePoints?: number;
   certificationStatus?: string;
@@ -4728,6 +4753,16 @@ export interface VoWecomContactVO {
   name?: string;
   position?: string;
   userid?: string;
+}
+
+export interface VoWeixinClawBotBindingSessionResponse {
+  bindingSessionId?: string;
+  expireAt?: string;
+  qrcode?: string;
+  qrcodeImageUrl?: string;
+  stationId?: string;
+  status?: string;
+  verifyCode?: string;
 }
 
 export interface VoWorkspace {
@@ -9010,6 +9045,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Stations
+     * @name V1TeamsDigiemployeesWeixinClawbotBindingSessionsCreate
+     * @summary Create weixin clawbot binding session
+     * @request POST:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/weixin-clawbot-binding-sessions
+     */
+    v1TeamsDigiemployeesWeixinClawbotBindingSessionsCreate: (
+      teamId: string,
+      digiEmployeeId: string,
+      request: VoCreateWeixinClawBotBindingSessionRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCreateWeixinClawBotBindingSessionResponse, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/weixin-clawbot-binding-sessions`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Roster
      * @name V1TeamsDigiemployeesWorkspaceAccessDetail
      * @summary Get digiemployee workspace access
@@ -11291,6 +11349,45 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v1/teams/${teamId}/usage-rollups`,
         method: "GET",
         query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1TeamsWeixinClawbotBindingSessionsDetail
+     * @summary Get weixin clawbot binding session detail
+     * @request GET:/api/v1/teams/{teamId}/weixin-clawbot-binding-sessions/{bindingSessionId}
+     */
+    v1TeamsWeixinClawbotBindingSessionsDetail: (teamId: string, bindingSessionId: string, params: RequestParams = {}) =>
+      this.request<VoWeixinClawBotBindingSessionResponse, any>({
+        path: `/api/v1/teams/${teamId}/weixin-clawbot-binding-sessions/${bindingSessionId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1TeamsWeixinClawbotBindingSessionsVerifyCodeCreate
+     * @summary Submit weixin clawbot binding session verify code
+     * @request POST:/api/v1/teams/{teamId}/weixin-clawbot-binding-sessions/{bindingSessionId}/verify-code
+     */
+    v1TeamsWeixinClawbotBindingSessionsVerifyCodeCreate: (
+      teamId: string,
+      bindingSessionId: string,
+      request: VoSubmitWeixinClawBotVerifyCodeRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWeixinClawBotBindingSessionResponse, any>({
+        path: `/api/v1/teams/${teamId}/weixin-clawbot-binding-sessions/${bindingSessionId}/verify-code`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
