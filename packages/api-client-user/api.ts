@@ -4517,6 +4517,10 @@ export interface VoTenantAdminOfficePreviewConfig {
   provider?: string;
 }
 
+export interface VoTenantAdminPatchDigiEmployeeRequest {
+  homeModeOverride?: string;
+}
+
 export interface VoTenantAdminPatchDigiWorkerRequest {
   allowDeployStation?: boolean;
   autohire?: boolean;
@@ -12065,6 +12069,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<BasePinOKVoTenantAdminDigiEmployeeDetail, BasePinErr>({
         path: `/tenant-admin/v1/digiemployees/${id}`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1DigiemployeesPartialUpdate
+     * @summary Patch digiemployee runtime config (tenant admin, scoped)
+     * @request PATCH:/tenant-admin/v1/digiemployees/{id}
+     */
+    v1DigiemployeesPartialUpdate: (
+      id: string,
+      request: VoTenantAdminPatchDigiEmployeeRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoAdminDigiEmployee, BasePinErr>({
+        path: `/tenant-admin/v1/digiemployees/${id}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
