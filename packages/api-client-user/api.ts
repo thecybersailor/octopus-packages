@@ -913,6 +913,11 @@ export interface BasePinOKVoListTenantAdminExternalAgentSpecsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListTenantAdminImageGenerationProvidersResponse {
+  data?: VoListTenantAdminImageGenerationProvidersResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListTenantAdminJobTagsResponse {
   data?: VoListTenantAdminJobTagsResponse;
   trace_id?: string;
@@ -1150,6 +1155,11 @@ export interface BasePinOKVoTenantAdminDigiWorkerAutoCreateThresholdResponse {
 
 export interface BasePinOKVoTenantAdminDigiworkerDebugConfig {
   data?: VoTenantAdminDigiworkerDebugConfig;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTenantAdminGenerateDigiWorkerAvatarPreviewResponse {
+  data?: VoTenantAdminGenerateDigiWorkerAvatarPreviewResponse;
   trace_id?: string;
 }
 
@@ -1731,6 +1741,8 @@ export interface VoAdminDeleteStorageRequest {
 
 export interface VoAdminDigiEmployee {
   digiWorkerId?: string;
+  homeMode?: string;
+  homeModeOverride?: string;
   id?: string;
   status?: string;
   teamId?: string;
@@ -1757,6 +1769,7 @@ export interface VoAdminDigiWorker {
   bioPicture?: string;
   hireableCount?: number;
   hiredCount?: number;
+  homeMode?: string;
   id?: string;
   jobTags?: VoJobTagLite[];
   marketVisible?: boolean;
@@ -2408,6 +2421,7 @@ export interface VoCreateAdminDigiWorkerRequest {
   bio?: string;
   bioPicture?: string;
   hireableCount: number;
+  homeMode?: string;
   id?: string;
   jobTagIds?: string[];
   marketVisible?: boolean;
@@ -2618,6 +2632,8 @@ export interface VoDigiEmployee {
   digiWorkerId?: string;
   externalAgentBinding?: VoExternalAgentBindingSummary;
   hiredAt?: string;
+  homeMode?: string;
+  homeModeOverride?: string;
   id?: string;
   lastActiveAt?: string;
   managerDigiEmployeeId?: string;
@@ -2688,6 +2704,7 @@ export interface VoDigiWorker {
   bioPicture?: string;
   hireableCount?: number;
   hiredCount?: number;
+  homeMode?: string;
   id?: string;
   jobTags?: VoJobTagLite[];
   marketVisible?: boolean;
@@ -3392,6 +3409,11 @@ export interface VoListTenantAdminExternalAgentSpecsResponse {
   items?: VoTenantAdminExternalAgentSpec[];
 }
 
+export interface VoListTenantAdminImageGenerationProvidersResponse {
+  items?: VoTenantAdminImageGenerationProvider[];
+  recommendedProvider?: string;
+}
+
 export interface VoListTenantAdminJobTagsResponse {
   items?: VoJobTagItem[];
 }
@@ -3654,6 +3676,7 @@ export interface VoPatchAdminDigiWorkerRequest {
   bio?: string;
   bioPicture?: string;
   hireableCount?: number;
+  homeMode?: string;
   jobTagIds?: string[];
   marketVisible?: boolean;
   meta?: Record<string, string>;
@@ -3695,6 +3718,7 @@ export interface VoPatchDigiEmployeeProfileRequest {
   allowAutoDelegate?: boolean;
   bio?: string;
   bioPicture?: string;
+  homeModeOverride?: string;
   quickStartPrompts?: string[];
 }
 
@@ -4240,6 +4264,10 @@ export interface VoTeamUsageRollupItem {
   value?: number;
 }
 
+export interface VoTenantAdminApplyGeneratedDigiWorkerAvatarRequest {
+  previewToken: string;
+}
+
 export interface VoTenantAdminAssistantEnsureRequest {
   digiWorkerId: string;
 }
@@ -4257,6 +4285,7 @@ export interface VoTenantAdminCreateDigiWorkerRequest {
   externalAgentProvider?: string;
   externalAgentSpecId?: string;
   hireableCount: number;
+  homeMode?: string;
   id?: string;
   jobTagIds?: string[];
   llmModelId?: string;
@@ -4297,6 +4326,7 @@ export interface VoTenantAdminDigiWorker {
   externalAgentSpecId?: string;
   hireableCount?: number;
   hiredCount?: number;
+  homeMode?: string;
   id?: string;
   jobTags?: VoJobTagLite[];
   llmModelId?: string;
@@ -4345,6 +4375,28 @@ export interface VoTenantAdminExternalAgentSpec {
   providerBadgeUrl?: string;
   providerSpecName?: string;
   specId?: string;
+}
+
+export interface VoTenantAdminGenerateDigiWorkerAvatarPreviewRequest {
+  prompt: string;
+  provider: string;
+}
+
+export interface VoTenantAdminGenerateDigiWorkerAvatarPreviewResponse {
+  effectiveProvider?: string;
+  errorCode?: string;
+  errorHint?: string;
+  errorMessage?: string;
+  expiresAt?: string;
+  jobId?: string;
+  previewToken?: string;
+  previewUrl?: string;
+  status?: string;
+}
+
+export interface VoTenantAdminImageGenerationProvider {
+  displayName?: string;
+  provider?: string;
 }
 
 export interface VoTenantAdminLLMModelItem {
@@ -4473,6 +4525,7 @@ export interface VoTenantAdminPatchDigiWorkerRequest {
   externalAgentProvider?: string;
   externalAgentSpecId?: string;
   hireableCount?: number;
+  homeMode?: string;
   jobTagIds?: string[];
   llmModelId?: string;
   marketVisible?: boolean;
@@ -12307,6 +12360,66 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags TenantAdmin
+     * @name V1DigiworkersAvatarApplyGeneratedCreate
+     * @summary Apply generated digiworker avatar preview (tenant admin)
+     * @request POST:/tenant-admin/v1/digiworkers/{id}/avatar/apply-generated
+     */
+    v1DigiworkersAvatarApplyGeneratedCreate: (
+      id: string,
+      request: VoTenantAdminApplyGeneratedDigiWorkerAvatarRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoTenantAdminDigiWorker, BasePinErr>({
+        path: `/tenant-admin/v1/digiworkers/${id}/avatar/apply-generated`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1DigiworkersAvatarGeneratePreviewCreate
+     * @summary Generate digiworker avatar preview by prompt (tenant admin)
+     * @request POST:/tenant-admin/v1/digiworkers/{id}/avatar/generate-preview
+     */
+    v1DigiworkersAvatarGeneratePreviewCreate: (
+      id: string,
+      request: VoTenantAdminGenerateDigiWorkerAvatarPreviewRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoTenantAdminGenerateDigiWorkerAvatarPreviewResponse, BasePinErr>({
+        path: `/tenant-admin/v1/digiworkers/${id}/avatar/generate-preview`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1DigiworkersAvatarGenerationJobsDetail
+     * @summary Get digiworker avatar generation job by id (tenant admin)
+     * @request GET:/tenant-admin/v1/digiworkers/{id}/avatar/generation-jobs/{jobId}
+     */
+    v1DigiworkersAvatarGenerationJobsDetail: (id: string, jobId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoTenantAdminGenerateDigiWorkerAvatarPreviewResponse, BasePinErr>({
+        path: `/tenant-admin/v1/digiworkers/${id}/avatar/generation-jobs/${jobId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
      * @name V1DigiworkersBioPictureUploadUrlCreate
      * @summary Create digiworker bio picture upload url (tenant admin, tenant-scoped)
      * @request POST:/tenant-admin/v1/digiworkers/{id}/bio-picture:upload-url
@@ -12556,6 +12669,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "PUT",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1ImageGenerationProvidersList
+     * @summary List available image generation providers (tenant admin)
+     * @request GET:/tenant-admin/v1/image-generation/providers
+     */
+    v1ImageGenerationProvidersList: (params: RequestParams = {}) =>
+      this.request<BasePinOKVoListTenantAdminImageGenerationProvidersResponse, BasePinErr>({
+        path: `/tenant-admin/v1/image-generation/providers`,
+        method: "GET",
         format: "json",
         ...params,
       }),
