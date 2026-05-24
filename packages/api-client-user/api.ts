@@ -2688,6 +2688,7 @@ export interface VoCreateWebSessionRequest {
 
 export interface VoCreateWebhookEndpointRequest {
   actionType: string;
+  debounceSeconds?: number;
   digiEmployeeId?: string;
   enabled?: boolean;
   initialPromptTemplate?: string;
@@ -4871,6 +4872,7 @@ export interface VoUpdateStationRequest {
 
 export interface VoUpdateWebhookEndpointRequest {
   actionType?: string;
+  debounceSeconds?: number;
   digiEmployeeId?: string;
   enabled?: boolean;
   initialPromptTemplate?: string;
