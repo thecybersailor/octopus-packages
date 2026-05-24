@@ -388,6 +388,16 @@ export interface BasePinOKVoBioPictureUploadURLResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoCalendarSource {
+  data?: VoCalendarSource;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoCalendarSourceSyncRun {
+  data?: VoCalendarSourceSyncRun;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoConnectionAuthTaskCreateResponse {
   data?: VoConnectionAuthTaskCreateResponse;
   trace_id?: string;
@@ -710,6 +720,21 @@ export interface BasePinOKVoListArtifactsResponse {
 
 export interface BasePinOKVoListAssemblableSkillsResponse {
   data?: VoListAssemblableSkillsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListCalendarCatalogResponse {
+  data?: VoListCalendarCatalogResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListCalendarSourceEventsResponse {
+  data?: VoListCalendarSourceEventsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListCalendarSourcesResponse {
+  data?: VoListCalendarSourcesResponse;
   trace_id?: string;
 }
 
@@ -2127,6 +2152,62 @@ export interface VoBioPictureUploadURLResponse {
   uploadUrl?: string;
 }
 
+export interface VoCalendarCatalogItem {
+  category?: string;
+  defaultTimezone?: string;
+  key?: string;
+  name?: string;
+  region?: string;
+  sourceType?: string;
+  url?: string;
+  urlTemplate?: string;
+}
+
+export interface VoCalendarSource {
+  catalogKey?: string;
+  createdAt?: string;
+  enabled?: boolean;
+  icalUrl?: string;
+  id?: string;
+  lastSyncError?: string;
+  lastSyncStatus?: string;
+  lastSyncedAt?: string;
+  maxStalenessMinutes?: number;
+  name?: string;
+  refreshIntervalMinutes?: number;
+  scope?: string;
+  teamId?: string;
+  timezone?: string;
+  updatedAt?: string;
+}
+
+export interface VoCalendarSourceEvent {
+  allDay?: boolean;
+  categories?: string[];
+  description?: string;
+  endsAt?: string;
+  id?: string;
+  kind?: string;
+  localDate?: string;
+  recurrenceId?: string;
+  sourceId?: string;
+  startsAt?: string;
+  summary?: string;
+  uid?: string;
+  workingDayOverride?: string;
+}
+
+export interface VoCalendarSourceSyncRun {
+  errorMessage?: string;
+  eventsUpserted?: number;
+  finishedAt?: string;
+  httpStatus?: number;
+  id?: string;
+  sourceId?: string;
+  startedAt?: string;
+  status?: string;
+}
+
 export interface VoConnectionAuthTaskAuthField {
   helpText?: string;
   key?: string;
@@ -2454,14 +2535,23 @@ export interface VoCreateConversationRequest {
 
 export interface VoCreateCronTriggerRequest {
   actionType: string;
+  calendarSourceIds?: string[];
   cronSpec: string;
   digiEmployeeId?: string;
   enabled?: boolean;
   initialPromptTemplate?: string;
+  maxRuns?: number;
   messageTemplate?: string;
   targetConversationId?: string;
   timezone: string;
   titleTemplate?: string;
+}
+
+export interface VoCreateCustomCalendarSourceRequest {
+  enabled?: boolean;
+  icalUrl: string;
+  name: string;
+  timezone: string;
 }
 
 export interface VoCreateFilePreviewSessionRequest {
@@ -2580,6 +2670,8 @@ export interface VoCreateWorkspaceRequest {
 
 export interface VoCronTrigger {
   actionType?: string;
+  autoDisabledAt?: string;
+  calendarSourceIds?: string[];
   createdById?: string;
   creatorActor?: VoActorSummary;
   cronSpec?: string;
@@ -2591,7 +2683,9 @@ export interface VoCronTrigger {
   lastError?: string;
   lastStatus?: string;
   lastTriggeredAt?: string;
+  maxRuns?: number;
   messageTemplate?: string;
+  runCount?: number;
   targetConversationId?: string;
   teamId?: string;
   timezone?: string;
@@ -2722,6 +2816,10 @@ export interface VoDigiWorker {
 
 export interface VoEnableAssemblableSkillRequest {
   displayName?: string;
+}
+
+export interface VoEnableBuiltinCalendarSourceRequest {
+  catalogKey: string;
 }
 
 export interface VoEndpointConfigField {
@@ -3232,6 +3330,18 @@ export interface VoListArtifactsResponse {
 
 export interface VoListAssemblableSkillsResponse {
   items?: VoAssemblableSkill[];
+}
+
+export interface VoListCalendarCatalogResponse {
+  items?: VoCalendarCatalogItem[];
+}
+
+export interface VoListCalendarSourceEventsResponse {
+  items?: VoCalendarSourceEvent[];
+}
+
+export interface VoListCalendarSourcesResponse {
+  items?: VoCalendarSource[];
 }
 
 export interface VoListConversationDesktopSnapshotsResponse {
@@ -4632,6 +4742,13 @@ export interface VoUnbindTeamDeviceExternalProviderRequest {
   devicePassword: string;
 }
 
+export interface VoUpdateCalendarSourceRequest {
+  enabled?: boolean;
+  icalUrl?: string;
+  name?: string;
+  timezone?: string;
+}
+
 export interface VoUpdateConversationFileGrantsRequest {
   defaultWorkspaceId?: string;
   grants?: VoFileGrant[];
@@ -4639,10 +4756,12 @@ export interface VoUpdateConversationFileGrantsRequest {
 
 export interface VoUpdateCronTriggerRequest {
   actionType?: string;
+  calendarSourceIds?: string[];
   cronSpec?: string;
   digiEmployeeId?: string;
   enabled?: boolean;
   initialPromptTemplate?: string;
+  maxRuns?: number;
   messageTemplate?: string;
   targetConversationId?: string;
   timezone?: string;
@@ -8269,6 +8388,164 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<BasePinOKVoTeamBillingSummaryResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/billing/summary`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesDetail
+     * @summary List team calendar sources
+     * @request GET:/api/v1/teams/{teamId}/calendar-sources
+     */
+    v1TeamsCalendarSourcesDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListCalendarSourcesResponse, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesCreate
+     * @summary Create custom iCal calendar source
+     * @request POST:/api/v1/teams/{teamId}/calendar-sources
+     */
+    v1TeamsCalendarSourcesCreate: (
+      teamId: string,
+      request: VoCreateCustomCalendarSourceRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCalendarSource, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesBuiltinCreate
+     * @summary Enable a platform built-in calendar source for team
+     * @request POST:/api/v1/teams/{teamId}/calendar-sources/builtin
+     */
+    v1TeamsCalendarSourcesBuiltinCreate: (
+      teamId: string,
+      request: VoEnableBuiltinCalendarSourceRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCalendarSource, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources/builtin`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesCatalogDetail
+     * @summary List platform calendar catalog
+     * @request GET:/api/v1/teams/{teamId}/calendar-sources/catalog
+     */
+    v1TeamsCalendarSourcesCatalogDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListCalendarCatalogResponse, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources/catalog`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesDelete
+     * @summary Delete custom team calendar source
+     * @request DELETE:/api/v1/teams/{teamId}/calendar-sources/{sourceId}
+     */
+    v1TeamsCalendarSourcesDelete: (teamId: string, sourceId: string, params: RequestParams = {}) =>
+      this.request<VoSimpleOKResponse, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources/${sourceId}`,
+        method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesPartialUpdate
+     * @summary Patch team calendar source
+     * @request PATCH:/api/v1/teams/{teamId}/calendar-sources/{sourceId}
+     */
+    v1TeamsCalendarSourcesPartialUpdate: (
+      teamId: string,
+      sourceId: string,
+      request: VoUpdateCalendarSourceRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCalendarSource, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources/${sourceId}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesEventsDetail
+     * @summary List calendar source events
+     * @request GET:/api/v1/teams/{teamId}/calendar-sources/{sourceId}/events
+     */
+    v1TeamsCalendarSourcesEventsDetail: (
+      teamId: string,
+      sourceId: string,
+      query: {
+        /** Start day (YYYY-MM-DD) */
+        from: string;
+        /** End day (YYYY-MM-DD) */
+        to: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoListCalendarSourceEventsResponse, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources/${sourceId}/events`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesSyncCreate
+     * @summary Sync team calendar source now
+     * @request POST:/api/v1/teams/{teamId}/calendar-sources/{sourceId}/sync
+     */
+    v1TeamsCalendarSourcesSyncCreate: (teamId: string, sourceId: string, params: RequestParams = {}) =>
+      this.request<VoCalendarSourceSyncRun, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources/${sourceId}/sync`,
+        method: "POST",
         format: "json",
         ...params,
       }),
