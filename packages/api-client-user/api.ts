@@ -273,11 +273,6 @@ export interface BasePinOKTenantAdminTenantAdminTeamDebugConfig {
   trace_id?: string;
 }
 
-export interface BasePinOKVoAcceptWebhookEventResponse {
-  data?: VoAcceptWebhookEventResponse;
-  trace_id?: string;
-}
-
 export interface BasePinOKVoAccountInboxActResponse {
   data?: VoAccountInboxActResponse;
   trace_id?: string;
@@ -460,11 +455,6 @@ export interface BasePinOKVoCountTeamSkillsResponse {
 
 export interface BasePinOKVoCreateOfficePreviewSessionResponse {
   data?: VoCreateOfficePreviewSessionResponse;
-  trace_id?: string;
-}
-
-export interface BasePinOKVoCreateWebhookEndpointResponse {
-  data?: VoCreateWebhookEndpointResponse;
   trace_id?: string;
 }
 
@@ -983,21 +973,6 @@ export interface BasePinOKVoListTenantAdminMarketWorkersResponse {
   trace_id?: string;
 }
 
-export interface BasePinOKVoListWebhookEndpointEventsResponse {
-  data?: VoListWebhookEndpointEventsResponse;
-  trace_id?: string;
-}
-
-export interface BasePinOKVoListWebhookEndpointRunsResponse {
-  data?: VoListWebhookEndpointRunsResponse;
-  trace_id?: string;
-}
-
-export interface BasePinOKVoListWebhookEndpointsResponse {
-  data?: VoListWebhookEndpointsResponse;
-  trace_id?: string;
-}
-
 export interface BasePinOKVoListWecomContactsResponse {
   data?: VoListWecomContactsResponse;
   trace_id?: string;
@@ -1075,16 +1050,6 @@ export interface BasePinOKVoRemoteTaskDeleteResponse {
 
 export interface BasePinOKVoRotateStationApiKeyResponse {
   data?: VoRotateStationApiKeyResponse;
-  trace_id?: string;
-}
-
-export interface BasePinOKVoRotateWebhookEndpointSignatureSecretResponse {
-  data?: VoRotateWebhookEndpointSignatureSecretResponse;
-  trace_id?: string;
-}
-
-export interface BasePinOKVoRotateWebhookEndpointTokenResponse {
-  data?: VoRotateWebhookEndpointTokenResponse;
   trace_id?: string;
 }
 
@@ -1295,11 +1260,6 @@ export interface BasePinOKVoWebSessionAckResponse {
 
 export interface BasePinOKVoWebSessionMessageResponse {
   data?: VoWebSessionMessageResponse;
-  trace_id?: string;
-}
-
-export interface BasePinOKVoWebhookEndpoint {
-  data?: VoWebhookEndpoint;
   trace_id?: string;
 }
 
@@ -1643,14 +1603,6 @@ export interface ServicesMcplinxVisibleProofRecord {
 
 export interface TenantAdminTenantAdminTeamDebugConfig {
   debugEnabled?: boolean;
-}
-
-export interface VoAcceptWebhookEventResponse {
-  accepted?: boolean;
-  dueAt?: string;
-  endpointId?: string;
-  eventId?: string;
-  mode?: string;
 }
 
 export interface VoAccountInboxActRequest {
@@ -2694,25 +2646,6 @@ export interface VoCreateWebSessionRequest {
   hostTools?: VoHostToolDescriptor[];
 }
 
-export interface VoCreateWebhookEndpointRequest {
-  actionType: string;
-  digiEmployeeId?: string;
-  enabled?: boolean;
-  initialPromptTemplate?: string;
-  messageTemplate?: string;
-  name: string;
-  signatureEnabled?: boolean;
-  targetConversationId?: string;
-  titleTemplate?: string;
-}
-
-export interface VoCreateWebhookEndpointResponse {
-  endpoint?: VoWebhookEndpoint;
-  publicToken?: string;
-  publicUrl?: string;
-  signatureSecret?: string;
-}
-
 export interface VoCreateWecomIntegrationRequest {
   agentId?: string;
   appType?: string;
@@ -2773,6 +2706,113 @@ export interface VoCronTriggerRun {
   teamId?: string;
   triggerId?: string;
   turnId?: string;
+}
+
+export interface VoCreateWebhookEndpointRequest {
+  actionType: string;
+  digiEmployeeId?: string;
+  enabled?: boolean;
+  initialPromptTemplate?: string;
+  messageTemplate?: string;
+  name: string;
+  signatureEnabled?: boolean;
+  targetConversationId?: string;
+  titleTemplate?: string;
+}
+
+export interface VoCreateWebhookEndpointResponse {
+  endpoint?: VoWebhookEndpoint;
+  publicToken?: string;
+  publicUrl?: string;
+  signatureSecret?: string;
+}
+
+export interface VoRotateWebhookEndpointTokenResponse {
+  endpoint?: VoWebhookEndpoint;
+  publicToken?: string;
+  publicUrl?: string;
+}
+
+export interface VoRotateWebhookEndpointSignatureSecretResponse {
+  endpoint?: VoWebhookEndpoint;
+  signatureSecret?: string;
+}
+
+export interface VoUpdateWebhookEndpointRequest {
+  actionType?: string;
+  digiEmployeeId?: string;
+  enabled?: boolean;
+  initialPromptTemplate?: string;
+  messageTemplate?: string;
+  name?: string;
+  signatureEnabled?: boolean;
+  targetConversationId?: string;
+  titleTemplate?: string;
+}
+
+export interface VoWebhookEndpoint {
+  actionType?: string;
+  createdAt?: string;
+  createdById?: string;
+  creatorActor?: VoActorSummary;
+  debounceSeconds?: number;
+  digiEmployeeId?: string;
+  enabled?: boolean;
+  executorActor?: VoActorSummary;
+  id?: string;
+  initialPromptTemplate?: string;
+  lastError?: string;
+  lastReceivedAt?: string;
+  lastStatus?: string;
+  lastTriggeredAt?: string;
+  maxBodyBytes?: number;
+  messageTemplate?: string;
+  name?: string;
+  pendingEventCount?: number;
+  pendingWindowDueAt?: string;
+  pendingWindowStartedAt?: string;
+  publicTokenPreview?: string;
+  publicUrl?: string;
+  runCount?: number;
+  signatureEnabled?: boolean;
+  signatureSecretPreview?: string;
+  targetConversationId?: string;
+  teamId?: string;
+  titleTemplate?: string;
+  updatedAt?: string;
+}
+
+export interface VoWebhookEndpointEvent {
+  bodySha256?: string;
+  createdAt?: string;
+  endpointId?: string;
+  errorMessage?: string;
+  id?: string;
+  receivedAt?: string;
+  requestId?: string;
+  runId?: string;
+  signatureVerified?: boolean;
+  status?: string;
+  teamId?: string;
+  windowKey?: string;
+}
+
+export interface VoWebhookEndpointRun {
+  actionType?: string;
+  createdAt?: string;
+  createdConversationId?: string;
+  endpointId?: string;
+  errorMessage?: string;
+  eventCount?: number;
+  finishedAt?: string;
+  id?: string;
+  responseId?: string;
+  startedAt?: string;
+  status?: string;
+  targetConversationId?: string;
+  teamId?: string;
+  turnId?: string;
+  windowKey?: string;
 }
 
 export interface VoDeleteExternalUserVerificationFlowResponse {
@@ -3433,6 +3473,18 @@ export interface VoListCronTriggersResponse {
   items?: VoCronTrigger[];
 }
 
+export interface VoListWebhookEndpointEventsResponse {
+  items?: VoWebhookEndpointEvent[];
+}
+
+export interface VoListWebhookEndpointRunsResponse {
+  items?: VoWebhookEndpointRun[];
+}
+
+export interface VoListWebhookEndpointsResponse {
+  items?: VoWebhookEndpoint[];
+}
+
 export interface VoListDigiEmployeesResponse {
   items?: VoDigiEmployee[];
 }
@@ -3616,18 +3668,6 @@ export interface VoListTenantAdminMarketWorkerCandidatesResponse {
 export interface VoListTenantAdminMarketWorkersResponse {
   items?: VoTenantAdminMarketWorker[];
   nextCursor?: string;
-}
-
-export interface VoListWebhookEndpointEventsResponse {
-  items?: VoWebhookEndpointEvent[];
-}
-
-export interface VoListWebhookEndpointRunsResponse {
-  items?: VoWebhookEndpointRun[];
-}
-
-export interface VoListWebhookEndpointsResponse {
-  items?: VoWebhookEndpoint[];
 }
 
 export interface VoListWecomContactsResponse {
@@ -4065,17 +4105,6 @@ export interface VoRotateStationApiKeyResponse {
   item?: VoStationApiKeyItem;
   key?: string;
   replacedKeyId?: string;
-}
-
-export interface VoRotateWebhookEndpointSignatureSecretResponse {
-  endpoint?: VoWebhookEndpoint;
-  signatureSecret?: string;
-}
-
-export interface VoRotateWebhookEndpointTokenResponse {
-  endpoint?: VoWebhookEndpoint;
-  publicToken?: string;
-  publicUrl?: string;
 }
 
 export interface VoSimpleOKResponse {
@@ -4877,18 +4906,6 @@ export interface VoUpdateStationRequest {
   title?: string;
 }
 
-export interface VoUpdateWebhookEndpointRequest {
-  actionType?: string;
-  digiEmployeeId?: string;
-  enabled?: boolean;
-  initialPromptTemplate?: string;
-  messageTemplate?: string;
-  name?: string;
-  signatureEnabled?: boolean;
-  targetConversationId?: string;
-  titleTemplate?: string;
-}
-
 export interface VoUpdateWecomIntegrationRequest {
   agentId?: string;
   corpid?: string;
@@ -5028,71 +5045,6 @@ export interface VoWebSessionMessageResponse {
 export interface VoWebSessionToolResultRequest {
   result?: any;
   toolCallId: string;
-}
-
-export interface VoWebhookEndpoint {
-  actionType?: string;
-  createdAt?: string;
-  createdById?: string;
-  creatorActor?: VoActorSummary;
-  debounceSeconds?: number;
-  digiEmployeeId?: string;
-  enabled?: boolean;
-  executorActor?: VoActorSummary;
-  id?: string;
-  initialPromptTemplate?: string;
-  lastError?: string;
-  lastReceivedAt?: string;
-  lastStatus?: string;
-  lastTriggeredAt?: string;
-  maxBodyBytes?: number;
-  messageTemplate?: string;
-  name?: string;
-  pendingEventCount?: number;
-  pendingWindowDueAt?: string;
-  pendingWindowStartedAt?: string;
-  publicTokenPreview?: string;
-  publicUrl?: string;
-  runCount?: number;
-  signatureEnabled?: boolean;
-  signatureSecretPreview?: string;
-  targetConversationId?: string;
-  teamId?: string;
-  titleTemplate?: string;
-  updatedAt?: string;
-}
-
-export interface VoWebhookEndpointEvent {
-  bodySha256?: string;
-  createdAt?: string;
-  endpointId?: string;
-  errorMessage?: string;
-  id?: string;
-  receivedAt?: string;
-  requestId?: string;
-  runId?: string;
-  signatureVerified?: boolean;
-  status?: string;
-  teamId?: string;
-  windowKey?: string;
-}
-
-export interface VoWebhookEndpointRun {
-  actionType?: string;
-  createdAt?: string;
-  createdConversationId?: string;
-  endpointId?: string;
-  errorMessage?: string;
-  eventCount?: number;
-  finishedAt?: string;
-  id?: string;
-  responseId?: string;
-  startedAt?: string;
-  status?: string;
-  targetConversationId?: string;
-  teamId?: string;
-  turnId?: string;
-  windowKey?: string;
 }
 
 export interface VoWecomContactVO {
@@ -7200,11 +7152,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Inbox
-     * @name UserGetAccountInboxItems
+     * @name V1AccountInboxItemsList
      * @summary List account inbox message items
      * @request GET:/api/v1/account/inbox/items
      */
-    userGetAccountInboxItems: (
+    v1AccountInboxItemsList: (
       query?: {
         /** Include read items when set to 1 */
         includeRead?: string;
@@ -7223,15 +7175,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Inbox
-     * @name UserPostAccountInboxItemsByItemIdAct
+     * @name V1AccountInboxItemsActCreate
      * @summary Act on account inbox message item
      * @request POST:/api/v1/account/inbox/items/{itemId}/act
      */
-    userPostAccountInboxItemsByItemIdAct: (
-      itemId: string,
-      request: VoAccountInboxActRequest,
-      params: RequestParams = {},
-    ) =>
+    v1AccountInboxItemsActCreate: (itemId: string, request: VoAccountInboxActRequest, params: RequestParams = {}) =>
       this.request<VoAccountInboxActResponse, any>({
         path: `/api/v1/account/inbox/items/${itemId}/act`,
         method: "POST",
@@ -7245,11 +7193,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Inbox
-     * @name UserGetAccountInboxSummary
+     * @name V1AccountInboxSummaryList
      * @summary Get account inbox summary
      * @request GET:/api/v1/account/inbox/summary
      */
-    userGetAccountInboxSummary: (params: RequestParams = {}) =>
+    v1AccountInboxSummaryList: (params: RequestParams = {}) =>
       this.request<VoAccountInboxSummary, any>({
         path: `/api/v1/account/inbox/summary`,
         method: "GET",
@@ -7261,11 +7209,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Bootstrap
-     * @name UserGetBootstrapTeamCreateAssistant
+     * @name V1BootstrapTeamCreateAssistantList
      * @summary Get team-create bootstrap assistant (for header display before first message)
      * @request GET:/api/v1/bootstrap/team-create/assistant
      */
-    userGetBootstrapTeamCreateAssistant: (params: RequestParams = {}) =>
+    v1BootstrapTeamCreateAssistantList: (params: RequestParams = {}) =>
       this.request<BasePinOKVoConversationAssistant, BasePinErr>({
         path: `/api/v1/bootstrap/team-create/assistant`,
         method: "GET",
@@ -7277,11 +7225,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetConnectionAuthTasksByTaskId
+     * @name V1ConnectionAuthTasksDetail
      * @summary Get connection auth task
      * @request GET:/api/v1/connection-auth-tasks/{taskId}
      */
-    userGetConnectionAuthTasksByTaskId: (taskId: string, params: RequestParams = {}) =>
+    v1ConnectionAuthTasksDetail: (taskId: string, params: RequestParams = {}) =>
       this.request<BasePinOKVoConnectionAuthTaskDetailResponse, BasePinErr>({
         path: `/api/v1/connection-auth-tasks/${taskId}`,
         method: "GET",
@@ -7293,11 +7241,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostConnectionAuthTasksByTaskIdCallback
+     * @name V1ConnectionAuthTasksCallbackCreate
      * @summary Complete connection auth task callback
      * @request POST:/api/v1/connection-auth-tasks/{taskId}/callback
      */
-    userPostConnectionAuthTasksByTaskIdCallback: (
+    v1ConnectionAuthTasksCallbackCreate: (
       taskId: string,
       request: VoConnectionAuthTaskCallbackRequest,
       params: RequestParams = {},
@@ -7315,11 +7263,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostConnectionAuthTasksByTaskIdSubmit
+     * @name V1ConnectionAuthTasksSubmitCreate
      * @summary Submit connection auth task
      * @request POST:/api/v1/connection-auth-tasks/{taskId}/submit
      */
-    userPostConnectionAuthTasksByTaskIdSubmit: (
+    v1ConnectionAuthTasksSubmitCreate: (
       taskId: string,
       request: VoConnectionAuthTaskSubmitRequest,
       params: RequestParams = {},
@@ -7337,11 +7285,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserPostConversations
+     * @name V1ConversationsCreate
      * @summary Create conversation
      * @request POST:/api/v1/conversations
      */
-    userPostConversations: (request: VoCreateConversationRequest, params: RequestParams = {}) =>
+    v1ConversationsCreate: (request: VoCreateConversationRequest, params: RequestParams = {}) =>
       this.request<VoConversationMeta, any>({
         path: `/api/v1/conversations`,
         method: "POST",
@@ -7355,11 +7303,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserGetConversationsRecents
+     * @name V1ConversationsRecentsList
      * @summary List recent conversations for current user
      * @request GET:/api/v1/conversations/recents
      */
-    userGetConversationsRecents: (
+    v1ConversationsRecentsList: (
       query?: {
         /** Max items to return */
         limit?: number;
@@ -7378,11 +7326,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserPostConversationsByIdAttachTeam
+     * @name V1ConversationsAttachTeamCreate
      * @summary Attach conversation to team
      * @request POST:/api/v1/conversations/{id}/attach-team
      */
-    userPostConversationsByIdAttachTeam: (
+    v1ConversationsAttachTeamCreate: (
       id: string,
       request: VoAttachConversationTeamRequest,
       params: RequestParams = {},
@@ -7400,11 +7348,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserGetConversationsByIdDesktopCurrent
+     * @name V1ConversationsDesktopCurrentDetail
      * @summary Get conversation desktop current state
      * @request GET:/api/v1/conversations/{id}/desktop/current
      */
-    userGetConversationsByIdDesktopCurrent: (id: string, params: RequestParams = {}) =>
+    v1ConversationsDesktopCurrentDetail: (id: string, params: RequestParams = {}) =>
       this.request<VoConversationDesktopCurrent, any>({
         path: `/api/v1/conversations/${id}/desktop/current`,
         method: "GET",
@@ -7416,11 +7364,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserGetConversationsByIdDesktopSnapshots
+     * @name V1ConversationsDesktopSnapshotsDetail
      * @summary List conversation desktop snapshots
      * @request GET:/api/v1/conversations/{id}/desktop/snapshots
      */
-    userGetConversationsByIdDesktopSnapshots: (
+    v1ConversationsDesktopSnapshotsDetail: (
       id: string,
       query?: {
         /** Max items to return */
@@ -7442,15 +7390,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserGetConversationsByIdDesktopSnapshotsBySnapshotIdAsset
+     * @name V1ConversationsDesktopSnapshotsAssetDetail
      * @summary Proxy conversation desktop snapshot asset
      * @request GET:/api/v1/conversations/{id}/desktop/snapshots/{snapshotId}/asset
      */
-    userGetConversationsByIdDesktopSnapshotsBySnapshotIdAsset: (
-      id: string,
-      snapshotId: string,
-      params: RequestParams = {},
-    ) =>
+    v1ConversationsDesktopSnapshotsAssetDetail: (id: string, snapshotId: string, params: RequestParams = {}) =>
       this.request<File, any>({
         path: `/api/v1/conversations/${id}/desktop/snapshots/${snapshotId}/asset`,
         method: "GET",
@@ -7461,11 +7405,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserGetConversationsByIdFileGrants
+     * @name V1ConversationsFileGrantsDetail
      * @summary Get conversation file grants
      * @request GET:/api/v1/conversations/{id}/file-grants
      */
-    userGetConversationsByIdFileGrants: (id: string, params: RequestParams = {}) =>
+    v1ConversationsFileGrantsDetail: (id: string, params: RequestParams = {}) =>
       this.request<VoConversationFileGrantsResponse, any>({
         path: `/api/v1/conversations/${id}/file-grants`,
         method: "GET",
@@ -7477,11 +7421,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserPutConversationsByIdFileGrants
+     * @name V1ConversationsFileGrantsUpdate
      * @summary Update conversation file grants
      * @request PUT:/api/v1/conversations/{id}/file-grants
      */
-    userPutConversationsByIdFileGrants: (
+    v1ConversationsFileGrantsUpdate: (
       id: string,
       request: VoUpdateConversationFileGrantsRequest,
       params: RequestParams = {},
@@ -7499,11 +7443,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserGetConversationsByIdMessages
+     * @name V1ConversationsMessagesDetail
      * @summary List conversation runtime messages
      * @request GET:/api/v1/conversations/{id}/messages
      */
-    userGetConversationsByIdMessages: (
+    v1ConversationsMessagesDetail: (
       id: string,
       query?: {
         /** Max items to return */
@@ -7525,11 +7469,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserGetConversationsByIdStream
+     * @name V1ConversationsStreamDetail
      * @summary Stream conversation runtime events
      * @request GET:/api/v1/conversations/{id}/stream
      */
-    userGetConversationsByIdStream: (
+    v1ConversationsStreamDetail: (
       id: string,
       query?: {
         /** Only stream events after seq */
@@ -7548,11 +7492,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserPostConversationsByIdTempFilesUploadAuthorize
+     * @name V1ConversationsTempFilesUploadAuthorizeCreate
      * @summary Authorize direct upload for a conversation temp file
      * @request POST:/api/v1/conversations/{id}/temp-files/upload-authorize
      */
-    userPostConversationsByIdTempFilesUploadAuthorize: (
+    v1ConversationsTempFilesUploadAuthorizeCreate: (
       id: string,
       request: VoConversationTempUploadAuthorizeRequest,
       params: RequestParams = {},
@@ -7570,11 +7514,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserPostConversationsByIdTempFilesUploadFinalize
+     * @name V1ConversationsTempFilesUploadFinalizeCreate
      * @summary Finalize direct upload for a conversation temp file
      * @request POST:/api/v1/conversations/{id}/temp-files/upload-finalize
      */
-    userPostConversationsByIdTempFilesUploadFinalize: (
+    v1ConversationsTempFilesUploadFinalizeCreate: (
       id: string,
       request: VoConversationTempUploadFinalizeRequest,
       params: RequestParams = {},
@@ -7592,11 +7536,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserPostConversationsByIdTurnsHuman
+     * @name V1ConversationsTurnsHumanCreate
      * @summary Post conversation human turn
      * @request POST:/api/v1/conversations/{id}/turns/human
      */
-    userPostConversationsByIdTurnsHuman: (
+    v1ConversationsTurnsHumanCreate: (
       id: string,
       request: VoPostConversationHumanTurnRequest,
       params: RequestParams = {},
@@ -7614,11 +7558,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserGetConversationsByIdTurnsByTurnIdLlmTrace
+     * @name V1ConversationsTurnsLlmTraceDetail
      * @summary List conversation turn LLM trace calls
      * @request GET:/api/v1/conversations/{id}/turns/{turnId}/llm-trace
      */
-    userGetConversationsByIdTurnsByTurnIdLlmTrace: (id: string, turnId: string, params: RequestParams = {}) =>
+    v1ConversationsTurnsLlmTraceDetail: (id: string, turnId: string, params: RequestParams = {}) =>
       this.request<VoListConversationTurnLLMTraceResponse, any>({
         path: `/api/v1/conversations/${id}/turns/${turnId}/llm-trace`,
         method: "GET",
@@ -7630,11 +7574,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserGetConversationsByIdTurnsByTurnIdLlmTraceByTraceCallId
+     * @name V1ConversationsTurnsLlmTraceDetail2
      * @summary Get conversation turn LLM trace call detail
      * @request GET:/api/v1/conversations/{id}/turns/{turnId}/llm-trace/{traceCallId}
+     * @originalName v1ConversationsTurnsLlmTraceDetail
+     * @duplicate
      */
-    userGetConversationsByIdTurnsByTurnIdLlmTraceByTraceCallId: (
+    v1ConversationsTurnsLlmTraceDetail2: (
       id: string,
       turnId: string,
       traceCallId: string,
@@ -7651,11 +7597,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
-     * @name UserPostConversationsByIdTurnsByTurnIdSteer
+     * @name V1ConversationsTurnsSteerCreate
      * @summary Post conversation turn steer
      * @request POST:/api/v1/conversations/{id}/turns/{turnId}/steer
      */
-    userPostConversationsByIdTurnsByTurnIdSteer: (
+    v1ConversationsTurnsSteerCreate: (
       id: string,
       turnId: string,
       request: VoPostConversationTurnSteerRequest,
@@ -7674,11 +7620,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags EndpointTypes
-     * @name UserGetEndpointTypes
+     * @name V1EndpointTypesList
      * @summary List supported endpoint types (for Deploy)
      * @request GET:/api/v1/endpoint-types
      */
-    userGetEndpointTypes: (params: RequestParams = {}) =>
+    v1EndpointTypesList: (params: RequestParams = {}) =>
       this.request<VoListEndpointTypesResponse, any>({
         path: `/api/v1/endpoint-types`,
         method: "GET",
@@ -7690,11 +7636,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags EndpointTypes
-     * @name UserGetEndpointTypesByEndpointTypeConfigSchema
+     * @name V1EndpointTypesConfigSchemaDetail
      * @summary Get config schema for an endpoint type
      * @request GET:/api/v1/endpoint-types/{endpointType}/config-schema
      */
-    userGetEndpointTypesByEndpointTypeConfigSchema: (endpointType: string, params: RequestParams = {}) =>
+    v1EndpointTypesConfigSchemaDetail: (endpointType: string, params: RequestParams = {}) =>
       this.request<VoEndpointTypeConfigSchemaResponse, any>({
         path: `/api/v1/endpoint-types/${endpointType}/config-schema`,
         method: "GET",
@@ -7706,15 +7652,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags PublicGroupSessions
-     * @name UserPostGroupSessionsByGroupSessionIdAgentloopsByAgentLoopIdStop
+     * @name V1GroupSessionsAgentloopsStopCreate
      * @summary Stop current group session agent loop
      * @request POST:/api/v1/group-sessions/{groupSessionId}/agentloops/{agentLoopId}/stop
      */
-    userPostGroupSessionsByGroupSessionIdAgentloopsByAgentLoopIdStop: (
-      groupSessionId: string,
-      agentLoopId: string,
-      params: RequestParams = {},
-    ) =>
+    v1GroupSessionsAgentloopsStopCreate: (groupSessionId: string, agentLoopId: string, params: RequestParams = {}) =>
       this.request<VoGroupSessionStopResponse, any>({
         path: `/api/v1/group-sessions/${groupSessionId}/agentloops/${agentLoopId}/stop`,
         method: "POST",
@@ -7727,11 +7669,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags PublicGroupSessions
-     * @name UserGetGroupSessionsByGroupSessionIdBootstrap
+     * @name V1GroupSessionsBootstrapDetail
      * @summary Bootstrap group session page
      * @request GET:/api/v1/group-sessions/{groupSessionId}/bootstrap
      */
-    userGetGroupSessionsByGroupSessionIdBootstrap: (groupSessionId: string, params: RequestParams = {}) =>
+    v1GroupSessionsBootstrapDetail: (groupSessionId: string, params: RequestParams = {}) =>
       this.request<VoGroupSessionBootstrapResponse, any>({
         path: `/api/v1/group-sessions/${groupSessionId}/bootstrap`,
         method: "GET",
@@ -7743,11 +7685,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags PublicGroupSessions
-     * @name UserGetGroupSessionsByGroupSessionIdEvents
+     * @name V1GroupSessionsEventsDetail
      * @summary Stream group session events
      * @request GET:/api/v1/group-sessions/{groupSessionId}/events
      */
-    userGetGroupSessionsByGroupSessionIdEvents: (groupSessionId: string, params: RequestParams = {}) =>
+    v1GroupSessionsEventsDetail: (groupSessionId: string, params: RequestParams = {}) =>
       this.request<string, any>({
         path: `/api/v1/group-sessions/${groupSessionId}/events`,
         method: "GET",
@@ -7759,11 +7701,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags PublicGroupSessions
-     * @name UserPostGroupSessionsByGroupSessionIdJoin
+     * @name V1GroupSessionsJoinCreate
      * @summary Join group session
      * @request POST:/api/v1/group-sessions/{groupSessionId}/join
      */
-    userPostGroupSessionsByGroupSessionIdJoin: (
+    v1GroupSessionsJoinCreate: (
       groupSessionId: string,
       request: VoJoinGroupSessionRequest,
       params: RequestParams = {},
@@ -7781,11 +7723,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags PublicGroupSessions
-     * @name UserGetGroupSessionsByGroupSessionIdMembers
+     * @name V1GroupSessionsMembersDetail
      * @summary List group session members
      * @request GET:/api/v1/group-sessions/{groupSessionId}/members
      */
-    userGetGroupSessionsByGroupSessionIdMembers: (groupSessionId: string, params: RequestParams = {}) =>
+    v1GroupSessionsMembersDetail: (groupSessionId: string, params: RequestParams = {}) =>
       this.request<ArrayVoGroupSessionMember, any>({
         path: `/api/v1/group-sessions/${groupSessionId}/members`,
         method: "GET",
@@ -7797,15 +7739,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags PublicGroupSessions
-     * @name UserPostGroupSessionsByGroupSessionIdMembersByMemberIdMute
+     * @name V1GroupSessionsMembersMuteCreate
      * @summary Mute group session member
      * @request POST:/api/v1/group-sessions/{groupSessionId}/members/{memberId}/mute
      */
-    userPostGroupSessionsByGroupSessionIdMembersByMemberIdMute: (
-      groupSessionId: string,
-      memberId: string,
-      params: RequestParams = {},
-    ) =>
+    v1GroupSessionsMembersMuteCreate: (groupSessionId: string, memberId: string, params: RequestParams = {}) =>
       this.request<VoGroupSessionMember, any>({
         path: `/api/v1/group-sessions/${groupSessionId}/members/${memberId}/mute`,
         method: "POST",
@@ -7817,15 +7755,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags PublicGroupSessions
-     * @name UserDeleteGroupSessionsByGroupSessionIdMembersByMemberIdMute
+     * @name V1GroupSessionsMembersMuteDelete
      * @summary Unmute group session member
      * @request DELETE:/api/v1/group-sessions/{groupSessionId}/members/{memberId}/mute
      */
-    userDeleteGroupSessionsByGroupSessionIdMembersByMemberIdMute: (
-      groupSessionId: string,
-      memberId: string,
-      params: RequestParams = {},
-    ) =>
+    v1GroupSessionsMembersMuteDelete: (groupSessionId: string, memberId: string, params: RequestParams = {}) =>
       this.request<VoGroupSessionMember, any>({
         path: `/api/v1/group-sessions/${groupSessionId}/members/${memberId}/mute`,
         method: "DELETE",
@@ -7837,11 +7771,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags PublicGroupSessions
-     * @name UserGetGroupSessionsByGroupSessionIdMessages
+     * @name V1GroupSessionsMessagesDetail
      * @summary List group session timeline messages
      * @request GET:/api/v1/group-sessions/{groupSessionId}/messages
      */
-    userGetGroupSessionsByGroupSessionIdMessages: (
+    v1GroupSessionsMessagesDetail: (
       groupSessionId: string,
       query?: {
         /** Limit */
@@ -7863,11 +7797,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags PublicGroupSessions
-     * @name UserPostGroupSessionsByGroupSessionIdMessages
+     * @name V1GroupSessionsMessagesCreate
      * @summary Post group session message
      * @request POST:/api/v1/group-sessions/{groupSessionId}/messages
      */
-    userPostGroupSessionsByGroupSessionIdMessages: (
+    v1GroupSessionsMessagesCreate: (
       groupSessionId: string,
       request: VoGroupSessionMessageRequest,
       params: RequestParams = {},
@@ -7885,11 +7819,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags PublicGroupSessions
-     * @name UserPutGroupSessionsByGroupSessionIdReplyTargets
+     * @name V1GroupSessionsReplyTargetsUpdate
      * @summary Update group session reply targets
      * @request PUT:/api/v1/group-sessions/{groupSessionId}/reply-targets
      */
-    userPutGroupSessionsByGroupSessionIdReplyTargets: (
+    v1GroupSessionsReplyTargetsUpdate: (
       groupSessionId: string,
       request: VoUpdateGroupSessionReplyTargetsRequest,
       params: RequestParams = {},
@@ -7907,11 +7841,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags PublicGroupSessions
-     * @name UserGetGroupSessionsByGroupSessionIdSettings
+     * @name V1GroupSessionsSettingsDetail
      * @summary Get group session settings
      * @request GET:/api/v1/group-sessions/{groupSessionId}/settings
      */
-    userGetGroupSessionsByGroupSessionIdSettings: (groupSessionId: string, params: RequestParams = {}) =>
+    v1GroupSessionsSettingsDetail: (groupSessionId: string, params: RequestParams = {}) =>
       this.request<VoGroupSessionSummary, any>({
         path: `/api/v1/group-sessions/${groupSessionId}/settings`,
         method: "GET",
@@ -7923,11 +7857,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags PublicGroupSessions
-     * @name UserPatchGroupSessionsByGroupSessionIdSettings
+     * @name V1GroupSessionsSettingsPartialUpdate
      * @summary Patch group session settings
      * @request PATCH:/api/v1/group-sessions/{groupSessionId}/settings
      */
-    userPatchGroupSessionsByGroupSessionIdSettings: (
+    v1GroupSessionsSettingsPartialUpdate: (
       groupSessionId: string,
       request: VoUpdateGroupSessionSettingsRequest,
       params: RequestParams = {},
@@ -7945,11 +7879,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @description Liveness probe
      *
      * @tags Health
-     * @name UserGetHealthz
+     * @name V1HealthzList
      * @summary Health check
      * @request GET:/api/v1/healthz
      */
-    userGetHealthz: (params: RequestParams = {}) =>
+    v1HealthzList: (params: RequestParams = {}) =>
       this.request<MapStringString, any>({
         path: `/api/v1/healthz`,
         method: "GET",
@@ -7961,11 +7895,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostLinktoolLoginExchange
+     * @name V1LinktoolLoginExchangeCreate
      * @summary Exchange linktool login code for full profile
      * @request POST:/api/v1/linktool-login/exchange
      */
-    userPostLinktoolLoginExchange: (request: VoLinktoolLoginCodeExchangeRequest, params: RequestParams = {}) =>
+    v1LinktoolLoginExchangeCreate: (request: VoLinktoolLoginCodeExchangeRequest, params: RequestParams = {}) =>
       this.request<VoLinktoolLoginCodeExchangeResponse, any>({
         path: `/api/v1/linktool-login/exchange`,
         method: "POST",
@@ -7979,11 +7913,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostLinktoolLoginSessions
+     * @name V1LinktoolLoginSessionsCreate
      * @summary Create linktool login session
      * @request POST:/api/v1/linktool-login/sessions
      */
-    userPostLinktoolLoginSessions: (request: VoLinktoolLoginSessionCreateRequest, params: RequestParams = {}) =>
+    v1LinktoolLoginSessionsCreate: (request: VoLinktoolLoginSessionCreateRequest, params: RequestParams = {}) =>
       this.request<VoLinktoolLoginSessionCreateResponse, any>({
         path: `/api/v1/linktool-login/sessions`,
         method: "POST",
@@ -7997,11 +7931,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetLinktoolLoginSessionsBySessionId
+     * @name V1LinktoolLoginSessionsDetail
      * @summary Get linktool login session detail
      * @request GET:/api/v1/linktool-login/sessions/{sessionId}
      */
-    userGetLinktoolLoginSessionsBySessionId: (sessionId: string, params: RequestParams = {}) =>
+    v1LinktoolLoginSessionsDetail: (sessionId: string, params: RequestParams = {}) =>
       this.request<VoLinktoolLoginSessionDetailResponse, any>({
         path: `/api/v1/linktool-login/sessions/${sessionId}`,
         method: "GET",
@@ -8014,11 +7948,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostLinktoolLoginSessionsBySessionIdComplete
+     * @name V1LinktoolLoginSessionsCompleteCreate
      * @summary Complete linktool login session through unified auth route
      * @request POST:/api/v1/linktool-login/sessions/{sessionId}/complete
      */
-    userPostLinktoolLoginSessionsBySessionIdComplete: (
+    v1LinktoolLoginSessionsCompleteCreate: (
       sessionId: string,
       body: LinktoolLoginAuthCompleteSessionRequest,
       params: RequestParams = {},
@@ -8036,11 +7970,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostLinktoolRuntimeConnections
+     * @name V1LinktoolRuntimeConnectionsCreate
      * @summary Resolve syntool connections runtime from opaque profile
      * @request POST:/api/v1/linktool-runtime/connections
      */
-    userPostLinktoolRuntimeConnections: (request: VoLinktoolRuntimeResolveRequest, params: RequestParams = {}) =>
+    v1LinktoolRuntimeConnectionsCreate: (request: VoLinktoolRuntimeResolveRequest, params: RequestParams = {}) =>
       this.request<VoLinktoolConnectionsRuntimeResponse, any>({
         path: `/api/v1/linktool-runtime/connections`,
         method: "POST",
@@ -8054,11 +7988,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostLinktoolRuntimePublish
+     * @name V1LinktoolRuntimePublishCreate
      * @summary Resolve syntool publish runtime from opaque profile
      * @request POST:/api/v1/linktool-runtime/publish
      */
-    userPostLinktoolRuntimePublish: (request: VoLinktoolRuntimeResolveRequest, params: RequestParams = {}) =>
+    v1LinktoolRuntimePublishCreate: (request: VoLinktoolRuntimeResolveRequest, params: RequestParams = {}) =>
       this.request<VoLinktoolPublishRuntimeResponse, any>({
         path: `/api/v1/linktool-runtime/publish`,
         method: "POST",
@@ -8072,11 +8006,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostLinktoolRuntimeTestAuth
+     * @name V1LinktoolRuntimeTestAuthCreate
      * @summary Resolve syntool test-auth runtime from opaque profile
      * @request POST:/api/v1/linktool-runtime/test-auth
      */
-    userPostLinktoolRuntimeTestAuth: (request: VoLinktoolRuntimeResolveRequest, params: RequestParams = {}) =>
+    v1LinktoolRuntimeTestAuthCreate: (request: VoLinktoolRuntimeResolveRequest, params: RequestParams = {}) =>
       this.request<VoLinktoolTestAuthRuntimeResponse, any>({
         path: `/api/v1/linktool-runtime/test-auth`,
         method: "POST",
@@ -8090,11 +8024,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostLinktoolRuntimeTunnelSession
+     * @name V1LinktoolRuntimeTunnelSessionCreate
      * @summary Resolve syntool tunnel-session runtime from opaque profile
      * @request POST:/api/v1/linktool-runtime/tunnel-session
      */
-    userPostLinktoolRuntimeTunnelSession: (request: VoLinktoolRuntimeResolveRequest, params: RequestParams = {}) =>
+    v1LinktoolRuntimeTunnelSessionCreate: (request: VoLinktoolRuntimeResolveRequest, params: RequestParams = {}) =>
       this.request<VoLinktoolTunnelSessionRuntimeResponse, any>({
         path: `/api/v1/linktool-runtime/tunnel-session`,
         method: "POST",
@@ -8108,11 +8042,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Market
-     * @name UserGetMarketDigiworkers
+     * @name V1MarketDigiworkersList
      * @summary List market digiwokers (tenant-scoped; uses JWT instance_id)
      * @request GET:/api/v1/market/digiworkers
      */
-    userGetMarketDigiworkers: (
+    v1MarketDigiworkersList: (
       query?: {
         /** Search query (worker name / job tag / toolkit key) */
         query?: string;
@@ -8131,11 +8065,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Session
-     * @name UserGetMe
+     * @name V1MeList
      * @summary Get current user
      * @request GET:/api/v1/me
      */
-    userGetMe: (params: RequestParams = {}) =>
+    v1MeList: (params: RequestParams = {}) =>
       this.request<VoMeResponse, any>({
         path: `/api/v1/me`,
         method: "GET",
@@ -8147,11 +8081,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Session
-     * @name UserPatchMe
+     * @name V1MePartialUpdate
      * @summary Update current user
      * @request PATCH:/api/v1/me
      */
-    userPatchMe: (request: VoPatchMeRequest, params: RequestParams = {}) =>
+    v1MePartialUpdate: (request: VoPatchMeRequest, params: RequestParams = {}) =>
       this.request<VoMeResponse, any>({
         path: `/api/v1/me`,
         method: "PATCH",
@@ -8165,11 +8099,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags OfficePreview
-     * @name UserGetOfficePreviewSessionsBySessionId
+     * @name V1OfficePreviewSessionsDetail
      * @summary Get office preview session init payload
      * @request GET:/api/v1/office-preview-sessions/{sessionId}
      */
-    userGetOfficePreviewSessionsBySessionId: (sessionId: string, params: RequestParams = {}) =>
+    v1OfficePreviewSessionsDetail: (sessionId: string, params: RequestParams = {}) =>
       this.request<VoOfficePreviewSessionResponse, any>({
         path: `/api/v1/office-preview-sessions/${sessionId}`,
         method: "GET",
@@ -8181,11 +8115,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @description Resolve tenant portal brand from current request host. `host` query is allowed only for local development/testing override.
      *
      * @tags PortalBrand
-     * @name UserGetPortalBrandResolve
+     * @name V1PortalBrandResolveList
      * @summary Resolve portal brand by host
      * @request GET:/api/v1/portal-brand/resolve
      */
-    userGetPortalBrandResolve: (
+    v1PortalBrandResolveList: (
       query?: {
         /** Optional host override for local development/testing */
         host?: string;
@@ -8204,11 +8138,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @description tenantId 从 JWT claim `instance_id` 推导，前端无需传 tenantId（如仍传则必须与 token 一致）
      *
      * @tags SiteConfig
-     * @name UserGetSiteConfigPublic
+     * @name V1SiteConfigPublicList
      * @summary Get public site config
      * @request GET:/api/v1/site-config/public
      */
-    userGetSiteConfigPublic: (
+    v1SiteConfigPublicList: (
       query?: {
         /** Config key */
         key?: string;
@@ -8233,11 +8167,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserPostStationsByStationIdEmbedAccessTokens
+     * @name V1StationsEmbedAccessTokensCreate
      * @summary Issue embed access token for a web-application station
      * @request POST:/api/v1/stations/{stationId}/embed-access-tokens
      */
-    userPostStationsByStationIdEmbedAccessTokens: (
+    v1StationsEmbedAccessTokensCreate: (
       stationId: string,
       request: VoIssueStationEmbedAccessTokenRequest,
       params: RequestParams = {},
@@ -8255,15 +8189,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserPostStationsByStationIdWebSessions
+     * @name V1StationsWebSessionsCreate
      * @summary Create web session for a web-application station
      * @request POST:/api/v1/stations/{stationId}/web-sessions
      */
-    userPostStationsByStationIdWebSessions: (
-      stationId: string,
-      request: VoCreateWebSessionRequest,
-      params: RequestParams = {},
-    ) =>
+    v1StationsWebSessionsCreate: (stationId: string, request: VoCreateWebSessionRequest, params: RequestParams = {}) =>
       this.request<VoWebSession, any>({
         path: `/api/v1/stations/${stationId}/web-sessions`,
         method: "POST",
@@ -8277,11 +8207,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Taskboard Proxy
-     * @name UserGetTaskboardProxyByPath
+     * @name V1TaskboardProxyDetail
      * @summary Proxy taskboard business requests
      * @request GET:/api/v1/taskboard-proxy/{path}
      */
-    userGetTaskboardProxyByPath: (path: string, params: RequestParams = {}) =>
+    v1TaskboardProxyDetail: (path: string, params: RequestParams = {}) =>
       this.request<BaseJSONMap, any>({
         path: `/api/v1/taskboard-proxy/${path}`,
         method: "GET",
@@ -8292,11 +8222,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserTeamsList
+     * @name V1TeamsList
      * @summary List teams
      * @request GET:/api/v1/teams
      */
-    userTeamsList: (params: RequestParams = {}) =>
+    v1TeamsList: (params: RequestParams = {}) =>
       this.request<VoListTeamsResponse, any>({
         path: `/api/v1/teams`,
         method: "GET",
@@ -8308,11 +8238,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeams
+     * @name V1TeamsCreate
      * @summary Create team
      * @request POST:/api/v1/teams
      */
-    userPostTeams: (request: VoCreateTeamRequest, params: RequestParams = {}) =>
+    v1TeamsCreate: (request: VoCreateTeamRequest, params: RequestParams = {}) =>
       this.request<VoTeam, any>({
         path: `/api/v1/teams`,
         method: "POST",
@@ -8326,11 +8256,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserTeamsGet
+     * @name V1TeamsDetail
      * @summary Get team by id
      * @request GET:/api/v1/teams/{teamId}
      */
-    userTeamsGet: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoTeam, any>({
         path: `/api/v1/teams/${teamId}`,
         method: "GET",
@@ -8342,11 +8272,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdActorProfiles
+     * @name V1TeamsActorProfilesCreate
      * @summary Batch resolve task actor profiles (avatar, display name) for human users and digi employees
      * @request POST:/api/v1/teams/{teamId}/actor-profiles
      */
-    userPostTeamsByTeamIdActorProfiles: (teamId: string, request: VoActorProfilesRequest, params: RequestParams = {}) =>
+    v1TeamsActorProfilesCreate: (teamId: string, request: VoActorProfilesRequest, params: RequestParams = {}) =>
       this.request<VoActorProfilesResponse, any>({
         path: `/api/v1/teams/${teamId}/actor-profiles`,
         method: "POST",
@@ -8360,11 +8290,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdArcubase
+     * @name V1TeamsArcubaseDetail
      * @summary Get team Arcubase binding
      * @request GET:/api/v1/teams/{teamId}/arcubase
      */
-    userGetTeamsByTeamIdArcubase: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsArcubaseDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoTeamArcubaseBinding, any>({
         path: `/api/v1/teams/${teamId}/arcubase`,
         method: "GET",
@@ -8376,11 +8306,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdArcubaseApps
+     * @name V1TeamsArcubaseAppsDetail
      * @summary List Arcubase apps for team
      * @request GET:/api/v1/teams/{teamId}/arcubase/apps
      */
-    userGetTeamsByTeamIdArcubaseApps: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsArcubaseAppsDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListArcubaseAppsResponse, any>({
         path: `/api/v1/teams/${teamId}/arcubase/apps`,
         method: "GET",
@@ -8392,11 +8322,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdArcubaseAppsByAppIdTables
+     * @name V1TeamsArcubaseAppsTablesDetail
      * @summary List Arcubase tables by app
      * @request GET:/api/v1/teams/{teamId}/arcubase/apps/{appId}/tables
      */
-    userGetTeamsByTeamIdArcubaseAppsByAppIdTables: (teamId: string, appId: string, params: RequestParams = {}) =>
+    v1TeamsArcubaseAppsTablesDetail: (teamId: string, appId: string, params: RequestParams = {}) =>
       this.request<VoListArcubaseTablesResponse, any>({
         path: `/api/v1/teams/${teamId}/arcubase/apps/${appId}/tables`,
         method: "GET",
@@ -8408,11 +8338,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdArcubaseAppsByAppIdTablesByTableIdRowsQuery
+     * @name V1TeamsArcubaseAppsTablesRowsQueryCreate
      * @summary Query Arcubase rows
      * @request POST:/api/v1/teams/{teamId}/arcubase/apps/{appId}/tables/{tableId}/rows/query
      */
-    userPostTeamsByTeamIdArcubaseAppsByAppIdTablesByTableIdRowsQuery: (
+    v1TeamsArcubaseAppsTablesRowsQueryCreate: (
       teamId: string,
       appId: string,
       tableId: string,
@@ -8432,11 +8362,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdArcubaseAppsByAppIdTablesByTableIdRowsByRowId
+     * @name V1TeamsArcubaseAppsTablesRowsDetail
      * @summary Get Arcubase row detail
      * @request GET:/api/v1/teams/{teamId}/arcubase/apps/{appId}/tables/{tableId}/rows/{rowId}
      */
-    userGetTeamsByTeamIdArcubaseAppsByAppIdTablesByTableIdRowsByRowId: (
+    v1TeamsArcubaseAppsTablesRowsDetail: (
       teamId: string,
       appId: string,
       tableId: string,
@@ -8454,11 +8384,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Artifacts
-     * @name UserGetTeamsByTeamIdArtifacts
+     * @name V1TeamsArtifactsDetail
      * @summary List artifacts
      * @request GET:/api/v1/teams/{teamId}/artifacts
      */
-    userGetTeamsByTeamIdArtifacts: (
+    v1TeamsArtifactsDetail: (
       teamId: string,
       query?: {
         /** Search artifact title */
@@ -8490,11 +8420,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Artifacts
-     * @name UserGetTeamsByTeamIdArtifactsSummary
+     * @name V1TeamsArtifactsSummaryDetail
      * @summary Get artifact summary
      * @request GET:/api/v1/teams/{teamId}/artifacts/summary
      */
-    userGetTeamsByTeamIdArtifactsSummary: (
+    v1TeamsArtifactsSummaryDetail: (
       teamId: string,
       query?: {
         /** Filter by workspace id */
@@ -8514,11 +8444,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Artifacts
-     * @name UserGetTeamsByTeamIdArtifactsByArtifactId
+     * @name V1TeamsArtifactsDetail2
      * @summary Get artifact
      * @request GET:/api/v1/teams/{teamId}/artifacts/{artifactId}
+     * @originalName v1TeamsArtifactsDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdArtifactsByArtifactId: (teamId: string, artifactId: string, params: RequestParams = {}) =>
+    v1TeamsArtifactsDetail2: (teamId: string, artifactId: string, params: RequestParams = {}) =>
       this.request<VoArtifactDetail, any>({
         path: `/api/v1/teams/${teamId}/artifacts/${artifactId}`,
         method: "GET",
@@ -8530,11 +8462,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Artifacts
-     * @name UserPostTeamsByTeamIdArtifactsByArtifactIdItemsByItemIdDownloadUrl
+     * @name V1TeamsArtifactsItemsDownloadUrlCreate
      * @summary Get artifact item download URL
      * @request POST:/api/v1/teams/{teamId}/artifacts/{artifactId}/items/{itemId}/download-url
      */
-    userPostTeamsByTeamIdArtifactsByArtifactIdItemsByItemIdDownloadUrl: (
+    v1TeamsArtifactsItemsDownloadUrlCreate: (
       teamId: string,
       artifactId: string,
       itemId: string,
@@ -8551,11 +8483,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdAssemblableSkills
+     * @name V1TeamsAssemblableSkillsDetail
      * @summary List team assemblable skills (team user, team-scoped)
      * @request GET:/api/v1/teams/{teamId}/assemblable-skills
      */
-    userGetTeamsByTeamIdAssemblableSkills: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsAssemblableSkillsDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<BasePinOKVoListAssemblableSkillsResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/assemblable-skills`,
         method: "GET",
@@ -8567,11 +8499,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Billing
-     * @name UserGetTeamsByTeamIdBillingSummary
+     * @name V1TeamsBillingSummaryDetail
      * @summary Get team billing summary
      * @request GET:/api/v1/teams/{teamId}/billing/summary
      */
-    userGetTeamsByTeamIdBillingSummary: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsBillingSummaryDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<BasePinOKVoTeamBillingSummaryResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/billing/summary`,
         method: "GET",
@@ -8583,11 +8515,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CalendarSources
-     * @name UserCalendarSourcesList
+     * @name V1TeamsCalendarSourcesDetail
      * @summary List team calendar sources
      * @request GET:/api/v1/teams/{teamId}/calendar-sources
      */
-    userCalendarSourcesList: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsCalendarSourcesDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListCalendarSourcesResponse, any>({
         path: `/api/v1/teams/${teamId}/calendar-sources`,
         method: "GET",
@@ -8599,11 +8531,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CalendarSources
-     * @name UserCalendarSourcesCreateCustom
+     * @name V1TeamsCalendarSourcesCreate
      * @summary Create custom iCal calendar source
      * @request POST:/api/v1/teams/{teamId}/calendar-sources
      */
-    userCalendarSourcesCreateCustom: (
+    v1TeamsCalendarSourcesCreate: (
       teamId: string,
       request: VoCreateCustomCalendarSourceRequest,
       params: RequestParams = {},
@@ -8621,11 +8553,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CalendarSources
-     * @name UserCalendarSourcesEnableBuiltin
+     * @name V1TeamsCalendarSourcesBuiltinCreate
      * @summary Enable a platform built-in calendar source for team
      * @request POST:/api/v1/teams/{teamId}/calendar-sources/builtin
      */
-    userCalendarSourcesEnableBuiltin: (
+    v1TeamsCalendarSourcesBuiltinCreate: (
       teamId: string,
       request: VoEnableBuiltinCalendarSourceRequest,
       params: RequestParams = {},
@@ -8643,11 +8575,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CalendarSources
-     * @name UserCalendarSourcesCatalogList
+     * @name V1TeamsCalendarSourcesCatalogDetail
      * @summary List platform calendar catalog
      * @request GET:/api/v1/teams/{teamId}/calendar-sources/catalog
      */
-    userCalendarSourcesCatalogList: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsCalendarSourcesCatalogDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListCalendarCatalogResponse, any>({
         path: `/api/v1/teams/${teamId}/calendar-sources/catalog`,
         method: "GET",
@@ -8659,11 +8591,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CalendarSources
-     * @name UserCalendarSourcesDelete
+     * @name V1TeamsCalendarSourcesDelete
      * @summary Delete custom team calendar source
      * @request DELETE:/api/v1/teams/{teamId}/calendar-sources/{sourceId}
      */
-    userCalendarSourcesDelete: (teamId: string, sourceId: string, params: RequestParams = {}) =>
+    v1TeamsCalendarSourcesDelete: (teamId: string, sourceId: string, params: RequestParams = {}) =>
       this.request<VoSimpleOKResponse, any>({
         path: `/api/v1/teams/${teamId}/calendar-sources/${sourceId}`,
         method: "DELETE",
@@ -8675,11 +8607,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CalendarSources
-     * @name UserCalendarSourcesPatch
+     * @name V1TeamsCalendarSourcesPartialUpdate
      * @summary Patch team calendar source
      * @request PATCH:/api/v1/teams/{teamId}/calendar-sources/{sourceId}
      */
-    userCalendarSourcesPatch: (
+    v1TeamsCalendarSourcesPartialUpdate: (
       teamId: string,
       sourceId: string,
       request: VoUpdateCalendarSourceRequest,
@@ -8698,11 +8630,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CalendarSources
-     * @name UserCalendarSourcesEventsList
+     * @name V1TeamsCalendarSourcesEventsDetail
      * @summary List calendar source events
      * @request GET:/api/v1/teams/{teamId}/calendar-sources/{sourceId}/events
      */
-    userCalendarSourcesEventsList: (
+    v1TeamsCalendarSourcesEventsDetail: (
       teamId: string,
       sourceId: string,
       query: {
@@ -8725,11 +8657,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CalendarSources
-     * @name UserCalendarSourcesSync
+     * @name V1TeamsCalendarSourcesSyncCreate
      * @summary Sync team calendar source now
      * @request POST:/api/v1/teams/{teamId}/calendar-sources/{sourceId}/sync
      */
-    userCalendarSourcesSync: (teamId: string, sourceId: string, params: RequestParams = {}) =>
+    v1TeamsCalendarSourcesSyncCreate: (teamId: string, sourceId: string, params: RequestParams = {}) =>
       this.request<VoCalendarSourceSyncRun, any>({
         path: `/api/v1/teams/${teamId}/calendar-sources/${sourceId}/sync`,
         method: "POST",
@@ -8741,11 +8673,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdComputeImages
+     * @name V1TeamsComputeImagesDetail
      * @summary List visible compute images for team
      * @request GET:/api/v1/teams/{teamId}/compute-images
      */
-    userGetTeamsByTeamIdComputeImages: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsComputeImagesDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListTeamComputeImagesResponse, any>({
         path: `/api/v1/teams/${teamId}/compute-images`,
         method: "GET",
@@ -8757,11 +8689,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostTeamsByTeamIdConnectionAuthTasks
+     * @name V1TeamsConnectionAuthTasksCreate
      * @summary Create connection auth task (team scope)
      * @request POST:/api/v1/teams/{teamId}/connection-auth-tasks
      */
-    userPostTeamsByTeamIdConnectionAuthTasks: (
+    v1TeamsConnectionAuthTasksCreate: (
       teamId: string,
       request: VoConnectionAuthTaskCreateRequest,
       params: RequestParams = {},
@@ -8779,11 +8711,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdConnectorsConfigConnectors
+     * @name V1TeamsConnectorsConfigConnectorsDetail
      * @summary List connector configs (team scope)
      * @request GET:/api/v1/teams/{teamId}/connectors/config/connectors
      */
-    userGetTeamsByTeamIdConnectorsConfigConnectors: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsConnectorsConfigConnectorsDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<BaseConnectorConfigListResponse, any>({
         path: `/api/v1/teams/${teamId}/connectors/config/connectors`,
         method: "GET",
@@ -8795,15 +8727,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdConnectorsConfigConnectorsByConnectorId
+     * @name V1TeamsConnectorsConfigConnectorsDetail2
      * @summary Get connector config detail (team scope)
      * @request GET:/api/v1/teams/{teamId}/connectors/config/connectors/{connectorId}
+     * @originalName v1TeamsConnectorsConfigConnectorsDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdConnectorsConfigConnectorsByConnectorId: (
-      teamId: string,
-      connectorId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsConnectorsConfigConnectorsDetail2: (teamId: string, connectorId: string, params: RequestParams = {}) =>
       this.request<BaseConnectorConfigRecord, any>({
         path: `/api/v1/teams/${teamId}/connectors/config/connectors/${connectorId}`,
         method: "GET",
@@ -8815,11 +8745,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPutTeamsByTeamIdConnectorsConfigConnectorsByConnectorId
+     * @name V1TeamsConnectorsConfigConnectorsUpdate
      * @summary Update connector config (team scope)
      * @request PUT:/api/v1/teams/{teamId}/connectors/config/connectors/{connectorId}
      */
-    userPutTeamsByTeamIdConnectorsConfigConnectorsByConnectorId: (
+    v1TeamsConnectorsConfigConnectorsUpdate: (
       teamId: string,
       connectorId: string,
       request: BaseConnectorConfigUpdateRequest,
@@ -8838,11 +8768,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdConnectorsPublishConnectors
+     * @name V1TeamsConnectorsPublishConnectorsDetail
      * @summary List connectors by team scope
      * @request GET:/api/v1/teams/{teamId}/connectors/publish/connectors
      */
-    userGetTeamsByTeamIdConnectorsPublishConnectors: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsConnectorsPublishConnectorsDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<ArrayBaseConnectorRegistryPackage, any>({
         path: `/api/v1/teams/${teamId}/connectors/publish/connectors`,
         method: "GET",
@@ -8854,11 +8784,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostTeamsByTeamIdConnectorsPublishDeploy
+     * @name V1TeamsConnectorsPublishDeployCreate
      * @summary Deploy connector version (team scope)
      * @request POST:/api/v1/teams/{teamId}/connectors/publish/deploy
      */
-    userPostTeamsByTeamIdConnectorsPublishDeploy: (
+    v1TeamsConnectorsPublishDeployCreate: (
       teamId: string,
       request: BaseConnectorRegistryDeployRequest,
       params: RequestParams = {},
@@ -8876,11 +8806,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostTeamsByTeamIdConnectorsPublishPublish
+     * @name V1TeamsConnectorsPublishPublishCreate
      * @summary Publish connector version (team scope)
      * @request POST:/api/v1/teams/{teamId}/connectors/publish/publish
      */
-    userPostTeamsByTeamIdConnectorsPublishPublish: (
+    v1TeamsConnectorsPublishPublishCreate: (
       teamId: string,
       request: BaseConnectorRegistryPublishRequest,
       params: RequestParams = {},
@@ -8898,11 +8828,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostTeamsByTeamIdConnectorsPublishUploadUrl
+     * @name V1TeamsConnectorsPublishUploadUrlCreate
      * @summary Create connector upload url (team scope)
      * @request POST:/api/v1/teams/{teamId}/connectors/publish/upload-url
      */
-    userPostTeamsByTeamIdConnectorsPublishUploadUrl: (
+    v1TeamsConnectorsPublishUploadUrlCreate: (
       teamId: string,
       request: BaseConnectorRegistryUploadURLRequest,
       params: RequestParams = {},
@@ -8920,11 +8850,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdConnectorsPublishVersions
+     * @name V1TeamsConnectorsPublishVersionsDetail
      * @summary List connector versions by team scope
      * @request GET:/api/v1/teams/{teamId}/connectors/publish/versions
      */
-    userGetTeamsByTeamIdConnectorsPublishVersions: (
+    v1TeamsConnectorsPublishVersionsDetail: (
       teamId: string,
       query: {
         /** Connector ID */
@@ -8944,11 +8874,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CronTriggers
-     * @name UserGetTeamsByTeamIdCronTriggers
+     * @name V1TeamsCronTriggersDetail
      * @summary List schedule triggers
      * @request GET:/api/v1/teams/{teamId}/cron-triggers
      */
-    userGetTeamsByTeamIdCronTriggers: (
+    v1TeamsCronTriggersDetail: (
       teamId: string,
       query?: {
         /** Filter triggers that fire on the given local day (YYYY-MM-DD) */
@@ -8970,15 +8900,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CronTriggers
-     * @name UserPostTeamsByTeamIdCronTriggers
+     * @name V1TeamsCronTriggersCreate
      * @summary Create schedule trigger
      * @request POST:/api/v1/teams/{teamId}/cron-triggers
      */
-    userPostTeamsByTeamIdCronTriggers: (
-      teamId: string,
-      request: VoCreateCronTriggerRequest,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsCronTriggersCreate: (teamId: string, request: VoCreateCronTriggerRequest, params: RequestParams = {}) =>
       this.request<VoCronTrigger, any>({
         path: `/api/v1/teams/${teamId}/cron-triggers`,
         method: "POST",
@@ -8992,11 +8918,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CronTriggers
-     * @name UserGetTeamsByTeamIdCronTriggersByTriggerId
+     * @name V1TeamsCronTriggersDetail2
      * @summary Get schedule trigger
      * @request GET:/api/v1/teams/{teamId}/cron-triggers/{triggerId}
+     * @originalName v1TeamsCronTriggersDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdCronTriggersByTriggerId: (teamId: string, triggerId: string, params: RequestParams = {}) =>
+    v1TeamsCronTriggersDetail2: (teamId: string, triggerId: string, params: RequestParams = {}) =>
       this.request<VoCronTrigger, any>({
         path: `/api/v1/teams/${teamId}/cron-triggers/${triggerId}`,
         method: "GET",
@@ -9008,11 +8936,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CronTriggers
-     * @name UserPatchTeamsByTeamIdCronTriggersByTriggerId
+     * @name V1TeamsCronTriggersPartialUpdate
      * @summary Patch schedule trigger
      * @request PATCH:/api/v1/teams/{teamId}/cron-triggers/{triggerId}
      */
-    userPatchTeamsByTeamIdCronTriggersByTriggerId: (
+    v1TeamsCronTriggersPartialUpdate: (
       teamId: string,
       triggerId: string,
       request: VoUpdateCronTriggerRequest,
@@ -9031,15 +8959,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CronTriggers
-     * @name UserPostTeamsByTeamIdCronTriggersByTriggerIdDisable
+     * @name V1TeamsCronTriggersDisableCreate
      * @summary Disable schedule trigger
      * @request POST:/api/v1/teams/{teamId}/cron-triggers/{triggerId}/disable
      */
-    userPostTeamsByTeamIdCronTriggersByTriggerIdDisable: (
-      teamId: string,
-      triggerId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsCronTriggersDisableCreate: (teamId: string, triggerId: string, params: RequestParams = {}) =>
       this.request<VoCronTrigger, any>({
         path: `/api/v1/teams/${teamId}/cron-triggers/${triggerId}/disable`,
         method: "POST",
@@ -9051,15 +8975,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CronTriggers
-     * @name UserPostTeamsByTeamIdCronTriggersByTriggerIdEnable
+     * @name V1TeamsCronTriggersEnableCreate
      * @summary Enable schedule trigger
      * @request POST:/api/v1/teams/{teamId}/cron-triggers/{triggerId}/enable
      */
-    userPostTeamsByTeamIdCronTriggersByTriggerIdEnable: (
-      teamId: string,
-      triggerId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsCronTriggersEnableCreate: (teamId: string, triggerId: string, params: RequestParams = {}) =>
       this.request<VoCronTrigger, any>({
         path: `/api/v1/teams/${teamId}/cron-triggers/${triggerId}/enable`,
         method: "POST",
@@ -9071,11 +8991,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CronTriggers
-     * @name UserPostTeamsByTeamIdCronTriggersByTriggerIdRun
+     * @name V1TeamsCronTriggersRunCreate
      * @summary Run schedule trigger now
      * @request POST:/api/v1/teams/{teamId}/cron-triggers/{triggerId}/run
      */
-    userPostTeamsByTeamIdCronTriggersByTriggerIdRun: (teamId: string, triggerId: string, params: RequestParams = {}) =>
+    v1TeamsCronTriggersRunCreate: (teamId: string, triggerId: string, params: RequestParams = {}) =>
       this.request<VoCronTriggerRun, any>({
         path: `/api/v1/teams/${teamId}/cron-triggers/${triggerId}/run`,
         method: "POST",
@@ -9087,14 +9007,127 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags CronTriggers
-     * @name UserGetTeamsByTeamIdCronTriggersByTriggerIdRuns
+     * @name V1TeamsCronTriggersRunsDetail
      * @summary List schedule trigger runs
      * @request GET:/api/v1/teams/{teamId}/cron-triggers/{triggerId}/runs
      */
-    userGetTeamsByTeamIdCronTriggersByTriggerIdRuns: (teamId: string, triggerId: string, params: RequestParams = {}) =>
+    v1TeamsCronTriggersRunsDetail: (teamId: string, triggerId: string, params: RequestParams = {}) =>
       this.request<VoListCronTriggerRunsResponse, any>({
         path: `/api/v1/teams/${teamId}/cron-triggers/${triggerId}/runs`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    v1TeamsWebhookEndpointsDetail: (
+      teamId: string,
+      query?: {
+        /** Filter by digiEmployee ID */
+        digiEmployeeId?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoListWebhookEndpointsResponse, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    v1TeamsWebhookEndpointsCreate: (
+      teamId: string,
+      request: VoCreateWebhookEndpointRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCreateWebhookEndpointResponse, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    v1TeamsWebhookEndpointsDetail2: (teamId: string, endpointId: string, params: RequestParams = {}) =>
+      this.request<VoWebhookEndpoint, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    v1TeamsWebhookEndpointsPartialUpdate: (
+      teamId: string,
+      endpointId: string,
+      request: VoUpdateWebhookEndpointRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWebhookEndpoint, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    v1TeamsWebhookEndpointsDisableCreate: (teamId: string, endpointId: string, params: RequestParams = {}) =>
+      this.request<VoWebhookEndpoint, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/disable`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    v1TeamsWebhookEndpointsEnableCreate: (teamId: string, endpointId: string, params: RequestParams = {}) =>
+      this.request<VoWebhookEndpoint, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/enable`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    v1TeamsWebhookEndpointsRotateUrlTokenCreate: (teamId: string, endpointId: string, params: RequestParams = {}) =>
+      this.request<VoRotateWebhookEndpointTokenResponse, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/rotate-url-token`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    v1TeamsWebhookEndpointsRotateSignatureSecretCreate: (
+      teamId: string,
+      endpointId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoRotateWebhookEndpointSignatureSecretResponse, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/rotate-signature-secret`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    v1TeamsWebhookEndpointsEventsDetail: (teamId: string, endpointId: string, params: RequestParams = {}) =>
+      this.request<VoListWebhookEndpointEventsResponse, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/events`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    v1TeamsWebhookEndpointsRunsDetail: (teamId: string, endpointId: string, params: RequestParams = {}) =>
+      this.request<VoListWebhookEndpointRunsResponse, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/runs`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    v1TeamsWebhookEndpointsDelete: (teamId: string, endpointId: string, params: RequestParams = {}) =>
+      this.request<Record<string, boolean>, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}`,
+        method: "DELETE",
         format: "json",
         ...params,
       }),
@@ -9103,11 +9136,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdDevices
+     * @name V1TeamsDevicesDetail
      * @summary List team devices
      * @request GET:/api/v1/teams/{teamId}/devices
      */
-    userGetTeamsByTeamIdDevices: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsDevicesDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListTeamDevicesResponse, any>({
         path: `/api/v1/teams/${teamId}/devices`,
         method: "GET",
@@ -9119,15 +9152,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdDevicesRegister
+     * @name V1TeamsDevicesRegisterCreate
      * @summary Register tentacle client in current team
      * @request POST:/api/v1/teams/{teamId}/devices/register
      */
-    userPostTeamsByTeamIdDevicesRegister: (
-      teamId: string,
-      request: VoRegisterTeamDeviceRequest,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsDevicesRegisterCreate: (teamId: string, request: VoRegisterTeamDeviceRequest, params: RequestParams = {}) =>
       this.request<VoTeamDevice, any>({
         path: `/api/v1/teams/${teamId}/devices/register`,
         method: "POST",
@@ -9141,11 +9170,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdDevicesByDeviceId
+     * @name V1TeamsDevicesDetail2
      * @summary Get team device by id
      * @request GET:/api/v1/teams/{teamId}/devices/{deviceId}
+     * @originalName v1TeamsDevicesDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdDevicesByDeviceId: (teamId: string, deviceId: string, params: RequestParams = {}) =>
+    v1TeamsDevicesDetail2: (teamId: string, deviceId: string, params: RequestParams = {}) =>
       this.request<VoTeamDevice, any>({
         path: `/api/v1/teams/${teamId}/devices/${deviceId}`,
         method: "GET",
@@ -9157,11 +9188,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdDevicesByDeviceIdExternalProvidersByProviderBind
+     * @name V1TeamsDevicesExternalProvidersBindCreate
      * @summary Bind team device to external provider
      * @request POST:/api/v1/teams/{teamId}/devices/{deviceId}/external-providers/{provider}/bind
      */
-    userPostTeamsByTeamIdDevicesByDeviceIdExternalProvidersByProviderBind: (
+    v1TeamsDevicesExternalProvidersBindCreate: (
       teamId: string,
       deviceId: string,
       provider: string,
@@ -9181,11 +9212,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdDevicesByDeviceIdExternalProvidersByProviderUnbind
+     * @name V1TeamsDevicesExternalProvidersUnbindCreate
      * @summary Unbind team device from external provider
      * @request POST:/api/v1/teams/{teamId}/devices/{deviceId}/external-providers/{provider}/unbind
      */
-    userPostTeamsByTeamIdDevicesByDeviceIdExternalProvidersByProviderUnbind: (
+    v1TeamsDevicesExternalProvidersUnbindCreate: (
       teamId: string,
       deviceId: string,
       provider: string,
@@ -9205,11 +9236,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserDigiEmployeesList
+     * @name V1TeamsDigiemployeesDetail
      * @summary List digiemployees
      * @request GET:/api/v1/teams/{teamId}/digiemployees
      */
-    userDigiEmployeesList: (
+    v1TeamsDigiemployeesDetail: (
       teamId: string,
       query?: {
         /** Search query (employee id / worker id / worker name) */
@@ -9229,15 +9260,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserPostTeamsByTeamIdDigiemployeesHire
+     * @name V1TeamsDigiemployeesHireCreate
      * @summary Hire digiemployee
      * @request POST:/api/v1/teams/{teamId}/digiemployees/hire
      */
-    userPostTeamsByTeamIdDigiemployeesHire: (
-      teamId: string,
-      request: VoHireDigiEmployeeRequest,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsDigiemployeesHireCreate: (teamId: string, request: VoHireDigiEmployeeRequest, params: RequestParams = {}) =>
       this.request<VoDigiEmployee, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/hire`,
         method: "POST",
@@ -9251,11 +9278,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserDigiEmployeesGet
+     * @name V1TeamsDigiemployeesDetail2
      * @summary Get digiemployee
      * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}
+     * @originalName v1TeamsDigiemployeesDetail
+     * @duplicate
      */
-    userDigiEmployeesGet: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
+    v1TeamsDigiemployeesDetail2: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
       this.request<VoDigiEmployee, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}`,
         method: "GET",
@@ -9267,15 +9296,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserGetTeamsByTeamIdDigiemployeesByDigiEmployeeIdArcubase
+     * @name V1TeamsDigiemployeesArcubaseDetail
      * @summary Get digiemployee Arcubase binding
      * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/arcubase
      */
-    userGetTeamsByTeamIdDigiemployeesByDigiEmployeeIdArcubase: (
-      teamId: string,
-      digiEmployeeId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsDigiemployeesArcubaseDetail: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
       this.request<VoDigiEmployeeArcubaseBinding, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/arcubase`,
         method: "GET",
@@ -9287,15 +9312,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserPostTeamsByTeamIdDigiemployeesByDigiEmployeeIdArcubaseEnsure
+     * @name V1TeamsDigiemployeesArcubaseEnsureCreate
      * @summary Ensure digiemployee Arcubase binding
      * @request POST:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/arcubase/ensure
      */
-    userPostTeamsByTeamIdDigiemployeesByDigiEmployeeIdArcubaseEnsure: (
-      teamId: string,
-      digiEmployeeId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsDigiemployeesArcubaseEnsureCreate: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
       this.request<VoDigiEmployeeArcubaseBinding, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/arcubase/ensure`,
         method: "POST",
@@ -9307,11 +9328,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserGetTeamsByTeamIdDigiemployeesByDigiEmployeeIdConversationActivityHeatmap
+     * @name V1TeamsDigiemployeesConversationActivityHeatmapDetail
      * @summary Get digiemployee conversation activity heatmap
      * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/conversation-activity-heatmap
      */
-    userGetTeamsByTeamIdDigiemployeesByDigiEmployeeIdConversationActivityHeatmap: (
+    v1TeamsDigiemployeesConversationActivityHeatmapDetail: (
       teamId: string,
       digiEmployeeId: string,
       query?: {
@@ -9332,15 +9353,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserPostTeamsByTeamIdDigiemployeesByDigiEmployeeIdFire
+     * @name V1TeamsDigiemployeesFireCreate
      * @summary Fire digiemployee
      * @request POST:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/fire
      */
-    userPostTeamsByTeamIdDigiemployeesByDigiEmployeeIdFire: (
-      teamId: string,
-      digiEmployeeId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsDigiemployeesFireCreate: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
       this.request<MapStringString, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/fire`,
         method: "POST",
@@ -9352,11 +9369,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostTeamsByTeamIdDigiemployeesByDigiEmployeeIdGroupSessions
+     * @name V1TeamsDigiemployeesGroupSessionsCreate
      * @summary Create group session
      * @request POST:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/group-sessions
      */
-    userPostTeamsByTeamIdDigiemployeesByDigiEmployeeIdGroupSessions: (
+    v1TeamsDigiemployeesGroupSessionsCreate: (
       teamId: string,
       digiEmployeeId: string,
       request: VoCreateGroupSessionRequest,
@@ -9375,15 +9392,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserGetTeamsByTeamIdDigiemployeesByDigiEmployeeIdKbAccess
+     * @name V1TeamsDigiemployeesKbAccessDetail
      * @summary Get digiemployee knowledge base access
      * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/kb-access
      */
-    userGetTeamsByTeamIdDigiemployeesByDigiEmployeeIdKbAccess: (
-      teamId: string,
-      digiEmployeeId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsDigiemployeesKbAccessDetail: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
       this.request<VoDigiEmployeeKBAccess, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/kb-access`,
         method: "GET",
@@ -9395,11 +9408,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserPutTeamsByTeamIdDigiemployeesByDigiEmployeeIdKbAccess
+     * @name V1TeamsDigiemployeesKbAccessUpdate
      * @summary Put digiemployee knowledge base access
      * @request PUT:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/kb-access
      */
-    userPutTeamsByTeamIdDigiemployeesByDigiEmployeeIdKbAccess: (
+    v1TeamsDigiemployeesKbAccessUpdate: (
       teamId: string,
       digiEmployeeId: string,
       request: VoPutDigiEmployeeKBAccessRequest,
@@ -9418,11 +9431,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserDigiEmployeesUpdateProfile
+     * @name V1TeamsDigiemployeesProfilePartialUpdate
      * @summary Patch digiemployee profile
      * @request PATCH:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/profile
      */
-    userDigiEmployeesUpdateProfile: (
+    v1TeamsDigiemployeesProfilePartialUpdate: (
       teamId: string,
       digiEmployeeId: string,
       request: VoPatchDigiEmployeeProfileRequest,
@@ -9441,19 +9454,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserPostTeamsByTeamIdDigiemployeesByDigiEmployeeIdProfileBioPictureUploadUrl
+     * @name V1TeamsDigiemployeesProfileBioPictureUploadUrlCreate
      * @summary Create digiemployee bio picture upload url
      * @request POST:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/profile/bio-picture:upload-url
      */
-    userPostTeamsByTeamIdDigiemployeesByDigiEmployeeIdProfileBioPictureUploadUrl: (
+    v1TeamsDigiemployeesProfileBioPictureUploadUrlCreate: (
       teamId: string,
       digiEmployeeId: string,
-      uploadUrl: string,
       request: VoBioPictureUploadURLRequest,
       params: RequestParams = {},
     ) =>
       this.request<VoBioPictureUploadURLResponse, any>({
-        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/profile/bio-picture${uploadUrl}`,
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/profile/bio-picture:upload-url`,
         method: "POST",
         body: request,
         type: ContentType.Json,
@@ -9465,11 +9477,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserPutTeamsByTeamIdDigiemployeesByDigiEmployeeIdReportingLine
+     * @name V1TeamsDigiemployeesReportingLineUpdate
      * @summary Put digiemployee reporting line
      * @request PUT:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/reporting-line
      */
-    userPutTeamsByTeamIdDigiemployeesByDigiEmployeeIdReportingLine: (
+    v1TeamsDigiemployeesReportingLineUpdate: (
       teamId: string,
       digiEmployeeId: string,
       request: VoPutDigiEmployeeReportingLineRequest,
@@ -9488,11 +9500,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserGetTeamsByTeamIdDigiemployeesByDigiEmployeeIdReportingNeighbors
+     * @name V1TeamsDigiemployeesReportingNeighborsDetail
      * @summary Get digiemployee reporting neighbors
      * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/reporting-neighbors
      */
-    userGetTeamsByTeamIdDigiemployeesByDigiEmployeeIdReportingNeighbors: (
+    v1TeamsDigiemployeesReportingNeighborsDetail: (
       teamId: string,
       digiEmployeeId: string,
       params: RequestParams = {},
@@ -9508,11 +9520,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserPatchTeamsByTeamIdDigiemployeesByDigiEmployeeIdSkillsets
+     * @name V1TeamsDigiemployeesSkillsetsPartialUpdate
      * @summary Patch digiemployee skillsets (team user, team-scoped)
      * @request PATCH:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/skillsets
      */
-    userPatchTeamsByTeamIdDigiemployeesByDigiEmployeeIdSkillsets: (
+    v1TeamsDigiemployeesSkillsetsPartialUpdate: (
       teamId: string,
       digiEmployeeId: string,
       request: VoPatchDigiEmployeeSkillsetsRequest,
@@ -9531,11 +9543,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserStationsList
+     * @name V1TeamsDigiemployeesStationsDetail
      * @summary List stations for a digiemployee
      * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/stations
      */
-    userStationsList: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
+    v1TeamsDigiemployeesStationsDetail: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
       this.request<VoListStationsResponse, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/stations`,
         method: "GET",
@@ -9547,11 +9559,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserPostTeamsByTeamIdDigiemployeesByDigiEmployeeIdStations
+     * @name V1TeamsDigiemployeesStationsCreate
      * @summary Create station for a digiemployee
      * @request POST:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/stations
      */
-    userPostTeamsByTeamIdDigiemployeesByDigiEmployeeIdStations: (
+    v1TeamsDigiemployeesStationsCreate: (
       teamId: string,
       digiEmployeeId: string,
       request: VoCreateStationRequest,
@@ -9570,15 +9582,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserGetTeamsByTeamIdDigiemployeesByDigiEmployeeIdTeamSkills
+     * @name V1TeamsDigiemployeesTeamSkillsDetail
      * @summary Get digiemployee team skills
      * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/team-skills
      */
-    userGetTeamsByTeamIdDigiemployeesByDigiEmployeeIdTeamSkills: (
-      teamId: string,
-      digiEmployeeId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsDigiemployeesTeamSkillsDetail: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
       this.request<BasePinOKVoGetDigiEmployeeTeamSkillsResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/team-skills`,
         method: "GET",
@@ -9590,11 +9598,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserPutTeamsByTeamIdDigiemployeesByDigiEmployeeIdTeamSkills
+     * @name V1TeamsDigiemployeesTeamSkillsUpdate
      * @summary Put digiemployee team skills
      * @request PUT:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/team-skills
      */
-    userPutTeamsByTeamIdDigiemployeesByDigiEmployeeIdTeamSkills: (
+    v1TeamsDigiemployeesTeamSkillsUpdate: (
       teamId: string,
       digiEmployeeId: string,
       request: VoPutDigiEmployeeTeamSkillsRequest,
@@ -9613,11 +9621,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserPostTeamsByTeamIdDigiemployeesByDigiEmployeeIdWeixinClawbotBindingSessions
+     * @name V1TeamsDigiemployeesWeixinClawbotBindingSessionsCreate
      * @summary Create weixin clawbot binding session
      * @request POST:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/weixin-clawbot-binding-sessions
      */
-    userPostTeamsByTeamIdDigiemployeesByDigiEmployeeIdWeixinClawbotBindingSessions: (
+    v1TeamsDigiemployeesWeixinClawbotBindingSessionsCreate: (
       teamId: string,
       digiEmployeeId: string,
       request: VoCreateWeixinClawBotBindingSessionRequest,
@@ -9636,15 +9644,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserGetTeamsByTeamIdDigiemployeesByDigiEmployeeIdWorkspaceAccess
+     * @name V1TeamsDigiemployeesWorkspaceAccessDetail
      * @summary Get digiemployee workspace access
      * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/workspace-access
      */
-    userGetTeamsByTeamIdDigiemployeesByDigiEmployeeIdWorkspaceAccess: (
-      teamId: string,
-      digiEmployeeId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsDigiemployeesWorkspaceAccessDetail: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
       this.request<VoDigiEmployeeWorkspaceAccess, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/workspace-access`,
         method: "GET",
@@ -9656,11 +9660,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserPutTeamsByTeamIdDigiemployeesByDigiEmployeeIdWorkspaceAccess
+     * @name V1TeamsDigiemployeesWorkspaceAccessUpdate
      * @summary Put digiemployee workspace access
      * @request PUT:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/workspace-access
      */
-    userPutTeamsByTeamIdDigiemployeesByDigiEmployeeIdWorkspaceAccess: (
+    v1TeamsDigiemployeesWorkspaceAccessUpdate: (
       teamId: string,
       digiEmployeeId: string,
       request: VoPutDigiEmployeeWorkspaceAccessRequest,
@@ -9679,15 +9683,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdExternalProvidersByProviderEnsure
+     * @name V1TeamsExternalProvidersEnsureCreate
      * @summary Ensure team external provider ready
      * @request POST:/api/v1/teams/{teamId}/external-providers/{provider}/ensure
      */
-    userPostTeamsByTeamIdExternalProvidersByProviderEnsure: (
-      teamId: string,
-      provider: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsExternalProvidersEnsureCreate: (teamId: string, provider: string, params: RequestParams = {}) =>
       this.request<VoTeamExternalProviderBinding, any>({
         path: `/api/v1/teams/${teamId}/external-providers/${provider}/ensure`,
         method: "POST",
@@ -9699,15 +9699,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdExternalProvidersByProviderRuntimeConfig
+     * @name V1TeamsExternalProvidersRuntimeConfigDetail
      * @summary Get team external provider runtime config
      * @request GET:/api/v1/teams/{teamId}/external-providers/{provider}/runtime-config
      */
-    userGetTeamsByTeamIdExternalProvidersByProviderRuntimeConfig: (
-      teamId: string,
-      provider: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsExternalProvidersRuntimeConfigDetail: (teamId: string, provider: string, params: RequestParams = {}) =>
       this.request<VoTeamExternalProviderRuntimeConfig, any>({
         path: `/api/v1/teams/${teamId}/external-providers/${provider}/runtime-config`,
         method: "GET",
@@ -9719,11 +9715,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags ExternalUserVerificationFlows
-     * @name UserGetTeamsByTeamIdExternalUserTags
+     * @name V1TeamsExternalUserTagsDetail
      * @summary List team external user tags
      * @request GET:/api/v1/teams/{teamId}/external-user-tags
      */
-    userGetTeamsByTeamIdExternalUserTags: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsExternalUserTagsDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListTeamExternalUserTagsResponse, any>({
         path: `/api/v1/teams/${teamId}/external-user-tags`,
         method: "GET",
@@ -9735,11 +9731,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags ExternalUserVerificationFlows
-     * @name UserGetTeamsByTeamIdExternalUserVerificationFlows
+     * @name V1TeamsExternalUserVerificationFlowsDetail
      * @summary List team external user verification flows
      * @request GET:/api/v1/teams/{teamId}/external-user-verification-flows
      */
-    userGetTeamsByTeamIdExternalUserVerificationFlows: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsExternalUserVerificationFlowsDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListExternalUserVerificationFlowsResponse, any>({
         path: `/api/v1/teams/${teamId}/external-user-verification-flows`,
         method: "GET",
@@ -9751,11 +9747,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags ExternalUserVerificationFlows
-     * @name UserPostTeamsByTeamIdExternalUserVerificationFlows
+     * @name V1TeamsExternalUserVerificationFlowsCreate
      * @summary Create team external user verification flow
      * @request POST:/api/v1/teams/{teamId}/external-user-verification-flows
      */
-    userPostTeamsByTeamIdExternalUserVerificationFlows: (
+    v1TeamsExternalUserVerificationFlowsCreate: (
       teamId: string,
       request: VoUpsertExternalUserVerificationFlowRequest,
       params: RequestParams = {},
@@ -9773,15 +9769,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags ExternalUserVerificationFlows
-     * @name UserGetTeamsByTeamIdExternalUserVerificationFlowsByFlowId
+     * @name V1TeamsExternalUserVerificationFlowsDetail2
      * @summary Get team external user verification flow
      * @request GET:/api/v1/teams/{teamId}/external-user-verification-flows/{flowId}
+     * @originalName v1TeamsExternalUserVerificationFlowsDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdExternalUserVerificationFlowsByFlowId: (
-      teamId: string,
-      flowId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsExternalUserVerificationFlowsDetail2: (teamId: string, flowId: string, params: RequestParams = {}) =>
       this.request<VoExternalUserVerificationFlowDetail, any>({
         path: `/api/v1/teams/${teamId}/external-user-verification-flows/${flowId}`,
         method: "GET",
@@ -9793,11 +9787,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags ExternalUserVerificationFlows
-     * @name UserPutTeamsByTeamIdExternalUserVerificationFlowsByFlowId
+     * @name V1TeamsExternalUserVerificationFlowsUpdate
      * @summary Update team external user verification flow
      * @request PUT:/api/v1/teams/{teamId}/external-user-verification-flows/{flowId}
      */
-    userPutTeamsByTeamIdExternalUserVerificationFlowsByFlowId: (
+    v1TeamsExternalUserVerificationFlowsUpdate: (
       teamId: string,
       flowId: string,
       request: VoUpsertExternalUserVerificationFlowRequest,
@@ -9816,15 +9810,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags ExternalUserVerificationFlows
-     * @name UserDeleteTeamsByTeamIdExternalUserVerificationFlowsByFlowId
+     * @name V1TeamsExternalUserVerificationFlowsDelete
      * @summary Delete team external user verification flow
      * @request DELETE:/api/v1/teams/{teamId}/external-user-verification-flows/{flowId}
      */
-    userDeleteTeamsByTeamIdExternalUserVerificationFlowsByFlowId: (
-      teamId: string,
-      flowId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsExternalUserVerificationFlowsDelete: (teamId: string, flowId: string, params: RequestParams = {}) =>
       this.request<VoDeleteExternalUserVerificationFlowResponse, any>({
         path: `/api/v1/teams/${teamId}/external-user-verification-flows/${flowId}`,
         method: "DELETE",
@@ -9836,11 +9826,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags ExternalUsers
-     * @name UserGetTeamsByTeamIdExternalUsers
+     * @name V1TeamsExternalUsersDetail
      * @summary List team external users
      * @request GET:/api/v1/teams/{teamId}/external-users
      */
-    userGetTeamsByTeamIdExternalUsers: (
+    v1TeamsExternalUsersDetail: (
       teamId: string,
       query?: {
         /** Query by externalUserId or channelUserId */
@@ -9876,15 +9866,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags ExternalUsers
-     * @name UserGetTeamsByTeamIdExternalUsersByExternalUserId
+     * @name V1TeamsExternalUsersDetail2
      * @summary Get team external user detail
      * @request GET:/api/v1/teams/{teamId}/external-users/{externalUserId}
+     * @originalName v1TeamsExternalUsersDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdExternalUsersByExternalUserId: (
-      teamId: string,
-      externalUserId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsExternalUsersDetail2: (teamId: string, externalUserId: string, params: RequestParams = {}) =>
       this.request<VoExternalUserDetail, any>({
         path: `/api/v1/teams/${teamId}/external-users/${externalUserId}`,
         method: "GET",
@@ -9896,15 +9884,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags ExternalUsers
-     * @name UserGetTeamsByTeamIdExternalUsersByExternalUserIdConversations
+     * @name V1TeamsExternalUsersConversationsDetail
      * @summary List conversations under a team external user
      * @request GET:/api/v1/teams/{teamId}/external-users/{externalUserId}/conversations
      */
-    userGetTeamsByTeamIdExternalUsersByExternalUserIdConversations: (
-      teamId: string,
-      externalUserId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsExternalUsersConversationsDetail: (teamId: string, externalUserId: string, params: RequestParams = {}) =>
       this.request<VoListExternalUserConversationsResponse, any>({
         path: `/api/v1/teams/${teamId}/external-users/${externalUserId}/conversations`,
         method: "GET",
@@ -9916,11 +9900,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags FilePreview
-     * @name UserPostTeamsByTeamIdFilePreviewSessions
+     * @name V1TeamsFilePreviewSessionsCreate
      * @summary Create file preview session
      * @request POST:/api/v1/teams/{teamId}/file-preview-sessions
      */
-    userPostTeamsByTeamIdFilePreviewSessions: (
+    v1TeamsFilePreviewSessionsCreate: (
       teamId: string,
       request: VoCreateFilePreviewSessionRequest,
       params: RequestParams = {},
@@ -9938,11 +9922,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdFilesDelete
+     * @name V1TeamsFilesDeleteCreate
      * @summary Delete team root files (team user)
      * @request POST:/api/v1/teams/{teamId}/files/delete
      */
-    userPostTeamsByTeamIdFilesDelete: (teamId: string, request: VoTeamDeleteRequest, params: RequestParams = {}) =>
+    v1TeamsFilesDeleteCreate: (teamId: string, request: VoTeamDeleteRequest, params: RequestParams = {}) =>
       this.request<VoSimpleOKResponse, any>({
         path: `/api/v1/teams/${teamId}/files/delete`,
         method: "POST",
@@ -9956,11 +9940,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdFilesEntries
+     * @name V1TeamsFilesEntriesDetail
      * @summary Browse team root file entries (team user)
      * @request GET:/api/v1/teams/{teamId}/files/entries
      */
-    userGetTeamsByTeamIdFilesEntries: (
+    v1TeamsFilesEntriesDetail: (
       teamId: string,
       query: {
         /** root kind */
@@ -9996,11 +9980,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdFilesMounts
+     * @name V1TeamsFilesMountsDetail
      * @summary List team root file mounts (team user)
      * @request GET:/api/v1/teams/{teamId}/files/mounts
      */
-    userGetTeamsByTeamIdFilesMounts: (
+    v1TeamsFilesMountsDetail: (
       teamId: string,
       query: {
         /** root kind */
@@ -10028,11 +10012,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdFilesMove
+     * @name V1TeamsFilesMoveCreate
      * @summary Move team root files (team user)
      * @request POST:/api/v1/teams/{teamId}/files/move
      */
-    userPostTeamsByTeamIdFilesMove: (teamId: string, request: VoTeamMoveRequest, params: RequestParams = {}) =>
+    v1TeamsFilesMoveCreate: (teamId: string, request: VoTeamMoveRequest, params: RequestParams = {}) =>
       this.request<VoSimpleOKResponse, any>({
         path: `/api/v1/teams/${teamId}/files/move`,
         method: "POST",
@@ -10046,11 +10030,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdFilesPresignGet
+     * @name V1TeamsFilesPresignGetCreate
      * @summary Presign GET for team root file (team user)
      * @request POST:/api/v1/teams/{teamId}/files/presign-get
      */
-    userPostTeamsByTeamIdFilesPresignGet: (teamId: string, request: VoTeamPresignRequest, params: RequestParams = {}) =>
+    v1TeamsFilesPresignGetCreate: (teamId: string, request: VoTeamPresignRequest, params: RequestParams = {}) =>
       this.request<VoTeamPresignResponse, any>({
         path: `/api/v1/teams/${teamId}/files/presign-get`,
         method: "POST",
@@ -10063,11 +10047,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdFilesPresignPut
+     * @name V1TeamsFilesPresignPutCreate
      * @summary Presign PUT for team root file (team user)
      * @request POST:/api/v1/teams/{teamId}/files/presign-put
      */
-    userPostTeamsByTeamIdFilesPresignPut: (teamId: string, request: VoTeamPresignRequest, params: RequestParams = {}) =>
+    v1TeamsFilesPresignPutCreate: (teamId: string, request: VoTeamPresignRequest, params: RequestParams = {}) =>
       this.request<VoTeamPresignResponse, any>({
         path: `/api/v1/teams/${teamId}/files/presign-put`,
         method: "POST",
@@ -10080,11 +10064,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdFilesUploadFinalize
+     * @name V1TeamsFilesUploadFinalizeCreate
      * @summary Finalize uploaded team root file (team user)
      * @request POST:/api/v1/teams/{teamId}/files/upload-finalize
      */
-    userPostTeamsByTeamIdFilesUploadFinalize: (
+    v1TeamsFilesUploadFinalizeCreate: (
       teamId: string,
       request: VoTeamUploadFinalizeRequest,
       params: RequestParams = {},
@@ -10102,11 +10086,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdGroupSessionsJoined
+     * @name V1TeamsGroupSessionsJoinedDetail
      * @summary List joined group sessions
      * @request GET:/api/v1/teams/{teamId}/group-sessions/joined
      */
-    userGetTeamsByTeamIdGroupSessionsJoined: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsGroupSessionsJoinedDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<ArrayVoJoinedGroupSessionItem, any>({
         path: `/api/v1/teams/${teamId}/group-sessions/joined`,
         method: "GET",
@@ -10118,16 +10102,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Inbox
-     * @name UserPostTeamsByTeamIdInboxItemsByItemIdAct
+     * @name V1TeamsInboxItemsActCreate
      * @summary Act on inbox item
      * @request POST:/api/v1/teams/{teamId}/inbox/items/{itemId}/act
      */
-    userPostTeamsByTeamIdInboxItemsByItemIdAct: (
-      teamId: string,
-      itemId: string,
-      request: VoActRequest,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsInboxItemsActCreate: (teamId: string, itemId: string, request: VoActRequest, params: RequestParams = {}) =>
       this.request<VoActResponse, any>({
         path: `/api/v1/teams/${teamId}/inbox/items/${itemId}/act`,
         method: "POST",
@@ -10141,11 +10120,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Inbox
-     * @name UserGetTeamsByTeamIdInboxSummary
+     * @name V1TeamsInboxSummaryDetail
      * @summary Get inbox summary
      * @request GET:/api/v1/teams/{teamId}/inbox/summary
      */
-    userGetTeamsByTeamIdInboxSummary: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsInboxSummaryDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoInboxSummary, any>({
         path: `/api/v1/teams/${teamId}/inbox/summary`,
         method: "GET",
@@ -10157,11 +10136,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Integrations
-     * @name UserGetTeamsByTeamIdIntegrations
+     * @name V1TeamsIntegrationsDetail
      * @summary List team integrations
      * @request GET:/api/v1/teams/{teamId}/integrations
      */
-    userGetTeamsByTeamIdIntegrations: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsIntegrationsDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListIntegrationsResponse, any>({
         path: `/api/v1/teams/${teamId}/integrations`,
         method: "GET",
@@ -10173,11 +10152,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Integrations
-     * @name UserPutTeamsByTeamIdIntegrationsFeishu
+     * @name V1TeamsIntegrationsFeishuUpdate
      * @summary Create or update feishu integration
      * @request PUT:/api/v1/teams/{teamId}/integrations/feishu
      */
-    userPutTeamsByTeamIdIntegrationsFeishu: (
+    v1TeamsIntegrationsFeishuUpdate: (
       teamId: string,
       body: VoUpsertFeishuIntegrationRequest,
       params: RequestParams = {},
@@ -10195,11 +10174,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Integrations
-     * @name UserDeleteTeamsByTeamIdIntegrationsFeishu
+     * @name V1TeamsIntegrationsFeishuDelete
      * @summary Delete feishu integration
      * @request DELETE:/api/v1/teams/{teamId}/integrations/feishu
      */
-    userDeleteTeamsByTeamIdIntegrationsFeishu: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsIntegrationsFeishuDelete: (teamId: string, params: RequestParams = {}) =>
       this.request<VoSimpleOKResponse, any>({
         path: `/api/v1/teams/${teamId}/integrations/feishu`,
         method: "DELETE",
@@ -10211,15 +10190,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Integrations
-     * @name UserPostTeamsByTeamIdIntegrationsFeishuVerify
+     * @name V1TeamsIntegrationsFeishuVerifyCreate
      * @summary Verify feishu credentials (read-only, no DB write)
      * @request POST:/api/v1/teams/{teamId}/integrations/feishu/verify
      */
-    userPostTeamsByTeamIdIntegrationsFeishuVerify: (
-      teamId: string,
-      body: VoVerifyFeishuRequest,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsIntegrationsFeishuVerifyCreate: (teamId: string, body: VoVerifyFeishuRequest, params: RequestParams = {}) =>
       this.request<VoVerifyFeishuResponse, any>({
         path: `/api/v1/teams/${teamId}/integrations/feishu/verify`,
         method: "POST",
@@ -10233,11 +10208,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Integrations
-     * @name UserPutTeamsByTeamIdIntegrationsWecom
+     * @name V1TeamsIntegrationsWecomUpdate
      * @summary Update wecom integration config
      * @request PUT:/api/v1/teams/{teamId}/integrations/wecom
      */
-    userPutTeamsByTeamIdIntegrationsWecom: (
+    v1TeamsIntegrationsWecomUpdate: (
       teamId: string,
       body: VoUpdateWecomIntegrationRequest,
       params: RequestParams = {},
@@ -10255,11 +10230,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Integrations
-     * @name UserPostTeamsByTeamIdIntegrationsWecom
+     * @name V1TeamsIntegrationsWecomCreate
      * @summary Create or overwrite wecom integration config
      * @request POST:/api/v1/teams/{teamId}/integrations/wecom
      */
-    userPostTeamsByTeamIdIntegrationsWecom: (
+    v1TeamsIntegrationsWecomCreate: (
       teamId: string,
       body: VoCreateWecomIntegrationRequest,
       params: RequestParams = {},
@@ -10277,11 +10252,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Integrations
-     * @name UserDeleteTeamsByTeamIdIntegrationsWecom
+     * @name V1TeamsIntegrationsWecomDelete
      * @summary Delete wecom integration
      * @request DELETE:/api/v1/teams/{teamId}/integrations/wecom
      */
-    userDeleteTeamsByTeamIdIntegrationsWecom: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsIntegrationsWecomDelete: (teamId: string, params: RequestParams = {}) =>
       this.request<VoSimpleOKResponse, any>({
         path: `/api/v1/teams/${teamId}/integrations/wecom`,
         method: "DELETE",
@@ -10293,11 +10268,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Integrations
-     * @name UserGetTeamsByTeamIdIntegrationsWecomContacts
+     * @name V1TeamsIntegrationsWecomContactsDetail
      * @summary List wecom contacts (local cache)
      * @request GET:/api/v1/teams/{teamId}/integrations/wecom/contacts
      */
-    userGetTeamsByTeamIdIntegrationsWecomContacts: (
+    v1TeamsIntegrationsWecomContactsDetail: (
       teamId: string,
       query?: {
         /** Name keyword */
@@ -10321,11 +10296,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Integrations
-     * @name UserPostTeamsByTeamIdIntegrationsWecomSyncContacts
+     * @name V1TeamsIntegrationsWecomSyncContactsCreate
      * @summary Trigger wecom contacts sync (async)
      * @request POST:/api/v1/teams/{teamId}/integrations/wecom/sync-contacts
      */
-    userPostTeamsByTeamIdIntegrationsWecomSyncContacts: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsIntegrationsWecomSyncContactsCreate: (teamId: string, params: RequestParams = {}) =>
       this.request<VoSimpleOKResponse, any>({
         path: `/api/v1/teams/${teamId}/integrations/wecom/sync-contacts`,
         method: "POST",
@@ -10337,15 +10312,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Integrations
-     * @name UserPostTeamsByTeamIdIntegrationsWecomVerify
+     * @name V1TeamsIntegrationsWecomVerifyCreate
      * @summary Verify wecom credentials (read-only, no DB write)
      * @request POST:/api/v1/teams/{teamId}/integrations/wecom/verify
      */
-    userPostTeamsByTeamIdIntegrationsWecomVerify: (
-      teamId: string,
-      body: VoVerifyWecomRequest,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsIntegrationsWecomVerifyCreate: (teamId: string, body: VoVerifyWecomRequest, params: RequestParams = {}) =>
       this.request<VoVerifyWecomResponse, any>({
         path: `/api/v1/teams/${teamId}/integrations/wecom/verify`,
         method: "POST",
@@ -10359,11 +10330,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdJobTagsSelectable
+     * @name V1TeamsJobTagsSelectableDetail
      * @summary List selectable job tags for hire page
      * @request GET:/api/v1/teams/{teamId}/job-tags/selectable
      */
-    userGetTeamsByTeamIdJobTagsSelectable: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsJobTagsSelectableDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<BasePinOKVoListSelectableJobTagsResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/job-tags/selectable`,
         method: "GET",
@@ -10375,11 +10346,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdKbDirectories
+     * @name V1TeamsKbDirectoriesDetail
      * @summary List team kb directories
      * @request GET:/api/v1/teams/{teamId}/kb/directories
      */
-    userGetTeamsByTeamIdKbDirectories: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsKbDirectoriesDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListTeamKbDirectoriesResponse, any>({
         path: `/api/v1/teams/${teamId}/kb/directories`,
         method: "GET",
@@ -10391,15 +10362,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdKbDirectories
+     * @name V1TeamsKbDirectoriesCreate
      * @summary Create team kb directory
      * @request POST:/api/v1/teams/{teamId}/kb/directories
      */
-    userPostTeamsByTeamIdKbDirectories: (
-      teamId: string,
-      request: VoCreateTeamKbDirectoryRequest,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsKbDirectoriesCreate: (teamId: string, request: VoCreateTeamKbDirectoryRequest, params: RequestParams = {}) =>
       this.request<VoTeamKbDirectory, any>({
         path: `/api/v1/teams/${teamId}/kb/directories`,
         method: "POST",
@@ -10413,11 +10380,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdKbSyncBindings
+     * @name V1TeamsKbSyncBindingsDetail
      * @summary List team kb sync bindings
      * @request GET:/api/v1/teams/{teamId}/kb/sync-bindings
      */
-    userGetTeamsByTeamIdKbSyncBindings: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsKbSyncBindingsDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListTeamKbSyncBindingsResponse, any>({
         path: `/api/v1/teams/${teamId}/kb/sync-bindings`,
         method: "GET",
@@ -10429,11 +10396,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdKbSyncBindings
+     * @name V1TeamsKbSyncBindingsCreate
      * @summary Create team kb sync binding
      * @request POST:/api/v1/teams/{teamId}/kb/sync-bindings
      */
-    userPostTeamsByTeamIdKbSyncBindings: (
+    v1TeamsKbSyncBindingsCreate: (
       teamId: string,
       request: VoCreateTeamKbSyncBindingRequest,
       params: RequestParams = {},
@@ -10451,11 +10418,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdKbSyncBindingsValidateTarget
+     * @name V1TeamsKbSyncBindingsValidateTargetCreate
      * @summary Validate kb sync target directory
      * @request POST:/api/v1/teams/{teamId}/kb/sync-bindings/validate-target
      */
-    userPostTeamsByTeamIdKbSyncBindingsValidateTarget: (
+    v1TeamsKbSyncBindingsValidateTargetCreate: (
       teamId: string,
       request: VoValidateTeamKbSyncTargetRequest,
       params: RequestParams = {},
@@ -10473,11 +10440,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserDeleteTeamsByTeamIdKbSyncBindingsByBindingId
+     * @name V1TeamsKbSyncBindingsDelete
      * @summary Delete team kb sync binding
      * @request DELETE:/api/v1/teams/{teamId}/kb/sync-bindings/{bindingId}
      */
-    userDeleteTeamsByTeamIdKbSyncBindingsByBindingId: (teamId: string, bindingId: string, params: RequestParams = {}) =>
+    v1TeamsKbSyncBindingsDelete: (teamId: string, bindingId: string, params: RequestParams = {}) =>
       this.request<VoSimpleOKResponse, any>({
         path: `/api/v1/teams/${teamId}/kb/sync-bindings/${bindingId}`,
         method: "DELETE",
@@ -10489,11 +10456,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdKbSyncBootstrapAccess
+     * @name V1TeamsKbSyncBootstrapAccessCreate
      * @summary Issue file gateway bootstrap access for tentacle kb sync
      * @request POST:/api/v1/teams/{teamId}/kb/sync-bootstrap-access
      */
-    userPostTeamsByTeamIdKbSyncBootstrapAccess: (
+    v1TeamsKbSyncBootstrapAccessCreate: (
       teamId: string,
       request: VoTeamKbSyncBootstrapAccessRequest,
       params: RequestParams = {},
@@ -10511,11 +10478,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdKbSyncJobs
+     * @name V1TeamsKbSyncJobsDetail
      * @summary List team kb sync jobs
      * @request GET:/api/v1/teams/{teamId}/kb/sync-jobs
      */
-    userGetTeamsByTeamIdKbSyncJobs: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsKbSyncJobsDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListTeamKbSyncJobsResponse, any>({
         path: `/api/v1/teams/${teamId}/kb/sync-jobs`,
         method: "GET",
@@ -10527,11 +10494,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostTeamsByTeamIdLinktoolLoginCodes
+     * @name V1TeamsLinktoolLoginCodesCreate
      * @summary Issue linktool login code for team scope
      * @request POST:/api/v1/teams/{teamId}/linktool-login/codes
      */
-    userPostTeamsByTeamIdLinktoolLoginCodes: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsLinktoolLoginCodesCreate: (teamId: string, params: RequestParams = {}) =>
       this.request<VoLinktoolLoginCodeIssueResponse, any>({
         path: `/api/v1/teams/${teamId}/linktool-login/codes`,
         method: "POST",
@@ -10544,11 +10511,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Market
-     * @name UserGetTeamsByTeamIdMarketJobTags
+     * @name V1TeamsMarketJobTagsDetail
      * @summary List selectable market job tags for a team
      * @request GET:/api/v1/teams/{teamId}/market/job-tags
      */
-    userGetTeamsByTeamIdMarketJobTags: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsMarketJobTagsDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListSelectableJobTagsResponse, any>({
         path: `/api/v1/teams/${teamId}/market/job-tags`,
         method: "GET",
@@ -10560,11 +10527,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Market
-     * @name UserGetTeamsByTeamIdMarketLanding
+     * @name V1TeamsMarketLandingDetail
      * @summary Get team hire market landing page
      * @request GET:/api/v1/teams/{teamId}/market/landing
      */
-    userGetTeamsByTeamIdMarketLanding: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsMarketLandingDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoMarketLandingResponse, any>({
         path: `/api/v1/teams/${teamId}/market/landing`,
         method: "GET",
@@ -10576,11 +10543,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Market
-     * @name UserPostTeamsByTeamIdMarketOrdersPlan
+     * @name V1TeamsMarketOrdersPlanCreate
      * @summary Hire a market plan
      * @request POST:/api/v1/teams/{teamId}/market/orders/plan
      */
-    userPostTeamsByTeamIdMarketOrdersPlan: (
+    v1TeamsMarketOrdersPlanCreate: (
       teamId: string,
       request: VoCreateMarketPlanOrderRequest,
       params: RequestParams = {},
@@ -10598,11 +10565,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Market
-     * @name UserPostTeamsByTeamIdMarketOrdersWorker
+     * @name V1TeamsMarketOrdersWorkerCreate
      * @summary Hire a standalone market worker
      * @request POST:/api/v1/teams/{teamId}/market/orders/worker
      */
-    userPostTeamsByTeamIdMarketOrdersWorker: (
+    v1TeamsMarketOrdersWorkerCreate: (
       teamId: string,
       request: VoCreateMarketWorkerOrderRequest,
       params: RequestParams = {},
@@ -10620,11 +10587,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Market
-     * @name UserGetTeamsByTeamIdMarketPlans
+     * @name V1TeamsMarketPlansDetail
      * @summary List market plans for a team
      * @request GET:/api/v1/teams/{teamId}/market/plans
      */
-    userGetTeamsByTeamIdMarketPlans: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsMarketPlansDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListMarketPlansResponse, any>({
         path: `/api/v1/teams/${teamId}/market/plans`,
         method: "GET",
@@ -10636,11 +10603,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Market
-     * @name UserGetTeamsByTeamIdMarketPlansByPlanId
+     * @name V1TeamsMarketPlansDetail2
      * @summary Get market plan detail for a team
      * @request GET:/api/v1/teams/{teamId}/market/plans/{planId}
+     * @originalName v1TeamsMarketPlansDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdMarketPlansByPlanId: (teamId: string, planId: string, params: RequestParams = {}) =>
+    v1TeamsMarketPlansDetail2: (teamId: string, planId: string, params: RequestParams = {}) =>
       this.request<VoMarketPlanDetail, any>({
         path: `/api/v1/teams/${teamId}/market/plans/${planId}`,
         method: "GET",
@@ -10652,11 +10621,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Market
-     * @name UserGetTeamsByTeamIdMarketWorkers
+     * @name V1TeamsMarketWorkersDetail
      * @summary List market workers for a team
      * @request GET:/api/v1/teams/{teamId}/market/workers
      */
-    userGetTeamsByTeamIdMarketWorkers: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsMarketWorkersDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListMarketWorkersResponse, any>({
         path: `/api/v1/teams/${teamId}/market/workers`,
         method: "GET",
@@ -10668,11 +10637,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Market
-     * @name UserGetTeamsByTeamIdMarketWorkersByWorkerId
+     * @name V1TeamsMarketWorkersDetail2
      * @summary Get market worker detail for a team
      * @request GET:/api/v1/teams/{teamId}/market/workers/{workerId}
+     * @originalName v1TeamsMarketWorkersDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdMarketWorkersByWorkerId: (teamId: string, workerId: string, params: RequestParams = {}) =>
+    v1TeamsMarketWorkersDetail2: (teamId: string, workerId: string, params: RequestParams = {}) =>
       this.request<VoMarketWorkerDetail, any>({
         path: `/api/v1/teams/${teamId}/market/workers/${workerId}`,
         method: "GET",
@@ -10684,11 +10655,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdMcpTunnels
+     * @name V1TeamsMcpTunnelsDetail
      * @summary List team mcp tunnels
      * @request GET:/api/v1/teams/{teamId}/mcp-tunnels
      */
-    userGetTeamsByTeamIdMcpTunnels: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsMcpTunnelsDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListTeamMcpTunnelsResponse, any>({
         path: `/api/v1/teams/${teamId}/mcp-tunnels`,
         method: "GET",
@@ -10700,15 +10671,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdMcpTunnels
+     * @name V1TeamsMcpTunnelsCreate
      * @summary Create team mcp tunnel
      * @request POST:/api/v1/teams/{teamId}/mcp-tunnels
      */
-    userPostTeamsByTeamIdMcpTunnels: (
-      teamId: string,
-      request: VoCreateTeamMcpTunnelRequest,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsMcpTunnelsCreate: (teamId: string, request: VoCreateTeamMcpTunnelRequest, params: RequestParams = {}) =>
       this.request<VoTeamMcpTunnel, any>({
         path: `/api/v1/teams/${teamId}/mcp-tunnels`,
         method: "POST",
@@ -10722,11 +10689,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdMcpTunnelsByMcpTunnelId
+     * @name V1TeamsMcpTunnelsDetail2
      * @summary Get team mcp tunnel by id
      * @request GET:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}
+     * @originalName v1TeamsMcpTunnelsDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdMcpTunnelsByMcpTunnelId: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
+    v1TeamsMcpTunnelsDetail2: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
       this.request<VoTeamMcpTunnel, any>({
         path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}`,
         method: "GET",
@@ -10738,11 +10707,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserDeleteTeamsByTeamIdMcpTunnelsByMcpTunnelId
+     * @name V1TeamsMcpTunnelsDelete
      * @summary Delete team mcp tunnel
      * @request DELETE:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}
      */
-    userDeleteTeamsByTeamIdMcpTunnelsByMcpTunnelId: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
+    v1TeamsMcpTunnelsDelete: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
       this.request<VoSimpleOKResponse, any>({
         path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}`,
         method: "DELETE",
@@ -10754,11 +10723,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPatchTeamsByTeamIdMcpTunnelsByMcpTunnelId
+     * @name V1TeamsMcpTunnelsPartialUpdate
      * @summary Patch team mcp tunnel
      * @request PATCH:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}
      */
-    userPatchTeamsByTeamIdMcpTunnelsByMcpTunnelId: (
+    v1TeamsMcpTunnelsPartialUpdate: (
       teamId: string,
       mcpTunnelId: string,
       request: VoPatchTeamMcpTunnelRequest,
@@ -10777,15 +10746,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdMcpTunnelsByMcpTunnelIdActivate
+     * @name V1TeamsMcpTunnelsActivateCreate
      * @summary Activate team mcp tunnel
      * @request POST:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}/activate
      */
-    userPostTeamsByTeamIdMcpTunnelsByMcpTunnelIdActivate: (
-      teamId: string,
-      mcpTunnelId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsMcpTunnelsActivateCreate: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
       this.request<VoTeamMcpTunnel, any>({
         path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}/activate`,
         method: "POST",
@@ -10797,15 +10762,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdMcpTunnelsByMcpTunnelIdBindings
+     * @name V1TeamsMcpTunnelsBindingsDetail
      * @summary List team mcp tunnel bindings
      * @request GET:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}/bindings
      */
-    userGetTeamsByTeamIdMcpTunnelsByMcpTunnelIdBindings: (
-      teamId: string,
-      mcpTunnelId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsMcpTunnelsBindingsDetail: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
       this.request<VoListTeamMcpTunnelBindingsResponse, any>({
         path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}/bindings`,
         method: "GET",
@@ -10817,15 +10778,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdMcpTunnelsByMcpTunnelIdDeactivate
+     * @name V1TeamsMcpTunnelsDeactivateCreate
      * @summary Deactivate team mcp tunnel
      * @request POST:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}/deactivate
      */
-    userPostTeamsByTeamIdMcpTunnelsByMcpTunnelIdDeactivate: (
-      teamId: string,
-      mcpTunnelId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsMcpTunnelsDeactivateCreate: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
       this.request<VoTeamMcpTunnel, any>({
         path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}/deactivate`,
         method: "POST",
@@ -10837,11 +10794,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdMeProfile
+     * @name V1TeamsMeProfileDetail
      * @summary Get current user team membership profile
      * @request GET:/api/v1/teams/{teamId}/me/profile
      */
-    userGetTeamsByTeamIdMeProfile: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsMeProfileDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoTeamMembershipProfile, any>({
         path: `/api/v1/teams/${teamId}/me/profile`,
         method: "GET",
@@ -10853,11 +10810,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPatchTeamsByTeamIdMeProfile
+     * @name V1TeamsMeProfilePartialUpdate
      * @summary Update current user team membership profile
      * @request PATCH:/api/v1/teams/{teamId}/me/profile
      */
-    userPatchTeamsByTeamIdMeProfile: (
+    v1TeamsMeProfilePartialUpdate: (
       teamId: string,
       request: VoPatchTeamMembershipProfileRequest,
       params: RequestParams = {},
@@ -10875,18 +10832,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdMeProfileAvatarUploadUrl
+     * @name V1TeamsMeProfileAvatarUploadUrlCreate
      * @summary Create current user team display avatar upload url
      * @request POST:/api/v1/teams/{teamId}/me/profile/avatar:upload-url
      */
-    userPostTeamsByTeamIdMeProfileAvatarUploadUrl: (
+    v1TeamsMeProfileAvatarUploadUrlCreate: (
       teamId: string,
-      uploadUrl: string,
       request: VoTeamMembershipProfileAvatarUploadURLRequest,
       params: RequestParams = {},
     ) =>
       this.request<VoTeamMembershipProfileAvatarUploadURLResponse, any>({
-        path: `/api/v1/teams/${teamId}/me/profile/avatar${uploadUrl}`,
+        path: `/api/v1/teams/${teamId}/me/profile/avatar:upload-url`,
         method: "POST",
         body: request,
         type: ContentType.Json,
@@ -10898,11 +10854,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdMembers
+     * @name V1TeamsMembersDetail
      * @summary List team members
      * @request GET:/api/v1/teams/{teamId}/members
      */
-    userGetTeamsByTeamIdMembers: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsMembersDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListTeamMembersResponse, any>({
         path: `/api/v1/teams/${teamId}/members`,
         method: "GET",
@@ -10914,11 +10870,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdMembersByUserIdProfile
+     * @name V1TeamsMembersProfileDetail
      * @summary Get team member profile
      * @request GET:/api/v1/teams/{teamId}/members/{userId}/profile
      */
-    userGetTeamsByTeamIdMembersByUserIdProfile: (teamId: string, userId: string, params: RequestParams = {}) =>
+    v1TeamsMembersProfileDetail: (teamId: string, userId: string, params: RequestParams = {}) =>
       this.request<VoTeamMembershipProfile, any>({
         path: `/api/v1/teams/${teamId}/members/${userId}/profile`,
         method: "GET",
@@ -10930,11 +10886,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPatchTeamsByTeamIdMembersByUserIdProfile
+     * @name V1TeamsMembersProfilePartialUpdate
      * @summary Update team member profile
      * @request PATCH:/api/v1/teams/{teamId}/members/{userId}/profile
      */
-    userPatchTeamsByTeamIdMembersByUserIdProfile: (
+    v1TeamsMembersProfilePartialUpdate: (
       teamId: string,
       userId: string,
       request: VoPatchTeamMembershipProfileRequest,
@@ -10953,11 +10909,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdMembersInvite
+     * @name V1TeamsMembersInviteCreate
      * @summary Invite team members by phone
      * @request POST:/api/v1/teams/{teamId}/members:invite
      */
-    userPostTeamsByTeamIdMembersInvite: (
+    v1TeamsMembersInviteCreate: (
       teamId: string,
       invite: string,
       request: VoInviteTeamMembersRequest,
@@ -10976,11 +10932,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags OfficePreview
-     * @name UserPostTeamsByTeamIdOfficePreviewSessions
+     * @name V1TeamsOfficePreviewSessionsCreate
      * @summary Create office preview session
      * @request POST:/api/v1/teams/{teamId}/office-preview-sessions
      */
-    userPostTeamsByTeamIdOfficePreviewSessions: (
+    v1TeamsOfficePreviewSessionsCreate: (
       teamId: string,
       request: VoCreateOfficePreviewSessionRequest,
       params: RequestParams = {},
@@ -10998,11 +10954,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserGetTeamsByTeamIdPinnedDigiemployees
+     * @name V1TeamsPinnedDigiemployeesDetail
      * @summary List pinned digiemployees for current user in team
      * @request GET:/api/v1/teams/{teamId}/pinned-digiemployees
      */
-    userGetTeamsByTeamIdPinnedDigiemployees: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsPinnedDigiemployeesDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoListPinnedDigiEmployeesResponse, any>({
         path: `/api/v1/teams/${teamId}/pinned-digiemployees`,
         method: "GET",
@@ -11014,15 +10970,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserPutTeamsByTeamIdPinnedDigiemployeesByDigiEmployeeId
+     * @name V1TeamsPinnedDigiemployeesUpdate
      * @summary Pin a digiemployee for current user in team
      * @request PUT:/api/v1/teams/{teamId}/pinned-digiemployees/{digiEmployeeId}
      */
-    userPutTeamsByTeamIdPinnedDigiemployeesByDigiEmployeeId: (
-      teamId: string,
-      digiEmployeeId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsPinnedDigiemployeesUpdate: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
       this.request<VoSimpleOKResponse, any>({
         path: `/api/v1/teams/${teamId}/pinned-digiemployees/${digiEmployeeId}`,
         method: "PUT",
@@ -11034,15 +10986,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
-     * @name UserDeleteTeamsByTeamIdPinnedDigiemployeesByDigiEmployeeId
+     * @name V1TeamsPinnedDigiemployeesDelete
      * @summary Unpin a digiemployee for current user in team
      * @request DELETE:/api/v1/teams/{teamId}/pinned-digiemployees/{digiEmployeeId}
      */
-    userDeleteTeamsByTeamIdPinnedDigiemployeesByDigiEmployeeId: (
-      teamId: string,
-      digiEmployeeId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsPinnedDigiemployeesDelete: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
       this.request<VoSimpleOKResponse, any>({
         path: `/api/v1/teams/${teamId}/pinned-digiemployees/${digiEmployeeId}`,
         method: "DELETE",
@@ -11054,11 +11002,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdRemoteTaskConnections
+     * @name V1TeamsRemoteTaskConnectionsDetail
      * @summary List remote-task connections (team scope)
      * @request GET:/api/v1/teams/{teamId}/remote-task/connections
      */
-    userGetTeamsByTeamIdRemoteTaskConnections: (
+    v1TeamsRemoteTaskConnectionsDetail: (
       teamId: string,
       query?: {
         /** Limit */
@@ -11080,11 +11028,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostTeamsByTeamIdRemoteTaskConnections
+     * @name V1TeamsRemoteTaskConnectionsCreate
      * @summary Create remote-task connection from connector instance (team scope)
      * @request POST:/api/v1/teams/{teamId}/remote-task/connections
      */
-    userPostTeamsByTeamIdRemoteTaskConnections: (
+    v1TeamsRemoteTaskConnectionsCreate: (
       teamId: string,
       request: BaseRemoteTaskCreateConnectionRequest,
       params: RequestParams = {},
@@ -11102,15 +11050,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdRemoteTaskConnectionsByConnectionId
+     * @name V1TeamsRemoteTaskConnectionsDetail2
      * @summary Get remote-task connection detail (team scope)
      * @request GET:/api/v1/teams/{teamId}/remote-task/connections/{connectionId}
+     * @originalName v1TeamsRemoteTaskConnectionsDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdRemoteTaskConnectionsByConnectionId: (
-      teamId: string,
-      connectionId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsRemoteTaskConnectionsDetail2: (teamId: string, connectionId: string, params: RequestParams = {}) =>
       this.request<BasePinOKBaseRemoteTaskConnection, BasePinErr>({
         path: `/api/v1/teams/${teamId}/remote-task/connections/${connectionId}`,
         method: "GET",
@@ -11122,15 +11068,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserDeleteTeamsByTeamIdRemoteTaskConnectionsByConnectionId
+     * @name V1TeamsRemoteTaskConnectionsDelete
      * @summary Delete remote-task connection (team scope)
      * @request DELETE:/api/v1/teams/{teamId}/remote-task/connections/{connectionId}
      */
-    userDeleteTeamsByTeamIdRemoteTaskConnectionsByConnectionId: (
-      teamId: string,
-      connectionId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsRemoteTaskConnectionsDelete: (teamId: string, connectionId: string, params: RequestParams = {}) =>
       this.request<BasePinOKBaseJSONMap, BasePinErr>({
         path: `/api/v1/teams/${teamId}/remote-task/connections/${connectionId}`,
         method: "DELETE",
@@ -11142,11 +11084,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdRemoteTaskConnectionsByConnectionIdActionsByActionKey
+     * @name V1TeamsRemoteTaskConnectionsActionsDetail
      * @summary Get remote-task connection action detail (team scope)
      * @request GET:/api/v1/teams/{teamId}/remote-task/connections/{connectionId}/actions/{actionKey}
      */
-    userGetTeamsByTeamIdRemoteTaskConnectionsByConnectionIdActionsByActionKey: (
+    v1TeamsRemoteTaskConnectionsActionsDetail: (
       teamId: string,
       connectionId: string,
       actionKey: string,
@@ -11163,11 +11105,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostTeamsByTeamIdRemoteTaskConnectionsByConnectionIdActionsByActionKeyExecute
+     * @name V1TeamsRemoteTaskConnectionsActionsExecuteCreate
      * @summary Execute remote-task connection action (team scope)
      * @request POST:/api/v1/teams/{teamId}/remote-task/connections/{connectionId}/actions/{actionKey}/execute
      */
-    userPostTeamsByTeamIdRemoteTaskConnectionsByConnectionIdActionsByActionKeyExecute: (
+    v1TeamsRemoteTaskConnectionsActionsExecuteCreate: (
       teamId: string,
       connectionId: string,
       actionKey: string,
@@ -11187,15 +11129,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostTeamsByTeamIdRemoteTaskConnectionsByConnectionIdReauth
+     * @name V1TeamsRemoteTaskConnectionsReauthCreate
      * @summary Start remote-task connection reauth (team scope)
      * @request POST:/api/v1/teams/{teamId}/remote-task/connections/{connectionId}/reauth
      */
-    userPostTeamsByTeamIdRemoteTaskConnectionsByConnectionIdReauth: (
-      teamId: string,
-      connectionId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsRemoteTaskConnectionsReauthCreate: (teamId: string, connectionId: string, params: RequestParams = {}) =>
       this.request<BasePinOKBaseRemoteTaskStartAuthResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/remote-task/connections/${connectionId}/reauth`,
         method: "POST",
@@ -11207,11 +11145,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdRemoteTaskConnectors
+     * @name V1TeamsRemoteTaskConnectorsDetail
      * @summary List remote-task visible connector instances (team scope)
      * @request GET:/api/v1/teams/{teamId}/remote-task/connectors
      */
-    userGetTeamsByTeamIdRemoteTaskConnectors: (
+    v1TeamsRemoteTaskConnectorsDetail: (
       teamId: string,
       query?: {
         /** Exclude connected connectors */
@@ -11235,15 +11173,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdRemoteTaskConnectorsByConnectorId
+     * @name V1TeamsRemoteTaskConnectorsDetail2
      * @summary Get remote-task connector instance detail (team scope)
      * @request GET:/api/v1/teams/{teamId}/remote-task/connectors/{connectorId}
+     * @originalName v1TeamsRemoteTaskConnectorsDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdRemoteTaskConnectorsByConnectorId: (
-      teamId: string,
-      connectorId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsRemoteTaskConnectorsDetail2: (teamId: string, connectorId: string, params: RequestParams = {}) =>
       this.request<BasePinOKBaseRemoteTaskConnector, BasePinErr>({
         path: `/api/v1/teams/${teamId}/remote-task/connectors/${connectorId}`,
         method: "GET",
@@ -11255,11 +11191,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdRemoteTaskInstances
+     * @name V1TeamsRemoteTaskInstancesDetail
      * @summary List remote-task connector instances (team scope)
      * @request GET:/api/v1/teams/{teamId}/remote-task/instances
      */
-    userGetTeamsByTeamIdRemoteTaskInstances: (
+    v1TeamsRemoteTaskInstancesDetail: (
       teamId: string,
       query?: {
         /** Instance status */
@@ -11279,11 +11215,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostTeamsByTeamIdRemoteTaskInstances
+     * @name V1TeamsRemoteTaskInstancesCreate
      * @summary Create remote-task connector instance (team scope)
      * @request POST:/api/v1/teams/{teamId}/remote-task/instances
      */
-    userPostTeamsByTeamIdRemoteTaskInstances: (
+    v1TeamsRemoteTaskInstancesCreate: (
       teamId: string,
       request: BaseRemoteTaskCreateInstanceRequest,
       params: RequestParams = {},
@@ -11301,15 +11237,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdRemoteTaskInstancesByInstanceId
+     * @name V1TeamsRemoteTaskInstancesDetail2
      * @summary Get remote-task connector instance detail (team scope)
      * @request GET:/api/v1/teams/{teamId}/remote-task/instances/{instanceId}
+     * @originalName v1TeamsRemoteTaskInstancesDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdRemoteTaskInstancesByInstanceId: (
-      teamId: string,
-      instanceId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsRemoteTaskInstancesDetail2: (teamId: string, instanceId: string, params: RequestParams = {}) =>
       this.request<BasePinOKBaseRemoteTaskConnectorInstance, BasePinErr>({
         path: `/api/v1/teams/${teamId}/remote-task/instances/${instanceId}`,
         method: "GET",
@@ -11321,11 +11255,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPutTeamsByTeamIdRemoteTaskInstancesByInstanceId
+     * @name V1TeamsRemoteTaskInstancesUpdate
      * @summary Update remote-task connector instance (team scope)
      * @request PUT:/api/v1/teams/{teamId}/remote-task/instances/{instanceId}
      */
-    userPutTeamsByTeamIdRemoteTaskInstancesByInstanceId: (
+    v1TeamsRemoteTaskInstancesUpdate: (
       teamId: string,
       instanceId: string,
       request: BaseRemoteTaskCreateInstanceRequest,
@@ -11344,11 +11278,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdRemoteTaskPackages
+     * @name V1TeamsRemoteTaskPackagesDetail
      * @summary List remote-task connector packages (team scope)
      * @request GET:/api/v1/teams/{teamId}/remote-task/packages
      */
-    userGetTeamsByTeamIdRemoteTaskPackages: (
+    v1TeamsRemoteTaskPackagesDetail: (
       teamId: string,
       query?: {
         /** Package status */
@@ -11372,11 +11306,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdRemoteTaskPackagesByPkgId
+     * @name V1TeamsRemoteTaskPackagesDetail2
      * @summary Get remote-task connector package detail (team scope)
      * @request GET:/api/v1/teams/{teamId}/remote-task/packages/{pkgId}
+     * @originalName v1TeamsRemoteTaskPackagesDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdRemoteTaskPackagesByPkgId: (teamId: string, pkgId: string, params: RequestParams = {}) =>
+    v1TeamsRemoteTaskPackagesDetail2: (teamId: string, pkgId: string, params: RequestParams = {}) =>
       this.request<BasePinOKBaseRemoteTaskConnectorPackageDetail, BasePinErr>({
         path: `/api/v1/teams/${teamId}/remote-task/packages/${pkgId}`,
         method: "GET",
@@ -11388,15 +11324,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdRemoteTaskPackagesByPkgIdInstances
+     * @name V1TeamsRemoteTaskPackagesInstancesDetail
      * @summary List remote-task connector package instances (team scope)
      * @request GET:/api/v1/teams/{teamId}/remote-task/packages/{pkgId}/instances
      */
-    userGetTeamsByTeamIdRemoteTaskPackagesByPkgIdInstances: (
-      teamId: string,
-      pkgId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsRemoteTaskPackagesInstancesDetail: (teamId: string, pkgId: string, params: RequestParams = {}) =>
       this.request<BasePinOKArrayBaseRemoteTaskConnectorInstance, BasePinErr>({
         path: `/api/v1/teams/${teamId}/remote-task/packages/${pkgId}/instances`,
         method: "GET",
@@ -11408,15 +11340,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdRemoteTaskPackagesByPkgIdVersions
+     * @name V1TeamsRemoteTaskPackagesVersionsDetail
      * @summary List remote-task connector package versions (team scope)
      * @request GET:/api/v1/teams/{teamId}/remote-task/packages/{pkgId}/versions
      */
-    userGetTeamsByTeamIdRemoteTaskPackagesByPkgIdVersions: (
-      teamId: string,
-      pkgId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsRemoteTaskPackagesVersionsDetail: (teamId: string, pkgId: string, params: RequestParams = {}) =>
       this.request<BasePinOKArrayBaseRemoteTaskPackageVersion, BasePinErr>({
         path: `/api/v1/teams/${teamId}/remote-task/packages/${pkgId}/versions`,
         method: "GET",
@@ -11428,11 +11356,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdRemoteTaskTasks
+     * @name V1TeamsRemoteTaskTasksDetail
      * @summary List remote-task executions (team scope)
      * @request GET:/api/v1/teams/{teamId}/remote-task/tasks
      */
-    userGetTeamsByTeamIdRemoteTaskTasks: (
+    v1TeamsRemoteTaskTasksDetail: (
       teamId: string,
       query?: {
         /** Limit */
@@ -11454,11 +11382,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdRemoteTaskTasksByTaskId
+     * @name V1TeamsRemoteTaskTasksDetail2
      * @summary Get remote-task execution detail (team scope)
      * @request GET:/api/v1/teams/{teamId}/remote-task/tasks/{taskId}
+     * @originalName v1TeamsRemoteTaskTasksDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdRemoteTaskTasksByTaskId: (teamId: string, taskId: string, params: RequestParams = {}) =>
+    v1TeamsRemoteTaskTasksDetail2: (teamId: string, taskId: string, params: RequestParams = {}) =>
       this.request<BasePinOKBaseRemoteTaskExecution, BasePinErr>({
         path: `/api/v1/teams/${teamId}/remote-task/tasks/${taskId}`,
         method: "GET",
@@ -11470,11 +11400,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserDeleteTeamsByTeamIdRemoteTaskTasksByTaskId
+     * @name V1TeamsRemoteTaskTasksDelete
      * @summary Delete remote-task execution (team scope)
      * @request DELETE:/api/v1/teams/{teamId}/remote-task/tasks/{taskId}
      */
-    userDeleteTeamsByTeamIdRemoteTaskTasksByTaskId: (teamId: string, taskId: string, params: RequestParams = {}) =>
+    v1TeamsRemoteTaskTasksDelete: (teamId: string, taskId: string, params: RequestParams = {}) =>
       this.request<BasePinOKVoRemoteTaskDeleteResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/remote-task/tasks/${taskId}`,
         method: "DELETE",
@@ -11486,11 +11416,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostTeamsByTeamIdRemoteTaskTasksByTaskIdCancel
+     * @name V1TeamsRemoteTaskTasksCancelCreate
      * @summary Cancel remote-task execution (team scope)
      * @request POST:/api/v1/teams/{teamId}/remote-task/tasks/{taskId}/cancel
      */
-    userPostTeamsByTeamIdRemoteTaskTasksByTaskIdCancel: (teamId: string, taskId: string, params: RequestParams = {}) =>
+    v1TeamsRemoteTaskTasksCancelCreate: (teamId: string, taskId: string, params: RequestParams = {}) =>
       this.request<BasePinOKBaseRemoteTaskCancelResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/remote-task/tasks/${taskId}/cancel`,
         method: "POST",
@@ -11502,11 +11432,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdSharedConnections
+     * @name V1TeamsSharedConnectionsDetail
      * @summary List shared connections (team scope)
      * @request GET:/api/v1/teams/{teamId}/shared-connections
      */
-    userGetTeamsByTeamIdSharedConnections: (
+    v1TeamsSharedConnectionsDetail: (
       teamId: string,
       query?: {
         /** Principal pattern */
@@ -11526,11 +11456,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostTeamsByTeamIdSharedConnections
+     * @name V1TeamsSharedConnectionsCreate
      * @summary Create shared connection (team scope)
      * @request POST:/api/v1/teams/{teamId}/shared-connections
      */
-    userPostTeamsByTeamIdSharedConnections: (teamId: string, request: BaseJSONMap, params: RequestParams = {}) =>
+    v1TeamsSharedConnectionsCreate: (teamId: string, request: BaseJSONMap, params: RequestParams = {}) =>
       this.request<BasePinOKBaseJSONMap, BasePinErr>({
         path: `/api/v1/teams/${teamId}/shared-connections`,
         method: "POST",
@@ -11544,15 +11474,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostTeamsByTeamIdSharedConnectionsStartAuth
+     * @name V1TeamsSharedConnectionsStartAuthCreate
      * @summary Start shared connection auth (team scope)
      * @request POST:/api/v1/teams/{teamId}/shared-connections/start-auth
      */
-    userPostTeamsByTeamIdSharedConnectionsStartAuth: (
-      teamId: string,
-      request: BaseJSONMap,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsSharedConnectionsStartAuthCreate: (teamId: string, request: BaseJSONMap, params: RequestParams = {}) =>
       this.request<BasePinOKBaseRemoteTaskStartAuthResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/shared-connections/start-auth`,
         method: "POST",
@@ -11566,15 +11492,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostTeamsByTeamIdSharedConnectionsSubmitAuth
+     * @name V1TeamsSharedConnectionsSubmitAuthCreate
      * @summary Submit shared connection auth (team scope)
      * @request POST:/api/v1/teams/{teamId}/shared-connections/submit-auth
      */
-    userPostTeamsByTeamIdSharedConnectionsSubmitAuth: (
-      teamId: string,
-      request: BaseJSONMap,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsSharedConnectionsSubmitAuthCreate: (teamId: string, request: BaseJSONMap, params: RequestParams = {}) =>
       this.request<BasePinOKBaseJSONMap, BasePinErr>({
         path: `/api/v1/teams/${teamId}/shared-connections/submit-auth`,
         method: "POST",
@@ -11588,15 +11510,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserGetTeamsByTeamIdSharedConnectionsByConnectionId
+     * @name V1TeamsSharedConnectionsDetail2
      * @summary Get shared connection detail (team scope)
      * @request GET:/api/v1/teams/{teamId}/shared-connections/{connectionId}
+     * @originalName v1TeamsSharedConnectionsDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdSharedConnectionsByConnectionId: (
-      teamId: string,
-      connectionId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsSharedConnectionsDetail2: (teamId: string, connectionId: string, params: RequestParams = {}) =>
       this.request<BasePinOKBaseJSONMap, BasePinErr>({
         path: `/api/v1/teams/${teamId}/shared-connections/${connectionId}`,
         method: "GET",
@@ -11608,11 +11528,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPutTeamsByTeamIdSharedConnectionsByConnectionId
+     * @name V1TeamsSharedConnectionsUpdate
      * @summary Update shared connection (team scope)
      * @request PUT:/api/v1/teams/{teamId}/shared-connections/{connectionId}
      */
-    userPutTeamsByTeamIdSharedConnectionsByConnectionId: (
+    v1TeamsSharedConnectionsUpdate: (
       teamId: string,
       connectionId: string,
       request: BaseJSONMap,
@@ -11631,15 +11551,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserDeleteTeamsByTeamIdSharedConnectionsByConnectionId
+     * @name V1TeamsSharedConnectionsDelete
      * @summary Delete shared connection (team scope)
      * @request DELETE:/api/v1/teams/{teamId}/shared-connections/{connectionId}
      */
-    userDeleteTeamsByTeamIdSharedConnectionsByConnectionId: (
-      teamId: string,
-      connectionId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsSharedConnectionsDelete: (teamId: string, connectionId: string, params: RequestParams = {}) =>
       this.request<BasePinOKBaseJSONMap, BasePinErr>({
         path: `/api/v1/teams/${teamId}/shared-connections/${connectionId}`,
         method: "DELETE",
@@ -11651,11 +11567,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags User
-     * @name UserPostTeamsByTeamIdSharedConnectionsByConnectionIdReauth
+     * @name V1TeamsSharedConnectionsReauthCreate
      * @summary Reauth shared connection (team scope)
      * @request POST:/api/v1/teams/{teamId}/shared-connections/{connectionId}/reauth
      */
-    userPostTeamsByTeamIdSharedConnectionsByConnectionIdReauth: (
+    v1TeamsSharedConnectionsReauthCreate: (
       teamId: string,
       connectionId: string,
       request: BaseJSONMap,
@@ -11674,11 +11590,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserSkillsList
+     * @name V1TeamsSkillsDetail
      * @summary List skills (team user, team-scoped)
      * @request GET:/api/v1/teams/{teamId}/skills
      */
-    userSkillsList: (
+    v1TeamsSkillsDetail: (
       teamId: string,
       query?: {
         /** Search query (name/description/s3Key) */
@@ -11700,11 +11616,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserGetTeamsByTeamIdSkillsCount
+     * @name V1TeamsSkillsCountDetail
      * @summary Count skills (team user, team-scoped)
      * @request GET:/api/v1/teams/{teamId}/skills/count
      */
-    userGetTeamsByTeamIdSkillsCount: (teamId: string, params: RequestParams = {}) =>
+    v1TeamsSkillsCountDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<BasePinOKVoCountTeamSkillsResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/skills/count`,
         method: "GET",
@@ -11716,11 +11632,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdSkillsScan
+     * @name V1TeamsSkillsScanCreate
      * @summary Scan team skills from NAS and upsert into DB (team user, team-scoped)
      * @request POST:/api/v1/teams/{teamId}/skills/scan
      */
-    userPostTeamsByTeamIdSkillsScan: (teamId: string, request: VoAdminScanSkillsRequest, params: RequestParams = {}) =>
+    v1TeamsSkillsScanCreate: (teamId: string, request: VoAdminScanSkillsRequest, params: RequestParams = {}) =>
       this.request<BasePinOKVoAdminScanSkillsResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/skills/scan`,
         method: "POST",
@@ -11733,11 +11649,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPatchTeamsByTeamIdSkillsById
+     * @name V1TeamsSkillsPartialUpdate
      * @summary Patch skill (team user, team-scoped)
      * @request PATCH:/api/v1/teams/{teamId}/skills/{id}
      */
-    userPatchTeamsByTeamIdSkillsById: (
+    v1TeamsSkillsPartialUpdate: (
       teamId: string,
       id: string,
       request: VoPatchSkillRequest,
@@ -11755,11 +11671,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserPostTeamsByTeamIdSkillsByIdEnableAssembly
+     * @name V1TeamsSkillsEnableAssemblyCreate
      * @summary Enable team skill assembly (team user, team-scoped)
      * @request POST:/api/v1/teams/{teamId}/skills/{id}/enable-assembly
      */
-    userPostTeamsByTeamIdSkillsByIdEnableAssembly: (
+    v1TeamsSkillsEnableAssemblyCreate: (
       teamId: string,
       id: string,
       request: VoEnableAssemblableSkillRequest,
@@ -11778,11 +11694,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserSkillsetsList
+     * @name V1TeamsSkillsetsDetail
      * @summary List skillsets (team user, team-scoped)
      * @request GET:/api/v1/teams/{teamId}/skillsets
      */
-    userSkillsetsList: (
+    v1TeamsSkillsetsDetail: (
       teamId: string,
       query?: {
         /** Search query (name/description) */
@@ -11804,11 +11720,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserSkillsetsCreate
+     * @name V1TeamsSkillsetsCreate
      * @summary Create skillset (team user, team-scoped)
      * @request POST:/api/v1/teams/{teamId}/skillsets
      */
-    userSkillsetsCreate: (teamId: string, request: VoCreateSkillsetRequest, params: RequestParams = {}) =>
+    v1TeamsSkillsetsCreate: (teamId: string, request: VoCreateSkillsetRequest, params: RequestParams = {}) =>
       this.request<BasePinOKVoSkillset, BasePinErr>({
         path: `/api/v1/teams/${teamId}/skillsets`,
         method: "POST",
@@ -11821,11 +11737,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserSkillsetsDelete
+     * @name V1TeamsSkillsetsDelete
      * @summary Delete skillset (team user, team-scoped)
      * @request DELETE:/api/v1/teams/{teamId}/skillsets/{id}
      */
-    userSkillsetsDelete: (teamId: string, id: string, params: RequestParams = {}) =>
+    v1TeamsSkillsetsDelete: (teamId: string, id: string, params: RequestParams = {}) =>
       this.request<BasePinOKVoSimpleOKResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/skillsets/${id}`,
         method: "DELETE",
@@ -11837,11 +11753,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name UserSkillsetsUpdate
+     * @name V1TeamsSkillsetsPartialUpdate
      * @summary Patch skillset (team user, team-scoped)
      * @request PATCH:/api/v1/teams/{teamId}/skillsets/{id}
      */
-    userSkillsetsUpdate: (teamId: string, id: string, request: VoPatchSkillsetRequest, params: RequestParams = {}) =>
+    v1TeamsSkillsetsPartialUpdate: (
+      teamId: string,
+      id: string,
+      request: VoPatchSkillsetRequest,
+      params: RequestParams = {},
+    ) =>
       this.request<BasePinOKVoSkillset, BasePinErr>({
         path: `/api/v1/teams/${teamId}/skillsets/${id}`,
         method: "PATCH",
@@ -11854,11 +11775,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserGetTeamsByTeamIdStationsByStationId
+     * @name V1TeamsStationsDetail
      * @summary Get station
      * @request GET:/api/v1/teams/{teamId}/stations/{stationId}
      */
-    userGetTeamsByTeamIdStationsByStationId: (teamId: string, stationId: string, params: RequestParams = {}) =>
+    v1TeamsStationsDetail: (teamId: string, stationId: string, params: RequestParams = {}) =>
       this.request<VoStation, any>({
         path: `/api/v1/teams/${teamId}/stations/${stationId}`,
         method: "GET",
@@ -11870,11 +11791,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserPatchTeamsByTeamIdStationsByStationId
+     * @name V1TeamsStationsPartialUpdate
      * @summary Patch station
      * @request PATCH:/api/v1/teams/{teamId}/stations/{stationId}
      */
-    userPatchTeamsByTeamIdStationsByStationId: (
+    v1TeamsStationsPartialUpdate: (
       teamId: string,
       stationId: string,
       request: VoUpdateStationRequest,
@@ -11893,11 +11814,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserGetTeamsByTeamIdStationsByStationIdApiKeys
+     * @name V1TeamsStationsApiKeysDetail
      * @summary List station api keys
      * @request GET:/api/v1/teams/{teamId}/stations/{stationId}/api-keys
      */
-    userGetTeamsByTeamIdStationsByStationIdApiKeys: (teamId: string, stationId: string, params: RequestParams = {}) =>
+    v1TeamsStationsApiKeysDetail: (teamId: string, stationId: string, params: RequestParams = {}) =>
       this.request<VoListStationApiKeysResponse, any>({
         path: `/api/v1/teams/${teamId}/stations/${stationId}/api-keys`,
         method: "GET",
@@ -11909,11 +11830,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserPostTeamsByTeamIdStationsByStationIdApiKeysRotate
+     * @name V1TeamsStationsApiKeysRotateCreate
      * @summary Rotate station api key (plaintext returned once)
      * @request POST:/api/v1/teams/{teamId}/stations/{stationId}/api-keys:rotate
      */
-    userPostTeamsByTeamIdStationsByStationIdApiKeysRotate: (
+    v1TeamsStationsApiKeysRotateCreate: (
       teamId: string,
       stationId: string,
       rotate: string,
@@ -11930,11 +11851,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserPutTeamsByTeamIdStationsByStationIdChannelConfig
+     * @name V1TeamsStationsChannelConfigUpdate
      * @summary Update station channel config
      * @request PUT:/api/v1/teams/{teamId}/stations/{stationId}/channel-config
      */
-    userPutTeamsByTeamIdStationsByStationIdChannelConfig: (
+    v1TeamsStationsChannelConfigUpdate: (
       teamId: string,
       stationId: string,
       request: VoUpdateStationChannelConfigRequest,
@@ -11953,11 +11874,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserStationsDelete
+     * @name V1TeamsStationsDeleteCreate
      * @summary Delete station (soft)
      * @request POST:/api/v1/teams/{teamId}/stations/{stationId}/delete
      */
-    userStationsDelete: (teamId: string, stationId: string, params: RequestParams = {}) =>
+    v1TeamsStationsDeleteCreate: (teamId: string, stationId: string, params: RequestParams = {}) =>
       this.request<VoStation, any>({
         path: `/api/v1/teams/${teamId}/stations/${stationId}/delete`,
         method: "POST",
@@ -11969,11 +11890,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserStationsDisable
+     * @name V1TeamsStationsDisableCreate
      * @summary Disable station
      * @request POST:/api/v1/teams/{teamId}/stations/{stationId}/disable
      */
-    userStationsDisable: (teamId: string, stationId: string, params: RequestParams = {}) =>
+    v1TeamsStationsDisableCreate: (teamId: string, stationId: string, params: RequestParams = {}) =>
       this.request<VoStation, any>({
         path: `/api/v1/teams/${teamId}/stations/${stationId}/disable`,
         method: "POST",
@@ -11985,11 +11906,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserStationsEnable
+     * @name V1TeamsStationsEnableCreate
      * @summary Enable station
      * @request POST:/api/v1/teams/{teamId}/stations/{stationId}/enable
      */
-    userStationsEnable: (teamId: string, stationId: string, params: RequestParams = {}) =>
+    v1TeamsStationsEnableCreate: (teamId: string, stationId: string, params: RequestParams = {}) =>
       this.request<VoStation, any>({
         path: `/api/v1/teams/${teamId}/stations/${stationId}/enable`,
         method: "POST",
@@ -12001,11 +11922,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Usage
-     * @name UserGetTeamsByTeamIdUsageRollups
+     * @name V1TeamsUsageRollupsDetail
      * @summary List team usage rollups
      * @request GET:/api/v1/teams/{teamId}/usage-rollups
      */
-    userGetTeamsByTeamIdUsageRollups: (
+    v1TeamsUsageRollupsDetail: (
       teamId: string,
       query: {
         /** Start date (YYYY-MM-DD) */
@@ -12026,245 +11947,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags WebhookEndpoints
-     * @name UserGetTeamsByTeamIdWebhookEndpoints
-     * @summary List webhook endpoints
-     * @request GET:/api/v1/teams/{teamId}/webhook-endpoints
-     */
-    userGetTeamsByTeamIdWebhookEndpoints: (
-      teamId: string,
-      query?: {
-        /** Filter by digiEmployee ID */
-        digiEmployeeId?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<VoListWebhookEndpointsResponse, any>({
-        path: `/api/v1/teams/${teamId}/webhook-endpoints`,
-        method: "GET",
-        query: query,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags WebhookEndpoints
-     * @name UserPostTeamsByTeamIdWebhookEndpoints
-     * @summary Create webhook endpoint
-     * @request POST:/api/v1/teams/{teamId}/webhook-endpoints
-     */
-    userPostTeamsByTeamIdWebhookEndpoints: (
-      teamId: string,
-      request: VoCreateWebhookEndpointRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoCreateWebhookEndpointResponse, any>({
-        path: `/api/v1/teams/${teamId}/webhook-endpoints`,
-        method: "POST",
-        body: request,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags WebhookEndpoints
-     * @name UserGetTeamsByTeamIdWebhookEndpointsByEndpointId
-     * @summary Get webhook endpoint
-     * @request GET:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}
-     */
-    userGetTeamsByTeamIdWebhookEndpointsByEndpointId: (
-      teamId: string,
-      endpointId: string,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoWebhookEndpoint, any>({
-        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags WebhookEndpoints
-     * @name UserDeleteTeamsByTeamIdWebhookEndpointsByEndpointId
-     * @summary Delete webhook endpoint
-     * @request DELETE:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}
-     */
-    userDeleteTeamsByTeamIdWebhookEndpointsByEndpointId: (
-      teamId: string,
-      endpointId: string,
-      params: RequestParams = {},
-    ) =>
-      this.request<MapStringBool, any>({
-        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}`,
-        method: "DELETE",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags WebhookEndpoints
-     * @name UserPatchTeamsByTeamIdWebhookEndpointsByEndpointId
-     * @summary Patch webhook endpoint
-     * @request PATCH:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}
-     */
-    userPatchTeamsByTeamIdWebhookEndpointsByEndpointId: (
-      teamId: string,
-      endpointId: string,
-      request: VoUpdateWebhookEndpointRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoWebhookEndpoint, any>({
-        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}`,
-        method: "PATCH",
-        body: request,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags WebhookEndpoints
-     * @name UserPostTeamsByTeamIdWebhookEndpointsByEndpointIdDisable
-     * @summary Disable webhook endpoint
-     * @request POST:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}/disable
-     */
-    userPostTeamsByTeamIdWebhookEndpointsByEndpointIdDisable: (
-      teamId: string,
-      endpointId: string,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoWebhookEndpoint, any>({
-        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/disable`,
-        method: "POST",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags WebhookEndpoints
-     * @name UserPostTeamsByTeamIdWebhookEndpointsByEndpointIdEnable
-     * @summary Enable webhook endpoint
-     * @request POST:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}/enable
-     */
-    userPostTeamsByTeamIdWebhookEndpointsByEndpointIdEnable: (
-      teamId: string,
-      endpointId: string,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoWebhookEndpoint, any>({
-        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/enable`,
-        method: "POST",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags WebhookEndpoints
-     * @name UserGetTeamsByTeamIdWebhookEndpointsByEndpointIdEvents
-     * @summary List webhook endpoint events
-     * @request GET:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}/events
-     */
-    userGetTeamsByTeamIdWebhookEndpointsByEndpointIdEvents: (
-      teamId: string,
-      endpointId: string,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoListWebhookEndpointEventsResponse, any>({
-        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/events`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags WebhookEndpoints
-     * @name UserPostTeamsByTeamIdWebhookEndpointsByEndpointIdRotateSignatureSecret
-     * @summary Rotate webhook endpoint signature secret
-     * @request POST:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}/rotate-signature-secret
-     */
-    userPostTeamsByTeamIdWebhookEndpointsByEndpointIdRotateSignatureSecret: (
-      teamId: string,
-      endpointId: string,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoRotateWebhookEndpointSignatureSecretResponse, any>({
-        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/rotate-signature-secret`,
-        method: "POST",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags WebhookEndpoints
-     * @name UserPostTeamsByTeamIdWebhookEndpointsByEndpointIdRotateUrlToken
-     * @summary Rotate webhook endpoint URL token
-     * @request POST:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}/rotate-url-token
-     */
-    userPostTeamsByTeamIdWebhookEndpointsByEndpointIdRotateUrlToken: (
-      teamId: string,
-      endpointId: string,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoRotateWebhookEndpointTokenResponse, any>({
-        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/rotate-url-token`,
-        method: "POST",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags WebhookEndpoints
-     * @name UserGetTeamsByTeamIdWebhookEndpointsByEndpointIdRuns
-     * @summary List webhook endpoint runs
-     * @request GET:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}/runs
-     */
-    userGetTeamsByTeamIdWebhookEndpointsByEndpointIdRuns: (
-      teamId: string,
-      endpointId: string,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoListWebhookEndpointRunsResponse, any>({
-        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/runs`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
      * @tags Stations
-     * @name UserGetTeamsByTeamIdWeixinClawbotBindingSessionsByBindingSessionId
+     * @name V1TeamsWeixinClawbotBindingSessionsDetail
      * @summary Get weixin clawbot binding session detail
      * @request GET:/api/v1/teams/{teamId}/weixin-clawbot-binding-sessions/{bindingSessionId}
      */
-    userGetTeamsByTeamIdWeixinClawbotBindingSessionsByBindingSessionId: (
-      teamId: string,
-      bindingSessionId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsWeixinClawbotBindingSessionsDetail: (teamId: string, bindingSessionId: string, params: RequestParams = {}) =>
       this.request<VoWeixinClawBotBindingSessionResponse, any>({
         path: `/api/v1/teams/${teamId}/weixin-clawbot-binding-sessions/${bindingSessionId}`,
         method: "GET",
@@ -12276,11 +11964,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserPostTeamsByTeamIdWeixinClawbotBindingSessionsByBindingSessionIdVerifyCode
+     * @name V1TeamsWeixinClawbotBindingSessionsVerifyCodeCreate
      * @summary Submit weixin clawbot binding session verify code
      * @request POST:/api/v1/teams/{teamId}/weixin-clawbot-binding-sessions/{bindingSessionId}/verify-code
      */
-    userPostTeamsByTeamIdWeixinClawbotBindingSessionsByBindingSessionIdVerifyCode: (
+    v1TeamsWeixinClawbotBindingSessionsVerifyCodeCreate: (
       teamId: string,
       bindingSessionId: string,
       request: VoSubmitWeixinClawBotVerifyCodeRequest,
@@ -12299,11 +11987,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Workspaces
-     * @name UserGetTeamsByTeamIdWorkspaces
+     * @name V1TeamsWorkspacesDetail
      * @summary List workspaces
      * @request GET:/api/v1/teams/{teamId}/workspaces
      */
-    userGetTeamsByTeamIdWorkspaces: (
+    v1TeamsWorkspacesDetail: (
       teamId: string,
       query?: {
         /** Workspace status */
@@ -12323,11 +12011,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Workspaces
-     * @name UserPostTeamsByTeamIdWorkspaces
+     * @name V1TeamsWorkspacesCreate
      * @summary Create workspace
      * @request POST:/api/v1/teams/{teamId}/workspaces
      */
-    userPostTeamsByTeamIdWorkspaces: (teamId: string, request: VoCreateWorkspaceRequest, params: RequestParams = {}) =>
+    v1TeamsWorkspacesCreate: (teamId: string, request: VoCreateWorkspaceRequest, params: RequestParams = {}) =>
       this.request<VoWorkspace, any>({
         path: `/api/v1/teams/${teamId}/workspaces`,
         method: "POST",
@@ -12341,11 +12029,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Workspaces
-     * @name UserGetTeamsByTeamIdWorkspacesByWorkspaceId
+     * @name V1TeamsWorkspacesDetail2
      * @summary Get workspace
      * @request GET:/api/v1/teams/{teamId}/workspaces/{workspaceId}
+     * @originalName v1TeamsWorkspacesDetail
+     * @duplicate
      */
-    userGetTeamsByTeamIdWorkspacesByWorkspaceId: (teamId: string, workspaceId: string, params: RequestParams = {}) =>
+    v1TeamsWorkspacesDetail2: (teamId: string, workspaceId: string, params: RequestParams = {}) =>
       this.request<VoWorkspace, any>({
         path: `/api/v1/teams/${teamId}/workspaces/${workspaceId}`,
         method: "GET",
@@ -12357,11 +12047,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Workspaces
-     * @name UserPatchTeamsByTeamIdWorkspacesByWorkspaceId
+     * @name V1TeamsWorkspacesPartialUpdate
      * @summary Update workspace
      * @request PATCH:/api/v1/teams/{teamId}/workspaces/{workspaceId}
      */
-    userPatchTeamsByTeamIdWorkspacesByWorkspaceId: (
+    v1TeamsWorkspacesPartialUpdate: (
       teamId: string,
       workspaceId: string,
       request: VoUpdateWorkspaceRequest,
@@ -12380,15 +12070,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Workspaces
-     * @name UserPostTeamsByTeamIdWorkspacesByWorkspaceIdArchive
+     * @name V1TeamsWorkspacesArchiveCreate
      * @summary Archive workspace
      * @request POST:/api/v1/teams/{teamId}/workspaces/{workspaceId}/archive
      */
-    userPostTeamsByTeamIdWorkspacesByWorkspaceIdArchive: (
-      teamId: string,
-      workspaceId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsWorkspacesArchiveCreate: (teamId: string, workspaceId: string, params: RequestParams = {}) =>
       this.request<VoWorkspace, any>({
         path: `/api/v1/teams/${teamId}/workspaces/${workspaceId}/archive`,
         method: "POST",
@@ -12400,15 +12086,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Workspaces
-     * @name UserPostTeamsByTeamIdWorkspacesByWorkspaceIdDelete
+     * @name V1TeamsWorkspacesDeleteCreate
      * @summary Delete workspace
      * @request POST:/api/v1/teams/{teamId}/workspaces/{workspaceId}/delete
      */
-    userPostTeamsByTeamIdWorkspacesByWorkspaceIdDelete: (
-      teamId: string,
-      workspaceId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsWorkspacesDeleteCreate: (teamId: string, workspaceId: string, params: RequestParams = {}) =>
       this.request<VoWorkspace, any>({
         path: `/api/v1/teams/${teamId}/workspaces/${workspaceId}/delete`,
         method: "POST",
@@ -12420,15 +12102,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Workspaces
-     * @name UserPostTeamsByTeamIdWorkspacesByWorkspaceIdRestore
+     * @name V1TeamsWorkspacesRestoreCreate
      * @summary Restore workspace
      * @request POST:/api/v1/teams/{teamId}/workspaces/{workspaceId}/restore
      */
-    userPostTeamsByTeamIdWorkspacesByWorkspaceIdRestore: (
-      teamId: string,
-      workspaceId: string,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsWorkspacesRestoreCreate: (teamId: string, workspaceId: string, params: RequestParams = {}) =>
       this.request<VoWorkspace, any>({
         path: `/api/v1/teams/${teamId}/workspaces/${workspaceId}/restore`,
         method: "POST",
@@ -12440,11 +12118,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserPostWebSessionsByWebSessionIdClose
+     * @name V1WebSessionsCloseCreate
      * @summary Close a web session
      * @request POST:/api/v1/web-sessions/{webSessionId}/close
      */
-    userPostWebSessionsByWebSessionIdClose: (webSessionId: string, params: RequestParams = {}) =>
+    v1WebSessionsCloseCreate: (webSessionId: string, params: RequestParams = {}) =>
       this.request<VoWebSessionAckResponse, any>({
         path: `/api/v1/web-sessions/${webSessionId}/close`,
         method: "POST",
@@ -12456,11 +12134,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserGetWebSessionsByWebSessionIdEvents
+     * @name V1WebSessionsEventsDetail
      * @summary Get web session events
      * @request GET:/api/v1/web-sessions/{webSessionId}/events
      */
-    userGetWebSessionsByWebSessionIdEvents: (webSessionId: string, params: RequestParams = {}) =>
+    v1WebSessionsEventsDetail: (webSessionId: string, params: RequestParams = {}) =>
       this.request<VoWebSessionAckResponse, any>({
         path: `/api/v1/web-sessions/${webSessionId}/events`,
         method: "GET",
@@ -12472,11 +12150,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserPostWebSessionsByWebSessionIdMessages
+     * @name V1WebSessionsMessagesCreate
      * @summary Post message to a web session
      * @request POST:/api/v1/web-sessions/{webSessionId}/messages
      */
-    userPostWebSessionsByWebSessionIdMessages: (
+    v1WebSessionsMessagesCreate: (
       webSessionId: string,
       request: VoWebSessionMessageRequest,
       params: RequestParams = {},
@@ -12494,39 +12172,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Stations
-     * @name UserPostWebSessionsByWebSessionIdToolResults
+     * @name V1WebSessionsToolResultsCreate
      * @summary Post tool result to a web session
      * @request POST:/api/v1/web-sessions/{webSessionId}/tool-results
      */
-    userPostWebSessionsByWebSessionIdToolResults: (
+    v1WebSessionsToolResultsCreate: (
       webSessionId: string,
       request: VoWebSessionToolResultRequest,
       params: RequestParams = {},
     ) =>
       this.request<VoWebSessionAckResponse, any>({
         path: `/api/v1/web-sessions/${webSessionId}/tool-results`,
-        method: "POST",
-        body: request,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags WebhookEndpoints
-     * @name UserPostWebhookEndpointEvent
-     * @summary Accept webhook endpoint event
-     * @request POST:/api/v1/webhooks/{publicToken}
-     */
-    userPostWebhookEndpointEvent: (
-      publicToken: string,
-      request: VoCreateWeixinClawBotBindingSessionRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoAcceptWebhookEventResponse, any>({
-        path: `/api/v1/webhooks/${publicToken}`,
         method: "POST",
         body: request,
         type: ContentType.Json,
