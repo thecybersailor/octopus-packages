@@ -453,6 +453,11 @@ export interface BasePinOKVoCountTeamSkillsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoCreateEmailIngressAddressResponse {
+  data?: VoCreateEmailIngressAddressResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoCreateOfficePreviewSessionResponse {
   data?: VoCreateOfficePreviewSessionResponse;
   trace_id?: string;
@@ -505,6 +510,11 @@ export interface BasePinOKVoDigiEmployeeKBAccess {
 
 export interface BasePinOKVoDigiEmployeeWorkspaceAccess {
   data?: VoDigiEmployeeWorkspaceAccess;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoEmailIngressAddress {
+  data?: VoEmailIngressAddress;
   trace_id?: string;
 }
 
@@ -770,6 +780,11 @@ export interface BasePinOKVoListCronTriggersResponse {
 
 export interface BasePinOKVoListDigiEmployeesResponse {
   data?: VoListDigiEmployeesResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListEmailIngressAddressesResponse {
+  data?: VoListEmailIngressAddressesResponse;
   trace_id?: string;
 }
 
@@ -2605,6 +2620,20 @@ export interface VoCreateCustomCalendarSourceRequest {
   timezone: string;
 }
 
+export interface VoCreateEmailIngressAddressRequest {
+  actionType: string;
+  digiEmployeeId: string;
+  enabled?: boolean;
+  messageTemplate?: string;
+  name: string;
+  targetConversationId?: string;
+  titleTemplate?: string;
+}
+
+export interface VoCreateEmailIngressAddressResponse {
+  address?: VoEmailIngressAddress;
+}
+
 export interface VoCreateFilePreviewSessionRequest {
   logicalPath: string;
   sourceKind: string;
@@ -2883,6 +2912,33 @@ export interface VoDigiWorker {
   score?: number;
   skillsets?: VoSkillsetLite[];
   toolkitKeys?: string[];
+}
+
+export interface VoEmailIngressAddress {
+  actionType?: string;
+  address?: string;
+  addressKey?: string;
+  createdAt?: string;
+  createdById?: string;
+  creatorActor?: VoActorSummary;
+  digiEmployeeId?: string;
+  domain?: string;
+  employeeKey?: string;
+  enabled?: boolean;
+  executorActor?: VoActorSummary;
+  id?: string;
+  lastError?: string;
+  lastReceivedAt?: string;
+  lastStatus?: string;
+  lastTriggeredAt?: string;
+  messageTemplate?: string;
+  name?: string;
+  namePrefix?: string;
+  runCount?: number;
+  targetConversationId?: string;
+  teamId?: string;
+  titleTemplate?: string;
+  updatedAt?: string;
 }
 
 export interface VoEnableAssemblableSkillRequest {
@@ -3439,6 +3495,10 @@ export interface VoListCronTriggersResponse {
 
 export interface VoListDigiEmployeesResponse {
   items?: VoDigiEmployee[];
+}
+
+export interface VoListEmailIngressAddressesResponse {
+  items?: VoEmailIngressAddress[];
 }
 
 export interface VoListEndpointTypesResponse {
@@ -4870,6 +4930,15 @@ export interface VoUpdateCronTriggerRequest {
   messageTemplate?: string;
   targetConversationId?: string;
   timezone?: string;
+  titleTemplate?: string;
+}
+
+export interface VoUpdateEmailIngressAddressRequest {
+  actionType?: string;
+  enabled?: boolean;
+  messageTemplate?: string;
+  name?: string;
+  targetConversationId?: string;
   titleTemplate?: string;
 }
 
@@ -9649,6 +9718,141 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "PUT",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesDetail
+     * @summary List email ingress addresses
+     * @request GET:/api/v1/teams/{teamId}/email-ingress-addresses
+     */
+    v1TeamsEmailIngressAddressesDetail: (
+      teamId: string,
+      query?: {
+        /** Filter by digiEmployee ID */
+        digiEmployeeId?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoListEmailIngressAddressesResponse, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesCreate
+     * @summary Create email ingress address
+     * @request POST:/api/v1/teams/{teamId}/email-ingress-addresses
+     */
+    v1TeamsEmailIngressAddressesCreate: (
+      teamId: string,
+      request: VoCreateEmailIngressAddressRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCreateEmailIngressAddressResponse, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesDetail2
+     * @summary Get email ingress address
+     * @request GET:/api/v1/teams/{teamId}/email-ingress-addresses/{addressId}
+     * @originalName v1TeamsEmailIngressAddressesDetail
+     * @duplicate
+     */
+    v1TeamsEmailIngressAddressesDetail2: (teamId: string, addressId: string, params: RequestParams = {}) =>
+      this.request<VoEmailIngressAddress, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses/${addressId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesDelete
+     * @summary Delete email ingress address
+     * @request DELETE:/api/v1/teams/{teamId}/email-ingress-addresses/{addressId}
+     */
+    v1TeamsEmailIngressAddressesDelete: (teamId: string, addressId: string, params: RequestParams = {}) =>
+      this.request<MapStringBool, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses/${addressId}`,
+        method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesPartialUpdate
+     * @summary Patch email ingress address
+     * @request PATCH:/api/v1/teams/{teamId}/email-ingress-addresses/{addressId}
+     */
+    v1TeamsEmailIngressAddressesPartialUpdate: (
+      teamId: string,
+      addressId: string,
+      request: VoUpdateEmailIngressAddressRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoEmailIngressAddress, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses/${addressId}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesDisableCreate
+     * @summary Disable email ingress address
+     * @request POST:/api/v1/teams/{teamId}/email-ingress-addresses/{addressId}/disable
+     */
+    v1TeamsEmailIngressAddressesDisableCreate: (teamId: string, addressId: string, params: RequestParams = {}) =>
+      this.request<VoEmailIngressAddress, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses/${addressId}/disable`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesEnableCreate
+     * @summary Enable email ingress address
+     * @request POST:/api/v1/teams/{teamId}/email-ingress-addresses/{addressId}/enable
+     */
+    v1TeamsEmailIngressAddressesEnableCreate: (teamId: string, addressId: string, params: RequestParams = {}) =>
+      this.request<VoEmailIngressAddress, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses/${addressId}/enable`,
+        method: "POST",
         format: "json",
         ...params,
       }),
