@@ -2605,12 +2605,10 @@ export interface VoCreateCronTriggerRequest {
   cronSpec: string;
   digiEmployeeId?: string;
   enabled?: boolean;
-  initialPromptTemplate?: string;
   maxRuns?: number;
-  messageTemplate?: string;
+  promptText?: string;
   targetConversationId?: string;
   timezone: string;
-  titleTemplate?: string;
 }
 
 export interface VoCreateCustomCalendarSourceRequest {
@@ -2624,10 +2622,9 @@ export interface VoCreateEmailIngressAddressRequest {
   actionType: string;
   digiEmployeeId: string;
   enabled?: boolean;
-  messageTemplate?: string;
   name: string;
+  promptText?: string;
   targetConversationId?: string;
-  titleTemplate?: string;
 }
 
 export interface VoCreateEmailIngressAddressResponse {
@@ -2731,12 +2728,10 @@ export interface VoCreateWebhookEndpointRequest {
   debounceSeconds?: number;
   digiEmployeeId?: string;
   enabled?: boolean;
-  initialPromptTemplate?: string;
-  messageTemplate?: string;
   name: string;
+  promptText?: string;
   signatureEnabled?: boolean;
   targetConversationId?: string;
-  titleTemplate?: string;
 }
 
 export interface VoCreateWebhookEndpointResponse {
@@ -2779,17 +2774,15 @@ export interface VoCronTrigger {
   enabled?: boolean;
   executorActor?: VoActorSummary;
   id?: string;
-  initialPromptTemplate?: string;
   lastError?: string;
   lastStatus?: string;
   lastTriggeredAt?: string;
   maxRuns?: number;
-  messageTemplate?: string;
+  promptText?: string;
   runCount?: number;
   targetConversationId?: string;
   teamId?: string;
   timezone?: string;
-  titleTemplate?: string;
 }
 
 export interface VoCronTriggerRun {
@@ -2931,13 +2924,12 @@ export interface VoEmailIngressAddress {
   lastReceivedAt?: string;
   lastStatus?: string;
   lastTriggeredAt?: string;
-  messageTemplate?: string;
   name?: string;
   namePrefix?: string;
+  promptText?: string;
   runCount?: number;
   targetConversationId?: string;
   teamId?: string;
-  titleTemplate?: string;
   updatedAt?: string;
 }
 
@@ -4925,21 +4917,18 @@ export interface VoUpdateCronTriggerRequest {
   cronSpec?: string;
   digiEmployeeId?: string;
   enabled?: boolean;
-  initialPromptTemplate?: string;
   maxRuns?: number;
-  messageTemplate?: string;
+  promptText?: string;
   targetConversationId?: string;
   timezone?: string;
-  titleTemplate?: string;
 }
 
 export interface VoUpdateEmailIngressAddressRequest {
   actionType?: string;
   enabled?: boolean;
-  messageTemplate?: string;
   name?: string;
+  promptText?: string;
   targetConversationId?: string;
-  titleTemplate?: string;
 }
 
 export interface VoUpdateGroupSessionReplyTargetsRequest {
@@ -4966,12 +4955,10 @@ export interface VoUpdateWebhookEndpointRequest {
   debounceSeconds?: number;
   digiEmployeeId?: string;
   enabled?: boolean;
-  initialPromptTemplate?: string;
-  messageTemplate?: string;
   name?: string;
+  promptText?: string;
   signatureEnabled?: boolean;
   targetConversationId?: string;
-  titleTemplate?: string;
 }
 
 export interface VoUpdateWecomIntegrationRequest {
@@ -5125,17 +5112,16 @@ export interface VoWebhookEndpoint {
   enabled?: boolean;
   executorActor?: VoActorSummary;
   id?: string;
-  initialPromptTemplate?: string;
   lastError?: string;
   lastReceivedAt?: string;
   lastStatus?: string;
   lastTriggeredAt?: string;
   maxBodyBytes?: number;
-  messageTemplate?: string;
   name?: string;
   pendingEventCount?: number;
   pendingWindowDueAt?: string;
   pendingWindowStartedAt?: string;
+  promptText?: string;
   publicTokenPreview?: string;
   publicUrl?: string;
   runCount?: number;
@@ -5143,7 +5129,6 @@ export interface VoWebhookEndpoint {
   signatureSecretPreview?: string;
   targetConversationId?: string;
   teamId?: string;
-  titleTemplate?: string;
   updatedAt?: string;
 }
 
