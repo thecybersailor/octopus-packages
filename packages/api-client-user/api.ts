@@ -453,6 +453,11 @@ export interface BasePinOKVoCountTeamSkillsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoCreateConversationShareResponse {
+  data?: VoCreateConversationShareResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoCreateEmailIngressAddressResponse {
   data?: VoCreateEmailIngressAddressResponse;
   trace_id?: string;
@@ -1105,6 +1110,11 @@ export interface BasePinOKVoRotateWebhookEndpointSignatureSecretResponse {
 
 export interface BasePinOKVoRotateWebhookEndpointTokenResponse {
   data?: VoRotateWebhookEndpointTokenResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoSharedConversationResponse {
+  data?: VoSharedConversationResponse;
   trace_id?: string;
 }
 
@@ -2612,6 +2622,10 @@ export interface VoCreateConversationRequest {
   teamId?: string;
   title?: string;
   workspaceId?: string;
+}
+
+export interface VoCreateConversationShareResponse {
+  shareId?: string;
 }
 
 export interface VoCreateCronTriggerRequest {
@@ -4162,6 +4176,34 @@ export interface VoRotateWebhookEndpointTokenResponse {
   endpoint?: VoWebhookEndpoint;
   publicToken?: string;
   publicUrl?: string;
+}
+
+export interface VoSharedConversationMessage {
+  artifacts?: VoConversationMessageArtifact[];
+  content?: string;
+  createdAt?: string;
+  messageId?: string;
+  parts?: VoConversationMessagePart[];
+  role?: string;
+  seq?: number;
+  turnId?: string;
+}
+
+export interface VoSharedConversationMeta {
+  assistant?: VoConversationAssistant;
+  digiEmployeeId?: string;
+  id?: string;
+  lastMessageAt?: string;
+  lastSeq?: number;
+  teamId?: string;
+  title?: string;
+}
+
+export interface VoSharedConversationResponse {
+  conversation?: VoSharedConversationMeta;
+  format?: string;
+  messages?: VoSharedConversationMessage[];
+  shareId?: string;
 }
 
 export interface VoSimpleOKResponse {
@@ -7633,6 +7675,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
+     * @name V1ConversationsShareCreate
+     * @summary Create conversation share
+     * @request POST:/api/v1/conversations/{id}/share
+     */
+    v1ConversationsShareCreate: (id: string, params: RequestParams = {}) =>
+      this.request<VoCreateConversationShareResponse, any>({
+        path: `/api/v1/conversations/${id}/share`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Conversations
      * @name V1ConversationsStreamDetail
      * @summary Stream conversation runtime events
      * @request GET:/api/v1/conversations/{id}/stream
@@ -8317,6 +8375,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v1/portal-brand/resolve`,
         method: "GET",
         query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags PublicConversationShares
+     * @name V1SharedDetail
+     * @summary Get shared conversation transcript
+     * @request GET:/api/v1/shared/{shareId}
+     */
+    v1SharedDetail: (shareId: string, params: RequestParams = {}) =>
+      this.request<VoSharedConversationResponse, any>({
+        path: `/api/v1/shared/${shareId}`,
+        method: "GET",
         format: "json",
         ...params,
       }),
