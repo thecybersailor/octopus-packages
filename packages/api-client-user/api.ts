@@ -463,6 +463,11 @@ export interface BasePinOKVoCreateEmailIngressAddressResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoCreateFeishuBotBindingSessionResponse {
+  data?: VoCreateFeishuBotBindingSessionResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoCreateOfficePreviewSessionResponse {
   data?: VoCreateOfficePreviewSessionResponse;
   trace_id?: string;
@@ -535,6 +540,11 @@ export interface BasePinOKVoExternalUserDetail {
 
 export interface BasePinOKVoExternalUserVerificationFlowDetail {
   data?: VoExternalUserVerificationFlowDetail;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoFeishuBotBindingSessionResponse {
+  data?: VoFeishuBotBindingSessionResponse;
   trace_id?: string;
 }
 
@@ -2661,6 +2671,16 @@ export interface VoCreateEmailIngressAddressResponse {
   address?: VoEmailIngressAddress;
 }
 
+export type VoCreateFeishuBotBindingSessionRequest = object;
+
+export interface VoCreateFeishuBotBindingSessionResponse {
+  authorizeUrl?: string;
+  bindingSessionId?: string;
+  expireAt?: string;
+  qrCodeUrl?: string;
+  status?: string;
+}
+
 export interface VoCreateFilePreviewSessionRequest {
   logicalPath: string;
   sourceKind: string;
@@ -3100,6 +3120,18 @@ export interface VoExternalUserVerificationMechanismItem {
   id?: string;
   mechanismType?: string;
   sortOrder?: number;
+}
+
+export interface VoFeishuBotBindingSessionResponse {
+  appId?: string;
+  authorizeUrl?: string;
+  bindingSessionId?: string;
+  errorCode?: string;
+  errorMessage?: string;
+  expireAt?: string;
+  qrCodeUrl?: string;
+  stationId?: string;
+  status?: string;
 }
 
 export interface VoFileGrant {
@@ -9503,6 +9535,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Stations
+     * @name V1TeamsDigiemployeesFeishuBotBindingSessionsCreate
+     * @summary Create feishu bot binding session
+     * @request POST:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/feishu-bot-binding-sessions
+     */
+    v1TeamsDigiemployeesFeishuBotBindingSessionsCreate: (
+      teamId: string,
+      digiEmployeeId: string,
+      request: VoCreateFeishuBotBindingSessionRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCreateFeishuBotBindingSessionResponse, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/feishu-bot-binding-sessions`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Roster
      * @name V1TeamsDigiemployeesFireCreate
      * @summary Fire digiemployee
@@ -10177,6 +10232,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v1TeamsExternalUsersConversationsDetail: (teamId: string, externalUserId: string, params: RequestParams = {}) =>
       this.request<VoListExternalUserConversationsResponse, any>({
         path: `/api/v1/teams/${teamId}/external-users/${externalUserId}/conversations`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1TeamsFeishuBotBindingSessionsDetail
+     * @summary Get feishu bot binding session detail
+     * @request GET:/api/v1/teams/{teamId}/feishu-bot-binding-sessions/{bindingSessionId}
+     */
+    v1TeamsFeishuBotBindingSessionsDetail: (teamId: string, bindingSessionId: string, params: RequestParams = {}) =>
+      this.request<VoFeishuBotBindingSessionResponse, any>({
+        path: `/api/v1/teams/${teamId}/feishu-bot-binding-sessions/${bindingSessionId}`,
         method: "GET",
         format: "json",
         ...params,
