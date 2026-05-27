@@ -1972,6 +1972,7 @@ export interface VoAdminNumberRange {
 }
 
 export interface VoAdminOctopusClusterItem {
+  browserLiveBaseURL?: string;
   fileGatewayBaseURL?: string;
   gatewayBaseURL?: string;
   isActiveForCreate?: boolean;
@@ -3983,6 +3984,7 @@ export interface VoPatchAdminLLMModelRequest {
 }
 
 export interface VoPatchAdminOctopusClusterRequest {
+  browserLiveBaseURL?: string;
   fileGatewayBaseURL?: string;
   gatewayBaseURL?: string;
   isActiveForCreate?: boolean;
@@ -5061,6 +5063,7 @@ export interface VoUpdateWorkspaceRequest {
 }
 
 export interface VoUpsertAdminOctopusClusterRequest {
+  browserLiveBaseURL: string;
   fileGatewayBaseURL: string;
   gatewayBaseURL: string;
   isActiveForCreate?: boolean;
