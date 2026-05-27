@@ -388,6 +388,16 @@ export interface BasePinOKVoBioPictureUploadURLResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoCalendarSource {
+  data?: VoCalendarSource;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoCalendarSourceSyncRun {
+  data?: VoCalendarSourceSyncRun;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoConnectionAuthTaskCreateResponse {
   data?: VoConnectionAuthTaskCreateResponse;
   trace_id?: string;
@@ -438,8 +448,28 @@ export interface BasePinOKVoConversationTurnLLMTraceCallDetail {
   trace_id?: string;
 }
 
+export interface BasePinOKVoCountTeamSkillsResponse {
+  data?: VoCountTeamSkillsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoCreateEmailIngressAddressResponse {
+  data?: VoCreateEmailIngressAddressResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoCreateFeishuBotBindingSessionResponse {
+  data?: VoCreateFeishuBotBindingSessionResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoCreateOfficePreviewSessionResponse {
   data?: VoCreateOfficePreviewSessionResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoCreateWebhookEndpointResponse {
+  data?: VoCreateWebhookEndpointResponse;
   trace_id?: string;
 }
 
@@ -488,6 +518,11 @@ export interface BasePinOKVoDigiEmployeeWorkspaceAccess {
   trace_id?: string;
 }
 
+export interface BasePinOKVoEmailIngressAddress {
+  data?: VoEmailIngressAddress;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoEndpointTypeConfigSchemaResponse {
   data?: VoEndpointTypeConfigSchemaResponse;
   trace_id?: string;
@@ -500,6 +535,11 @@ export interface BasePinOKVoExternalUserDetail {
 
 export interface BasePinOKVoExternalUserVerificationFlowDetail {
   data?: VoExternalUserVerificationFlowDetail;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoFeishuBotBindingSessionResponse {
+  data?: VoFeishuBotBindingSessionResponse;
   trace_id?: string;
 }
 
@@ -708,6 +748,21 @@ export interface BasePinOKVoListAssemblableSkillsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListCalendarCatalogResponse {
+  data?: VoListCalendarCatalogResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListCalendarSourceEventsResponse {
+  data?: VoListCalendarSourceEventsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListCalendarSourcesResponse {
+  data?: VoListCalendarSourcesResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListConversationDesktopSnapshotsResponse {
   data?: VoListConversationDesktopSnapshotsResponse;
   trace_id?: string;
@@ -735,6 +790,11 @@ export interface BasePinOKVoListCronTriggersResponse {
 
 export interface BasePinOKVoListDigiEmployeesResponse {
   data?: VoListDigiEmployeesResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListEmailIngressAddressesResponse {
+  data?: VoListEmailIngressAddressesResponse;
   trace_id?: string;
 }
 
@@ -908,6 +968,11 @@ export interface BasePinOKVoListTenantAdminExternalAgentSpecsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListTenantAdminImageGenerationProvidersResponse {
+  data?: VoListTenantAdminImageGenerationProvidersResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListTenantAdminJobTagsResponse {
   data?: VoListTenantAdminJobTagsResponse;
   trace_id?: string;
@@ -935,6 +1000,21 @@ export interface BasePinOKVoListTenantAdminMarketWorkerCandidatesResponse {
 
 export interface BasePinOKVoListTenantAdminMarketWorkersResponse {
   data?: VoListTenantAdminMarketWorkersResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListWebhookEndpointEventsResponse {
+  data?: VoListWebhookEndpointEventsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListWebhookEndpointRunsResponse {
+  data?: VoListWebhookEndpointRunsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListWebhookEndpointsResponse {
+  data?: VoListWebhookEndpointsResponse;
   trace_id?: string;
 }
 
@@ -1003,6 +1083,11 @@ export interface BasePinOKVoPostConversationHumanTurnResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoPostConversationTurnResumeResponse {
+  data?: VoPostConversationTurnResumeResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoPostConversationTurnSteerResponse {
   data?: VoPostConversationTurnSteerResponse;
   trace_id?: string;
@@ -1015,6 +1100,16 @@ export interface BasePinOKVoRemoteTaskDeleteResponse {
 
 export interface BasePinOKVoRotateStationApiKeyResponse {
   data?: VoRotateStationApiKeyResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoRotateWebhookEndpointSignatureSecretResponse {
+  data?: VoRotateWebhookEndpointSignatureSecretResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoRotateWebhookEndpointTokenResponse {
+  data?: VoRotateWebhookEndpointTokenResponse;
   trace_id?: string;
 }
 
@@ -1148,6 +1243,11 @@ export interface BasePinOKVoTenantAdminDigiworkerDebugConfig {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTenantAdminGenerateDigiWorkerAvatarPreviewResponse {
+  data?: VoTenantAdminGenerateDigiWorkerAvatarPreviewResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTenantAdminMarketConfig {
   data?: VoTenantAdminMarketConfig;
   trace_id?: string;
@@ -1220,6 +1320,11 @@ export interface BasePinOKVoWebSessionAckResponse {
 
 export interface BasePinOKVoWebSessionMessageResponse {
   data?: VoWebSessionMessageResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWebhookEndpoint {
+  data?: VoWebhookEndpoint;
   trace_id?: string;
 }
 
@@ -1726,6 +1831,8 @@ export interface VoAdminDeleteStorageRequest {
 
 export interface VoAdminDigiEmployee {
   digiWorkerId?: string;
+  homeMode?: string;
+  homeModeOverride?: string;
   id?: string;
   status?: string;
   teamId?: string;
@@ -1752,6 +1859,7 @@ export interface VoAdminDigiWorker {
   bioPicture?: string;
   hireableCount?: number;
   hiredCount?: number;
+  homeMode?: string;
   id?: string;
   jobTags?: VoJobTagLite[];
   marketVisible?: boolean;
@@ -1884,10 +1992,15 @@ export interface VoAdminScanSkillsRequest {
 export interface VoAdminScanSkillsResponse {
   deleted?: number;
   scanned?: number;
+  skills?: VoAdminSkill[];
   upserted?: number;
 }
 
 export interface VoAdminSkill {
+  assembledToCurrentDigiEmployee?: boolean;
+  assemblyNextSystemAdminArgs?: string[];
+  assemblyNextSystemAdminCommand?: string;
+  assemblyStatus?: string;
   contentSha?: string;
   description?: string;
   filePath?: string;
@@ -2109,6 +2222,62 @@ export interface VoBioPictureUploadURLResponse {
   uploadUrl?: string;
 }
 
+export interface VoCalendarCatalogItem {
+  category?: string;
+  defaultTimezone?: string;
+  key?: string;
+  name?: string;
+  region?: string;
+  sourceType?: string;
+  url?: string;
+  urlTemplate?: string;
+}
+
+export interface VoCalendarSource {
+  catalogKey?: string;
+  createdAt?: string;
+  enabled?: boolean;
+  icalUrl?: string;
+  id?: string;
+  lastSyncError?: string;
+  lastSyncStatus?: string;
+  lastSyncedAt?: string;
+  maxStalenessMinutes?: number;
+  name?: string;
+  refreshIntervalMinutes?: number;
+  scope?: string;
+  teamId?: string;
+  timezone?: string;
+  updatedAt?: string;
+}
+
+export interface VoCalendarSourceEvent {
+  allDay?: boolean;
+  categories?: string[];
+  description?: string;
+  endsAt?: string;
+  id?: string;
+  kind?: string;
+  localDate?: string;
+  recurrenceId?: string;
+  sourceId?: string;
+  startsAt?: string;
+  summary?: string;
+  uid?: string;
+  workingDayOverride?: string;
+}
+
+export interface VoCalendarSourceSyncRun {
+  errorMessage?: string;
+  eventsUpserted?: number;
+  finishedAt?: string;
+  httpStatus?: number;
+  id?: string;
+  sourceId?: string;
+  startedAt?: string;
+  status?: string;
+}
+
 export interface VoConnectionAuthTaskAuthField {
   helpText?: string;
   key?: string;
@@ -2291,6 +2460,12 @@ export interface VoConversationMeta {
   workspaceId?: string;
 }
 
+export interface VoConversationRuntimeIdentity {
+  appVersion?: string;
+  podName?: string;
+  sessionId?: string;
+}
+
 export interface VoConversationRuntimeItem {
   actionId?: string;
   artifacts?: VoConversationMessageArtifact[];
@@ -2394,11 +2569,16 @@ export interface VoConversationTurnLLMTraceCallSummary {
   usage?: RuntimesnapshotHostLLMUsage;
 }
 
+export interface VoCountTeamSkillsResponse {
+  count?: number;
+}
+
 export interface VoCreateAdminDigiWorkerRequest {
   allowDeployStation?: boolean;
   bio?: string;
   bioPicture?: string;
   hireableCount: number;
+  homeMode?: string;
   id?: string;
   jobTagIds?: string[];
   marketVisible?: boolean;
@@ -2431,14 +2611,44 @@ export interface VoCreateConversationRequest {
 
 export interface VoCreateCronTriggerRequest {
   actionType: string;
+  calendarSourceIds?: string[];
   cronSpec: string;
   digiEmployeeId?: string;
   enabled?: boolean;
-  initialPromptTemplate?: string;
-  messageTemplate?: string;
+  maxRuns?: number;
+  promptText?: string;
   targetConversationId?: string;
   timezone: string;
-  titleTemplate?: string;
+}
+
+export interface VoCreateCustomCalendarSourceRequest {
+  enabled?: boolean;
+  icalUrl: string;
+  name: string;
+  timezone: string;
+}
+
+export interface VoCreateEmailIngressAddressRequest {
+  actionType: string;
+  digiEmployeeId: string;
+  enabled?: boolean;
+  name: string;
+  promptText?: string;
+  targetConversationId?: string;
+}
+
+export interface VoCreateEmailIngressAddressResponse {
+  address?: VoEmailIngressAddress;
+}
+
+export type VoCreateFeishuBotBindingSessionRequest = object;
+
+export interface VoCreateFeishuBotBindingSessionResponse {
+  authorizeUrl?: string;
+  bindingSessionId?: string;
+  expireAt?: string;
+  qrCodeUrl?: string;
+  status?: string;
 }
 
 export interface VoCreateFilePreviewSessionRequest {
@@ -2533,6 +2743,24 @@ export interface VoCreateWebSessionRequest {
   hostTools?: VoHostToolDescriptor[];
 }
 
+export interface VoCreateWebhookEndpointRequest {
+  actionType: string;
+  debounceSeconds?: number;
+  digiEmployeeId?: string;
+  enabled?: boolean;
+  name: string;
+  promptText?: string;
+  signatureEnabled?: boolean;
+  targetConversationId?: string;
+}
+
+export interface VoCreateWebhookEndpointResponse {
+  endpoint?: VoWebhookEndpoint;
+  publicToken?: string;
+  publicUrl?: string;
+  signatureSecret?: string;
+}
+
 export interface VoCreateWecomIntegrationRequest {
   agentId?: string;
   appType?: string;
@@ -2557,6 +2785,8 @@ export interface VoCreateWorkspaceRequest {
 
 export interface VoCronTrigger {
   actionType?: string;
+  autoDisabledAt?: string;
+  calendarSourceIds?: string[];
   createdById?: string;
   creatorActor?: VoActorSummary;
   cronSpec?: string;
@@ -2564,15 +2794,15 @@ export interface VoCronTrigger {
   enabled?: boolean;
   executorActor?: VoActorSummary;
   id?: string;
-  initialPromptTemplate?: string;
   lastError?: string;
   lastStatus?: string;
   lastTriggeredAt?: string;
-  messageTemplate?: string;
+  maxRuns?: number;
+  promptText?: string;
+  runCount?: number;
   targetConversationId?: string;
   teamId?: string;
   timezone?: string;
-  titleTemplate?: string;
 }
 
 export interface VoCronTriggerRun {
@@ -2609,7 +2839,10 @@ export interface VoDigiEmployee {
   digiWorkerId?: string;
   externalAgentBinding?: VoExternalAgentBindingSummary;
   hiredAt?: string;
+  homeMode?: string;
+  homeModeOverride?: string;
   id?: string;
+  lastActiveAt?: string;
   managerDigiEmployeeId?: string;
   quickStartPrompts?: string[];
   resolvedBio?: string;
@@ -2678,6 +2911,7 @@ export interface VoDigiWorker {
   bioPicture?: string;
   hireableCount?: number;
   hiredCount?: number;
+  homeMode?: string;
   id?: string;
   jobTags?: VoJobTagLite[];
   marketVisible?: boolean;
@@ -2693,8 +2927,38 @@ export interface VoDigiWorker {
   toolkitKeys?: string[];
 }
 
+export interface VoEmailIngressAddress {
+  actionType?: string;
+  address?: string;
+  addressKey?: string;
+  createdAt?: string;
+  createdById?: string;
+  creatorActor?: VoActorSummary;
+  digiEmployeeId?: string;
+  domain?: string;
+  employeeKey?: string;
+  enabled?: boolean;
+  executorActor?: VoActorSummary;
+  id?: string;
+  lastError?: string;
+  lastReceivedAt?: string;
+  lastStatus?: string;
+  lastTriggeredAt?: string;
+  name?: string;
+  namePrefix?: string;
+  promptText?: string;
+  runCount?: number;
+  targetConversationId?: string;
+  teamId?: string;
+  updatedAt?: string;
+}
+
 export interface VoEnableAssemblableSkillRequest {
   displayName?: string;
+}
+
+export interface VoEnableBuiltinCalendarSourceRequest {
+  catalogKey: string;
 }
 
 export interface VoEndpointConfigField {
@@ -2826,6 +3090,18 @@ export interface VoExternalUserVerificationMechanismItem {
   id?: string;
   mechanismType?: string;
   sortOrder?: number;
+}
+
+export interface VoFeishuBotBindingSessionResponse {
+  appId?: string;
+  authorizeUrl?: string;
+  bindingSessionId?: string;
+  errorCode?: string;
+  errorMessage?: string;
+  expireAt?: string;
+  qrCodeUrl?: string;
+  stationId?: string;
+  status?: string;
 }
 
 export interface VoFileGrant {
@@ -3207,6 +3483,18 @@ export interface VoListAssemblableSkillsResponse {
   items?: VoAssemblableSkill[];
 }
 
+export interface VoListCalendarCatalogResponse {
+  items?: VoCalendarCatalogItem[];
+}
+
+export interface VoListCalendarSourceEventsResponse {
+  items?: VoCalendarSourceEvent[];
+}
+
+export interface VoListCalendarSourcesResponse {
+  items?: VoCalendarSource[];
+}
+
 export interface VoListConversationDesktopSnapshotsResponse {
   hasMore?: boolean;
   items?: VoConversationDesktopSnapshot[];
@@ -3231,6 +3519,10 @@ export interface VoListCronTriggersResponse {
 
 export interface VoListDigiEmployeesResponse {
   items?: VoDigiEmployee[];
+}
+
+export interface VoListEmailIngressAddressesResponse {
+  items?: VoEmailIngressAddress[];
 }
 
 export interface VoListEndpointTypesResponse {
@@ -3382,6 +3674,11 @@ export interface VoListTenantAdminExternalAgentSpecsResponse {
   items?: VoTenantAdminExternalAgentSpec[];
 }
 
+export interface VoListTenantAdminImageGenerationProvidersResponse {
+  items?: VoTenantAdminImageGenerationProvider[];
+  recommendedProvider?: string;
+}
+
 export interface VoListTenantAdminJobTagsResponse {
   items?: VoJobTagItem[];
 }
@@ -3407,6 +3704,18 @@ export interface VoListTenantAdminMarketWorkerCandidatesResponse {
 export interface VoListTenantAdminMarketWorkersResponse {
   items?: VoTenantAdminMarketWorker[];
   nextCursor?: string;
+}
+
+export interface VoListWebhookEndpointEventsResponse {
+  items?: VoWebhookEndpointEvent[];
+}
+
+export interface VoListWebhookEndpointRunsResponse {
+  items?: VoWebhookEndpointRun[];
+}
+
+export interface VoListWebhookEndpointsResponse {
+  items?: VoWebhookEndpoint[];
 }
 
 export interface VoListWecomContactsResponse {
@@ -3644,6 +3953,7 @@ export interface VoPatchAdminDigiWorkerRequest {
   bio?: string;
   bioPicture?: string;
   hireableCount?: number;
+  homeMode?: string;
   jobTagIds?: string[];
   marketVisible?: boolean;
   meta?: Record<string, string>;
@@ -3685,6 +3995,7 @@ export interface VoPatchDigiEmployeeProfileRequest {
   allowAutoDelegate?: boolean;
   bio?: string;
   bioPicture?: string;
+  homeModeOverride?: string;
   quickStartPrompts?: string[];
 }
 
@@ -3763,6 +4074,17 @@ export interface VoPostConversationHumanTurnRequest {
 
 export interface VoPostConversationHumanTurnResponse {
   accepted?: boolean;
+  runtime?: VoConversationRuntimeIdentity;
+  turnId?: string;
+}
+
+export interface VoPostConversationTurnResumeRequest {
+  clientAction?: string;
+}
+
+export interface VoPostConversationTurnResumeResponse {
+  accepted?: boolean;
+  runtime?: VoConversationRuntimeIdentity;
   turnId?: string;
 }
 
@@ -3842,6 +4164,17 @@ export interface VoRotateStationApiKeyResponse {
   item?: VoStationApiKeyItem;
   key?: string;
   replacedKeyId?: string;
+}
+
+export interface VoRotateWebhookEndpointSignatureSecretResponse {
+  endpoint?: VoWebhookEndpoint;
+  signatureSecret?: string;
+}
+
+export interface VoRotateWebhookEndpointTokenResponse {
+  endpoint?: VoWebhookEndpoint;
+  publicToken?: string;
+  publicUrl?: string;
 }
 
 export interface VoSimpleOKResponse {
@@ -4230,6 +4563,10 @@ export interface VoTeamUsageRollupItem {
   value?: number;
 }
 
+export interface VoTenantAdminApplyGeneratedDigiWorkerAvatarRequest {
+  previewToken: string;
+}
+
 export interface VoTenantAdminAssistantEnsureRequest {
   digiWorkerId: string;
 }
@@ -4247,6 +4584,7 @@ export interface VoTenantAdminCreateDigiWorkerRequest {
   externalAgentProvider?: string;
   externalAgentSpecId?: string;
   hireableCount: number;
+  homeMode?: string;
   id?: string;
   jobTagIds?: string[];
   llmModelId?: string;
@@ -4287,6 +4625,7 @@ export interface VoTenantAdminDigiWorker {
   externalAgentSpecId?: string;
   hireableCount?: number;
   hiredCount?: number;
+  homeMode?: string;
   id?: string;
   jobTags?: VoJobTagLite[];
   llmModelId?: string;
@@ -4335,6 +4674,28 @@ export interface VoTenantAdminExternalAgentSpec {
   providerBadgeUrl?: string;
   providerSpecName?: string;
   specId?: string;
+}
+
+export interface VoTenantAdminGenerateDigiWorkerAvatarPreviewRequest {
+  prompt: string;
+  provider: string;
+}
+
+export interface VoTenantAdminGenerateDigiWorkerAvatarPreviewResponse {
+  effectiveProvider?: string;
+  errorCode?: string;
+  errorHint?: string;
+  errorMessage?: string;
+  expiresAt?: string;
+  jobId?: string;
+  previewToken?: string;
+  previewUrl?: string;
+  status?: string;
+}
+
+export interface VoTenantAdminImageGenerationProvider {
+  displayName?: string;
+  provider?: string;
 }
 
 export interface VoTenantAdminLLMModelItem {
@@ -4455,6 +4816,10 @@ export interface VoTenantAdminOfficePreviewConfig {
   provider?: string;
 }
 
+export interface VoTenantAdminPatchDigiEmployeeRequest {
+  homeModeOverride?: string;
+}
+
 export interface VoTenantAdminPatchDigiWorkerRequest {
   allowDeployStation?: boolean;
   autohire?: boolean;
@@ -4463,6 +4828,7 @@ export interface VoTenantAdminPatchDigiWorkerRequest {
   externalAgentProvider?: string;
   externalAgentSpecId?: string;
   hireableCount?: number;
+  homeMode?: string;
   jobTagIds?: string[];
   llmModelId?: string;
   marketVisible?: boolean;
@@ -4565,6 +4931,13 @@ export interface VoUnbindTeamDeviceExternalProviderRequest {
   devicePassword: string;
 }
 
+export interface VoUpdateCalendarSourceRequest {
+  enabled?: boolean;
+  icalUrl?: string;
+  name?: string;
+  timezone?: string;
+}
+
 export interface VoUpdateConversationFileGrantsRequest {
   defaultWorkspaceId?: string;
   grants?: VoFileGrant[];
@@ -4572,14 +4945,22 @@ export interface VoUpdateConversationFileGrantsRequest {
 
 export interface VoUpdateCronTriggerRequest {
   actionType?: string;
+  calendarSourceIds?: string[];
   cronSpec?: string;
   digiEmployeeId?: string;
   enabled?: boolean;
-  initialPromptTemplate?: string;
-  messageTemplate?: string;
+  maxRuns?: number;
+  promptText?: string;
   targetConversationId?: string;
   timezone?: string;
-  titleTemplate?: string;
+}
+
+export interface VoUpdateEmailIngressAddressRequest {
+  actionType?: string;
+  enabled?: boolean;
+  name?: string;
+  promptText?: string;
+  targetConversationId?: string;
 }
 
 export interface VoUpdateGroupSessionReplyTargetsRequest {
@@ -4599,6 +4980,17 @@ export interface VoUpdateStationChannelConfigRequest {
 
 export interface VoUpdateStationRequest {
   title?: string;
+}
+
+export interface VoUpdateWebhookEndpointRequest {
+  actionType?: string;
+  debounceSeconds?: number;
+  digiEmployeeId?: string;
+  enabled?: boolean;
+  name?: string;
+  promptText?: string;
+  signatureEnabled?: boolean;
+  targetConversationId?: string;
 }
 
 export interface VoUpdateWecomIntegrationRequest {
@@ -4740,6 +5132,69 @@ export interface VoWebSessionMessageResponse {
 export interface VoWebSessionToolResultRequest {
   result?: any;
   toolCallId: string;
+}
+
+export interface VoWebhookEndpoint {
+  actionType?: string;
+  createdAt?: string;
+  createdById?: string;
+  creatorActor?: VoActorSummary;
+  debounceSeconds?: number;
+  digiEmployeeId?: string;
+  enabled?: boolean;
+  executorActor?: VoActorSummary;
+  id?: string;
+  lastError?: string;
+  lastReceivedAt?: string;
+  lastStatus?: string;
+  lastTriggeredAt?: string;
+  maxBodyBytes?: number;
+  name?: string;
+  pendingEventCount?: number;
+  pendingWindowDueAt?: string;
+  pendingWindowStartedAt?: string;
+  promptText?: string;
+  publicTokenPreview?: string;
+  publicUrl?: string;
+  runCount?: number;
+  signatureEnabled?: boolean;
+  signatureSecretPreview?: string;
+  targetConversationId?: string;
+  teamId?: string;
+  updatedAt?: string;
+}
+
+export interface VoWebhookEndpointEvent {
+  bodySha256?: string;
+  createdAt?: string;
+  endpointId?: string;
+  errorMessage?: string;
+  id?: string;
+  receivedAt?: string;
+  requestId?: string;
+  runId?: string;
+  signatureVerified?: boolean;
+  status?: string;
+  teamId?: string;
+  windowKey?: string;
+}
+
+export interface VoWebhookEndpointRun {
+  actionType?: string;
+  createdAt?: string;
+  createdConversationId?: string;
+  endpointId?: string;
+  errorMessage?: string;
+  eventCount?: number;
+  finishedAt?: string;
+  id?: string;
+  responseId?: string;
+  startedAt?: string;
+  status?: string;
+  targetConversationId?: string;
+  teamId?: string;
+  turnId?: string;
+  windowKey?: string;
 }
 
 export interface VoWecomContactVO {
@@ -7292,6 +7747,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Conversations
+     * @name V1ConversationsTurnsResumeCreate
+     * @summary Resume interrupted conversation turn
+     * @request POST:/api/v1/conversations/{id}/turns/{turnId}/resume
+     */
+    v1ConversationsTurnsResumeCreate: (
+      id: string,
+      turnId: string,
+      request: VoPostConversationTurnResumeRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoPostConversationTurnResumeResponse, any>({
+        path: `/api/v1/conversations/${id}/turns/${turnId}/resume`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Conversations
      * @name V1ConversationsTurnsSteerCreate
      * @summary Post conversation turn steer
      * @request POST:/api/v1/conversations/{id}/turns/{turnId}/steer
@@ -8209,6 +8687,164 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesDetail
+     * @summary List team calendar sources
+     * @request GET:/api/v1/teams/{teamId}/calendar-sources
+     */
+    v1TeamsCalendarSourcesDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListCalendarSourcesResponse, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesCreate
+     * @summary Create custom iCal calendar source
+     * @request POST:/api/v1/teams/{teamId}/calendar-sources
+     */
+    v1TeamsCalendarSourcesCreate: (
+      teamId: string,
+      request: VoCreateCustomCalendarSourceRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCalendarSource, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesBuiltinCreate
+     * @summary Enable a platform built-in calendar source for team
+     * @request POST:/api/v1/teams/{teamId}/calendar-sources/builtin
+     */
+    v1TeamsCalendarSourcesBuiltinCreate: (
+      teamId: string,
+      request: VoEnableBuiltinCalendarSourceRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCalendarSource, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources/builtin`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesCatalogDetail
+     * @summary List platform calendar catalog
+     * @request GET:/api/v1/teams/{teamId}/calendar-sources/catalog
+     */
+    v1TeamsCalendarSourcesCatalogDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListCalendarCatalogResponse, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources/catalog`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesDelete
+     * @summary Delete custom team calendar source
+     * @request DELETE:/api/v1/teams/{teamId}/calendar-sources/{sourceId}
+     */
+    v1TeamsCalendarSourcesDelete: (teamId: string, sourceId: string, params: RequestParams = {}) =>
+      this.request<VoSimpleOKResponse, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources/${sourceId}`,
+        method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesPartialUpdate
+     * @summary Patch team calendar source
+     * @request PATCH:/api/v1/teams/{teamId}/calendar-sources/{sourceId}
+     */
+    v1TeamsCalendarSourcesPartialUpdate: (
+      teamId: string,
+      sourceId: string,
+      request: VoUpdateCalendarSourceRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCalendarSource, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources/${sourceId}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesEventsDetail
+     * @summary List calendar source events
+     * @request GET:/api/v1/teams/{teamId}/calendar-sources/{sourceId}/events
+     */
+    v1TeamsCalendarSourcesEventsDetail: (
+      teamId: string,
+      sourceId: string,
+      query: {
+        /** Start day (YYYY-MM-DD) */
+        from: string;
+        /** End day (YYYY-MM-DD) */
+        to: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoListCalendarSourceEventsResponse, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources/${sourceId}/events`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CalendarSources
+     * @name V1TeamsCalendarSourcesSyncCreate
+     * @summary Sync team calendar source now
+     * @request POST:/api/v1/teams/{teamId}/calendar-sources/{sourceId}/sync
+     */
+    v1TeamsCalendarSourcesSyncCreate: (teamId: string, sourceId: string, params: RequestParams = {}) =>
+      this.request<VoCalendarSourceSyncRun, any>({
+        path: `/api/v1/teams/${teamId}/calendar-sources/${sourceId}/sync`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Teams
      * @name V1TeamsComputeImagesDetail
      * @summary List visible compute images for team
@@ -8776,6 +9412,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Stations
+     * @name V1TeamsDigiemployeesFeishuBotBindingSessionsCreate
+     * @summary Create feishu bot binding session
+     * @request POST:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/feishu-bot-binding-sessions
+     */
+    v1TeamsDigiemployeesFeishuBotBindingSessionsCreate: (
+      teamId: string,
+      digiEmployeeId: string,
+      request: VoCreateFeishuBotBindingSessionRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCreateFeishuBotBindingSessionResponse, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/feishu-bot-binding-sessions`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Roster
      * @name V1TeamsDigiemployeesFireCreate
      * @summary Fire digiemployee
@@ -9106,6 +9765,141 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesDetail
+     * @summary List email ingress addresses
+     * @request GET:/api/v1/teams/{teamId}/email-ingress-addresses
+     */
+    v1TeamsEmailIngressAddressesDetail: (
+      teamId: string,
+      query?: {
+        /** Filter by digiEmployee ID */
+        digiEmployeeId?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoListEmailIngressAddressesResponse, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesCreate
+     * @summary Create email ingress address
+     * @request POST:/api/v1/teams/{teamId}/email-ingress-addresses
+     */
+    v1TeamsEmailIngressAddressesCreate: (
+      teamId: string,
+      request: VoCreateEmailIngressAddressRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCreateEmailIngressAddressResponse, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesDetail2
+     * @summary Get email ingress address
+     * @request GET:/api/v1/teams/{teamId}/email-ingress-addresses/{addressId}
+     * @originalName v1TeamsEmailIngressAddressesDetail
+     * @duplicate
+     */
+    v1TeamsEmailIngressAddressesDetail2: (teamId: string, addressId: string, params: RequestParams = {}) =>
+      this.request<VoEmailIngressAddress, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses/${addressId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesDelete
+     * @summary Delete email ingress address
+     * @request DELETE:/api/v1/teams/{teamId}/email-ingress-addresses/{addressId}
+     */
+    v1TeamsEmailIngressAddressesDelete: (teamId: string, addressId: string, params: RequestParams = {}) =>
+      this.request<MapStringBool, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses/${addressId}`,
+        method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesPartialUpdate
+     * @summary Patch email ingress address
+     * @request PATCH:/api/v1/teams/{teamId}/email-ingress-addresses/{addressId}
+     */
+    v1TeamsEmailIngressAddressesPartialUpdate: (
+      teamId: string,
+      addressId: string,
+      request: VoUpdateEmailIngressAddressRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoEmailIngressAddress, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses/${addressId}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesDisableCreate
+     * @summary Disable email ingress address
+     * @request POST:/api/v1/teams/{teamId}/email-ingress-addresses/{addressId}/disable
+     */
+    v1TeamsEmailIngressAddressesDisableCreate: (teamId: string, addressId: string, params: RequestParams = {}) =>
+      this.request<VoEmailIngressAddress, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses/${addressId}/disable`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesEnableCreate
+     * @summary Enable email ingress address
+     * @request POST:/api/v1/teams/{teamId}/email-ingress-addresses/{addressId}/enable
+     */
+    v1TeamsEmailIngressAddressesEnableCreate: (teamId: string, addressId: string, params: RequestParams = {}) =>
+      this.request<VoEmailIngressAddress, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses/${addressId}/enable`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Teams
      * @name V1TeamsExternalProvidersEnsureCreate
      * @summary Ensure team external provider ready
@@ -9315,6 +10109,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v1TeamsExternalUsersConversationsDetail: (teamId: string, externalUserId: string, params: RequestParams = {}) =>
       this.request<VoListExternalUserConversationsResponse, any>({
         path: `/api/v1/teams/${teamId}/external-users/${externalUserId}/conversations`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Stations
+     * @name V1TeamsFeishuBotBindingSessionsDetail
+     * @summary Get feishu bot binding session detail
+     * @request GET:/api/v1/teams/{teamId}/feishu-bot-binding-sessions/{bindingSessionId}
+     */
+    v1TeamsFeishuBotBindingSessionsDetail: (teamId: string, bindingSessionId: string, params: RequestParams = {}) =>
+      this.request<VoFeishuBotBindingSessionResponse, any>({
+        path: `/api/v1/teams/${teamId}/feishu-bot-binding-sessions/${bindingSessionId}`,
         method: "GET",
         format: "json",
         ...params,
@@ -11040,6 +11850,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
+     * @name V1TeamsSkillsCountDetail
+     * @summary Count skills (team user, team-scoped)
+     * @request GET:/api/v1/teams/{teamId}/skills/count
+     */
+    v1TeamsSkillsCountDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoCountTeamSkillsResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/skills/count`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
      * @name V1TeamsSkillsScanCreate
      * @summary Scan team skills from NAS and upsert into DB (team user, team-scoped)
      * @request POST:/api/v1/teams/{teamId}/skills/scan
@@ -11348,6 +12174,209 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v1/teams/${teamId}/usage-rollups`,
         method: "GET",
         query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags WebhookEndpoints
+     * @name V1TeamsWebhookEndpointsDetail
+     * @summary List webhook endpoints
+     * @request GET:/api/v1/teams/{teamId}/webhook-endpoints
+     */
+    v1TeamsWebhookEndpointsDetail: (
+      teamId: string,
+      query?: {
+        /** Filter by digiEmployee ID */
+        digiEmployeeId?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoListWebhookEndpointsResponse, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags WebhookEndpoints
+     * @name V1TeamsWebhookEndpointsCreate
+     * @summary Create webhook endpoint
+     * @request POST:/api/v1/teams/{teamId}/webhook-endpoints
+     */
+    v1TeamsWebhookEndpointsCreate: (
+      teamId: string,
+      request: VoCreateWebhookEndpointRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCreateWebhookEndpointResponse, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags WebhookEndpoints
+     * @name V1TeamsWebhookEndpointsDetail2
+     * @summary Get webhook endpoint
+     * @request GET:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}
+     * @originalName v1TeamsWebhookEndpointsDetail
+     * @duplicate
+     */
+    v1TeamsWebhookEndpointsDetail2: (teamId: string, endpointId: string, params: RequestParams = {}) =>
+      this.request<VoWebhookEndpoint, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags WebhookEndpoints
+     * @name V1TeamsWebhookEndpointsDelete
+     * @summary Delete webhook endpoint
+     * @request DELETE:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}
+     */
+    v1TeamsWebhookEndpointsDelete: (teamId: string, endpointId: string, params: RequestParams = {}) =>
+      this.request<MapStringBool, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}`,
+        method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags WebhookEndpoints
+     * @name V1TeamsWebhookEndpointsPartialUpdate
+     * @summary Patch webhook endpoint
+     * @request PATCH:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}
+     */
+    v1TeamsWebhookEndpointsPartialUpdate: (
+      teamId: string,
+      endpointId: string,
+      request: VoUpdateWebhookEndpointRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWebhookEndpoint, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags WebhookEndpoints
+     * @name V1TeamsWebhookEndpointsDisableCreate
+     * @summary Disable webhook endpoint
+     * @request POST:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}/disable
+     */
+    v1TeamsWebhookEndpointsDisableCreate: (teamId: string, endpointId: string, params: RequestParams = {}) =>
+      this.request<VoWebhookEndpoint, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/disable`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags WebhookEndpoints
+     * @name V1TeamsWebhookEndpointsEnableCreate
+     * @summary Enable webhook endpoint
+     * @request POST:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}/enable
+     */
+    v1TeamsWebhookEndpointsEnableCreate: (teamId: string, endpointId: string, params: RequestParams = {}) =>
+      this.request<VoWebhookEndpoint, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/enable`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags WebhookEndpoints
+     * @name V1TeamsWebhookEndpointsEventsDetail
+     * @summary List webhook endpoint events
+     * @request GET:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}/events
+     */
+    v1TeamsWebhookEndpointsEventsDetail: (teamId: string, endpointId: string, params: RequestParams = {}) =>
+      this.request<VoListWebhookEndpointEventsResponse, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/events`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags WebhookEndpoints
+     * @name V1TeamsWebhookEndpointsRotateSignatureSecretCreate
+     * @summary Rotate webhook endpoint signature secret
+     * @request POST:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}/rotate-signature-secret
+     */
+    v1TeamsWebhookEndpointsRotateSignatureSecretCreate: (
+      teamId: string,
+      endpointId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoRotateWebhookEndpointSignatureSecretResponse, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/rotate-signature-secret`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags WebhookEndpoints
+     * @name V1TeamsWebhookEndpointsRotateUrlTokenCreate
+     * @summary Rotate webhook endpoint URL token
+     * @request POST:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}/rotate-url-token
+     */
+    v1TeamsWebhookEndpointsRotateUrlTokenCreate: (teamId: string, endpointId: string, params: RequestParams = {}) =>
+      this.request<VoRotateWebhookEndpointTokenResponse, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/rotate-url-token`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags WebhookEndpoints
+     * @name V1TeamsWebhookEndpointsRunsDetail
+     * @summary List webhook endpoint runs
+     * @request GET:/api/v1/teams/{teamId}/webhook-endpoints/{endpointId}/runs
+     */
+    v1TeamsWebhookEndpointsRunsDetail: (teamId: string, endpointId: string, params: RequestParams = {}) =>
+      this.request<VoListWebhookEndpointRunsResponse, any>({
+        path: `/api/v1/teams/${teamId}/webhook-endpoints/${endpointId}/runs`,
+        method: "GET",
         format: "json",
         ...params,
       }),
@@ -11994,6 +13023,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags TenantAdmin
+     * @name V1DigiemployeesPartialUpdate
+     * @summary Patch digiemployee runtime config (tenant admin, scoped)
+     * @request PATCH:/tenant-admin/v1/digiemployees/{id}
+     */
+    v1DigiemployeesPartialUpdate: (
+      id: string,
+      request: VoTenantAdminPatchDigiEmployeeRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoAdminDigiEmployee, BasePinErr>({
+        path: `/tenant-admin/v1/digiemployees/${id}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
      * @name V1DigiemployeesDisableCreate
      * @summary Disable digiemployee (tenant admin, scoped)
      * @request POST:/tenant-admin/v1/digiemployees/{id}/disable
@@ -12281,6 +13332,66 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags TenantAdmin
+     * @name V1DigiworkersAvatarApplyGeneratedCreate
+     * @summary Apply generated digiworker avatar preview (tenant admin)
+     * @request POST:/tenant-admin/v1/digiworkers/{id}/avatar/apply-generated
+     */
+    v1DigiworkersAvatarApplyGeneratedCreate: (
+      id: string,
+      request: VoTenantAdminApplyGeneratedDigiWorkerAvatarRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoTenantAdminDigiWorker, BasePinErr>({
+        path: `/tenant-admin/v1/digiworkers/${id}/avatar/apply-generated`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1DigiworkersAvatarGeneratePreviewCreate
+     * @summary Generate digiworker avatar preview by prompt (tenant admin)
+     * @request POST:/tenant-admin/v1/digiworkers/{id}/avatar/generate-preview
+     */
+    v1DigiworkersAvatarGeneratePreviewCreate: (
+      id: string,
+      request: VoTenantAdminGenerateDigiWorkerAvatarPreviewRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoTenantAdminGenerateDigiWorkerAvatarPreviewResponse, BasePinErr>({
+        path: `/tenant-admin/v1/digiworkers/${id}/avatar/generate-preview`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1DigiworkersAvatarGenerationJobsDetail
+     * @summary Get digiworker avatar generation job by id (tenant admin)
+     * @request GET:/tenant-admin/v1/digiworkers/{id}/avatar/generation-jobs/{jobId}
+     */
+    v1DigiworkersAvatarGenerationJobsDetail: (id: string, jobId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoTenantAdminGenerateDigiWorkerAvatarPreviewResponse, BasePinErr>({
+        path: `/tenant-admin/v1/digiworkers/${id}/avatar/generation-jobs/${jobId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
      * @name V1DigiworkersBioPictureUploadUrlCreate
      * @summary Create digiworker bio picture upload url (tenant admin, tenant-scoped)
      * @request POST:/tenant-admin/v1/digiworkers/{id}/bio-picture:upload-url
@@ -12530,6 +13641,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "PUT",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1ImageGenerationProvidersList
+     * @summary List available image generation providers (tenant admin)
+     * @request GET:/tenant-admin/v1/image-generation/providers
+     */
+    v1ImageGenerationProvidersList: (params: RequestParams = {}) =>
+      this.request<BasePinOKVoListTenantAdminImageGenerationProvidersResponse, BasePinErr>({
+        path: `/tenant-admin/v1/image-generation/providers`,
+        method: "GET",
         format: "json",
         ...params,
       }),
