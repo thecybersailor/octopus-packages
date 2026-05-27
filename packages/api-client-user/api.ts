@@ -4303,10 +4303,10 @@ export interface VoTeamDeleteRequest {
 }
 
 export interface VoTeamDevice {
-  boundMcpTunnelsCount?: number;
   clientId?: string;
   clientType?: string;
   deviceName?: string;
+  hostedMcpServersCount?: number;
   lastSeenAt?: string;
   platformBaseUrl?: string;
   registeredAt?: string;
