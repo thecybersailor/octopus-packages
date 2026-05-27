@@ -453,6 +453,11 @@ export interface BasePinOKVoCountTeamSkillsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoCreateEmailIngressAddressResponse {
+  data?: VoCreateEmailIngressAddressResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoCreateOfficePreviewSessionResponse {
   data?: VoCreateOfficePreviewSessionResponse;
   trace_id?: string;
@@ -505,6 +510,11 @@ export interface BasePinOKVoDigiEmployeeKBAccess {
 
 export interface BasePinOKVoDigiEmployeeWorkspaceAccess {
   data?: VoDigiEmployeeWorkspaceAccess;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoEmailIngressAddress {
+  data?: VoEmailIngressAddress;
   trace_id?: string;
 }
 
@@ -773,6 +783,11 @@ export interface BasePinOKVoListDigiEmployeesResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListEmailIngressAddressesResponse {
+  data?: VoListEmailIngressAddressesResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListEndpointTypesResponse {
   data?: VoListEndpointTypesResponse;
   trace_id?: string;
@@ -893,8 +908,13 @@ export interface BasePinOKVoListTeamKbSyncJobsResponse {
   trace_id?: string;
 }
 
-export interface BasePinOKVoListTeamMcpTunnelBindingsResponse {
-  data?: VoListTeamMcpTunnelBindingsResponse;
+export interface BasePinOKVoListTeamMcpServerBindingsResponse {
+  data?: VoListTeamMcpServerBindingsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListTeamMcpServersResponse {
+  data?: VoListTeamMcpServersResponse;
   trace_id?: string;
 }
 
@@ -1165,6 +1185,16 @@ export interface BasePinOKVoTeamKbSyncBinding {
 
 export interface BasePinOKVoTeamKbSyncBootstrapAccessResponse {
   data?: VoTeamKbSyncBootstrapAccessResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamMcpHub {
+  data?: VoTeamMcpHub;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamMcpServer {
+  data?: VoTeamMcpServer;
   trace_id?: string;
 }
 
@@ -2590,12 +2620,10 @@ export interface VoCreateCronTriggerRequest {
   cronSpec: string;
   digiEmployeeId?: string;
   enabled?: boolean;
-  initialPromptTemplate?: string;
   maxRuns?: number;
-  messageTemplate?: string;
+  promptText?: string;
   targetConversationId?: string;
   timezone: string;
-  titleTemplate?: string;
 }
 
 export interface VoCreateCustomCalendarSourceRequest {
@@ -2603,6 +2631,19 @@ export interface VoCreateCustomCalendarSourceRequest {
   icalUrl: string;
   name: string;
   timezone: string;
+}
+
+export interface VoCreateEmailIngressAddressRequest {
+  actionType: string;
+  digiEmployeeId: string;
+  enabled?: boolean;
+  name: string;
+  promptText?: string;
+  targetConversationId?: string;
+}
+
+export interface VoCreateEmailIngressAddressResponse {
+  address?: VoEmailIngressAddress;
 }
 
 export interface VoCreateFilePreviewSessionRequest {
@@ -2675,7 +2716,7 @@ export interface VoCreateTeamKbSyncBindingRequest {
   targetDirectory: string;
 }
 
-export interface VoCreateTeamMcpTunnelRequest {
+export interface VoCreateTeamMcpTunnelRegistrationRequest {
   deviceId: string;
   localEndpoint: string;
   name: string;
@@ -2702,12 +2743,10 @@ export interface VoCreateWebhookEndpointRequest {
   debounceSeconds?: number;
   digiEmployeeId?: string;
   enabled?: boolean;
-  initialPromptTemplate?: string;
-  messageTemplate?: string;
   name: string;
+  promptText?: string;
   signatureEnabled?: boolean;
   targetConversationId?: string;
-  titleTemplate?: string;
 }
 
 export interface VoCreateWebhookEndpointResponse {
@@ -2750,17 +2789,15 @@ export interface VoCronTrigger {
   enabled?: boolean;
   executorActor?: VoActorSummary;
   id?: string;
-  initialPromptTemplate?: string;
   lastError?: string;
   lastStatus?: string;
   lastTriggeredAt?: string;
   maxRuns?: number;
-  messageTemplate?: string;
+  promptText?: string;
   runCount?: number;
   targetConversationId?: string;
   teamId?: string;
   timezone?: string;
-  titleTemplate?: string;
 }
 
 export interface VoCronTriggerRun {
@@ -2883,6 +2920,32 @@ export interface VoDigiWorker {
   score?: number;
   skillsets?: VoSkillsetLite[];
   toolkitKeys?: string[];
+}
+
+export interface VoEmailIngressAddress {
+  actionType?: string;
+  address?: string;
+  addressKey?: string;
+  createdAt?: string;
+  createdById?: string;
+  creatorActor?: VoActorSummary;
+  digiEmployeeId?: string;
+  domain?: string;
+  employeeKey?: string;
+  enabled?: boolean;
+  executorActor?: VoActorSummary;
+  id?: string;
+  lastError?: string;
+  lastReceivedAt?: string;
+  lastStatus?: string;
+  lastTriggeredAt?: string;
+  name?: string;
+  namePrefix?: string;
+  promptText?: string;
+  runCount?: number;
+  targetConversationId?: string;
+  teamId?: string;
+  updatedAt?: string;
 }
 
 export interface VoEnableAssemblableSkillRequest {
@@ -3441,6 +3504,10 @@ export interface VoListDigiEmployeesResponse {
   items?: VoDigiEmployee[];
 }
 
+export interface VoListEmailIngressAddressesResponse {
+  items?: VoEmailIngressAddress[];
+}
+
 export interface VoListEndpointTypesResponse {
   items?: VoEndpointTypeItem[];
 }
@@ -3543,8 +3610,12 @@ export interface VoListTeamKbSyncJobsResponse {
   items?: VoTeamKbSyncJob[];
 }
 
-export interface VoListTeamMcpTunnelBindingsResponse {
-  items?: VoTeamMcpTunnelBinding[];
+export interface VoListTeamMcpServerBindingsResponse {
+  items?: VoTeamMcpServerBinding[];
+}
+
+export interface VoListTeamMcpServersResponse {
+  items?: VoTeamMcpServer[];
 }
 
 export interface VoListTeamMcpTunnelsResponse {
@@ -3943,7 +4014,7 @@ export interface VoPatchSkillsetRequest {
   name?: string;
 }
 
-export interface VoPatchTeamMcpTunnelRequest {
+export interface VoPatchTeamMcpTunnelRegistrationRequest {
   localEndpoint?: string;
   name?: string;
   transportType?: string;
@@ -4232,10 +4303,10 @@ export interface VoTeamDeleteRequest {
 }
 
 export interface VoTeamDevice {
-  boundMcpTunnelsCount?: number;
   clientId?: string;
   clientType?: string;
   deviceName?: string;
+  hostedMcpServersCount?: number;
   lastSeenAt?: string;
   platformBaseUrl?: string;
   registeredAt?: string;
@@ -4327,6 +4398,38 @@ export interface VoTeamKbSyncJob {
   summary?: string;
 }
 
+export interface VoTeamMcpHub {
+  mcpHubId?: string;
+  name?: string;
+  teamId?: string;
+}
+
+export interface VoTeamMcpServer {
+  activatedAt?: string;
+  activeRegistrationId?: string;
+  boundAgentsCount?: number;
+  deactivatedAt?: string;
+  endpoint?: string;
+  lastError?: string;
+  mcpHubId?: string;
+  mcpServerId?: string;
+  name?: string;
+  registrationKind?: string;
+  status?: string;
+  teamId?: string;
+  transportType?: string;
+  tunnel?: VoTeamMcpTunnel;
+  updatedAt?: string;
+}
+
+export interface VoTeamMcpServerBinding {
+  agentId?: string;
+  agentName?: string;
+  createdAt?: string;
+  id?: string;
+  mcpServerId?: string;
+}
+
 export interface VoTeamMcpTunnel {
   activatedAt?: string;
   boundAgentsCount?: number;
@@ -4335,6 +4438,8 @@ export interface VoTeamMcpTunnel {
   externalMappingId?: string;
   lastError?: string;
   localEndpoint?: string;
+  mcpHubId?: string;
+  mcpServerId?: string;
   mcpTunnelId?: string;
   name?: string;
   publicEndpoint?: string;
@@ -4343,13 +4448,6 @@ export interface VoTeamMcpTunnel {
   transportType?: string;
   tunnelPath?: string;
   updatedAt?: string;
-}
-
-export interface VoTeamMcpTunnelBinding {
-  agentId?: string;
-  agentName?: string;
-  createdAt?: string;
-  id?: string;
 }
 
 export interface VoTeamMemberInvitationResult {
@@ -4865,12 +4963,18 @@ export interface VoUpdateCronTriggerRequest {
   cronSpec?: string;
   digiEmployeeId?: string;
   enabled?: boolean;
-  initialPromptTemplate?: string;
   maxRuns?: number;
-  messageTemplate?: string;
+  promptText?: string;
   targetConversationId?: string;
   timezone?: string;
-  titleTemplate?: string;
+}
+
+export interface VoUpdateEmailIngressAddressRequest {
+  actionType?: string;
+  enabled?: boolean;
+  name?: string;
+  promptText?: string;
+  targetConversationId?: string;
 }
 
 export interface VoUpdateGroupSessionReplyTargetsRequest {
@@ -4897,12 +5001,10 @@ export interface VoUpdateWebhookEndpointRequest {
   debounceSeconds?: number;
   digiEmployeeId?: string;
   enabled?: boolean;
-  initialPromptTemplate?: string;
-  messageTemplate?: string;
   name?: string;
+  promptText?: string;
   signatureEnabled?: boolean;
   targetConversationId?: string;
-  titleTemplate?: string;
 }
 
 export interface VoUpdateWecomIntegrationRequest {
@@ -5056,17 +5158,16 @@ export interface VoWebhookEndpoint {
   enabled?: boolean;
   executorActor?: VoActorSummary;
   id?: string;
-  initialPromptTemplate?: string;
   lastError?: string;
   lastReceivedAt?: string;
   lastStatus?: string;
   lastTriggeredAt?: string;
   maxBodyBytes?: number;
-  messageTemplate?: string;
   name?: string;
   pendingEventCount?: number;
   pendingWindowDueAt?: string;
   pendingWindowStartedAt?: string;
+  promptText?: string;
   publicTokenPreview?: string;
   publicUrl?: string;
   runCount?: number;
@@ -5074,7 +5175,6 @@ export interface VoWebhookEndpoint {
   signatureSecretPreview?: string;
   targetConversationId?: string;
   teamId?: string;
-  titleTemplate?: string;
   updatedAt?: string;
 }
 
@@ -9656,6 +9756,141 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesDetail
+     * @summary List email ingress addresses
+     * @request GET:/api/v1/teams/{teamId}/email-ingress-addresses
+     */
+    v1TeamsEmailIngressAddressesDetail: (
+      teamId: string,
+      query?: {
+        /** Filter by digiEmployee ID */
+        digiEmployeeId?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoListEmailIngressAddressesResponse, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesCreate
+     * @summary Create email ingress address
+     * @request POST:/api/v1/teams/{teamId}/email-ingress-addresses
+     */
+    v1TeamsEmailIngressAddressesCreate: (
+      teamId: string,
+      request: VoCreateEmailIngressAddressRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCreateEmailIngressAddressResponse, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesDetail2
+     * @summary Get email ingress address
+     * @request GET:/api/v1/teams/{teamId}/email-ingress-addresses/{addressId}
+     * @originalName v1TeamsEmailIngressAddressesDetail
+     * @duplicate
+     */
+    v1TeamsEmailIngressAddressesDetail2: (teamId: string, addressId: string, params: RequestParams = {}) =>
+      this.request<VoEmailIngressAddress, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses/${addressId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesDelete
+     * @summary Delete email ingress address
+     * @request DELETE:/api/v1/teams/{teamId}/email-ingress-addresses/{addressId}
+     */
+    v1TeamsEmailIngressAddressesDelete: (teamId: string, addressId: string, params: RequestParams = {}) =>
+      this.request<MapStringBool, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses/${addressId}`,
+        method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesPartialUpdate
+     * @summary Patch email ingress address
+     * @request PATCH:/api/v1/teams/{teamId}/email-ingress-addresses/{addressId}
+     */
+    v1TeamsEmailIngressAddressesPartialUpdate: (
+      teamId: string,
+      addressId: string,
+      request: VoUpdateEmailIngressAddressRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoEmailIngressAddress, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses/${addressId}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesDisableCreate
+     * @summary Disable email ingress address
+     * @request POST:/api/v1/teams/{teamId}/email-ingress-addresses/{addressId}/disable
+     */
+    v1TeamsEmailIngressAddressesDisableCreate: (teamId: string, addressId: string, params: RequestParams = {}) =>
+      this.request<VoEmailIngressAddress, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses/${addressId}/disable`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags EmailIngressAddresses
+     * @name V1TeamsEmailIngressAddressesEnableCreate
+     * @summary Enable email ingress address
+     * @request POST:/api/v1/teams/{teamId}/email-ingress-addresses/{addressId}/enable
+     */
+    v1TeamsEmailIngressAddressesEnableCreate: (teamId: string, addressId: string, params: RequestParams = {}) =>
+      this.request<VoEmailIngressAddress, any>({
+        path: `/api/v1/teams/${teamId}/email-ingress-addresses/${addressId}/enable`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Teams
      * @name V1TeamsExternalProvidersEnsureCreate
      * @summary Ensure team external provider ready
@@ -10629,13 +10864,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V1TeamsMcpTunnelsDetail
-     * @summary List team mcp tunnels
-     * @request GET:/api/v1/teams/{teamId}/mcp-tunnels
+     * @name V1TeamsMcpHubDetail
+     * @summary Get team mcp hub
+     * @request GET:/api/v1/teams/{teamId}/mcp-hub
      */
-    v1TeamsMcpTunnelsDetail: (teamId: string, params: RequestParams = {}) =>
-      this.request<VoListTeamMcpTunnelsResponse, any>({
-        path: `/api/v1/teams/${teamId}/mcp-tunnels`,
+    v1TeamsMcpHubDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoTeamMcpHub, any>({
+        path: `/api/v1/teams/${teamId}/mcp-hub`,
         method: "GET",
         format: "json",
         ...params,
@@ -10645,13 +10880,83 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V1TeamsMcpTunnelsCreate
-     * @summary Create team mcp tunnel
-     * @request POST:/api/v1/teams/{teamId}/mcp-tunnels
+     * @name V1TeamsMcpHubServersDetail
+     * @summary List team mcp servers
+     * @request GET:/api/v1/teams/{teamId}/mcp-hub/servers
      */
-    v1TeamsMcpTunnelsCreate: (teamId: string, request: VoCreateTeamMcpTunnelRequest, params: RequestParams = {}) =>
+    v1TeamsMcpHubServersDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListTeamMcpServersResponse, any>({
+        path: `/api/v1/teams/${teamId}/mcp-hub/servers`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMcpHubServersDetail2
+     * @summary Get team mcp server by id
+     * @request GET:/api/v1/teams/{teamId}/mcp-hub/servers/{mcpServerId}
+     * @originalName v1TeamsMcpHubServersDetail
+     * @duplicate
+     */
+    v1TeamsMcpHubServersDetail2: (teamId: string, mcpServerId: string, params: RequestParams = {}) =>
+      this.request<VoTeamMcpServer, any>({
+        path: `/api/v1/teams/${teamId}/mcp-hub/servers/${mcpServerId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMcpHubServersBindingsDetail
+     * @summary List team mcp server bindings
+     * @request GET:/api/v1/teams/{teamId}/mcp-hub/servers/{mcpServerId}/bindings
+     */
+    v1TeamsMcpHubServersBindingsDetail: (teamId: string, mcpServerId: string, params: RequestParams = {}) =>
+      this.request<VoListTeamMcpServerBindingsResponse, any>({
+        path: `/api/v1/teams/${teamId}/mcp-hub/servers/${mcpServerId}/bindings`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMcpHubTunnelRegistrationsDetail
+     * @summary List team mcp tunnel registrations
+     * @request GET:/api/v1/teams/{teamId}/mcp-hub/tunnel-registrations
+     */
+    v1TeamsMcpHubTunnelRegistrationsDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListTeamMcpTunnelsResponse, any>({
+        path: `/api/v1/teams/${teamId}/mcp-hub/tunnel-registrations`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMcpHubTunnelRegistrationsCreate
+     * @summary Create team mcp tunnel registration
+     * @request POST:/api/v1/teams/{teamId}/mcp-hub/tunnel-registrations
+     */
+    v1TeamsMcpHubTunnelRegistrationsCreate: (
+      teamId: string,
+      request: VoCreateTeamMcpTunnelRegistrationRequest,
+      params: RequestParams = {},
+    ) =>
       this.request<VoTeamMcpTunnel, any>({
-        path: `/api/v1/teams/${teamId}/mcp-tunnels`,
+        path: `/api/v1/teams/${teamId}/mcp-hub/tunnel-registrations`,
         method: "POST",
         body: request,
         type: ContentType.Json,
@@ -10663,15 +10968,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V1TeamsMcpTunnelsDetail2
-     * @summary Get team mcp tunnel by id
-     * @request GET:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}
-     * @originalName v1TeamsMcpTunnelsDetail
+     * @name V1TeamsMcpHubTunnelRegistrationsDetail2
+     * @summary Get team mcp tunnel registration by id
+     * @request GET:/api/v1/teams/{teamId}/mcp-hub/tunnel-registrations/{mcpTunnelId}
+     * @originalName v1TeamsMcpHubTunnelRegistrationsDetail
      * @duplicate
      */
-    v1TeamsMcpTunnelsDetail2: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
+    v1TeamsMcpHubTunnelRegistrationsDetail2: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
       this.request<VoTeamMcpTunnel, any>({
-        path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}`,
+        path: `/api/v1/teams/${teamId}/mcp-hub/tunnel-registrations/${mcpTunnelId}`,
         method: "GET",
         format: "json",
         ...params,
@@ -10681,13 +10986,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V1TeamsMcpTunnelsDelete
-     * @summary Delete team mcp tunnel
-     * @request DELETE:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}
+     * @name V1TeamsMcpHubTunnelRegistrationsDelete
+     * @summary Delete team mcp tunnel registration
+     * @request DELETE:/api/v1/teams/{teamId}/mcp-hub/tunnel-registrations/{mcpTunnelId}
      */
-    v1TeamsMcpTunnelsDelete: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
+    v1TeamsMcpHubTunnelRegistrationsDelete: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
       this.request<VoSimpleOKResponse, any>({
-        path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}`,
+        path: `/api/v1/teams/${teamId}/mcp-hub/tunnel-registrations/${mcpTunnelId}`,
         method: "DELETE",
         format: "json",
         ...params,
@@ -10697,18 +11002,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V1TeamsMcpTunnelsPartialUpdate
-     * @summary Patch team mcp tunnel
-     * @request PATCH:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}
+     * @name V1TeamsMcpHubTunnelRegistrationsPartialUpdate
+     * @summary Patch team mcp tunnel registration
+     * @request PATCH:/api/v1/teams/{teamId}/mcp-hub/tunnel-registrations/{mcpTunnelId}
      */
-    v1TeamsMcpTunnelsPartialUpdate: (
+    v1TeamsMcpHubTunnelRegistrationsPartialUpdate: (
       teamId: string,
       mcpTunnelId: string,
-      request: VoPatchTeamMcpTunnelRequest,
+      request: VoPatchTeamMcpTunnelRegistrationRequest,
       params: RequestParams = {},
     ) =>
       this.request<VoTeamMcpTunnel, any>({
-        path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}`,
+        path: `/api/v1/teams/${teamId}/mcp-hub/tunnel-registrations/${mcpTunnelId}`,
         method: "PATCH",
         body: request,
         type: ContentType.Json,
@@ -10720,13 +11025,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V1TeamsMcpTunnelsActivateCreate
-     * @summary Activate team mcp tunnel
-     * @request POST:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}/activate
+     * @name V1TeamsMcpHubTunnelRegistrationsActivateCreate
+     * @summary Activate team mcp tunnel registration
+     * @request POST:/api/v1/teams/{teamId}/mcp-hub/tunnel-registrations/{mcpTunnelId}/activate
      */
-    v1TeamsMcpTunnelsActivateCreate: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
+    v1TeamsMcpHubTunnelRegistrationsActivateCreate: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
       this.request<VoTeamMcpTunnel, any>({
-        path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}/activate`,
+        path: `/api/v1/teams/${teamId}/mcp-hub/tunnel-registrations/${mcpTunnelId}/activate`,
         method: "POST",
         format: "json",
         ...params,
@@ -10736,29 +11041,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V1TeamsMcpTunnelsBindingsDetail
-     * @summary List team mcp tunnel bindings
-     * @request GET:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}/bindings
+     * @name V1TeamsMcpHubTunnelRegistrationsDeactivateCreate
+     * @summary Deactivate team mcp tunnel registration
+     * @request POST:/api/v1/teams/{teamId}/mcp-hub/tunnel-registrations/{mcpTunnelId}/deactivate
      */
-    v1TeamsMcpTunnelsBindingsDetail: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
-      this.request<VoListTeamMcpTunnelBindingsResponse, any>({
-        path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}/bindings`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Teams
-     * @name V1TeamsMcpTunnelsDeactivateCreate
-     * @summary Deactivate team mcp tunnel
-     * @request POST:/api/v1/teams/{teamId}/mcp-tunnels/{mcpTunnelId}/deactivate
-     */
-    v1TeamsMcpTunnelsDeactivateCreate: (teamId: string, mcpTunnelId: string, params: RequestParams = {}) =>
+    v1TeamsMcpHubTunnelRegistrationsDeactivateCreate: (
+      teamId: string,
+      mcpTunnelId: string,
+      params: RequestParams = {},
+    ) =>
       this.request<VoTeamMcpTunnel, any>({
-        path: `/api/v1/teams/${teamId}/mcp-tunnels/${mcpTunnelId}/deactivate`,
+        path: `/api/v1/teams/${teamId}/mcp-hub/tunnel-registrations/${mcpTunnelId}/deactivate`,
         method: "POST",
         format: "json",
         ...params,
