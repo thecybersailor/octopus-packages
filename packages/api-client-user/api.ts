@@ -1183,6 +1183,11 @@ export interface BasePinOKVoTeamDevice {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamDevicePairingSession {
+  data?: VoTeamDevicePairingSession;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamExternalDeviceBinding {
   data?: VoTeamExternalDeviceBinding;
   trace_id?: string;
@@ -2314,6 +2319,10 @@ export interface VoCalendarSourceSyncRun {
   status?: string;
 }
 
+export interface VoClaimTeamDevicePairingCodeRequest {
+  code: string;
+}
+
 export interface VoConnectionAuthTaskAuthField {
   helpText?: string;
   key?: string;
@@ -2758,6 +2767,13 @@ export interface VoCreateStationRequest {
   channelConfig?: Record<string, any>;
   endpointType: string;
   title?: string;
+}
+
+export interface VoCreateTeamDevicePairingSessionRequest {
+  clientId: string;
+  clientType: string;
+  deviceName: string;
+  platformBaseUrl: string;
 }
 
 export interface VoCreateTeamKbDirectoryRequest {
@@ -4417,6 +4433,15 @@ export interface VoTeamDevice {
   lastSeenAt?: string;
   platformBaseUrl?: string;
   registeredAt?: string;
+  status?: string;
+  teamDeviceId?: string;
+  teamId?: string;
+}
+
+export interface VoTeamDevicePairingSession {
+  code?: string;
+  expiresAt?: string;
+  sessionId?: string;
   status?: string;
   teamDeviceId?: string;
   teamId?: string;
@@ -7930,6 +7955,40 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Teams
+     * @name V1DevicePairingSessionsCreate
+     * @summary Create tentacle device pairing session
+     * @request POST:/api/v1/device-pairing-sessions
+     */
+    v1DevicePairingSessionsCreate: (request: VoCreateTeamDevicePairingSessionRequest, params: RequestParams = {}) =>
+      this.request<VoTeamDevicePairingSession, any>({
+        path: `/api/v1/device-pairing-sessions`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1DevicePairingSessionsDetail
+     * @summary Get tentacle device pairing session
+     * @request GET:/api/v1/device-pairing-sessions/{sessionId}
+     */
+    v1DevicePairingSessionsDetail: (sessionId: string, params: RequestParams = {}) =>
+      this.request<VoTeamDevicePairingSession, any>({
+        path: `/api/v1/device-pairing-sessions/${sessionId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags EndpointTypes
      * @name V1EndpointTypesList
      * @summary List supported endpoint types (for Deploy)
@@ -9400,6 +9459,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoListTeamDevicesResponse, any>({
         path: `/api/v1/teams/${teamId}/devices`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsDevicesPairingSessionsClaimCreate
+     * @summary Claim tentacle device pairing code in current team
+     * @request POST:/api/v1/teams/{teamId}/devices/pairing-sessions/claim
+     */
+    v1TeamsDevicesPairingSessionsClaimCreate: (
+      teamId: string,
+      request: VoClaimTeamDevicePairingCodeRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamDevice, any>({
+        path: `/api/v1/teams/${teamId}/devices/pairing-sessions/claim`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
