@@ -903,6 +903,11 @@ export interface BasePinOKVoListStationsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListTeamBrowserInstancesResponse {
+  data?: VoListTeamBrowserInstancesResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListTeamComputeImagesResponse {
   data?: VoListTeamComputeImagesResponse;
   trace_id?: string;
@@ -1175,6 +1180,11 @@ export interface BasePinOKVoTeamArcubaseBinding {
 
 export interface BasePinOKVoTeamBillingSummaryResponse {
   data?: VoTeamBillingSummaryResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamBrowserInstance {
+  data?: VoTeamBrowserInstance;
   trace_id?: string;
 }
 
@@ -2645,6 +2655,10 @@ export interface VoCreateAdminDigiWorkerSeedRequest {
   weight?: number;
 }
 
+export interface VoCreateCloudTeamBrowserInstanceRequest {
+  displayName: string;
+}
+
 export interface VoCreateConversationRequest {
   defaultWorkspaceId?: string;
   digiEmployeeId: string;
@@ -3680,6 +3694,10 @@ export interface VoListStationsResponse {
   items?: VoStation[];
 }
 
+export interface VoListTeamBrowserInstancesResponse {
+  items?: VoTeamBrowserInstance[];
+}
+
 export interface VoListTeamComputeImagesResponse {
   items?: VoTeamComputeImageItem[];
 }
@@ -4406,6 +4424,20 @@ export interface VoTeamBillingSummaryResponse {
   entries?: VoBillingLedgerEntry[];
   snapshot?: VoBillingSnapshot;
   wallet?: VoBillingWallet;
+}
+
+export interface VoTeamBrowserInstance {
+  browserInstanceId?: string;
+  capabilities?: string[];
+  createdAt?: string;
+  deviceId?: string;
+  displayName?: string;
+  kind?: string;
+  lastSeenAt?: string;
+  profileS3Path?: string;
+  status?: string;
+  teamId?: string;
+  updatedAt?: string;
 }
 
 export interface VoTeamComputeImageItem {
@@ -7521,6 +7553,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Teams
+     * @name V1ChromeBrowserConnectionsWsList
+     * @summary Connect Chrome browser endpoint websocket
+     * @request GET:/api/v1/chrome-browser-connections/ws
+     */
+    v1ChromeBrowserConnectionsWsList: (params: RequestParams = {}) =>
+      this.request<any, any>({
+        path: `/api/v1/chrome-browser-connections/ws`,
+        method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags User
      * @name V1ConnectionAuthTasksDetail
      * @summary Get connection auth task
@@ -8893,6 +8940,44 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<BasePinOKVoTeamBillingSummaryResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/billing/summary`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsBrowserInstancesDetail
+     * @summary List team browser instances
+     * @request GET:/api/v1/teams/{teamId}/browser-instances
+     */
+    v1TeamsBrowserInstancesDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListTeamBrowserInstancesResponse, any>({
+        path: `/api/v1/teams/${teamId}/browser-instances`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsBrowserInstancesCloudCreate
+     * @summary Create cloud team browser instance
+     * @request POST:/api/v1/teams/{teamId}/browser-instances/cloud
+     */
+    v1TeamsBrowserInstancesCloudCreate: (
+      teamId: string,
+      request: VoCreateCloudTeamBrowserInstanceRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamBrowserInstance, any>({
+        path: `/api/v1/teams/${teamId}/browser-instances/cloud`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
