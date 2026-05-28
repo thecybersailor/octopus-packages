@@ -468,6 +468,11 @@ export interface BasePinOKVoCreateFeishuBotBindingSessionResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoCreateFeishuTeamIntegrationBindingSessionResponse {
+  data?: VoCreateFeishuTeamIntegrationBindingSessionResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoCreateOfficePreviewSessionResponse {
   data?: VoCreateOfficePreviewSessionResponse;
   trace_id?: string;
@@ -545,6 +550,11 @@ export interface BasePinOKVoExternalUserVerificationFlowDetail {
 
 export interface BasePinOKVoFeishuBotBindingSessionResponse {
   data?: VoFeishuBotBindingSessionResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoFeishuTeamIntegrationBindingSessionResponse {
+  data?: VoFeishuTeamIntegrationBindingSessionResponse;
   trace_id?: string;
 }
 
@@ -2681,6 +2691,16 @@ export interface VoCreateFeishuBotBindingSessionResponse {
   status?: string;
 }
 
+export type VoCreateFeishuTeamIntegrationBindingSessionRequest = object;
+
+export interface VoCreateFeishuTeamIntegrationBindingSessionResponse {
+  authorizeUrl?: string;
+  bindingSessionId?: string;
+  expireAt?: string;
+  qrCodeUrl?: string;
+  status?: string;
+}
+
 export interface VoCreateFilePreviewSessionRequest {
   logicalPath: string;
   sourceKind: string;
@@ -3131,6 +3151,17 @@ export interface VoFeishuBotBindingSessionResponse {
   expireAt?: string;
   qrCodeUrl?: string;
   stationId?: string;
+  status?: string;
+}
+
+export interface VoFeishuTeamIntegrationBindingSessionResponse {
+  appId?: string;
+  authorizeUrl?: string;
+  bindingSessionId?: string;
+  errorCode?: string;
+  errorMessage?: string;
+  expireAt?: string;
+  qrCodeUrl?: string;
   status?: string;
 }
 
@@ -8961,6 +8992,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoCalendarSourceSyncRun, any>({
         path: `/api/v1/teams/${teamId}/calendar-sources/${sourceId}/sync`,
         method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CollaborationPlatforms
+     * @name V1TeamsCollaborationPlatformsFeishuBindingSessionsCreate
+     * @summary Create feishu collaboration platform binding session
+     * @request POST:/api/v1/teams/{teamId}/collaboration-platforms/feishu/binding-sessions
+     */
+    v1TeamsCollaborationPlatformsFeishuBindingSessionsCreate: (
+      teamId: string,
+      request: VoCreateFeishuTeamIntegrationBindingSessionRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCreateFeishuTeamIntegrationBindingSessionResponse, any>({
+        path: `/api/v1/teams/${teamId}/collaboration-platforms/feishu/binding-sessions`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CollaborationPlatforms
+     * @name V1TeamsCollaborationPlatformsFeishuBindingSessionsDetail
+     * @summary Get feishu collaboration platform binding session detail
+     * @request GET:/api/v1/teams/{teamId}/collaboration-platforms/feishu/binding-sessions/{bindingSessionId}
+     */
+    v1TeamsCollaborationPlatformsFeishuBindingSessionsDetail: (
+      teamId: string,
+      bindingSessionId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoFeishuTeamIntegrationBindingSessionResponse, any>({
+        path: `/api/v1/teams/${teamId}/collaboration-platforms/feishu/binding-sessions/${bindingSessionId}`,
+        method: "GET",
         format: "json",
         ...params,
       }),
