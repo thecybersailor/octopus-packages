@@ -4462,6 +4462,8 @@ export interface VoTeamDevice {
   clientType?: string;
   deviceName?: string;
   hostedMcpServersCount?: number;
+  lastActiveIp?: string;
+  lastActiveIpLocation?: string;
   lastSeenAt?: string;
   platformBaseUrl?: string;
   registeredAt?: string;
