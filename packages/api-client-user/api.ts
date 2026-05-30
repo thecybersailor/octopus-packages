@@ -398,6 +398,11 @@ export interface BasePinOKVoCalendarSourceSyncRun {
   trace_id?: string;
 }
 
+export interface BasePinOKVoCommitTeamBrowserLiveLoginResponse {
+  data?: VoCommitTeamBrowserLiveLoginResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoConnectionAuthTaskCreateResponse {
   data?: VoConnectionAuthTaskCreateResponse;
   trace_id?: string;
@@ -1190,6 +1195,11 @@ export interface BasePinOKVoTeamBrowserInstance {
 
 export interface BasePinOKVoTeamBrowserLiveLoginResponse {
   data?: VoTeamBrowserLiveLoginResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamBrowserProfileSitesResponse {
+  data?: VoTeamBrowserProfileSitesResponse;
   trace_id?: string;
 }
 
@@ -2339,6 +2349,18 @@ export interface VoCalendarSourceSyncRun {
 
 export interface VoClaimTeamDevicePairingCodeRequest {
   code: string;
+}
+
+export interface VoCommitTeamBrowserLiveLoginRequest {
+  handoffId: string;
+  profileVersion: string;
+  runtimeSessionId: string;
+}
+
+export interface VoCommitTeamBrowserLiveLoginResponse {
+  bytes?: number;
+  durationMs?: number;
+  newProfileVersion?: string;
 }
 
 export interface VoConnectionAuthTaskAuthField {
@@ -4457,8 +4479,20 @@ export interface VoTeamBrowserInstance {
 
 export interface VoTeamBrowserLiveLoginResponse {
   handoffId?: string;
+  profileVersion?: string;
   runtimeSessionId?: string;
   viewerUrl?: string;
+}
+
+export interface VoTeamBrowserProfileSite {
+  host?: string;
+  origin?: string;
+  sources?: string[];
+}
+
+export interface VoTeamBrowserProfileSitesResponse {
+  profileExists?: boolean;
+  sites?: VoTeamBrowserProfileSite[];
 }
 
 export interface VoTeamComputeImageItem {
@@ -9107,6 +9141,49 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoTeamBrowserLiveLoginResponse, any>({
         path: `/api/v1/teams/${teamId}/browser-instances/${browserInstanceId}/live-login`,
         method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsBrowserInstancesLiveLoginCommitCreate
+     * @summary Save cloud browser live login profile and close session
+     * @request POST:/api/v1/teams/{teamId}/browser-instances/{browserInstanceId}/live-login/commit
+     */
+    v1TeamsBrowserInstancesLiveLoginCommitCreate: (
+      teamId: string,
+      browserInstanceId: string,
+      request: VoCommitTeamBrowserLiveLoginRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoCommitTeamBrowserLiveLoginResponse, any>({
+        path: `/api/v1/teams/${teamId}/browser-instances/${browserInstanceId}/live-login/commit`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsBrowserInstancesProfileSitesDetail
+     * @summary List saved sites from cloud browser profile
+     * @request GET:/api/v1/teams/{teamId}/browser-instances/{browserInstanceId}/profile-sites
+     */
+    v1TeamsBrowserInstancesProfileSitesDetail: (
+      teamId: string,
+      browserInstanceId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamBrowserProfileSitesResponse, any>({
+        path: `/api/v1/teams/${teamId}/browser-instances/${browserInstanceId}/profile-sites`,
+        method: "GET",
         format: "json",
         ...params,
       }),
