@@ -1273,6 +1273,11 @@ export interface BasePinOKVoTeamUploadFinalizeResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTenantAdminAssignDigiWorkerToTeamResponse {
+  data?: VoTenantAdminAssignDigiWorkerToTeamResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTenantAdminAssistantEnsureResponse {
   data?: VoTenantAdminAssistantEnsureResponse;
   trace_id?: string;
@@ -2012,14 +2017,12 @@ export interface VoAdminNumberRange {
 }
 
 export interface VoAdminOctopusClusterItem {
-  browserLiveBaseURL?: string;
-  fileGatewayBaseURL?: string;
-  gatewayBaseURL?: string;
+  internalBaseURL?: string;
   isActiveForCreate?: boolean;
   key?: string;
   name?: string;
   nasRootPVCName?: string;
-  podManagerBaseURL?: string;
+  publicBaseURL?: string;
 }
 
 export interface VoAdminPresignPrivateStorageRequest {
@@ -4087,14 +4090,12 @@ export interface VoPatchAdminLLMModelRequest {
 }
 
 export interface VoPatchAdminOctopusClusterRequest {
-  browserLiveBaseURL?: string;
-  fileGatewayBaseURL?: string;
-  gatewayBaseURL?: string;
+  internalBaseURL?: string;
   isActiveForCreate?: boolean;
   kubeconfig?: string;
   name?: string;
   nasRootPVCName?: string;
-  podManagerBaseURL?: string;
+  publicBaseURL?: string;
 }
 
 export interface VoPatchDigiEmployeeProfileRequest {
@@ -4767,6 +4768,22 @@ export interface VoTenantAdminApplyGeneratedDigiWorkerAvatarRequest {
   previewToken: string;
 }
 
+export interface VoTenantAdminApplyGeneratedDigiWorkerVisualAssetRequest {
+  assetType: VoTenantAdminApplyGeneratedDigiWorkerVisualAssetRequestAssetTypeEnum;
+  previewToken: string;
+}
+
+export interface VoTenantAdminAssignDigiWorkerToTeamRequest {
+  teamId: string;
+}
+
+export interface VoTenantAdminAssignDigiWorkerToTeamResponse {
+  digiWorkerId?: string;
+  employeeId?: string;
+  sourceType?: string;
+  teamId?: string;
+}
+
 export interface VoTenantAdminAssistantEnsureRequest {
   digiWorkerId: string;
 }
@@ -4882,6 +4899,8 @@ export interface VoTenantAdminGenerateDigiWorkerAvatarPreviewRequest {
 }
 
 export interface VoTenantAdminGenerateDigiWorkerAvatarPreviewResponse {
+  aspectRatio?: string;
+  assetType?: string;
   effectiveProvider?: string;
   errorCode?: string;
   errorHint?: string;
@@ -4890,12 +4909,25 @@ export interface VoTenantAdminGenerateDigiWorkerAvatarPreviewResponse {
   jobId?: string;
   previewToken?: string;
   previewUrl?: string;
+  referenceMode?: string;
   status?: string;
+}
+
+export interface VoTenantAdminGenerateDigiWorkerVisualAssetPreviewRequest {
+  aspectRatio?: VoTenantAdminGenerateDigiWorkerVisualAssetPreviewRequestAspectRatioEnum;
+  assetType: VoTenantAdminGenerateDigiWorkerVisualAssetPreviewRequestAssetTypeEnum;
+  prompt: string;
+  provider: string;
+  referenceMode?: VoTenantAdminGenerateDigiWorkerVisualAssetPreviewRequestReferenceModeEnum;
 }
 
 export interface VoTenantAdminImageGenerationProvider {
   displayName?: string;
   provider?: string;
+  recommendedForAvatar?: boolean;
+  recommendedForBioPicture?: boolean;
+  supportsAspectRatio?: boolean;
+  supportsReferenceImage?: boolean;
 }
 
 export interface VoTenantAdminLLMModelItem {
@@ -5205,14 +5237,12 @@ export interface VoUpdateWorkspaceRequest {
 }
 
 export interface VoUpsertAdminOctopusClusterRequest {
-  browserLiveBaseURL: string;
-  fileGatewayBaseURL: string;
-  gatewayBaseURL: string;
+  internalBaseURL: string;
   isActiveForCreate?: boolean;
   kubeconfig: string;
   name: string;
   nasRootPVCName: string;
-  podManagerBaseURL: string;
+  publicBaseURL: string;
 }
 
 export interface VoUpsertExternalUserVerificationActionToolRequest {
@@ -5430,6 +5460,28 @@ export interface VoWorkspace {
   status?: string;
   storageUsage?: number;
   updatedAt?: string;
+}
+
+export enum VoTenantAdminApplyGeneratedDigiWorkerVisualAssetRequestAssetTypeEnum {
+  Avatar = "avatar",
+  BioPicture = "bio_picture",
+}
+
+export enum VoTenantAdminGenerateDigiWorkerVisualAssetPreviewRequestAspectRatioEnum {
+  Value11 = "1:1",
+  Value169 = "16:9",
+  Value43 = "4:3",
+  Value34 = "3:4",
+}
+
+export enum VoTenantAdminGenerateDigiWorkerVisualAssetPreviewRequestAssetTypeEnum {
+  Avatar = "avatar",
+  BioPicture = "bio_picture",
+}
+
+export enum VoTenantAdminGenerateDigiWorkerVisualAssetPreviewRequestReferenceModeEnum {
+  None = "none",
+  Avatar = "avatar",
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -13829,6 +13881,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags TenantAdmin
+     * @name V1DigiworkersAssignmentsCreate
+     * @summary Assign a DigiWorker to a team as tenant admin
+     * @request POST:/tenant-admin/v1/digiworkers/{id}/assignments
+     */
+    v1DigiworkersAssignmentsCreate: (
+      id: string,
+      request: VoTenantAdminAssignDigiWorkerToTeamRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoTenantAdminAssignDigiWorkerToTeamResponse, BasePinErr>({
+        path: `/tenant-admin/v1/digiworkers/${id}/assignments`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
      * @name V1DigiworkersAvatarApplyGeneratedCreate
      * @summary Apply generated digiworker avatar preview (tenant admin)
      * @request POST:/tenant-admin/v1/digiworkers/{id}/avatar/apply-generated
@@ -13936,6 +14010,50 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<BasePinOKVoTenantAdminDigiWorker, BasePinErr>({
         path: `/tenant-admin/v1/digiworkers/${id}/refresh-avatar`,
         method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1DigiworkersVisualAssetsApplyPreviewCreate
+     * @summary Apply generated digiworker visual asset preview (tenant admin)
+     * @request POST:/tenant-admin/v1/digiworkers/{id}/visual-assets/apply-preview
+     */
+    v1DigiworkersVisualAssetsApplyPreviewCreate: (
+      id: string,
+      request: VoTenantAdminApplyGeneratedDigiWorkerVisualAssetRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoTenantAdminDigiWorker, BasePinErr>({
+        path: `/tenant-admin/v1/digiworkers/${id}/visual-assets/apply-preview`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags TenantAdmin
+     * @name V1DigiworkersVisualAssetsGeneratePreviewCreate
+     * @summary Generate digiworker visual asset preview by prompt (tenant admin)
+     * @request POST:/tenant-admin/v1/digiworkers/{id}/visual-assets/generate-preview
+     */
+    v1DigiworkersVisualAssetsGeneratePreviewCreate: (
+      id: string,
+      request: VoTenantAdminGenerateDigiWorkerVisualAssetPreviewRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoTenantAdminGenerateDigiWorkerAvatarPreviewResponse, BasePinErr>({
+        path: `/tenant-admin/v1/digiworkers/${id}/visual-assets/generate-preview`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
