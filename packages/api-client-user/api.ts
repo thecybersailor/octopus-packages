@@ -1188,6 +1188,11 @@ export interface BasePinOKVoTeamBrowserInstance {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamBrowserLiveLoginResponse {
+  data?: VoTeamBrowserLiveLoginResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamDevice {
   data?: VoTeamDevice;
   trace_id?: string;
@@ -2657,6 +2662,7 @@ export interface VoCreateAdminDigiWorkerSeedRequest {
 
 export interface VoCreateCloudTeamBrowserInstanceRequest {
   displayName: string;
+  labels?: string[];
 }
 
 export interface VoCreateConversationRequest {
@@ -4127,6 +4133,11 @@ export interface VoPatchSkillsetRequest {
   name?: string;
 }
 
+export interface VoPatchTeamBrowserInstanceRequest {
+  displayName?: string;
+  labels?: string[];
+}
+
 export interface VoPatchTeamMcpTunnelRegistrationRequest {
   localEndpoint?: string;
   name?: string;
@@ -4433,11 +4444,18 @@ export interface VoTeamBrowserInstance {
   deviceId?: string;
   displayName?: string;
   kind?: string;
+  labels?: string[];
   lastSeenAt?: string;
   profileS3Path?: string;
   status?: string;
   teamId?: string;
   updatedAt?: string;
+}
+
+export interface VoTeamBrowserLiveLoginResponse {
+  handoffId?: string;
+  runtimeSessionId?: string;
+  viewerUrl?: string;
 }
 
 export interface VoTeamComputeImageItem {
@@ -8980,6 +8998,61 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "POST",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsBrowserInstancesDelete
+     * @summary Delete team browser instance
+     * @request DELETE:/api/v1/teams/{teamId}/browser-instances/{browserInstanceId}
+     */
+    v1TeamsBrowserInstancesDelete: (teamId: string, browserInstanceId: string, params: RequestParams = {}) =>
+      this.request<MapStringBool, any>({
+        path: `/api/v1/teams/${teamId}/browser-instances/${browserInstanceId}`,
+        method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsBrowserInstancesPartialUpdate
+     * @summary Patch team browser instance
+     * @request PATCH:/api/v1/teams/{teamId}/browser-instances/{browserInstanceId}
+     */
+    v1TeamsBrowserInstancesPartialUpdate: (
+      teamId: string,
+      browserInstanceId: string,
+      request: VoPatchTeamBrowserInstanceRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamBrowserInstance, any>({
+        path: `/api/v1/teams/${teamId}/browser-instances/${browserInstanceId}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsBrowserInstancesLiveLoginCreate
+     * @summary Start cloud browser live login
+     * @request POST:/api/v1/teams/{teamId}/browser-instances/{browserInstanceId}/live-login
+     */
+    v1TeamsBrowserInstancesLiveLoginCreate: (teamId: string, browserInstanceId: string, params: RequestParams = {}) =>
+      this.request<VoTeamBrowserLiveLoginResponse, any>({
+        path: `/api/v1/teams/${teamId}/browser-instances/${browserInstanceId}/live-login`,
+        method: "POST",
         format: "json",
         ...params,
       }),
