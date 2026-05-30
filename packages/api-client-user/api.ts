@@ -4136,6 +4136,7 @@ export interface VoPatchSkillsetRequest {
 export interface VoPatchTeamBrowserInstanceRequest {
   displayName?: string;
   labels?: string[];
+  webSkillEnabled?: boolean;
 }
 
 export interface VoPatchTeamMcpTunnelRegistrationRequest {
@@ -4450,6 +4451,7 @@ export interface VoTeamBrowserInstance {
   status?: string;
   teamId?: string;
   updatedAt?: string;
+  webSkillEnabled?: boolean;
 }
 
 export interface VoTeamBrowserLiveLoginResponse {
