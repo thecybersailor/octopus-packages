@@ -4159,6 +4159,8 @@ export interface VoPatchSkillsetRequest {
 export interface VoPatchTeamBrowserInstanceRequest {
   displayName?: string;
   labels?: string[];
+  proxyServer?: string;
+  resetFingerprintSeed?: boolean;
   webSkillEnabled?: boolean;
 }
 
@@ -4467,10 +4469,13 @@ export interface VoTeamBrowserInstance {
   createdAt?: string;
   deviceId?: string;
   displayName?: string;
+  fingerprintSeed?: string;
+  hasProxyServer?: boolean;
   kind?: string;
   labels?: string[];
   lastSeenAt?: string;
   profileS3Path?: string;
+  proxyServerMasked?: string;
   status?: string;
   teamId?: string;
   updatedAt?: string;
