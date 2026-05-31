@@ -1098,6 +1098,11 @@ export interface BasePinOKVoOfficePreviewSessionResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoOntologyRuntimeProxyResponse {
+  data?: VoOntologyRuntimeProxyResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoPortalBrand {
   data?: VoPortalBrand;
   trace_id?: string;
@@ -4089,6 +4094,8 @@ export interface VoOntologyListItem {
   status?: string;
   updatedAt?: string;
 }
+
+export type VoOntologyRuntimeProxyResponse = Record<string, any>;
 
 export interface VoPatchAdminComputeImageRequest {
   cpu?: number;
@@ -11861,9 +11868,32 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/api/v1/teams/{teamId}/ontology-runtime/{path}
      */
     v1TeamsOntologyRuntimeDetail: (teamId: string, path: string, params: RequestParams = {}) =>
-      this.request<VoCreateFeishuBotBindingSessionRequest, any>({
+      this.request<VoOntologyRuntimeProxyResponse, any>({
         path: `/api/v1/teams/${teamId}/ontology-runtime/${path}`,
         method: "GET",
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Ontologies
+     * @name V1TeamsOntologyRuntimeCreate
+     * @summary Proxy team ontology runtime request
+     * @request POST:/api/v1/teams/{teamId}/ontology-runtime/{path}
+     */
+    v1TeamsOntologyRuntimeCreate: (
+      teamId: string,
+      path: string,
+      request: VoOntologyRuntimeProxyResponse,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoOntologyRuntimeProxyResponse, any>({
+        path: `/api/v1/teams/${teamId}/ontology-runtime/${path}`,
+        method: "POST",
+        body: request,
         type: ContentType.Json,
         format: "json",
         ...params,
