@@ -598,6 +598,11 @@ export interface BasePinOKVoGitSkillSourceTestConnectionResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoGraphExplorerData {
+  data?: VoGraphExplorerData;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoGroupSessionBootstrapResponse {
   data?: VoGroupSessionBootstrapResponse;
   trace_id?: string;
@@ -868,6 +873,11 @@ export interface BasePinOKVoListMarketWorkersResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListOntologiesResponse {
+  data?: VoListOntologiesResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListPinnedDigiEmployeesResponse {
   data?: VoListPinnedDigiEmployeesResponse;
   trace_id?: string;
@@ -1090,6 +1100,21 @@ export interface BasePinOKVoMeResponse {
 
 export interface BasePinOKVoOfficePreviewSessionResponse {
   data?: VoOfficePreviewSessionResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoOntologyDetail {
+  data?: VoOntologyDetail;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoOntologyNodeDetail {
+  data?: VoOntologyNodeDetail;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoOntologySimulationTrace {
+  data?: VoOntologySimulationTrace;
   trace_id?: string;
 }
 
@@ -3304,6 +3329,29 @@ export interface VoGitSkillSourceTestConnectionResponse {
   resolvedCommit?: string;
 }
 
+export interface VoGraphExplorerData {
+  edges?: VoGraphExplorerEdge[];
+  nodes?: VoGraphExplorerNode[];
+}
+
+export interface VoGraphExplorerEdge {
+  from?: string;
+  id?: string;
+  intensity?: number;
+  relation?: string;
+  to?: string;
+  valence?: number;
+}
+
+export interface VoGraphExplorerNode {
+  id?: string;
+  intensity?: number;
+  metadata?: Record<string, any>;
+  text?: string;
+  type?: string;
+  valence?: number;
+}
+
 export interface VoGroupSessionBootstrapResponse {
   currentMember?: VoGroupSessionMember;
   members?: VoGroupSessionMember[];
@@ -3690,6 +3738,10 @@ export interface VoListMarketWorkersResponse {
   nextCursor?: string;
 }
 
+export interface VoListOntologiesResponse {
+  items?: VoOntologyListItem[];
+}
+
 export interface VoListPinnedDigiEmployeesResponse {
   items?: string[];
 }
@@ -4067,6 +4119,76 @@ export interface VoOfficePreviewSourceRef {
   uploadId?: string;
   workspaceId?: string;
   workspaceIdent?: string;
+}
+
+export interface VoOntologyDetail {
+  actionCount?: number;
+  description?: string;
+  entityCount?: number;
+  id?: string;
+  logicalPath?: string;
+  manifestHash?: string;
+  name?: string;
+  ontologyId?: string;
+  policyCount?: number;
+  publishedAt?: string;
+  status?: string;
+  updatedAt?: string;
+}
+
+export interface VoOntologyListItem {
+  actionCount?: number;
+  description?: string;
+  entityCount?: number;
+  id?: string;
+  name?: string;
+  ontologyId?: string;
+  policyCount?: number;
+  status?: string;
+  updatedAt?: string;
+}
+
+export interface VoOntologyNodeDetail {
+  id?: string;
+  incoming?: VoGraphExplorerEdge[];
+  label?: string;
+  operationBindings?: Record<string, string>[];
+  outgoing?: VoGraphExplorerEdge[];
+  properties?: VoOntologyNodeProperty[];
+  sourceBindings?: Record<string, string>[];
+  types?: string[];
+}
+
+export interface VoOntologyNodeProperty {
+  predicate?: string;
+  value?: string;
+}
+
+export interface VoOntologySimulationHop {
+  edgeId?: string;
+  evidence?: string[];
+  fromNodeId?: string;
+  index?: number;
+  kind?: string;
+  requiresConfirmation?: boolean;
+  riskLevel?: string;
+  summary?: string;
+  title?: string;
+  toNodeId?: string;
+}
+
+export interface VoOntologySimulationRequest {
+  focusedNodeId?: string;
+  input?: string;
+  maxHops?: number;
+}
+
+export interface VoOntologySimulationTrace {
+  anchors?: Record<string, any>[];
+  hops?: VoOntologySimulationHop[];
+  input?: string;
+  runId?: string;
+  status?: string;
 }
 
 export interface VoPatchAdminComputeImageRequest {
@@ -11810,6 +11932,108 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v1/teams/${teamId}/office-preview-sessions`,
         method: "POST",
         body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Ontologies
+     * @name V1TeamsOntologiesDetail
+     * @summary List team ontologies
+     * @request GET:/api/v1/teams/{teamId}/ontologies
+     */
+    v1TeamsOntologiesDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListOntologiesResponse, any>({
+        path: `/api/v1/teams/${teamId}/ontologies`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Ontologies
+     * @name V1TeamsOntologiesDetail2
+     * @summary Get team ontology detail
+     * @request GET:/api/v1/teams/{teamId}/ontologies/{ontologyId}
+     * @originalName v1TeamsOntologiesDetail
+     * @duplicate
+     */
+    v1TeamsOntologiesDetail2: (teamId: string, ontologyId: string, params: RequestParams = {}) =>
+      this.request<VoOntologyDetail, any>({
+        path: `/api/v1/teams/${teamId}/ontologies/${ontologyId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Ontologies
+     * @name V1TeamsOntologiesGraphDetail
+     * @summary Get team ontology graph
+     * @request GET:/api/v1/teams/{teamId}/ontologies/{ontologyId}/graph
+     */
+    v1TeamsOntologiesGraphDetail: (
+      teamId: string,
+      ontologyId: string,
+      query?: {
+        /** Graph search query */
+        query?: string;
+        /** Max graph nodes */
+        limit?: number;
+        /** Graph node type filter */
+        type?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoGraphExplorerData, any>({
+        path: `/api/v1/teams/${teamId}/ontologies/${ontologyId}/graph`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Ontologies
+     * @name V1TeamsOntologiesNodesDetail
+     * @summary Get team ontology node detail
+     * @request GET:/api/v1/teams/{teamId}/ontologies/{ontologyId}/nodes/{nodeId}
+     */
+    v1TeamsOntologiesNodesDetail: (teamId: string, ontologyId: string, nodeId: string, params: RequestParams = {}) =>
+      this.request<VoOntologyNodeDetail, any>({
+        path: `/api/v1/teams/${teamId}/ontologies/${ontologyId}/nodes/${nodeId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Ontologies
+     * @name V1TeamsOntologiesSimulationsCreate
+     * @summary Run team ontology simulation
+     * @request POST:/api/v1/teams/{teamId}/ontologies/{ontologyId}/simulations
+     */
+    v1TeamsOntologiesSimulationsCreate: (
+      teamId: string,
+      ontologyId: string,
+      body: VoOntologySimulationRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoOntologySimulationTrace, any>({
+        path: `/api/v1/teams/${teamId}/ontologies/${ontologyId}/simulations`,
+        method: "POST",
+        body: body,
         type: ContentType.Json,
         format: "json",
         ...params,
