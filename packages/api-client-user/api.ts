@@ -4087,6 +4087,7 @@ export interface VoOntologyListItem {
   actionCount?: number;
   description?: string;
   entityCount?: number;
+  gitCommit?: string;
   id?: string;
   name?: string;
   ontologyId?: string;
