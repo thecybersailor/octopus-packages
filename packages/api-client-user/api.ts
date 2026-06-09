@@ -1133,6 +1133,11 @@ export interface BasePinOKVoPostConversationTurnSteerResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoRefreshTeamBrowserClientInfoResponse {
+  data?: VoRefreshTeamBrowserClientInfoResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoRemoteTaskDeleteResponse {
   data?: VoRemoteTaskDeleteResponse;
   trace_id?: string;
@@ -4309,6 +4314,10 @@ export interface VoPutTenantAdminMarketPlanMembersRequest {
   members?: VoTenantAdminMarketPlanMember[];
 }
 
+export interface VoRefreshTeamBrowserClientInfoResponse {
+  clientInfo?: Record<string, any>;
+}
+
 export interface VoRegisterTeamDeviceRequest {
   clientId: string;
   clientType: string;
@@ -4505,9 +4514,12 @@ export interface VoTeamBillingSummaryResponse {
 export interface VoTeamBrowserInstance {
   browserInstanceId?: string;
   capabilities?: string[];
+  clientInfo?: Record<string, any>;
+  clientInfoCheckedAt?: string;
   createdAt?: string;
   deviceId?: string;
   displayName?: string;
+  fingerprintConfig?: Record<string, any>;
   fingerprintSeed?: string;
   hasProxyServer?: boolean;
   kind?: string;
@@ -9169,6 +9181,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "PATCH",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsBrowserInstancesClientInfoRefreshCreate
+     * @summary Refresh browser client info
+     * @request POST:/api/v1/teams/{teamId}/browser-instances/{browserInstanceId}/client-info/refresh
+     */
+    v1TeamsBrowserInstancesClientInfoRefreshCreate: (
+      teamId: string,
+      browserInstanceId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoRefreshTeamBrowserClientInfoResponse, any>({
+        path: `/api/v1/teams/${teamId}/browser-instances/${browserInstanceId}/client-info/refresh`,
+        method: "POST",
         format: "json",
         ...params,
       }),
