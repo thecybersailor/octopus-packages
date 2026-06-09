@@ -4257,7 +4257,9 @@ export interface VoPatchSkillsetRequest {
 export interface VoPatchTeamBrowserInstanceRequest {
   displayName?: string;
   labels?: string[];
+  proxyPassword?: string;
   proxyServer?: string;
+  proxyUsername?: string;
   resetFingerprintSeed?: boolean;
   webSkillEnabled?: boolean;
 }
