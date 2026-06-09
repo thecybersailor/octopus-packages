@@ -2998,6 +2998,7 @@ export interface VoDeleteGitSkillSourceRequest {
 export interface VoDigiEmployee {
   allowAutoDelegate?: boolean;
   arcubaseBinding?: VoArcubaseBindingSummary;
+  arcubaseIdentityMode?: string;
   bio?: string;
   bioPicture?: string;
   conversationStats7d?: VoDigiEmployeeConversationStats7D;
@@ -4214,6 +4215,7 @@ export interface VoPatchAdminOctopusClusterRequest {
 
 export interface VoPatchDigiEmployeeProfileRequest {
   allowAutoDelegate?: boolean;
+  arcubaseIdentityMode?: string;
   bio?: string;
   bioPicture?: string;
   homeModeOverride?: string;
