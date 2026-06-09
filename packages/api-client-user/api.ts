@@ -3135,6 +3135,9 @@ export interface VoExternalUserDetail {
   externalUserId?: string;
   firstChannel?: string;
   firstChannelUserId?: string;
+  humanMemberAvatarUrl?: string;
+  humanMemberDisplayName?: string;
+  humanMemberUserId?: string;
   identities?: VoExternalUserIdentityItem[];
   identityCount?: number;
   lastActiveAt?: string;
@@ -3155,6 +3158,9 @@ export interface VoExternalUserListItem {
   externalUserId?: string;
   firstChannel?: string;
   firstChannelUserId?: string;
+  humanMemberAvatarUrl?: string;
+  humanMemberDisplayName?: string;
+  humanMemberUserId?: string;
   identityCount?: number;
   lastActiveAt?: string;
   meta?: Record<string, string>;
@@ -4159,6 +4165,10 @@ export interface VoPatchDigiEmployeeProfileRequest {
 
 export interface VoPatchDigiEmployeeSkillsetsRequest {
   skillsets?: VoSkillsetRef[];
+}
+
+export interface VoPatchExternalUserHumanMemberRequest {
+  humanMemberUserId?: string;
 }
 
 export interface VoPatchGitSkillSourceRequest {
@@ -10712,6 +10722,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoListExternalUserConversationsResponse, any>({
         path: `/api/v1/teams/${teamId}/external-users/${externalUserId}/conversations`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ExternalUsers
+     * @name V1TeamsExternalUsersHumanMemberPartialUpdate
+     * @summary Bind team external user to a human member
+     * @request PATCH:/api/v1/teams/{teamId}/external-users/{externalUserId}/human-member
+     */
+    v1TeamsExternalUsersHumanMemberPartialUpdate: (
+      teamId: string,
+      externalUserId: string,
+      request: VoPatchExternalUserHumanMemberRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoExternalUserDetail, any>({
+        path: `/api/v1/teams/${teamId}/external-users/${externalUserId}/human-member`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
