@@ -928,6 +928,11 @@ export interface BasePinOKVoListStationsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListTeamAppsResponse {
+  data?: VoListTeamAppsResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListTeamBrowserInstancesResponse {
   data?: VoListTeamBrowserInstancesResponse;
   trace_id?: string;
@@ -1118,6 +1123,11 @@ export interface BasePinOKVoOntologyRuntimeProxyResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoOpenTeamAppResponse {
+  data?: VoOpenTeamAppResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoPortalBrand {
   data?: VoPortalBrand;
   trace_id?: string;
@@ -1205,6 +1215,11 @@ export interface BasePinOKVoStationResponsesResult {
 
 export interface BasePinOKVoTeam {
   data?: VoTeam;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamApp {
+  data?: VoTeamApp;
   trace_id?: string;
 }
 
@@ -2902,6 +2917,15 @@ export interface VoCreateTeamRequest {
   name?: string;
 }
 
+export interface VoCreateTeamWebURLAppRequest {
+  description?: string;
+  iconUrl?: string;
+  name?: string;
+  sortOrder?: number;
+  status?: string;
+  url?: string;
+}
+
 export interface VoCreateWebSessionRequest {
   embedAccessToken: string;
   externalConversationId?: string;
@@ -3803,6 +3827,10 @@ export interface VoListStationsResponse {
   items?: VoStation[];
 }
 
+export interface VoListTeamAppsResponse {
+  items?: VoTeamApp[];
+}
+
 export interface VoListTeamBrowserInstancesResponse {
   items?: VoTeamBrowserInstance[];
 }
@@ -4162,6 +4190,10 @@ export interface VoOntologyListItem {
 
 export type VoOntologyRuntimeProxyResponse = Record<string, any>;
 
+export interface VoOpenTeamAppResponse {
+  redirectUrl?: string;
+}
+
 export interface VoPatchAdminComputeImageRequest {
   cpu?: number;
   description?: string;
@@ -4276,6 +4308,15 @@ export interface VoPatchTeamMembershipProfileRequest {
   avatarStorageKey?: string;
   avatarUrl?: string;
   displayName?: string;
+}
+
+export interface VoPatchTeamWebURLAppRequest {
+  description?: string;
+  iconUrl?: string;
+  name?: string;
+  sortOrder?: number;
+  status?: string;
+  url?: string;
 }
 
 export interface VoPortalBrand {
@@ -4561,6 +4602,20 @@ export interface VoTeam {
   organizationProfile?: VoTeamOrganizationProfile;
   registrationName?: string;
   tags?: string[];
+}
+
+export interface VoTeamApp {
+  createdAt?: string;
+  description?: string;
+  iconUrl?: string;
+  id?: string;
+  name?: string;
+  sortOrder?: number;
+  source?: string;
+  status?: string;
+  type?: string;
+  updatedAt?: string;
+  url?: string;
 }
 
 export interface VoTeamArcubaseBinding {
@@ -8972,6 +9027,79 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
+     * @name V1TeamsAppsWebUrlDetail
+     * @summary List BotWorks web URL apps in team settings
+     * @request GET:/api/v1/teams/{teamId}/apps/web-url
+     */
+    v1TeamsAppsWebUrlDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListTeamAppsResponse, any>({
+        path: `/api/v1/teams/${teamId}/apps/web-url`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsAppsWebUrlCreate
+     * @summary Create BotWorks web URL app
+     * @request POST:/api/v1/teams/{teamId}/apps/web-url
+     */
+    v1TeamsAppsWebUrlCreate: (teamId: string, request: VoCreateTeamWebURLAppRequest, params: RequestParams = {}) =>
+      this.request<VoTeamApp, any>({
+        path: `/api/v1/teams/${teamId}/apps/web-url`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsAppsWebUrlDelete
+     * @summary Delete BotWorks web URL app
+     * @request DELETE:/api/v1/teams/{teamId}/apps/web-url/{appId}
+     */
+    v1TeamsAppsWebUrlDelete: (teamId: string, appId: string, params: RequestParams = {}) =>
+      this.request<MapStringBool, any>({
+        path: `/api/v1/teams/${teamId}/apps/web-url/${appId}`,
+        method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsAppsWebUrlPartialUpdate
+     * @summary Patch BotWorks web URL app
+     * @request PATCH:/api/v1/teams/{teamId}/apps/web-url/{appId}
+     */
+    v1TeamsAppsWebUrlPartialUpdate: (
+      teamId: string,
+      appId: string,
+      request: VoPatchTeamWebURLAppRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamApp, any>({
+        path: `/api/v1/teams/${teamId}/apps/web-url/${appId}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
      * @name V1TeamsArcubaseDetail
      * @summary Get team Arcubase binding
      * @request GET:/api/v1/teams/{teamId}/arcubase
@@ -12166,6 +12294,38 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "POST",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMyAppsDetail
+     * @summary List current member accessible apps
+     * @request GET:/api/v1/teams/{teamId}/my-apps
+     */
+    v1TeamsMyAppsDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListTeamAppsResponse, any>({
+        path: `/api/v1/teams/${teamId}/my-apps`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMyAppsOpenCreate
+     * @summary Open current member accessible app
+     * @request POST:/api/v1/teams/{teamId}/my-apps/{appId}/open
+     */
+    v1TeamsMyAppsOpenCreate: (teamId: string, appId: string, params: RequestParams = {}) =>
+      this.request<VoOpenTeamAppResponse, any>({
+        path: `/api/v1/teams/${teamId}/my-apps/${appId}/open`,
+        method: "POST",
         format: "json",
         ...params,
       }),
