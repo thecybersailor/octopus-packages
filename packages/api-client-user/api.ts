@@ -998,6 +998,11 @@ export interface BasePinOKVoListTeamStorageMountsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListTeamUsagePointRollupsResponse {
+  data?: VoListTeamUsagePointRollupsResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListTeamUsageRollupsResponse {
   data?: VoListTeamUsageRollupsResponse;
   trace_id?: string;
@@ -2322,6 +2327,19 @@ export interface VoAssemblableSkill {
 export interface VoAttachConversationTeamRequest {
   teamId: string;
   title?: string;
+}
+
+export interface VoBillingAvailability {
+  availablePoints?: number;
+  ledgerBalancePoints?: number;
+  pendingUsagePoints?: number;
+  status?: string;
+}
+
+export interface VoBillingLedgerSummary {
+  creditedPoints?: number;
+  debitedPoints?: number;
+  netDeductedPoints?: number;
 }
 
 export interface VoBindTeamDeviceExternalProviderRequest {
@@ -3874,6 +3892,12 @@ export interface VoListTeamStorageMountsResponse {
   items?: VoTeamStorageMount[];
 }
 
+export interface VoListTeamUsagePointRollupsResponse {
+  items?: VoTeamUsagePointRollupItem[];
+  totalChargePoints?: number;
+  totalPendingPoints?: number;
+}
+
 export interface VoListTeamUsageRollupsResponse {
   items?: VoTeamUsageRollupItem[];
 }
@@ -4994,10 +5018,11 @@ export interface VoTeamStorageMount {
 }
 
 export interface VoTeamSubscribeSummaryResponse {
+  availability?: VoBillingAvailability;
   cycle?: VoSubscribeCycle;
   entries?: VoSubscribeLedgerEntry[];
+  ledgerSummary?: VoBillingLedgerSummary;
   subscribe?: VoSubscribeSnapshot;
-  usageCharge?: VoUsageChargeSummary;
   wallet?: VoSubscribeWallet;
 }
 
@@ -5013,6 +5038,13 @@ export interface VoTeamUploadFinalizeResponse {
   fileName?: string;
   logicalPath?: string;
   sizeBytes?: number;
+}
+
+export interface VoTeamUsagePointRollupItem {
+  chargePoints?: number;
+  date?: string;
+  pendingPoints?: number;
+  usageType?: string;
 }
 
 export interface VoTeamUsageRollupItem {
@@ -5534,21 +5566,6 @@ export interface VoUpsertFeishuIntegrationRequest {
   appId: string;
   /** 更新时留空表示保留原 Secret */
   appSecret?: string;
-}
-
-export interface VoUsageChargeBreakdownItem {
-  chargePoints?: number;
-  chargePrecision?: number;
-  chargeUnit?: string;
-  chargeUsd?: number;
-  usageType?: string;
-}
-
-export interface VoUsageChargeSummary {
-  chargeUnit?: string;
-  items?: VoUsageChargeBreakdownItem[];
-  totalChargePoints?: number;
-  totalChargeUsd?: number;
 }
 
 export interface VoValidateTeamKbSyncTargetRequest {
@@ -13439,6 +13456,32 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<BasePinOKVoTeamSubscribeSummaryResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/subscribe/summary`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Usage
+     * @name V1TeamsUsagePointsRollupsDetail
+     * @summary List team usage point rollups
+     * @request GET:/api/v1/teams/{teamId}/usage-points-rollups
+     */
+    v1TeamsUsagePointsRollupsDetail: (
+      teamId: string,
+      query: {
+        /** Start date (YYYY-MM-DD) */
+        from: string;
+        /** End date (YYYY-MM-DD) */
+        to: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoListTeamUsagePointRollupsResponse, any>({
+        path: `/api/v1/teams/${teamId}/usage-points-rollups`,
+        method: "GET",
+        query: query,
         format: "json",
         ...params,
       }),
