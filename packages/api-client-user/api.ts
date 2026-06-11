@@ -11040,6 +11040,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         tagAny?: string[];
         /** Match all tags */
         tagAll?: string[];
+        /** Exact human member user ID */
+        humanMemberUserId?: string;
         /** Require meta keys to exist */
         metaExists?: string[];
         /** Require exact meta value for tier */
