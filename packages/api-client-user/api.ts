@@ -1228,11 +1228,6 @@ export interface BasePinOKVoTeamArcubaseBinding {
   trace_id?: string;
 }
 
-export interface BasePinOKVoTeamBillingSummaryResponse {
-  data?: VoTeamBillingSummaryResponse;
-  trace_id?: string;
-}
-
 export interface BasePinOKVoTeamBrowserInstance {
   data?: VoTeamBrowserInstance;
   trace_id?: string;
@@ -1330,6 +1325,11 @@ export interface BasePinOKVoTeamMembershipProfileAvatarUploadURLResponse {
 
 export interface BasePinOKVoTeamPresignResponse {
   data?: VoTeamPresignResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamSubscribeSummaryResponse {
+  data?: VoTeamSubscribeSummaryResponse;
   trace_id?: string;
 }
 
@@ -2312,30 +2312,6 @@ export interface VoAssemblableSkill {
 export interface VoAttachConversationTeamRequest {
   teamId: string;
   title?: string;
-}
-
-export interface VoBillingCycle {
-  endAt?: string;
-  mode?: string;
-  periodKey?: string;
-  startAt?: string;
-}
-
-export interface VoBillingLedgerEntry {
-  effectiveAt?: string;
-  pointsDelta?: number;
-  ref?: string;
-  type?: string;
-}
-
-export interface VoBillingSnapshot {
-  /** passthrough from host snapshot JSON */
-  items?: number[];
-  totalMonthlyChargePoints?: number;
-}
-
-export interface VoBillingWallet {
-  balancePoints?: number;
 }
 
 export interface VoBindTeamDeviceExternalProviderRequest {
@@ -4589,6 +4565,44 @@ export interface VoSubmitWeixinClawBotVerifyCodeRequest {
   verifyCode: string;
 }
 
+export interface VoSubscribeCycle {
+  endAt?: string;
+  mode?: string;
+  periodKey?: string;
+  startAt?: string;
+}
+
+export interface VoSubscribeLedgerEntry {
+  effectiveAt?: string;
+  pointsDelta?: number;
+  ref?: string;
+  type?: string;
+}
+
+export interface VoSubscribeSnapshot {
+  id?: string;
+  items?: VoSubscribeSnapshotItem[];
+  periodKey?: string;
+  totalChargePoints?: number;
+}
+
+export interface VoSubscribeSnapshotItem {
+  chargePoints?: number;
+  displayName?: string;
+  id?: string;
+  quantity?: number;
+  resourceId?: string;
+  resourceType?: string;
+  subjectId?: string;
+  subjectType?: string;
+  subscribeResourceId?: string;
+  unitPricePoints?: number;
+}
+
+export interface VoSubscribeWallet {
+  balancePoints?: number;
+}
+
 export interface VoTeam {
   balancePoints?: number;
   certificationStatus?: string;
@@ -4626,14 +4640,6 @@ export interface VoTeamArcubaseBinding {
   bindingStatus?: string;
   lastError?: string;
   teamId?: string;
-}
-
-export interface VoTeamBillingSummaryResponse {
-  cycle?: VoBillingCycle;
-  entries?: VoBillingLedgerEntry[];
-  snapshot?: VoBillingSnapshot;
-  usageBilling?: VoUsageBillingSummary;
-  wallet?: VoBillingWallet;
 }
 
 export interface VoTeamBrowserInstance {
@@ -4971,6 +4977,14 @@ export interface VoTeamStorageMount {
   id?: string;
   mode?: string;
   name?: string;
+}
+
+export interface VoTeamSubscribeSummaryResponse {
+  cycle?: VoSubscribeCycle;
+  entries?: VoSubscribeLedgerEntry[];
+  subscribe?: VoSubscribeSnapshot;
+  usageCharge?: VoUsageChargeSummary;
+  wallet?: VoSubscribeWallet;
 }
 
 export interface VoTeamUploadFinalizeRequest {
@@ -5508,19 +5522,19 @@ export interface VoUpsertFeishuIntegrationRequest {
   appSecret?: string;
 }
 
-export interface VoUsageBillingBreakdownItem {
-  billingPoints?: number;
-  billingPrecision?: number;
-  billingUnit?: string;
-  billingUsd?: number;
+export interface VoUsageChargeBreakdownItem {
+  chargePoints?: number;
+  chargePrecision?: number;
+  chargeUnit?: string;
+  chargeUsd?: number;
   usageType?: string;
 }
 
-export interface VoUsageBillingSummary {
-  billingUnit?: string;
-  items?: VoUsageBillingBreakdownItem[];
-  totalBillingPoints?: number;
-  totalBillingUsd?: number;
+export interface VoUsageChargeSummary {
+  chargeUnit?: string;
+  items?: VoUsageChargeBreakdownItem[];
+  totalChargePoints?: number;
+  totalChargeUsd?: number;
 }
 
 export interface VoValidateTeamKbSyncTargetRequest {
@@ -9440,22 +9454,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v1TeamsAssemblableSkillsDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<BasePinOKVoListAssemblableSkillsResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/assemblable-skills`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Billing
-     * @name V1TeamsBillingSummaryDetail
-     * @summary Get team billing summary
-     * @request GET:/api/v1/teams/{teamId}/billing/summary
-     */
-    v1TeamsBillingSummaryDetail: (teamId: string, params: RequestParams = {}) =>
-      this.request<BasePinOKVoTeamBillingSummaryResponse, BasePinErr>({
-        path: `/api/v1/teams/${teamId}/billing/summary`,
         method: "GET",
         format: "json",
         ...params,
@@ -13390,6 +13388,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoStation, any>({
         path: `/api/v1/teams/${teamId}/stations/${stationId}/enable`,
         method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Subscribe
+     * @name V1TeamsSubscribeSummaryDetail
+     * @summary Get team subscribe summary
+     * @request GET:/api/v1/teams/{teamId}/subscribe/summary
+     */
+    v1TeamsSubscribeSummaryDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoTeamSubscribeSummaryResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/subscribe/summary`,
+        method: "GET",
         format: "json",
         ...params,
       }),
