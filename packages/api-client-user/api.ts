@@ -4632,6 +4632,7 @@ export interface VoTeamBillingSummaryResponse {
   cycle?: VoBillingCycle;
   entries?: VoBillingLedgerEntry[];
   snapshot?: VoBillingSnapshot;
+  usageBilling?: VoUsageBillingSummary;
   wallet?: VoBillingWallet;
 }
 
@@ -4988,6 +4989,8 @@ export interface VoTeamUploadFinalizeResponse {
 
 export interface VoTeamUsageRollupItem {
   date?: string;
+  displayPrecision?: number;
+  displayUnit?: string;
   metric?: string;
   unit?: string;
   usageType?: string;
@@ -5503,6 +5506,21 @@ export interface VoUpsertFeishuIntegrationRequest {
   appId: string;
   /** 更新时留空表示保留原 Secret */
   appSecret?: string;
+}
+
+export interface VoUsageBillingBreakdownItem {
+  billingPoints?: number;
+  billingPrecision?: number;
+  billingUnit?: string;
+  billingUsd?: number;
+  usageType?: string;
+}
+
+export interface VoUsageBillingSummary {
+  billingUnit?: string;
+  items?: VoUsageBillingBreakdownItem[];
+  totalBillingPoints?: number;
+  totalBillingUsd?: number;
 }
 
 export interface VoValidateTeamKbSyncTargetRequest {
