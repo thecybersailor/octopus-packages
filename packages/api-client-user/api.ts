@@ -1058,6 +1058,11 @@ export interface BasePinOKVoListTenantAdminMarketWorkersResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoListVibeCodingProjectsResponse {
+  data?: VoListVibeCodingProjectsResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoListWebhookEndpointEventsResponse {
   data?: VoListWebhookEndpointEventsResponse;
   trace_id?: string;
@@ -1415,6 +1420,11 @@ export interface BasePinOKVoVerifyFeishuResponse {
 
 export interface BasePinOKVoVerifyWecomResponse {
   data?: VoVerifyWecomResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoVibeCodingProject {
+  data?: VoVibeCodingProject;
   trace_id?: string;
 }
 
@@ -3942,6 +3952,10 @@ export interface VoListTenantAdminMarketWorkersResponse {
   nextCursor?: string;
 }
 
+export interface VoListVibeCodingProjectsResponse {
+  items?: VoVibeCodingProject[];
+}
+
 export interface VoListWebhookEndpointEventsResponse {
   items?: VoWebhookEndpointEvent[];
 }
@@ -5535,6 +5549,25 @@ export interface VoVerifyWecomResponse {
   errcode?: number;
   errmsg?: string;
   valid?: boolean;
+}
+
+export interface VoVibeCodingProject {
+  archivedAt?: string;
+  createdAt?: string;
+  createdByDigiEmployeeId?: string;
+  createdByUserId?: string;
+  description?: string;
+  id?: string;
+  latestDeploymentId?: string;
+  provider?: string;
+  providerSiteId?: string;
+  publishedAt?: string;
+  publishedUrl?: string;
+  runtimePath?: string;
+  status?: string;
+  teamAppId?: string;
+  title?: string;
+  updatedAt?: string;
 }
 
 export interface VoWPSCallbackDownloadResponse {
@@ -13398,6 +13431,64 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v1/teams/${teamId}/usage-rollups`,
         method: "GET",
         query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsVibeCodingProjectsDetail
+     * @summary List vibe coding projects in team settings
+     * @request GET:/api/v1/teams/{teamId}/vibe-coding/projects
+     */
+    v1TeamsVibeCodingProjectsDetail: (
+      teamId: string,
+      query?: {
+        /** Include archived projects */
+        includeArchived?: boolean;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoListVibeCodingProjectsResponse, any>({
+        path: `/api/v1/teams/${teamId}/vibe-coding/projects`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsVibeCodingProjectsDetail2
+     * @summary Get vibe coding project in team settings
+     * @request GET:/api/v1/teams/{teamId}/vibe-coding/projects/{projectId}
+     * @originalName v1TeamsVibeCodingProjectsDetail
+     * @duplicate
+     */
+    v1TeamsVibeCodingProjectsDetail2: (teamId: string, projectId: string, params: RequestParams = {}) =>
+      this.request<VoVibeCodingProject, any>({
+        path: `/api/v1/teams/${teamId}/vibe-coding/projects/${projectId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsVibeCodingProjectsDelete
+     * @summary Archive vibe coding project in team settings
+     * @request DELETE:/api/v1/teams/{teamId}/vibe-coding/projects/{projectId}
+     */
+    v1TeamsVibeCodingProjectsDelete: (teamId: string, projectId: string, params: RequestParams = {}) =>
+      this.request<VoVibeCodingProject, any>({
+        path: `/api/v1/teams/${teamId}/vibe-coding/projects/${projectId}`,
+        method: "DELETE",
         format: "json",
         ...params,
       }),
