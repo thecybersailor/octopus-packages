@@ -958,6 +958,11 @@ export interface BasePinOKVoPostConversationTurnSteerResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoRedeemTicketResponse {
+  data?: VoRedeemTicketResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoRefreshTeamBrowserClientInfoResponse {
   data?: VoRefreshTeamBrowserClientInfoResponse;
   trace_id?: string;
@@ -3519,6 +3524,18 @@ export interface VoPutDigiEmployeeWorkspaceAccessRequest {
 
 export interface VoPutTeamMemberArcubaseDepartmentsRequest {
   departmentIds?: string[];
+}
+
+export interface VoRedeemTicketRequest {
+  code?: string;
+  idempotencyKey?: string;
+}
+
+export interface VoRedeemTicketResponse {
+  packageAssignmentId?: string;
+  packageId?: string;
+  redemptionId?: string;
+  status?: string;
 }
 
 export interface VoRefreshTeamBrowserClientInfoResponse {
@@ -10834,6 +10851,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<BasePinOKVoTeamSubscribeSummaryResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/subscribe/summary`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsTicketRedemptionsCreate
+     * @summary Redeem a ticket code for team billing
+     * @request POST:/api/v1/teams/{teamId}/ticket-redemptions
+     */
+    v1TeamsTicketRedemptionsCreate: (teamId: string, body: VoRedeemTicketRequest, params: RequestParams = {}) =>
+      this.request<VoRedeemTicketResponse, any>({
+        path: `/api/v1/teams/${teamId}/ticket-redemptions`,
+        method: "POST",
+        body: body,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
