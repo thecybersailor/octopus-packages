@@ -1143,6 +1143,11 @@ export interface BasePinOKVoTeamSubscribeSummaryResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamTicketIntegrationStatusResponse {
+  data?: VoTeamTicketIntegrationStatusResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamUploadFinalizeResponse {
   data?: VoTeamUploadFinalizeResponse;
   trace_id?: string;
@@ -4176,6 +4181,10 @@ export interface VoTeamSubscribeSummaryResponse {
   ledgerSummary?: VoBillingLedgerSummary;
   subscribe?: VoSubscribeSnapshot;
   wallet?: VoSubscribeWallet;
+}
+
+export interface VoTeamTicketIntegrationStatusResponse {
+  enabled?: boolean;
 }
 
 export interface VoTeamUploadFinalizeRequest {
@@ -10902,6 +10911,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v1TeamsSubscribeSummaryDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<BasePinOKVoTeamSubscribeSummaryResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/subscribe/summary`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsTicketIntegrationDetail
+     * @summary Get Ticket integration status for team
+     * @request GET:/api/v1/teams/{teamId}/ticket-integration
+     */
+    v1TeamsTicketIntegrationDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoTeamTicketIntegrationStatusResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/ticket-integration`,
         method: "GET",
         format: "json",
         ...params,
