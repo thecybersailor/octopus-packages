@@ -3537,6 +3537,7 @@ export interface VoPutTeamMemberArcubaseDepartmentsRequest {
 }
 
 export interface VoRedeemTicketBenefit {
+  description?: string;
   matchPattern?: string;
   name?: string;
   periodSeconds?: number;
