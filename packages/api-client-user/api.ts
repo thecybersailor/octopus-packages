@@ -3531,12 +3531,39 @@ export interface VoPutTeamMemberArcubaseDepartmentsRequest {
   departmentIds?: string[];
 }
 
+export interface VoRedeemTicketBenefit {
+  matchPattern?: string;
+  name?: string;
+  periodSeconds?: number;
+  pointLimitMicros?: number;
+  points?: number;
+  type?: string;
+  usageAllowanceDefinitionId?: string;
+}
+
+export interface VoRedeemTicketHiredDigiEmployee {
+  bio?: string;
+  bioPicture?: string;
+  digiEmployeeId?: string;
+  digiWorkerId?: string;
+  name?: string;
+}
+
+export interface VoRedeemTicketPackageSummary {
+  description?: string;
+  id?: string;
+  name?: string;
+}
+
 export interface VoRedeemTicketRequest {
   code?: string;
   idempotencyKey?: string;
 }
 
 export interface VoRedeemTicketResponse {
+  benefits?: VoRedeemTicketBenefit[];
+  hiredDigiEmployees?: VoRedeemTicketHiredDigiEmployee[];
+  package?: VoRedeemTicketPackageSummary;
   packageAssignmentId?: string;
   packageId?: string;
   redemptionId?: string;
