@@ -1048,6 +1048,11 @@ export interface BasePinOKVoTeamBrowserProfileSitesResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamCreateConfigResponse {
+  data?: VoTeamCreateConfigResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamDevice {
   data?: VoTeamDevice;
   trace_id?: string;
@@ -3845,6 +3850,10 @@ export interface VoTeamComputeImageItem {
   visibility?: string;
 }
 
+export interface VoTeamCreateConfigResponse {
+  mode?: string;
+}
+
 export interface VoTeamDeleteRequest {
   keys?: string[];
   mountId?: string;
@@ -5322,6 +5331,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v1BootstrapTeamCreateAssistantList: (params: RequestParams = {}) =>
       this.request<BasePinOKVoConversationAssistant, BasePinErr>({
         path: `/api/v1/bootstrap/team-create/assistant`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Bootstrap
+     * @name V1BootstrapTeamCreateConfigList
+     * @summary Get team-create config
+     * @request GET:/api/v1/bootstrap/team-create/config
+     */
+    v1BootstrapTeamCreateConfigList: (params: RequestParams = {}) =>
+      this.request<BasePinOKVoTeamCreateConfigResponse, BasePinErr>({
+        path: `/api/v1/bootstrap/team-create/config`,
         method: "GET",
         format: "json",
         ...params,
