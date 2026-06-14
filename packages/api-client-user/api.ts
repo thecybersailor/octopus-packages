@@ -2527,7 +2527,6 @@ export interface VoExternalAgentBindingSummary {
   provider?: string;
   providerBadgeUrl?: string;
   providerEmployeeRef?: string;
-  providerSpecRef?: string;
 }
 
 export interface VoExternalUserConversationItem {
