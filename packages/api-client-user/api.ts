@@ -3479,6 +3479,7 @@ export interface VoPostConversationHumanTurnRequest {
   metadata?: Record<string, string>;
   parts?: VoConversationMessagePart[];
   tempFiles?: VoConversationTempFileRef[];
+  turnId?: string;
   uiReceipt?: Record<string, any>;
 }
 
