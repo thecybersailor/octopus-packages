@@ -1023,6 +1023,11 @@ export interface BasePinOKVoTeam {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamActivationResponse {
+  data?: VoTeamActivationResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamApp {
   data?: VoTeamApp;
   trace_id?: string;
@@ -3810,6 +3815,17 @@ export interface VoTeam {
   tags?: string[];
 }
 
+export interface VoTeamActivationResponse {
+  activatedAt?: string;
+  canUserStart?: boolean;
+  errorCode?: string;
+  errorMessage?: string;
+  source?: string;
+  sourceRef?: string;
+  startedAt?: string;
+  status?: string;
+}
+
 export interface VoTeamApp {
   createdAt?: string;
   description?: string;
@@ -6535,6 +6551,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v1TeamsDetail: (teamId: string, params: RequestParams = {}) =>
       this.request<VoTeam, any>({
         path: `/api/v1/teams/${teamId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsActivationDetail
+     * @summary Get team activation status
+     * @request GET:/api/v1/teams/{teamId}/activation
+     */
+    v1TeamsActivationDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoTeamActivationResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/activation`,
         method: "GET",
         format: "json",
         ...params,
