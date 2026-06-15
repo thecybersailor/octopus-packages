@@ -2121,6 +2121,9 @@ export interface VoCreateArcubaseDepartmentRequest {
 export interface VoCreateCloudTeamBrowserInstanceRequest {
   displayName: string;
   labels?: string[];
+  locale?: string;
+  os?: string;
+  timezone?: string;
 }
 
 export interface VoCreateConversationRequest {
@@ -3463,13 +3466,30 @@ export interface VoPatchTeamWebURLAppRequest {
 
 export interface VoPortalBrand {
   browserTitle?: string;
+  copyrightText?: string;
   displayName?: string;
+  faviconStorageKey?: string;
+  faviconUrl?: string;
+  icpText?: string;
+  icpUrl?: string;
+  loginIllustrationStorageKey?: string;
+  loginIllustrationUrl?: string;
+  loginLogoStorageKey?: string;
+  loginLogoUrl?: string;
+  loginPageStyle?: string;
   logoDarkStorageKey?: string;
   logoDarkUrl?: string;
   logoStorageKey?: string;
   logoUrl?: string;
+  mainSlogan?: string;
   primaryColorHex?: string;
+  sidebarLogoDisplayMode?: string;
+  subSlogan?: string;
   tagline?: string;
+  workspaceLogoDarkStorageKey?: string;
+  workspaceLogoDarkUrl?: string;
+  workspaceLogoLightStorageKey?: string;
+  workspaceLogoLightUrl?: string;
 }
 
 export interface VoPortalBrandResolution {
