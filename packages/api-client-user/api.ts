@@ -3824,6 +3824,14 @@ export interface VoSubscribeWallet {
 }
 
 export interface VoTeam {
+  activatedAt?: string;
+  activationErrorCode?: string;
+  activationErrorMessage?: string;
+  activationSource?: string;
+  activationSourceRef?: string;
+  activationStartedAt?: string;
+  activationStatus?: string;
+  activationTaskId?: string;
   balancePoints?: number;
   certificationStatus?: string;
   createdAt?: string;
@@ -3847,6 +3855,7 @@ export interface VoTeamActivationResponse {
   sourceRef?: string;
   startedAt?: string;
   status?: string;
+  taskId?: string;
 }
 
 export interface VoTeamApp {
