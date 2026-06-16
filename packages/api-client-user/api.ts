@@ -1421,6 +1421,30 @@ export interface BaseRemoteTaskStartAuthResponse {
   url?: string;
 }
 
+export interface BaseSharedConnectionMutationRequest {
+  connector_id?: string;
+  inherits_to?: string[];
+  label?: string;
+  principal_pattern?: string;
+}
+
+export interface BaseSharedConnectionStartAuthRequest {
+  connector_id?: string;
+  inherits_to?: string[];
+  label?: string;
+  principal_pattern?: string;
+  redirect_uri?: string;
+}
+
+export interface BaseSharedConnectionSubmitAuthRequest {
+  auth_data?: BaseJSONMap;
+  connection_id?: string;
+  connector_id?: string;
+  inherits_to?: string[];
+  label?: string;
+  principal_pattern?: string;
+}
+
 export interface E2EProofSendRequest {
   externalUserId?: string;
   message?: string;
@@ -3512,7 +3536,7 @@ export interface VoPostConversationHumanTurnResponse {
 }
 
 export interface VoPostConversationTurnResumeRequest {
-  clientAction?: string;
+  clientAction?: VoPostConversationTurnResumeRequestClientActionEnum;
 }
 
 export interface VoPostConversationTurnResumeResponse {
@@ -4575,6 +4599,10 @@ export interface VoWorkspace {
   updatedAt?: string;
 }
 
+export enum VoPostConversationTurnResumeRequestClientActionEnum {
+  Continue = "continue",
+}
+
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 
@@ -5186,7 +5214,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Create shared connection (platform scope)
      * @request POST:/admin/v1/shared-connections
      */
-    v1SharedConnectionsCreate: (request: BaseJSONMap, params: RequestParams = {}) =>
+    v1SharedConnectionsCreate: (request: BaseSharedConnectionMutationRequest, params: RequestParams = {}) =>
       this.request<BasePinOKBaseJSONMap, BasePinErr>({
         path: `/admin/v1/shared-connections`,
         method: "POST",
@@ -5227,7 +5255,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Start shared connection auth (platform scope)
      * @request POST:/admin/v1/shared-connections/start-auth
      */
-    v1SharedConnectionsStartAuthCreate: (request: BaseJSONMap, params: RequestParams = {}) =>
+    v1SharedConnectionsStartAuthCreate: (request: BaseSharedConnectionStartAuthRequest, params: RequestParams = {}) =>
       this.request<BasePinOKBaseRemoteTaskStartAuthResponse, BasePinErr>({
         path: `/admin/v1/shared-connections/start-auth`,
         method: "POST",
@@ -5245,7 +5273,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Submit shared connection auth (platform scope)
      * @request POST:/admin/v1/shared-connections/submit-auth
      */
-    v1SharedConnectionsSubmitAuthCreate: (request: BaseJSONMap, params: RequestParams = {}) =>
+    v1SharedConnectionsSubmitAuthCreate: (request: BaseSharedConnectionSubmitAuthRequest, params: RequestParams = {}) =>
       this.request<BasePinOKBaseJSONMap, BasePinErr>({
         path: `/admin/v1/shared-connections/submit-auth`,
         method: "POST",
@@ -5279,7 +5307,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Update shared connection (platform scope)
      * @request PUT:/admin/v1/shared-connections/{connectionId}
      */
-    v1SharedConnectionsUpdate: (connectionId: string, request: BaseJSONMap, params: RequestParams = {}) =>
+    v1SharedConnectionsUpdate: (
+      connectionId: string,
+      request: BaseSharedConnectionMutationRequest,
+      params: RequestParams = {},
+    ) =>
       this.request<BasePinOKBaseJSONMap, BasePinErr>({
         path: `/admin/v1/shared-connections/${connectionId}`,
         method: "PUT",
@@ -5313,7 +5345,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Reauth shared connection (platform scope)
      * @request POST:/admin/v1/shared-connections/{connectionId}/reauth
      */
-    v1SharedConnectionsReauthCreate: (connectionId: string, request: BaseJSONMap, params: RequestParams = {}) =>
+    v1SharedConnectionsReauthCreate: (
+      connectionId: string,
+      request: BaseSharedConnectionStartAuthRequest,
+      params: RequestParams = {},
+    ) =>
       this.request<BasePinOKBaseRemoteTaskStartAuthResponse, BasePinErr>({
         path: `/admin/v1/shared-connections/${connectionId}/reauth`,
         method: "POST",
@@ -10497,7 +10533,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Create shared connection (team scope)
      * @request POST:/api/v1/teams/{teamId}/shared-connections
      */
-    v1TeamsSharedConnectionsCreate: (teamId: string, request: BaseJSONMap, params: RequestParams = {}) =>
+    v1TeamsSharedConnectionsCreate: (
+      teamId: string,
+      request: BaseSharedConnectionMutationRequest,
+      params: RequestParams = {},
+    ) =>
       this.request<BasePinOKBaseJSONMap, BasePinErr>({
         path: `/api/v1/teams/${teamId}/shared-connections`,
         method: "POST",
@@ -10515,7 +10555,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Start shared connection auth (team scope)
      * @request POST:/api/v1/teams/{teamId}/shared-connections/start-auth
      */
-    v1TeamsSharedConnectionsStartAuthCreate: (teamId: string, request: BaseJSONMap, params: RequestParams = {}) =>
+    v1TeamsSharedConnectionsStartAuthCreate: (
+      teamId: string,
+      request: BaseSharedConnectionStartAuthRequest,
+      params: RequestParams = {},
+    ) =>
       this.request<BasePinOKBaseRemoteTaskStartAuthResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/shared-connections/start-auth`,
         method: "POST",
@@ -10533,7 +10577,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Submit shared connection auth (team scope)
      * @request POST:/api/v1/teams/{teamId}/shared-connections/submit-auth
      */
-    v1TeamsSharedConnectionsSubmitAuthCreate: (teamId: string, request: BaseJSONMap, params: RequestParams = {}) =>
+    v1TeamsSharedConnectionsSubmitAuthCreate: (
+      teamId: string,
+      request: BaseSharedConnectionSubmitAuthRequest,
+      params: RequestParams = {},
+    ) =>
       this.request<BasePinOKBaseJSONMap, BasePinErr>({
         path: `/api/v1/teams/${teamId}/shared-connections/submit-auth`,
         method: "POST",
@@ -10572,7 +10620,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v1TeamsSharedConnectionsUpdate: (
       teamId: string,
       connectionId: string,
-      request: BaseJSONMap,
+      request: BaseSharedConnectionMutationRequest,
       params: RequestParams = {},
     ) =>
       this.request<BasePinOKBaseJSONMap, BasePinErr>({
@@ -10611,7 +10659,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v1TeamsSharedConnectionsReauthCreate: (
       teamId: string,
       connectionId: string,
-      request: BaseJSONMap,
+      request: BaseSharedConnectionStartAuthRequest,
       params: RequestParams = {},
     ) =>
       this.request<BasePinOKBaseRemoteTaskStartAuthResponse, BasePinErr>({
@@ -12083,7 +12131,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Create shared connection (tenant scope)
      * @request POST:/tenant-admin/v1/shared-connections
      */
-    v1SharedConnectionsCreate: (request: BaseJSONMap, params: RequestParams = {}) =>
+    v1SharedConnectionsCreate: (request: BaseSharedConnectionMutationRequest, params: RequestParams = {}) =>
       this.request<BasePinOKBaseJSONMap, BasePinErr>({
         path: `/tenant-admin/v1/shared-connections`,
         method: "POST",
@@ -12124,7 +12172,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Start shared connection auth (tenant scope)
      * @request POST:/tenant-admin/v1/shared-connections/start-auth
      */
-    v1SharedConnectionsStartAuthCreate: (request: BaseJSONMap, params: RequestParams = {}) =>
+    v1SharedConnectionsStartAuthCreate: (request: BaseSharedConnectionStartAuthRequest, params: RequestParams = {}) =>
       this.request<BasePinOKBaseRemoteTaskStartAuthResponse, BasePinErr>({
         path: `/tenant-admin/v1/shared-connections/start-auth`,
         method: "POST",
@@ -12142,7 +12190,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Submit shared connection auth (tenant scope)
      * @request POST:/tenant-admin/v1/shared-connections/submit-auth
      */
-    v1SharedConnectionsSubmitAuthCreate: (request: BaseJSONMap, params: RequestParams = {}) =>
+    v1SharedConnectionsSubmitAuthCreate: (request: BaseSharedConnectionSubmitAuthRequest, params: RequestParams = {}) =>
       this.request<BasePinOKBaseJSONMap, BasePinErr>({
         path: `/tenant-admin/v1/shared-connections/submit-auth`,
         method: "POST",
@@ -12176,7 +12224,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Update shared connection (tenant scope)
      * @request PUT:/tenant-admin/v1/shared-connections/{connectionId}
      */
-    v1SharedConnectionsUpdate: (connectionId: string, request: BaseJSONMap, params: RequestParams = {}) =>
+    v1SharedConnectionsUpdate: (
+      connectionId: string,
+      request: BaseSharedConnectionMutationRequest,
+      params: RequestParams = {},
+    ) =>
       this.request<BasePinOKBaseJSONMap, BasePinErr>({
         path: `/tenant-admin/v1/shared-connections/${connectionId}`,
         method: "PUT",
@@ -12210,7 +12262,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Reauth shared connection (tenant scope)
      * @request POST:/tenant-admin/v1/shared-connections/{connectionId}/reauth
      */
-    v1SharedConnectionsReauthCreate: (connectionId: string, request: BaseJSONMap, params: RequestParams = {}) =>
+    v1SharedConnectionsReauthCreate: (
+      connectionId: string,
+      request: BaseSharedConnectionStartAuthRequest,
+      params: RequestParams = {},
+    ) =>
       this.request<BasePinOKBaseRemoteTaskStartAuthResponse, BasePinErr>({
         path: `/tenant-admin/v1/shared-connections/${connectionId}/reauth`,
         method: "POST",
