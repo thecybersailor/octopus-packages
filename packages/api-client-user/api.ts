@@ -1589,7 +1589,6 @@ export interface VoAdminSkill {
   name?: string;
   s3Key?: string;
   skillsetId?: string;
-  skillsetName?: string;
   sourceId?: string;
   sourceType?: string;
   teamId?: string;
@@ -1703,7 +1702,6 @@ export interface VoArtifactSummaryResponse {
 
 export interface VoAssemblableSkill {
   description?: string;
-  displayName?: string;
   name?: string;
   skillId?: string;
   skillsetId?: string;
@@ -2495,10 +2493,6 @@ export interface VoEmailIngressAddress {
   targetConversationId?: string;
   teamId?: string;
   updatedAt?: string;
-}
-
-export interface VoEnableAssemblableSkillRequest {
-  displayName?: string;
 }
 
 export interface VoEnableBuiltinCalendarSourceRequest {
@@ -10716,21 +10710,30 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
+     * @name V1TeamsSkillsDisableAssemblyCreate
+     * @summary Disable team skill assembly (team user, team-scoped)
+     * @request POST:/api/v1/teams/{teamId}/skills/{id}/disable-assembly
+     */
+    v1TeamsSkillsDisableAssemblyCreate: (teamId: string, id: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoSimpleOKResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/skills/${id}/disable-assembly`,
+        method: "POST",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
      * @name V1TeamsSkillsEnableAssemblyCreate
      * @summary Enable team skill assembly (team user, team-scoped)
      * @request POST:/api/v1/teams/{teamId}/skills/{id}/enable-assembly
      */
-    v1TeamsSkillsEnableAssemblyCreate: (
-      teamId: string,
-      id: string,
-      request: VoEnableAssemblableSkillRequest,
-      params: RequestParams = {},
-    ) =>
+    v1TeamsSkillsEnableAssemblyCreate: (teamId: string, id: string, params: RequestParams = {}) =>
       this.request<BasePinOKVoAssemblableSkill, BasePinErr>({
         path: `/api/v1/teams/${teamId}/skills/${id}/enable-assembly`,
         method: "POST",
-        body: request,
-        type: ContentType.Json,
         format: "json",
         ...params,
       }),
