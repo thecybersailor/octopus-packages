@@ -2379,6 +2379,7 @@ export interface VoDigiEmployee {
   conversationStats7d?: VoDigiEmployeeConversationStats7D;
   digiWorker?: VoDigiWorker;
   digiWorkerId?: string;
+  displayName?: string;
   externalAgentBinding?: VoExternalAgentBindingSummary;
   hiredAt?: string;
   homeMode?: string;
@@ -2388,6 +2389,7 @@ export interface VoDigiEmployee {
   managerDigiEmployeeId?: string;
   quickStartPrompts?: string[];
   resolvedBio?: string;
+  resolvedDisplayName?: string;
   runtimeKind?: string;
   skillsets?: VoSkillsetLite[];
   status?: string;
@@ -3405,6 +3407,7 @@ export interface VoPatchDigiEmployeeProfileRequest {
   arcubaseIdentityMode?: string;
   bio?: string;
   bioPicture?: string;
+  displayName?: string;
   homeModeOverride?: string;
   quickStartPrompts?: string[];
 }
@@ -7853,7 +7856,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v1TeamsDigiemployeesDetail: (
       teamId: string,
       query?: {
-        /** Search query (employee id / worker id / worker name) */
+        /** Search query (employee display name / employee id / worker id / worker name) */
         query?: string;
       },
       params: RequestParams = {},
