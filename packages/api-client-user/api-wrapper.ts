@@ -46,11 +46,32 @@ export class ApiError extends Error {
     public readonly status?: string,
     public readonly traceId?: string,
     public readonly statusCode?: number,
-    public readonly body?: unknown
+    public readonly body?: unknown,
+    public readonly cause?: unknown
   ) {
     super(message)
     this.name = 'ApiError'
   }
+}
+
+export class ApiUnavailableError extends ApiError {
+  constructor(
+    message: string,
+    statusCode?: number,
+    body?: unknown,
+    cause?: unknown
+  ) {
+    super(message, undefined, undefined, 'unavailable', undefined, statusCode, body, cause)
+    this.name = 'ApiUnavailableError'
+  }
+}
+
+export function isApiUnavailableError(error: unknown): error is ApiUnavailableError {
+  return error instanceof ApiUnavailableError || (
+    !!error &&
+    typeof error === 'object' &&
+    (error as { name?: unknown }).name === 'ApiUnavailableError'
+  )
 }
 
 function isPinErrorResponse(value: any): value is PinErrorResponse {
@@ -59,15 +80,45 @@ function isPinErrorResponse(value: any): value is PinErrorResponse {
 
 function extractPinErrorPayload(error: any): { body: PinErrorResponse; statusCode?: number } | null {
   if (isPinErrorResponse(error)) {
-    return { body: error }
+    return { body: error, statusCode: readHttpStatusCode(error) }
   }
   if (isPinErrorResponse(error?.error)) {
-    return { body: error.error }
+    return { body: error.error, statusCode: readHttpStatusCode(error) }
   }
   if (isPinErrorResponse(error?.response?.data)) {
     return { body: error.response.data, statusCode: error.response.status }
   }
   return null
+}
+
+function readHttpStatusCode(error: any): number | undefined {
+  const candidates = [
+    error?.statusCode,
+    error?.status,
+    error?.response?.status,
+  ]
+  for (const candidate of candidates) {
+    if (typeof candidate === 'number' && Number.isFinite(candidate)) return candidate
+    if (typeof candidate === 'string' && candidate.trim()) {
+      const parsed = Number(candidate)
+      if (Number.isFinite(parsed)) return parsed
+    }
+  }
+  return undefined
+}
+
+function isUnavailableStatusCode(statusCode: number | undefined): boolean {
+  return statusCode === 0 || (typeof statusCode === 'number' && statusCode >= 500)
+}
+
+function errorMessage(error: any, fallback: string): string {
+  if (typeof error?.message === 'string' && error.message.trim()) return error.message
+  if (typeof error?.statusText === 'string' && error.statusText.trim()) return error.statusText
+  return fallback
+}
+
+function readErrorBody(error: any): unknown {
+  return error?.body ?? error?.error ?? error?.response?.data
 }
 
 /**
@@ -96,17 +147,44 @@ function unwrapData<T>(promise: Promise<PinResponse<T>>): Promise<T> {
       const payload = extractPinErrorPayload(error)
       if (payload) {
         const errorData = payload.body
+        if (isUnavailableStatusCode(payload.statusCode)) {
+          throw new ApiUnavailableError(
+            errorData?.error?.message || errorMessage(error, 'Backend unavailable'),
+            payload.statusCode,
+            errorData,
+            error
+          )
+        }
         throw new ApiError(
-          errorData?.error?.message || error.message || 'Unknown error',
+          errorData?.error?.message || errorMessage(error, 'Unknown error'),
           errorData?.error?.key,
           undefined,
           errorData?.error?.type,
           errorData?.trace_id,
           payload.statusCode,
-          errorData
+          errorData,
+          error
         )
       }
-      throw new ApiError(error.message || 'Network error')
+      const statusCode = readHttpStatusCode(error)
+      if (isUnavailableStatusCode(statusCode) || statusCode == null) {
+        throw new ApiUnavailableError(
+          errorMessage(error, 'Backend unavailable'),
+          statusCode,
+          readErrorBody(error),
+          error
+        )
+      }
+      throw new ApiError(
+        errorMessage(error, 'Unknown error'),
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        statusCode,
+        readErrorBody(error),
+        error
+      )
     })
 }
 
