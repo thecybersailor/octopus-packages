@@ -214,14 +214,6 @@ export function createApi(config: ConstructorParameters<typeof GeneratedApi<any>
   const rawApi = new GeneratedApi<any>(config)
   const wrappedApi: any = {}
   
-  wrappedApi.admin = {}
-  for (const key in rawApi.admin) {
-    const method = (rawApi.admin as any)[key]
-    if (typeof method === 'function') {
-      wrappedApi.admin[key] = (...args: any[]) => unwrapData(method.apply(rawApi.admin, args))
-    }
-  }
-  
   wrappedApi.api = {}
   for (const key in rawApi.api) {
     const method = (rawApi.api as any)[key]
@@ -230,27 +222,11 @@ export function createApi(config: ConstructorParameters<typeof GeneratedApi<any>
     }
   }
   
-  wrappedApi.e2E = {}
-  for (const key in rawApi.e2E) {
-    const method = (rawApi.e2E as any)[key]
-    if (typeof method === 'function') {
-      wrappedApi.e2E[key] = (...args: any[]) => unwrapData(method.apply(rawApi.e2E, args))
-    }
-  }
-  
   wrappedApi.open = {}
   for (const key in rawApi.open) {
     const method = (rawApi.open as any)[key]
     if (typeof method === 'function') {
       wrappedApi.open[key] = (...args: any[]) => unwrapData(method.apply(rawApi.open, args))
-    }
-  }
-  
-  wrappedApi.tenantAdmin = {}
-  for (const key in rawApi.tenantAdmin) {
-    const method = (rawApi.tenantAdmin as any)[key]
-    if (typeof method === 'function') {
-      wrappedApi.tenantAdmin[key] = (...args: any[]) => unwrapData(method.apply(rawApi.tenantAdmin, args))
     }
   }
   return wrappedApi as UnwrappedApi
