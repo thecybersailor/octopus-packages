@@ -336,6 +336,11 @@ export interface BasePinOKVoInviteTeamMembersResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoIssueConversationStreamTicketResponse {
+  data?: VoIssueConversationStreamTicketResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoIssueStationEmbedAccessTokenResponse {
   data?: VoIssueStationEmbedAccessTokenResponse;
   trace_id?: string;
@@ -2246,6 +2251,10 @@ export interface VoInviteTeamMembersRequest {
 
 export interface VoInviteTeamMembersResponse {
   items?: VoTeamMemberInvitationResult[];
+}
+
+export interface VoIssueConversationStreamTicketResponse {
+  streamTicket?: string;
 }
 
 export interface VoIssueStationEmbedAccessTokenRequest {
@@ -4500,9 +4509,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     v1ConversationsStreamDetail: (
       id: string,
-      query?: {
+      query: {
         /** Only stream events after seq */
         afterSeq?: number;
+        /** Conversation stream ticket */
+        stream_ticket: string;
       },
       params: RequestParams = {},
     ) =>
@@ -4510,6 +4521,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/v1/conversations/${id}/stream`,
         method: "GET",
         query: query,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Conversations
+     * @name V1ConversationsStreamTicketCreate
+     * @summary Issue a short-lived conversation stream ticket
+     * @request POST:/api/v1/conversations/{id}/stream-ticket
+     */
+    v1ConversationsStreamTicketCreate: (id: string, params: RequestParams = {}) =>
+      this.request<VoIssueConversationStreamTicketResponse, any>({
+        path: `/api/v1/conversations/${id}/stream-ticket`,
+        method: "POST",
+        format: "json",
         ...params,
       }),
 
