@@ -1783,6 +1783,7 @@ export interface VoCronTrigger {
   createdById?: string;
   creatorActor?: VoActorSummary;
   cronSpec?: string;
+  deletedAt?: string;
   digiEmployeeId?: string;
   enabled?: boolean;
   executorActor?: VoActorSummary;
@@ -6137,6 +6138,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "PATCH",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CronTriggers
+     * @name V1TeamsCronTriggersDeleteCreate
+     * @summary Delete schedule trigger
+     * @request POST:/api/v1/teams/{teamId}/cron-triggers/{triggerId}/delete
+     */
+    v1TeamsCronTriggersDeleteCreate: (teamId: string, triggerId: string, params: RequestParams = {}) =>
+      this.request<VoCronTrigger, any>({
+        path: `/api/v1/teams/${teamId}/cron-triggers/${triggerId}/delete`,
+        method: "POST",
         format: "json",
         ...params,
       }),
