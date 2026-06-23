@@ -246,6 +246,11 @@ export interface BasePinOKVoDigiEmployeeKBAccess {
   trace_id?: string;
 }
 
+export interface BasePinOKVoDigiEmployeeRuntimeConfigResponse {
+  data?: VoDigiEmployeeRuntimeConfigResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoDigiEmployeeWorkspaceAccess {
   data?: VoDigiEmployeeWorkspaceAccess;
   trace_id?: string;
@@ -989,6 +994,22 @@ export interface ModelsMarketPlanResult {
   sortOrder?: number;
 }
 
+export interface ModelsModalitiesCapability {
+  input?: string[];
+  output?: string[];
+}
+
+export interface ModelsThinkingCapability {
+  efforts?: string[];
+  supports?: boolean;
+  transportMode?: string;
+  types?: string[];
+}
+
+export interface ModelsVisionCapability {
+  supports?: boolean;
+}
+
 export interface RuntimesnapshotHostLLMUsage {
   cachedTokens?: number;
   inputTokens?: number;
@@ -1151,6 +1172,7 @@ export interface VoArtifactDetail {
   jobId?: string;
   owner?: string;
   qualityScore?: number;
+  sourceHumanUserId?: string;
   status?: string;
   summary?: string;
   title?: string;
@@ -1188,6 +1210,7 @@ export interface VoArtifactListItem {
   jobId?: string;
   owner?: string;
   qualityScore?: number;
+  sourceHumanUserId?: string;
   status?: string;
   summary?: string;
   title?: string;
@@ -1198,6 +1221,7 @@ export interface VoArtifactRecentUpdate {
   artifactId?: string;
   completedAt?: string;
   owner?: string;
+  sourceHumanUserId?: string;
   summary?: string;
   title?: string;
 }
@@ -1879,6 +1903,40 @@ export interface VoDigiEmployeeConversationStats7D {
 export interface VoDigiEmployeeKBAccess {
   kbPaths?: string[];
   mode?: string;
+}
+
+export interface VoDigiEmployeeLLMConfigItem {
+  inputModalities?: string[];
+  llmModelId?: string;
+  name?: string;
+  reasoningEffort?: string;
+  source?: string;
+  status?: string;
+  thinking?: ModelsThinkingCapability;
+  thinkingType?: string;
+}
+
+export interface VoDigiEmployeeRuntimeConfigModelItem {
+  id?: string;
+  modalities?: ModelsModalitiesCapability;
+  monthlyPoints?: number;
+  name?: string;
+  thinking?: ModelsThinkingCapability;
+  vision?: ModelsVisionCapability;
+}
+
+export interface VoDigiEmployeeRuntimeConfigResponse {
+  allowedModels?: VoDigiEmployeeRuntimeConfigModelItem[];
+  canUpdate?: boolean;
+  effectiveConfig?: VoDigiEmployeeLLMConfigItem;
+  overrideConfig?: VoDigiEmployeeLLMConfigItem;
+  policyEnabled?: boolean;
+  workerDefaultConfig?: VoDigiEmployeeLLMConfigItem;
+}
+
+export interface VoDigiEmployeeRuntimeThinkingConfigRequest {
+  effort?: string;
+  type?: string;
 }
 
 export interface VoDigiEmployeeTeamSkill {
@@ -3714,6 +3772,11 @@ export interface VoUpdateWecomIntegrationRequest {
 export interface VoUpdateWorkspaceRequest {
   description?: string;
   name?: string;
+}
+
+export interface VoUpsertDigiEmployeeRuntimeConfigRequest {
+  llmModelId: string;
+  thinkingConfig?: VoDigiEmployeeRuntimeThinkingConfigRequest;
 }
 
 export interface VoUpsertExternalUserVerificationActionToolRequest {
@@ -6647,6 +6710,61 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoListReportingNeighborsResponse, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/reporting-neighbors`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesRuntimeConfigDetail
+     * @summary Get digiemployee runtime config
+     * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/runtime-config
+     */
+    v1TeamsDigiemployeesRuntimeConfigDetail: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoDigiEmployeeRuntimeConfigResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/runtime-config`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesRuntimeConfigUpdate
+     * @summary Put digiemployee runtime config
+     * @request PUT:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/runtime-config
+     */
+    v1TeamsDigiemployeesRuntimeConfigUpdate: (
+      teamId: string,
+      digiEmployeeId: string,
+      request: VoUpsertDigiEmployeeRuntimeConfigRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoDigiEmployeeRuntimeConfigResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/runtime-config`,
+        method: "PUT",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesRuntimeConfigDelete
+     * @summary Delete digiemployee runtime config
+     * @request DELETE:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/runtime-config
+     */
+    v1TeamsDigiemployeesRuntimeConfigDelete: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoDigiEmployeeRuntimeConfigResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/runtime-config`,
+        method: "DELETE",
         format: "json",
         ...params,
       }),
