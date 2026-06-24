@@ -1785,6 +1785,7 @@ export interface VoCreateTeamPrivateDigiWorkerRequest {
   avatarPreviewToken?: string;
   bio?: string;
   bioPicture?: string;
+  homeMode?: string;
   llmModelId?: string;
   name: string;
   promptSpec?: ModelsPromptSpec;
@@ -2955,8 +2956,10 @@ export interface VoPatchTeamMembershipProfileRequest {
 }
 
 export interface VoPatchTeamPrivateDigiWorkerRequest {
+  avatarPreviewToken?: string;
   bio?: string;
   bioPicture?: string;
+  homeMode?: string;
   llmModelId?: string;
   name?: string;
   promptSpec?: ModelsPromptSpec;
