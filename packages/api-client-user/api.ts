@@ -201,6 +201,11 @@ export interface BasePinOKVoCreateOfficePreviewSessionResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoCreateTeamPrivateDigiWorkerAvatarUploadURLResponse {
+  data?: VoCreateTeamPrivateDigiWorkerAvatarUploadURLResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoCreateWebhookEndpointResponse {
   data?: VoCreateWebhookEndpointResponse;
   trace_id?: string;
@@ -1764,7 +1769,20 @@ export interface VoCreateTeamMcpTunnelRegistrationRequest {
   tunnelPath: string;
 }
 
+export interface VoCreateTeamPrivateDigiWorkerAvatarUploadURLRequest {
+  contentType: string;
+}
+
+export interface VoCreateTeamPrivateDigiWorkerAvatarUploadURLResponse {
+  expireAt?: string;
+  method?: string;
+  previewToken?: string;
+  previewUrl?: string;
+  uploadUrl?: string;
+}
+
 export interface VoCreateTeamPrivateDigiWorkerRequest {
+  avatarPreviewToken?: string;
   bio?: string;
   bioPicture?: string;
   llmModelId?: string;
@@ -1772,6 +1790,7 @@ export interface VoCreateTeamPrivateDigiWorkerRequest {
   promptSpec?: ModelsPromptSpec;
   quickStartPrompts?: string[];
   skillsets?: VoSkillsetRef[];
+  teamSkillIds?: string[];
   thinkingConfig?: ModelsThinkingConfig;
   toolkitKeys?: string[];
 }
@@ -3319,6 +3338,7 @@ export interface VoTeam {
   balancePoints?: number;
   certificationStatus?: string;
   createdAt?: string;
+  creatorPhoneMasked?: string;
   debugEnabled?: boolean;
   digiEmployeeCount?: number;
   id?: string;
@@ -3684,6 +3704,7 @@ export interface VoTeamPresignResponse {
 
 export interface VoTeamPrivateDigiWorkerPortalConfigResponse {
   allowedModels?: VoDigiEmployeeRuntimeConfigModelItem[];
+  availableToolkits?: VoTeamPrivateDigiWorkerToolkitOption[];
   canCreate?: boolean;
   defaultLlmModelId?: string;
   defaultThinkingConfig?: ModelsThinkingConfig;
@@ -3695,6 +3716,11 @@ export interface VoTeamPrivateDigiWorkerPortalConfigResponse {
 export interface VoTeamPrivateDigiWorkerResponse {
   digiEmployee?: VoDigiEmployee;
   digiWorker?: VoDigiWorker;
+}
+
+export interface VoTeamPrivateDigiWorkerToolkitOption {
+  key?: string;
+  label?: string;
 }
 
 export interface VoTeamRootScope {
@@ -8733,6 +8759,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<BasePinOKVoTeamPrivateDigiWorkerResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/private-digiworkers`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsPrivateDigiworkersAvatarUploadUrlCreate
+     * @summary Create team private digiworker avatar upload URL
+     * @request POST:/api/v1/teams/{teamId}/private-digiworkers/avatar:upload-url
+     */
+    v1TeamsPrivateDigiworkersAvatarUploadUrlCreate: (
+      teamId: string,
+      request: VoCreateTeamPrivateDigiWorkerAvatarUploadURLRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoCreateTeamPrivateDigiWorkerAvatarUploadURLResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/private-digiworkers/avatar:upload-url`,
         method: "POST",
         body: request,
         type: ContentType.Json,
