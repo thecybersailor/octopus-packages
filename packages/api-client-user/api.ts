@@ -256,6 +256,11 @@ export interface BasePinOKVoDigiEmployeeWorkspaceAccess {
   trace_id?: string;
 }
 
+export interface BasePinOKVoDigiWorker {
+  data?: VoDigiWorker;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoEmailIngressAddress {
   data?: VoEmailIngressAddress;
   trace_id?: string;
@@ -886,6 +891,16 @@ export interface BasePinOKVoTeamPresignResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamPrivateDigiWorkerPortalConfigResponse {
+  data?: VoTeamPrivateDigiWorkerPortalConfigResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamPrivateDigiWorkerResponse {
+  data?: VoTeamPrivateDigiWorkerResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamSubscribeSummaryResponse {
   data?: VoTeamSubscribeSummaryResponse;
   trace_id?: string;
@@ -999,11 +1014,22 @@ export interface ModelsModalitiesCapability {
   output?: string[];
 }
 
+export interface ModelsPromptSpec {
+  script?: string;
+  text?: string;
+  type?: string;
+}
+
 export interface ModelsThinkingCapability {
   efforts?: string[];
   supports?: boolean;
   transportMode?: string;
   types?: string[];
+}
+
+export interface ModelsThinkingConfig {
+  effort?: string;
+  type?: string;
 }
 
 export interface ModelsVisionCapability {
@@ -1738,6 +1764,18 @@ export interface VoCreateTeamMcpTunnelRegistrationRequest {
   tunnelPath: string;
 }
 
+export interface VoCreateTeamPrivateDigiWorkerRequest {
+  bio?: string;
+  bioPicture?: string;
+  llmModelId?: string;
+  name: string;
+  promptSpec?: ModelsPromptSpec;
+  quickStartPrompts?: string[];
+  skillsets?: VoSkillsetRef[];
+  thinkingConfig?: ModelsThinkingConfig;
+  toolkitKeys?: string[];
+}
+
 export interface VoCreateTeamRequest {
   bootstrapConversationId?: string;
   locale?: string;
@@ -1965,16 +2003,21 @@ export interface VoDigiWorker {
   homeMode?: string;
   id?: string;
   jobTags?: VoJobTagLite[];
+  llmModelId?: string;
   marketVisible?: boolean;
   meta?: Record<string, string>;
   modelExternalName?: string;
   name?: string;
+  ownerTeamId?: string;
+  promptSpec?: ModelsPromptSpec;
   providerBadgeUrl?: string;
   quickStartPrompts?: string[];
   reasoningEffort?: string;
   salary?: number;
   score?: number;
   skillsets?: VoSkillsetLite[];
+  sourceType?: string;
+  thinkingConfig?: ModelsThinkingConfig;
   toolkitKeys?: string[];
 }
 
@@ -2892,6 +2935,18 @@ export interface VoPatchTeamMembershipProfileRequest {
   displayName?: string;
 }
 
+export interface VoPatchTeamPrivateDigiWorkerRequest {
+  bio?: string;
+  bioPicture?: string;
+  llmModelId?: string;
+  name?: string;
+  promptSpec?: ModelsPromptSpec;
+  quickStartPrompts?: string[];
+  skillsets?: VoSkillsetRef[];
+  thinkingConfig?: ModelsThinkingConfig;
+  toolkitKeys?: string[];
+}
+
 export interface VoPatchTeamWebURLAppRequest {
   description?: string;
   iconUrl?: string;
@@ -3625,6 +3680,21 @@ export interface VoTeamPresignResponse {
   finalizeToken?: string;
   method?: string;
   url?: string;
+}
+
+export interface VoTeamPrivateDigiWorkerPortalConfigResponse {
+  allowedModels?: VoDigiEmployeeRuntimeConfigModelItem[];
+  canCreate?: boolean;
+  defaultLlmModelId?: string;
+  defaultThinkingConfig?: ModelsThinkingConfig;
+  managerEnabled?: boolean;
+  modelPolicyEnabled?: boolean;
+  teamEnabled?: boolean;
+}
+
+export interface VoTeamPrivateDigiWorkerResponse {
+  digiEmployee?: VoDigiEmployee;
+  digiWorker?: VoDigiWorker;
 }
 
 export interface VoTeamRootScope {
@@ -8628,6 +8698,83 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoSimpleOKResponse, any>({
         path: `/api/v1/teams/${teamId}/pinned-digiemployees/${digiEmployeeId}`,
         method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsPrivateDigiworkerConfigDetail
+     * @summary Get team private digiworker portal config
+     * @request GET:/api/v1/teams/{teamId}/private-digiworker/config
+     */
+    v1TeamsPrivateDigiworkerConfigDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoTeamPrivateDigiWorkerPortalConfigResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/private-digiworker/config`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsPrivateDigiworkersCreate
+     * @summary Create team private digiworker
+     * @request POST:/api/v1/teams/{teamId}/private-digiworkers
+     */
+    v1TeamsPrivateDigiworkersCreate: (
+      teamId: string,
+      request: VoCreateTeamPrivateDigiWorkerRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoTeamPrivateDigiWorkerResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/private-digiworkers`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsPrivateDigiworkersDetail
+     * @summary Get team private digiworker
+     * @request GET:/api/v1/teams/{teamId}/private-digiworkers/{workerId}
+     */
+    v1TeamsPrivateDigiworkersDetail: (teamId: string, workerId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoDigiWorker, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/private-digiworkers/${workerId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsPrivateDigiworkersPartialUpdate
+     * @summary Patch team private digiworker
+     * @request PATCH:/api/v1/teams/{teamId}/private-digiworkers/{workerId}
+     */
+    v1TeamsPrivateDigiworkersPartialUpdate: (
+      teamId: string,
+      workerId: string,
+      request: VoPatchTeamPrivateDigiWorkerRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoDigiWorker, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/private-digiworkers/${workerId}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
