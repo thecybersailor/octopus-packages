@@ -3710,7 +3710,9 @@ export interface VoTeamMemberInvitationResult {
 }
 
 export interface VoTeamMembership {
+  avatarUrl?: string;
   capability?: VoTeamMemberCapability;
+  displayName?: string;
   joinedAt?: string;
   phone?: string;
   phoneMasked?: string;
