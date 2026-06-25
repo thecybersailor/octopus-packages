@@ -1309,6 +1309,16 @@ export interface VoBioPictureUploadURLResponse {
   uploadUrl?: string;
 }
 
+export interface VoBrowserFingerprintConfigRequest {
+  locale?: string;
+  os?: string;
+  platform?: string;
+  screenHeight?: number;
+  screenWidth?: number;
+  timezone?: string;
+  userAgent?: string;
+}
+
 export interface VoCalendarCatalogItem {
   category?: string;
   defaultTimezone?: string;
@@ -1623,10 +1633,8 @@ export interface VoCreateArcubaseDepartmentRequest {
 
 export interface VoCreateCloudTeamBrowserInstanceRequest {
   displayName: string;
+  fingerprintConfig?: VoBrowserFingerprintConfigRequest;
   labels?: string[];
-  locale?: string;
-  os?: string;
-  timezone?: string;
 }
 
 export interface VoCreateConversationRequest {
@@ -2938,6 +2946,7 @@ export interface VoPatchSkillsetRequest {
 
 export interface VoPatchTeamBrowserInstanceRequest {
   displayName?: string;
+  fingerprintConfig?: VoBrowserFingerprintConfigRequest;
   labels?: string[];
   proxyPassword?: string;
   proxyServer?: string;
