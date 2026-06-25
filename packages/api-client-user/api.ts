@@ -8770,6 +8770,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
+     * @name V1TeamsMembersProfileAvatarUploadUrlCreate
+     * @summary Create team member display avatar upload url
+     * @request POST:/api/v1/teams/{teamId}/members/{userId}/profile/avatar:upload-url
+     */
+    v1TeamsMembersProfileAvatarUploadUrlCreate: (
+      teamId: string,
+      userId: string,
+      request: VoTeamMembershipProfileAvatarUploadURLRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamMembershipProfileAvatarUploadURLResponse, any>({
+        path: `/api/v1/teams/${teamId}/members/${userId}/profile/avatar:upload-url`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
      * @name V1TeamsMembersRolePartialUpdate
      * @summary Update team member role
      * @request PATCH:/api/v1/teams/{teamId}/members/{userId}/role
