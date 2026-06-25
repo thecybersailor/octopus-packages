@@ -91,6 +91,11 @@ export interface BasePinOKVoArcubaseDepartmentItem {
   trace_id?: string;
 }
 
+export interface BasePinOKVoArcubaseOrganizationRole {
+  data?: VoArcubaseOrganizationRole;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoArtifactDetail {
   data?: VoArtifactDetail;
   trace_id?: string;
@@ -383,6 +388,11 @@ export interface BasePinOKVoListArcubaseAppsResponse {
 
 export interface BasePinOKVoListArcubaseDepartmentsResponse {
   data?: VoListArcubaseDepartmentsResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoListArcubaseOrganizationRolesResponse {
+  data?: VoListArcubaseOrganizationRolesResponse;
   trace_id?: string;
 }
 
@@ -881,6 +891,11 @@ export interface BasePinOKVoTeamMemberArcubaseDepartmentsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamMemberArcubaseOrganizationRolesResponse {
+  data?: VoTeamMemberArcubaseOrganizationRolesResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamMembership {
   data?: VoTeamMembership;
   trace_id?: string;
@@ -1188,6 +1203,11 @@ export interface VoArcubaseDepartmentItem {
   name?: string;
   parentId?: string;
   path?: string;
+}
+
+export interface VoArcubaseOrganizationRole {
+  id?: string;
+  name?: string;
 }
 
 export interface VoArcubaseRowsQueryRequest {
@@ -1638,6 +1658,10 @@ export interface VoCountTeamSkillsResponse {
 export interface VoCreateArcubaseDepartmentRequest {
   name: string;
   parentId: string;
+}
+
+export interface VoCreateArcubaseOrganizationRoleRequest {
+  name?: string;
 }
 
 export interface VoCreateCloudTeamBrowserInstanceRequest {
@@ -2458,6 +2482,10 @@ export interface VoListArcubaseDepartmentsResponse {
   items?: VoArcubaseDepartmentItem[];
 }
 
+export interface VoListArcubaseOrganizationRolesResponse {
+  items?: VoArcubaseOrganizationRole[];
+}
+
 export interface VoListArcubaseTablesResponse {
   items?: VoArcubaseTableItem[];
 }
@@ -3102,8 +3130,8 @@ export interface VoPutTeamMemberArcubaseDepartmentsRequest {
   departmentIds?: string[];
 }
 
-export interface VoPutTeamMemberArcubaseRoleRequest {
-  isAdmin?: boolean;
+export interface VoPutTeamMemberArcubaseOrganizationRolesRequest {
+  actorIds?: string[];
 }
 
 export interface VoRedeemTicketBenefit {
@@ -3654,6 +3682,13 @@ export interface VoTeamMemberArcubaseBinding {
 export interface VoTeamMemberArcubaseDepartmentsResponse {
   arcubaseTenantId?: string;
   departmentIds?: string[];
+  tenantUserId?: string;
+}
+
+export interface VoTeamMemberArcubaseOrganizationRolesResponse {
+  actorIds?: string[];
+  actors?: VoArcubaseOrganizationRole[];
+  arcubaseTenantId?: string;
   tenantUserId?: string;
 }
 
@@ -5773,6 +5808,60 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "PUT",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsArcubaseOrganizationRolesDetail
+     * @summary List Arcubase organization roles for team
+     * @request GET:/api/v1/teams/{teamId}/arcubase/organization/roles
+     */
+    v1TeamsArcubaseOrganizationRolesDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoListArcubaseOrganizationRolesResponse, any>({
+        path: `/api/v1/teams/${teamId}/arcubase/organization/roles`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsArcubaseOrganizationRolesCreate
+     * @summary Create Arcubase organization role
+     * @request POST:/api/v1/teams/{teamId}/arcubase/organization/roles
+     */
+    v1TeamsArcubaseOrganizationRolesCreate: (
+      teamId: string,
+      request: VoCreateArcubaseOrganizationRoleRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoArcubaseOrganizationRole, any>({
+        path: `/api/v1/teams/${teamId}/arcubase/organization/roles`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsArcubaseOrganizationRolesDelete
+     * @summary Delete Arcubase organization role
+     * @request DELETE:/api/v1/teams/{teamId}/arcubase/organization/roles/{roleId}
+     */
+    v1TeamsArcubaseOrganizationRolesDelete: (teamId: string, roleId: string, params: RequestParams = {}) =>
+      this.request<VoSimpleOKResponse, any>({
+        path: `/api/v1/teams/${teamId}/arcubase/organization/roles/${roleId}`,
+        method: "DELETE",
         format: "json",
         ...params,
       }),
@@ -8580,18 +8669,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V1TeamsMembersArcubaseRoleUpdate
-     * @summary Update team member Arcubase role
-     * @request PUT:/api/v1/teams/{teamId}/members/{userId}/arcubase/role
+     * @name V1TeamsMembersArcubaseOrganizationRolesDetail
+     * @summary Get team member Arcubase organization roles
+     * @request GET:/api/v1/teams/{teamId}/members/{userId}/arcubase/organization/roles
      */
-    v1TeamsMembersArcubaseRoleUpdate: (
+    v1TeamsMembersArcubaseOrganizationRolesDetail: (teamId: string, userId: string, params: RequestParams = {}) =>
+      this.request<VoTeamMemberArcubaseOrganizationRolesResponse, any>({
+        path: `/api/v1/teams/${teamId}/members/${userId}/arcubase/organization/roles`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMembersArcubaseOrganizationRolesUpdate
+     * @summary Update team member Arcubase organization roles
+     * @request PUT:/api/v1/teams/{teamId}/members/{userId}/arcubase/organization/roles
+     */
+    v1TeamsMembersArcubaseOrganizationRolesUpdate: (
       teamId: string,
       userId: string,
-      request: VoPutTeamMemberArcubaseRoleRequest,
+      request: VoPutTeamMemberArcubaseOrganizationRolesRequest,
       params: RequestParams = {},
     ) =>
-      this.request<VoTeamMemberArcubaseBinding, any>({
-        path: `/api/v1/teams/${teamId}/members/${userId}/arcubase/role`,
+      this.request<VoTeamMemberArcubaseOrganizationRolesResponse, any>({
+        path: `/api/v1/teams/${teamId}/members/${userId}/arcubase/organization/roles`,
         method: "PUT",
         body: request,
         type: ContentType.Json,
