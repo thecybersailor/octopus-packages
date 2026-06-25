@@ -201,6 +201,11 @@ export interface BasePinOKVoCreateOfficePreviewSessionResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoCreateTeamPrivateDigiWorkerAvatarUploadURLResponse {
+  data?: VoCreateTeamPrivateDigiWorkerAvatarUploadURLResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoCreateWebhookEndpointResponse {
   data?: VoCreateWebhookEndpointResponse;
   trace_id?: string;
@@ -246,8 +251,18 @@ export interface BasePinOKVoDigiEmployeeKBAccess {
   trace_id?: string;
 }
 
+export interface BasePinOKVoDigiEmployeeRuntimeConfigResponse {
+  data?: VoDigiEmployeeRuntimeConfigResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoDigiEmployeeWorkspaceAccess {
   data?: VoDigiEmployeeWorkspaceAccess;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoDigiWorker {
+  data?: VoDigiWorker;
   trace_id?: string;
 }
 
@@ -881,6 +896,16 @@ export interface BasePinOKVoTeamPresignResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamPrivateDigiWorkerPortalConfigResponse {
+  data?: VoTeamPrivateDigiWorkerPortalConfigResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamPrivateDigiWorkerResponse {
+  data?: VoTeamPrivateDigiWorkerResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamSubscribeSummaryResponse {
   data?: VoTeamSubscribeSummaryResponse;
   trace_id?: string;
@@ -987,6 +1012,33 @@ export interface ModelsMarketPlanResult {
   descriptionMd?: string;
   label?: string;
   sortOrder?: number;
+}
+
+export interface ModelsModalitiesCapability {
+  input?: string[];
+  output?: string[];
+}
+
+export interface ModelsPromptSpec {
+  script?: string;
+  text?: string;
+  type?: string;
+}
+
+export interface ModelsThinkingCapability {
+  efforts?: string[];
+  supports?: boolean;
+  transportMode?: string;
+  types?: string[];
+}
+
+export interface ModelsThinkingConfig {
+  effort?: string;
+  type?: string;
+}
+
+export interface ModelsVisionCapability {
+  supports?: boolean;
 }
 
 export interface RuntimesnapshotHostLLMUsage {
@@ -1151,6 +1203,7 @@ export interface VoArtifactDetail {
   jobId?: string;
   owner?: string;
   qualityScore?: number;
+  sourceHumanUserId?: string;
   status?: string;
   summary?: string;
   title?: string;
@@ -1188,6 +1241,7 @@ export interface VoArtifactListItem {
   jobId?: string;
   owner?: string;
   qualityScore?: number;
+  sourceHumanUserId?: string;
   status?: string;
   summary?: string;
   title?: string;
@@ -1198,6 +1252,7 @@ export interface VoArtifactRecentUpdate {
   artifactId?: string;
   completedAt?: string;
   owner?: string;
+  sourceHumanUserId?: string;
   summary?: string;
   title?: string;
 }
@@ -1252,6 +1307,16 @@ export interface VoBioPictureUploadURLResponse {
   publicUrl?: string;
   storageKey?: string;
   uploadUrl?: string;
+}
+
+export interface VoBrowserFingerprintConfigRequest {
+  locale?: string;
+  os?: string;
+  platform?: string;
+  screenHeight?: number;
+  screenWidth?: number;
+  timezone?: string;
+  userAgent?: string;
 }
 
 export interface VoCalendarCatalogItem {
@@ -1568,10 +1633,8 @@ export interface VoCreateArcubaseDepartmentRequest {
 
 export interface VoCreateCloudTeamBrowserInstanceRequest {
   displayName: string;
+  fingerprintConfig?: VoBrowserFingerprintConfigRequest;
   labels?: string[];
-  locale?: string;
-  os?: string;
-  timezone?: string;
 }
 
 export interface VoCreateConversationRequest {
@@ -1712,6 +1775,33 @@ export interface VoCreateTeamMcpTunnelRegistrationRequest {
   provider: string;
   transportType: string;
   tunnelPath: string;
+}
+
+export interface VoCreateTeamPrivateDigiWorkerAvatarUploadURLRequest {
+  contentType: string;
+}
+
+export interface VoCreateTeamPrivateDigiWorkerAvatarUploadURLResponse {
+  expireAt?: string;
+  method?: string;
+  previewToken?: string;
+  previewUrl?: string;
+  uploadUrl?: string;
+}
+
+export interface VoCreateTeamPrivateDigiWorkerRequest {
+  avatarPreviewToken?: string;
+  bio?: string;
+  bioPicture?: string;
+  homeMode?: string;
+  llmModelId?: string;
+  name: string;
+  promptSpec?: ModelsPromptSpec;
+  quickStartPrompts?: string[];
+  skillsets?: VoSkillsetRef[];
+  teamSkillIds?: string[];
+  thinkingConfig?: ModelsThinkingConfig;
+  toolkitKeys?: string[];
 }
 
 export interface VoCreateTeamRequest {
@@ -1881,6 +1971,40 @@ export interface VoDigiEmployeeKBAccess {
   mode?: string;
 }
 
+export interface VoDigiEmployeeLLMConfigItem {
+  inputModalities?: string[];
+  llmModelId?: string;
+  name?: string;
+  reasoningEffort?: string;
+  source?: string;
+  status?: string;
+  thinking?: ModelsThinkingCapability;
+  thinkingType?: string;
+}
+
+export interface VoDigiEmployeeRuntimeConfigModelItem {
+  id?: string;
+  modalities?: ModelsModalitiesCapability;
+  monthlyPoints?: number;
+  name?: string;
+  thinking?: ModelsThinkingCapability;
+  vision?: ModelsVisionCapability;
+}
+
+export interface VoDigiEmployeeRuntimeConfigResponse {
+  allowedModels?: VoDigiEmployeeRuntimeConfigModelItem[];
+  canUpdate?: boolean;
+  effectiveConfig?: VoDigiEmployeeLLMConfigItem;
+  overrideConfig?: VoDigiEmployeeLLMConfigItem;
+  policyEnabled?: boolean;
+  workerDefaultConfig?: VoDigiEmployeeLLMConfigItem;
+}
+
+export interface VoDigiEmployeeRuntimeThinkingConfigRequest {
+  effort?: string;
+  type?: string;
+}
+
 export interface VoDigiEmployeeTeamSkill {
   description?: string;
   id?: string;
@@ -1907,16 +2031,21 @@ export interface VoDigiWorker {
   homeMode?: string;
   id?: string;
   jobTags?: VoJobTagLite[];
+  llmModelId?: string;
   marketVisible?: boolean;
   meta?: Record<string, string>;
   modelExternalName?: string;
   name?: string;
+  ownerTeamId?: string;
+  promptSpec?: ModelsPromptSpec;
   providerBadgeUrl?: string;
   quickStartPrompts?: string[];
   reasoningEffort?: string;
   salary?: number;
   score?: number;
   skillsets?: VoSkillsetLite[];
+  sourceType?: string;
+  thinkingConfig?: ModelsThinkingConfig;
   toolkitKeys?: string[];
 }
 
@@ -2812,6 +2941,7 @@ export interface VoPatchSkillsetRequest {
 
 export interface VoPatchTeamBrowserInstanceRequest {
   displayName?: string;
+  fingerprintConfig?: VoBrowserFingerprintConfigRequest;
   labels?: string[];
   proxyPassword?: string;
   proxyServer?: string;
@@ -2832,6 +2962,20 @@ export interface VoPatchTeamMembershipProfileRequest {
   avatarStorageKey?: string;
   avatarUrl?: string;
   displayName?: string;
+}
+
+export interface VoPatchTeamPrivateDigiWorkerRequest {
+  avatarPreviewToken?: string;
+  bio?: string;
+  bioPicture?: string;
+  homeMode?: string;
+  llmModelId?: string;
+  name?: string;
+  promptSpec?: ModelsPromptSpec;
+  quickStartPrompts?: string[];
+  skillsets?: VoSkillsetRef[];
+  thinkingConfig?: ModelsThinkingConfig;
+  toolkitKeys?: string[];
 }
 
 export interface VoPatchTeamWebURLAppRequest {
@@ -3206,6 +3350,7 @@ export interface VoTeam {
   balancePoints?: number;
   certificationStatus?: string;
   createdAt?: string;
+  creatorPhoneMasked?: string;
   debugEnabled?: boolean;
   digiEmployeeCount?: number;
   id?: string;
@@ -3569,6 +3714,27 @@ export interface VoTeamPresignResponse {
   url?: string;
 }
 
+export interface VoTeamPrivateDigiWorkerPortalConfigResponse {
+  allowedModels?: VoDigiEmployeeRuntimeConfigModelItem[];
+  availableToolkits?: VoTeamPrivateDigiWorkerToolkitOption[];
+  canCreate?: boolean;
+  defaultLlmModelId?: string;
+  defaultThinkingConfig?: ModelsThinkingConfig;
+  managerEnabled?: boolean;
+  modelPolicyEnabled?: boolean;
+  teamEnabled?: boolean;
+}
+
+export interface VoTeamPrivateDigiWorkerResponse {
+  digiEmployee?: VoDigiEmployee;
+  digiWorker?: VoDigiWorker;
+}
+
+export interface VoTeamPrivateDigiWorkerToolkitOption {
+  key?: string;
+  label?: string;
+}
+
 export interface VoTeamRootScope {
   conversationId?: string;
   externalUserId?: string;
@@ -3714,6 +3880,11 @@ export interface VoUpdateWecomIntegrationRequest {
 export interface VoUpdateWorkspaceRequest {
   description?: string;
   name?: string;
+}
+
+export interface VoUpsertDigiEmployeeRuntimeConfigRequest {
+  llmModelId: string;
+  thinkingConfig?: VoDigiEmployeeRuntimeThinkingConfigRequest;
 }
 
 export interface VoUpsertExternalUserVerificationActionToolRequest {
@@ -6655,6 +6826,61 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Roster
+     * @name V1TeamsDigiemployeesRuntimeConfigDetail
+     * @summary Get digiemployee runtime config
+     * @request GET:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/runtime-config
+     */
+    v1TeamsDigiemployeesRuntimeConfigDetail: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoDigiEmployeeRuntimeConfigResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/runtime-config`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesRuntimeConfigUpdate
+     * @summary Put digiemployee runtime config
+     * @request PUT:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/runtime-config
+     */
+    v1TeamsDigiemployeesRuntimeConfigUpdate: (
+      teamId: string,
+      digiEmployeeId: string,
+      request: VoUpsertDigiEmployeeRuntimeConfigRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoDigiEmployeeRuntimeConfigResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/runtime-config`,
+        method: "PUT",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesRuntimeConfigDelete
+     * @summary Delete digiemployee runtime config
+     * @request DELETE:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/runtime-config
+     */
+    v1TeamsDigiemployeesRuntimeConfigDelete: (teamId: string, digiEmployeeId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoDigiEmployeeRuntimeConfigResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/runtime-config`,
+        method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
      * @name V1TeamsDigiemployeesSkillsetsPartialUpdate
      * @summary Patch digiemployee skillsets (team user, team-scoped)
      * @request PATCH:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/skillsets
@@ -8510,6 +8736,105 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoSimpleOKResponse, any>({
         path: `/api/v1/teams/${teamId}/pinned-digiemployees/${digiEmployeeId}`,
         method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsPrivateDigiworkerConfigDetail
+     * @summary Get team private digiworker portal config
+     * @request GET:/api/v1/teams/{teamId}/private-digiworker/config
+     */
+    v1TeamsPrivateDigiworkerConfigDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoTeamPrivateDigiWorkerPortalConfigResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/private-digiworker/config`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsPrivateDigiworkersCreate
+     * @summary Create team private digiworker
+     * @request POST:/api/v1/teams/{teamId}/private-digiworkers
+     */
+    v1TeamsPrivateDigiworkersCreate: (
+      teamId: string,
+      request: VoCreateTeamPrivateDigiWorkerRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoTeamPrivateDigiWorkerResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/private-digiworkers`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsPrivateDigiworkersAvatarUploadUrlCreate
+     * @summary Create team private digiworker avatar upload URL
+     * @request POST:/api/v1/teams/{teamId}/private-digiworkers/avatar:upload-url
+     */
+    v1TeamsPrivateDigiworkersAvatarUploadUrlCreate: (
+      teamId: string,
+      request: VoCreateTeamPrivateDigiWorkerAvatarUploadURLRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoCreateTeamPrivateDigiWorkerAvatarUploadURLResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/private-digiworkers/avatar:upload-url`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsPrivateDigiworkersDetail
+     * @summary Get team private digiworker
+     * @request GET:/api/v1/teams/{teamId}/private-digiworkers/{workerId}
+     */
+    v1TeamsPrivateDigiworkersDetail: (teamId: string, workerId: string, params: RequestParams = {}) =>
+      this.request<BasePinOKVoDigiWorker, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/private-digiworkers/${workerId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsPrivateDigiworkersPartialUpdate
+     * @summary Patch team private digiworker
+     * @request PATCH:/api/v1/teams/{teamId}/private-digiworkers/{workerId}
+     */
+    v1TeamsPrivateDigiworkersPartialUpdate: (
+      teamId: string,
+      workerId: string,
+      request: VoPatchTeamPrivateDigiWorkerRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoDigiWorker, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/private-digiworkers/${workerId}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
