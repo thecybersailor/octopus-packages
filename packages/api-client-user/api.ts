@@ -2367,8 +2367,13 @@ export interface VoInboxSummary {
   review?: number;
 }
 
+export interface VoInviteTeamMemberRequest {
+  displayName: string;
+  phone: string;
+}
+
 export interface VoInviteTeamMembersRequest {
-  phones: string[];
+  members: VoInviteTeamMemberRequest[];
 }
 
 export interface VoInviteTeamMembersResponse {
