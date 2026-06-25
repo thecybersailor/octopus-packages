@@ -881,6 +881,11 @@ export interface BasePinOKVoTeamMemberArcubaseDepartmentsResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamMembership {
+  data?: VoTeamMembership;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamMembershipProfile {
   data?: VoTeamMembershipProfile;
   trace_id?: string;
@@ -1098,6 +1103,10 @@ export interface VoActRequest {
 
 export interface VoActResponse {
   item?: VoInboxItem;
+}
+
+export interface VoActTeamMemberRequest {
+  action: string;
 }
 
 export interface VoActorProfileItem {
@@ -2962,6 +2971,10 @@ export interface VoPatchTeamMcpTunnelRegistrationRequest {
   tunnelPath?: string;
 }
 
+export interface VoPatchTeamMemberRoleRequest {
+  role: string;
+}
+
 export interface VoPatchTeamMembershipProfileRequest {
   avatarSourceType?: string;
   avatarStorageKey?: string;
@@ -3644,6 +3657,15 @@ export interface VoTeamMemberArcubaseDepartmentsResponse {
   tenantUserId?: string;
 }
 
+export interface VoTeamMemberCapability {
+  canDemoteToMember?: boolean;
+  canDisable?: boolean;
+  canEnable?: boolean;
+  canPromoteToAdmin?: boolean;
+  canRemove?: boolean;
+  isCreator?: boolean;
+}
+
 export interface VoTeamMemberInvitationResult {
   inboxItemId?: string;
   membershipStatus?: string;
@@ -3653,6 +3675,10 @@ export interface VoTeamMemberInvitationResult {
 }
 
 export interface VoTeamMembership {
+  capability?: VoTeamMemberCapability;
+  joinedAt?: string;
+  phone?: string;
+  phoneMasked?: string;
   role?: string;
   status?: string;
   teamId?: string;
@@ -8474,6 +8500,47 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
+     * @name V1TeamsMembersDetail2
+     * @summary Get team member
+     * @request GET:/api/v1/teams/{teamId}/members/{userId}
+     * @originalName v1TeamsMembersDetail
+     * @duplicate
+     */
+    v1TeamsMembersDetail2: (teamId: string, userId: string, params: RequestParams = {}) =>
+      this.request<VoTeamMembership, any>({
+        path: `/api/v1/teams/${teamId}/members/${userId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMembersActionsCreate
+     * @summary Act on team member
+     * @request POST:/api/v1/teams/{teamId}/members/{userId}/actions
+     */
+    v1TeamsMembersActionsCreate: (
+      teamId: string,
+      userId: string,
+      request: VoActTeamMemberRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamMembership, any>({
+        path: `/api/v1/teams/${teamId}/members/${userId}/actions`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
      * @name V1TeamsMembersArcubaseDepartmentsDetail
      * @summary Get team member Arcubase departments
      * @request GET:/api/v1/teams/{teamId}/members/{userId}/arcubase/departments
@@ -8609,6 +8676,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoInviteTeamMembersResponse, any>({
         path: `/api/v1/teams/${teamId}/members${invite}`,
         method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMembersRolePartialUpdate
+     * @summary Update team member role
+     * @request PATCH:/api/v1/teams/{teamId}/members/{userId}/role
+     */
+    v1TeamsMembersRolePartialUpdate: (
+      teamId: string,
+      userId: string,
+      request: VoPatchTeamMemberRoleRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamMembership, any>({
+        path: `/api/v1/teams/${teamId}/members/${userId}/role`,
+        method: "PATCH",
         body: request,
         type: ContentType.Json,
         format: "json",
