@@ -3089,6 +3089,10 @@ export interface VoPutTeamMemberArcubaseDepartmentsRequest {
   departmentIds?: string[];
 }
 
+export interface VoPutTeamMemberArcubaseRoleRequest {
+  isAdmin?: boolean;
+}
+
 export interface VoRedeemTicketBenefit {
   description?: string;
   matchPattern?: string;
@@ -3627,6 +3631,7 @@ export interface VoTeamMemberArcubaseBinding {
   activated?: boolean;
   arcubaseTenantId?: string;
   bindingStatus?: string;
+  isAdmin?: boolean;
   lastError?: string;
   teamId?: string;
   tenantUserId?: string;
@@ -8497,6 +8502,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<VoTeamMemberArcubaseDepartmentsResponse, any>({
         path: `/api/v1/teams/${teamId}/members/${userId}/arcubase/departments`,
+        method: "PUT",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMembersArcubaseRoleUpdate
+     * @summary Update team member Arcubase role
+     * @request PUT:/api/v1/teams/{teamId}/members/{userId}/arcubase/role
+     */
+    v1TeamsMembersArcubaseRoleUpdate: (
+      teamId: string,
+      userId: string,
+      request: VoPutTeamMemberArcubaseRoleRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamMemberArcubaseBinding, any>({
+        path: `/api/v1/teams/${teamId}/members/${userId}/arcubase/role`,
         method: "PUT",
         body: request,
         type: ContentType.Json,
