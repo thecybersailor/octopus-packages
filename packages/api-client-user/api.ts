@@ -8484,22 +8484,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V1TeamsMembersArcubaseDetail
-     * @summary Get team member Arcubase identity binding
-     * @request GET:/api/v1/teams/{teamId}/members/{userId}/arcubase
-     */
-    v1TeamsMembersArcubaseDetail: (teamId: string, userId: string, params: RequestParams = {}) =>
-      this.request<VoTeamMemberArcubaseBinding, any>({
-        path: `/api/v1/teams/${teamId}/members/${userId}/arcubase`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Teams
      * @name V1TeamsMembersDetail2
      * @summary Get team member
      * @request GET:/api/v1/teams/{teamId}/members/{userId}
@@ -8533,6 +8517,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "POST",
         body: request,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMembersArcubaseDetail
+     * @summary Get team member Arcubase identity binding
+     * @request GET:/api/v1/teams/{teamId}/members/{userId}/arcubase
+     */
+    v1TeamsMembersArcubaseDetail: (teamId: string, userId: string, params: RequestParams = {}) =>
+      this.request<VoTeamMemberArcubaseBinding, any>({
+        path: `/api/v1/teams/${teamId}/members/${userId}/arcubase`,
+        method: "GET",
         format: "json",
         ...params,
       }),
@@ -8663,29 +8663,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V1TeamsMembersInviteCreate
-     * @summary Invite team members by phone
-     * @request POST:/api/v1/teams/{teamId}/members:invite
-     */
-    v1TeamsMembersInviteCreate: (
-      teamId: string,
-      invite: string,
-      request: VoInviteTeamMembersRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoInviteTeamMembersResponse, any>({
-        path: `/api/v1/teams/${teamId}/members${invite}`,
-        method: "POST",
-        body: request,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Teams
      * @name V1TeamsMembersRolePartialUpdate
      * @summary Update team member role
      * @request PATCH:/api/v1/teams/{teamId}/members/{userId}/role
@@ -8699,6 +8676,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoTeamMembership, any>({
         path: `/api/v1/teams/${teamId}/members/${userId}/role`,
         method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsMembersInviteCreate
+     * @summary Invite team members by phone
+     * @request POST:/api/v1/teams/{teamId}/members:invite
+     */
+    v1TeamsMembersInviteCreate: (
+      teamId: string,
+      invite: string,
+      request: VoInviteTeamMembersRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoInviteTeamMembersResponse, any>({
+        path: `/api/v1/teams/${teamId}/members${invite}`,
+        method: "POST",
         body: request,
         type: ContentType.Json,
         format: "json",
