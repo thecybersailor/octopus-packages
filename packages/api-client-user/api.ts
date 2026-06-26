@@ -1020,6 +1020,10 @@ export interface ModelsDigiEmployeeAccessSubject {
   type?: string;
 }
 
+export interface ModelsDigiWorkerTeamCustomizationPolicy {
+  mode?: string;
+}
+
 export interface ModelsMarketCapabilityHighlight {
   iconKey?: string;
   oneLiner?: string;
@@ -2089,6 +2093,7 @@ export interface VoDigiWorker {
   score?: number;
   skillsets?: VoSkillsetLite[];
   sourceType?: string;
+  teamCustomizationPolicy?: ModelsDigiWorkerTeamCustomizationPolicy;
   thinkingConfig?: ModelsThinkingConfig;
   toolkitKeys?: string[];
 }
