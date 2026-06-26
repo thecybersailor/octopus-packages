@@ -351,6 +351,11 @@ export interface BasePinOKVoInboxSummary {
   trace_id?: string;
 }
 
+export interface BasePinOKVoInternalSearchOrganizationDirectoryResponse {
+  data?: VoInternalSearchOrganizationDirectoryResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoInviteTeamMembersResponse {
   data?: VoInviteTeamMembersResponse;
   trace_id?: string;
@@ -2436,6 +2441,34 @@ export interface VoInboxSummary {
   incident?: number;
   question?: number;
   review?: number;
+}
+
+export interface VoInternalOrganizationDirectoryItem {
+  arcubaseUserId?: string;
+  bindingStatus?: string;
+  departmentIds?: string[];
+  departments?: VoInternalOrganizationDirectoryRef[];
+  displayName?: string;
+  roleIds?: string[];
+  roles?: VoInternalOrganizationDirectoryRef[];
+  userId?: string;
+}
+
+export interface VoInternalOrganizationDirectoryRef {
+  id?: string;
+  name?: string;
+}
+
+export interface VoInternalSearchOrganizationDirectoryRequest {
+  departmentIds?: string[];
+  limit?: number;
+  query?: string;
+  roleIds?: string[];
+  teamId?: string;
+}
+
+export interface VoInternalSearchOrganizationDirectoryResponse {
+  items?: VoInternalOrganizationDirectoryItem[];
 }
 
 export interface VoInviteTeamMemberRequest {
@@ -9026,6 +9059,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<VoOntologyRuntimeProxyResponse, any>({
         path: `/api/v1/teams/${teamId}/ontology-runtime/${path}`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsOrganizationMembersSearchCreate
+     * @summary Search BotWorks organization members by department or role
+     * @request POST:/api/v1/teams/{teamId}/organization/members:search
+     */
+    v1TeamsOrganizationMembersSearchCreate: (
+      teamId: string,
+      search: string,
+      request: VoInternalSearchOrganizationDirectoryRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoInternalSearchOrganizationDirectoryResponse, any>({
+        path: `/api/v1/teams/${teamId}/organization/members${search}`,
         method: "POST",
         body: request,
         type: ContentType.Json,

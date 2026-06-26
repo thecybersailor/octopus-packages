@@ -213,7 +213,7 @@ type UnwrapNamespace<T> = {
 export function createApi(config: ConstructorParameters<typeof GeneratedApi<any>>[0]): UnwrappedApi {
   const rawApi = new GeneratedApi<any>(config)
   const wrappedApi: any = {}
-
+  
   wrappedApi.api = {}
   for (const key in rawApi.api) {
     const method = (rawApi.api as any)[key]
@@ -221,7 +221,7 @@ export function createApi(config: ConstructorParameters<typeof GeneratedApi<any>
       wrappedApi.api[key] = (...args: any[]) => unwrapData(method.apply(rawApi.api, args))
     }
   }
-
+  
   wrappedApi.open = {}
   for (const key in rawApi.open) {
     const method = (rawApi.open as any)[key]
@@ -229,6 +229,7 @@ export function createApi(config: ConstructorParameters<typeof GeneratedApi<any>
       wrappedApi.open[key] = (...args: any[]) => unwrapData(method.apply(rawApi.open, args))
     }
   }
+  
   wrappedApi.publishedDocs = {}
   for (const key in rawApi.publishedDocs) {
     const method = (rawApi.publishedDocs as any)[key]
