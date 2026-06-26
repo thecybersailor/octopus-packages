@@ -1010,6 +1010,16 @@ export type MapStringBool = Record<string, boolean>;
 
 export type MapStringString = Record<string, string>;
 
+export interface ModelsDigiEmployeeAccessPolicy {
+  mode?: string;
+  subjects?: ModelsDigiEmployeeAccessSubject[];
+}
+
+export interface ModelsDigiEmployeeAccessSubject {
+  id?: string;
+  type?: string;
+}
+
 export interface ModelsMarketCapabilityHighlight {
   iconKey?: string;
   oneLiner?: string;
@@ -1943,6 +1953,7 @@ export interface VoDeleteExternalUserVerificationFlowResponse {
 }
 
 export interface VoDigiEmployee {
+  accessPolicy?: ModelsDigiEmployeeAccessPolicy;
   allowAutoDelegate?: boolean;
   arcubaseBinding?: VoArcubaseBindingSummary;
   arcubaseIdentityMode?: string;
@@ -2949,6 +2960,11 @@ export interface VoOpenTeamAppResponse {
   redirectUrl?: string;
 }
 
+export interface VoPatchDigiEmployeeAccessPolicyRequest {
+  mode: string;
+  subjects?: ModelsDigiEmployeeAccessSubject[];
+}
+
 export interface VoPatchDigiEmployeeProfileRequest {
   allowAutoDelegate?: boolean;
   arcubaseIdentityMode?: string;
@@ -3671,25 +3687,25 @@ export interface VoTeamMcpTunnel {
 export interface VoTeamMemberArcubaseBinding {
   activated?: boolean;
   arcubaseTenantId?: string;
+  arcubaseUserId?: string;
   bindingStatus?: string;
   isAdmin?: boolean;
   lastError?: string;
   teamId?: string;
-  tenantUserId?: string;
   userId?: string;
 }
 
 export interface VoTeamMemberArcubaseDepartmentsResponse {
   arcubaseTenantId?: string;
+  arcubaseUserId?: string;
   departmentIds?: string[];
-  tenantUserId?: string;
 }
 
 export interface VoTeamMemberArcubaseOrganizationRolesResponse {
   actorIds?: string[];
   actors?: VoArcubaseOrganizationRole[];
   arcubaseTenantId?: string;
-  tenantUserId?: string;
+  arcubaseUserId?: string;
 }
 
 export interface VoTeamMemberCapability {
@@ -6698,6 +6714,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoDigiEmployee, any>({
         path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Roster
+     * @name V1TeamsDigiemployeesAccessPolicyPartialUpdate
+     * @summary Patch digiemployee access policy
+     * @request PATCH:/api/v1/teams/{teamId}/digiemployees/{digiEmployeeId}/access-policy
+     */
+    v1TeamsDigiemployeesAccessPolicyPartialUpdate: (
+      teamId: string,
+      digiEmployeeId: string,
+      request: VoPatchDigiEmployeeAccessPolicyRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoDigiEmployee, any>({
+        path: `/api/v1/teams/${teamId}/digiemployees/${digiEmployeeId}/access-policy`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
@@ -10117,6 +10156,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "GET",
         query: query,
         format: "json",
+        ...params,
+      }),
+  };
+  publishedDocs = {
+    /**
+     * No description
+     *
+     * @tags PublishedHTMLDocuments
+     * @name PublishedDocsDetail
+     * @summary Get published HTML document
+     * @request GET:/published-docs/{slug}
+     */
+    publishedDocsDetail: (slug: string, params: RequestParams = {}) =>
+      this.request<string, BasePinErr>({
+        path: `/published-docs/${slug}`,
+        method: "GET",
         ...params,
       }),
   };
