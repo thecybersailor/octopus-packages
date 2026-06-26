@@ -3486,6 +3486,7 @@ export interface VoTeamArcubaseBinding {
   arcubaseTenantSlug?: string;
   bindingStatus?: string;
   lastError?: string;
+  runtimeCredentialExpiresAt?: string;
   teamId?: string;
 }
 
