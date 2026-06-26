@@ -1935,6 +1935,9 @@ export interface VoCreateWorkspaceRequest {
 export interface VoCronTrigger {
   actionType?: string;
   autoDisabledAt?: string;
+  autoDisabledFailureCount?: number;
+  autoDisabledReason?: string;
+  autoDisabledRunId?: string;
   calendarSourceIds?: string[];
   createdById?: string;
   creatorActor?: VoActorSummary;
