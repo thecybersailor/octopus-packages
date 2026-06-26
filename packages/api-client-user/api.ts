@@ -9070,7 +9070,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Use this command for "who is in this department" and "who has this role/identity". Body must use departmentIds array, roleIds array, or query.
+     * @description Use this command for "who is in this department" and "who has this role/identity". For role/identity names, first call roles-list and then search with roleIds; never put a role/identity name in query. Query is only for member name, phone, or user text.
      *
      * @tags Teams
      * @name V1TeamsOrganizationMembersSearchCreate
