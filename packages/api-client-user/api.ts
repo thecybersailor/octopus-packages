@@ -3791,6 +3791,7 @@ export interface VoTeamMembership {
   avatarUrl?: string;
   capability?: VoTeamMemberCapability;
   displayName?: string;
+  invitedAt?: string;
   joinedAt?: string;
   phone?: string;
   phoneMasked?: string;
