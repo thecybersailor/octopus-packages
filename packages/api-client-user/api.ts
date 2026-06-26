@@ -3215,6 +3215,10 @@ export interface VoRenameArcubaseDepartmentRequest {
   name: string;
 }
 
+export interface VoRenameArcubaseOrganizationRoleRequest {
+  name?: string;
+}
+
 export interface VoReportingNeighborItem {
   avatar?: string;
   digiEmployeeId?: string;
@@ -5885,6 +5889,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoSimpleOKResponse, any>({
         path: `/api/v1/teams/${teamId}/arcubase/organization/roles/${roleId}`,
         method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsArcubaseOrganizationRolesRenameUpdate
+     * @summary Rename Arcubase organization role
+     * @request PUT:/api/v1/teams/{teamId}/arcubase/organization/roles/{roleId}/rename
+     */
+    v1TeamsArcubaseOrganizationRolesRenameUpdate: (
+      teamId: string,
+      roleId: string,
+      request: VoRenameArcubaseOrganizationRoleRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoArcubaseOrganizationRole, any>({
+        path: `/api/v1/teams/${teamId}/arcubase/organization/roles/${roleId}/rename`,
+        method: "PUT",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
