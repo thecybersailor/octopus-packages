@@ -1042,6 +1042,20 @@ export interface ModelsMarketConfigMetric {
   value?: string;
 }
 
+export interface ModelsMarketHumanCollaborationProfile {
+  collaborationTargets?: ModelsMarketHumanCollaborationTarget[];
+  primaryHumanRoles?: string[];
+  summary?: string;
+}
+
+export interface ModelsMarketHumanCollaborationTarget {
+  displayRelationship?: string;
+  inputsNeeded?: string[];
+  outputsDelivered?: string[];
+  relationshipType?: string;
+  role?: string;
+}
+
 export interface ModelsMarketPlanResult {
   descriptionMd?: string;
   label?: string;
@@ -2868,6 +2882,7 @@ export interface VoMarketWorkerCard {
   orderable?: boolean;
   planSummary?: VoMarketWorkerCardPlanSummary;
   pricing?: VoMarketPricing;
+  primaryHumanRoles?: string[];
   purchaseMode?: string;
   purchaseModeLabel?: string;
   roleTitle?: string;
@@ -2887,6 +2902,7 @@ export interface VoMarketWorkerDetail {
   displayName?: string;
   existingEmployeeId?: string;
   hireState?: string;
+  humanCollaborationProfile?: ModelsMarketHumanCollaborationProfile;
   id?: string;
   jobTags?: VoJobTagLite[];
   oneLinerDuty?: string;
