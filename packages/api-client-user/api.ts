@@ -946,6 +946,31 @@ export interface BasePinOKVoTeamUploadFinalizeResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamWebSkillBundleResponse {
+  data?: VoTeamWebSkillBundleResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamWebSkillFileReadResponse {
+  data?: VoTeamWebSkillFileReadResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamWebSkillListResponse {
+  data?: VoTeamWebSkillListResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamWebSkillSearchResponse {
+  data?: VoTeamWebSkillSearchResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamWebSkillUploadResponse {
+  data?: VoTeamWebSkillUploadResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoValidateTeamKbSyncTargetResponse {
   data?: VoValidateTeamKbSyncTargetResponse;
   trace_id?: string;
@@ -993,6 +1018,11 @@ export interface BasePinOKVoWebSessionAckResponse {
 
 export interface BasePinOKVoWebSessionMessageResponse {
   data?: VoWebSessionMessageResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoWebSkillPackageSummary {
+  data?: VoWebSkillPackageSummary;
   trace_id?: string;
 }
 
@@ -3957,6 +3987,59 @@ export interface VoTeamUsageRollupItem {
   value?: number;
 }
 
+export interface VoTeamWebSkillBundleResponse {
+  files?: Record<string, string>;
+  teamId?: string;
+  webSkillId?: string;
+}
+
+export interface VoTeamWebSkillCloneRequest {
+  sourceWebSkillId: string;
+}
+
+export interface VoTeamWebSkillFeedbackRequest {
+  rating: string;
+  reason?: string;
+}
+
+export interface VoTeamWebSkillFileReadRequest {
+  path?: string;
+}
+
+export interface VoTeamWebSkillFileReadResponse {
+  content?: string;
+  path?: string;
+  webSkillId?: string;
+}
+
+export interface VoTeamWebSkillListResponse {
+  items?: VoWebSkillPackageSummary[];
+}
+
+export interface VoTeamWebSkillPatchRequest {
+  status: string;
+}
+
+export interface VoTeamWebSkillSearchRequest {
+  domain?: string;
+  limit?: number;
+  matchMode?: string;
+  query?: string;
+  url?: string;
+}
+
+export interface VoTeamWebSkillSearchResponse {
+  hasMore?: boolean;
+  hint?: string;
+  matchMode?: string;
+  matched?: boolean;
+  results?: VoWebSkillSearchResult[];
+}
+
+export interface VoTeamWebSkillUploadResponse {
+  package?: VoWebSkillPackageSummary;
+}
+
 export interface VoUnbindTeamDeviceExternalProviderRequest {
   devicePassword: string;
 }
@@ -4176,6 +4259,49 @@ export interface VoWebSessionMessageResponse {
 export interface VoWebSessionToolResultRequest {
   result?: any;
   toolCallId: string;
+}
+
+export interface VoWebSkillPackageSummary {
+  appName?: string;
+  dislikes?: number;
+  domains?: string[];
+  entryPath?: string;
+  likes?: number;
+  manifestJson?: Record<string, any>;
+  match?: string;
+  name?: string;
+  pathPatterns?: string[];
+  status?: string;
+  summary?: string;
+  tools?: VoWebSkillToolSummary[];
+  usage90d?: number;
+  version?: string;
+  webSkillId?: string;
+}
+
+export interface VoWebSkillQuality {
+  dislikes?: number;
+  likes?: number;
+  usage90d?: number;
+}
+
+export interface VoWebSkillSearchResult {
+  appName?: string;
+  entryPath?: string;
+  hint?: string;
+  matchType?: string;
+  name?: string;
+  quality?: VoWebSkillQuality;
+  score?: number;
+  summary?: string;
+  tools?: VoWebSkillToolSummary[];
+  version?: string;
+  webSkillId?: string;
+}
+
+export interface VoWebSkillToolSummary {
+  name?: string;
+  summary?: string;
 }
 
 export interface VoWebhookEndpoint {
@@ -9741,6 +9867,175 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoVibeCodingProject, any>({
         path: `/api/v1/teams/${teamId}/vibe-coding/projects/${projectId}`,
         method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsWebSkillsDetail
+     * @summary List team web skill packages
+     * @request GET:/api/v1/teams/{teamId}/web-skills
+     */
+    v1TeamsWebSkillsDetail: (teamId: string, params: RequestParams = {}) =>
+      this.request<VoTeamWebSkillListResponse, any>({
+        path: `/api/v1/teams/${teamId}/web-skills`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsWebSkillsSearchCreate
+     * @summary Search team web skill packages
+     * @request POST:/api/v1/teams/{teamId}/web-skills/search
+     */
+    v1TeamsWebSkillsSearchCreate: (teamId: string, request: VoTeamWebSkillSearchRequest, params: RequestParams = {}) =>
+      this.request<VoTeamWebSkillSearchResponse, any>({
+        path: `/api/v1/teams/${teamId}/web-skills/search`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsWebSkillsUploadCreate
+     * @summary Upload a team web skill zip package
+     * @request POST:/api/v1/teams/{teamId}/web-skills/upload
+     */
+    v1TeamsWebSkillsUploadCreate: (
+      teamId: string,
+      data: {
+        /** WebSkill zip package */
+        file: File;
+        /** Existing WebSkill ID for update */
+        webSkillId?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamWebSkillUploadResponse, any>({
+        path: `/api/v1/teams/${teamId}/web-skills/upload`,
+        method: "POST",
+        body: data,
+        type: ContentType.FormData,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsWebSkillsPartialUpdate
+     * @summary Patch team web skill package
+     * @request PATCH:/api/v1/teams/{teamId}/web-skills/{webSkillId}
+     */
+    v1TeamsWebSkillsPartialUpdate: (
+      teamId: string,
+      webSkillId: string,
+      request: VoTeamWebSkillPatchRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWebSkillPackageSummary, any>({
+        path: `/api/v1/teams/${teamId}/web-skills/${webSkillId}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsWebSkillsBundleDetail
+     * @summary Read a team web skill package bundle
+     * @request GET:/api/v1/teams/{teamId}/web-skills/{webSkillId}/bundle
+     */
+    v1TeamsWebSkillsBundleDetail: (teamId: string, webSkillId: string, params: RequestParams = {}) =>
+      this.request<VoTeamWebSkillBundleResponse, any>({
+        path: `/api/v1/teams/${teamId}/web-skills/${webSkillId}/bundle`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsWebSkillsCloneCreate
+     * @summary Clone a web skill package into the current team
+     * @request POST:/api/v1/teams/{teamId}/web-skills/{webSkillId}/clone
+     */
+    v1TeamsWebSkillsCloneCreate: (
+      teamId: string,
+      webSkillId: string,
+      request: VoTeamWebSkillCloneRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoWebSkillPackageSummary, any>({
+        path: `/api/v1/teams/${teamId}/web-skills/${webSkillId}/clone`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsWebSkillsFeedbackCreate
+     * @summary Record team web skill feedback
+     * @request POST:/api/v1/teams/{teamId}/web-skills/{webSkillId}/feedback
+     */
+    v1TeamsWebSkillsFeedbackCreate: (
+      teamId: string,
+      webSkillId: string,
+      request: VoTeamWebSkillFeedbackRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoSimpleOKResponse, any>({
+        path: `/api/v1/teams/${teamId}/web-skills/${webSkillId}/feedback`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsWebSkillsFilesReadCreate
+     * @summary Read one team web skill package file
+     * @request POST:/api/v1/teams/{teamId}/web-skills/{webSkillId}/files/read
+     */
+    v1TeamsWebSkillsFilesReadCreate: (
+      teamId: string,
+      webSkillId: string,
+      request: VoTeamWebSkillFileReadRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<VoTeamWebSkillFileReadResponse, any>({
+        path: `/api/v1/teams/${teamId}/web-skills/${webSkillId}/files/read`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
