@@ -8680,11 +8680,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Lists BotWorks team membership only. It does not include Arcubase organization departments or roles; use members-search for "who is in this department" or "who has this role/identity".
      *
      * @tags Teams
      * @name V1TeamsMembersDetail
-     * @summary List team members
+     * @summary List team members without organization department or role assignments
      * @request GET:/api/v1/teams/{teamId}/members
      */
     v1TeamsMembersDetail: (teamId: string, params: RequestParams = {}) =>
@@ -9070,11 +9070,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Use this command for "who is in this department" and "who has this role/identity". Body must use departmentIds array, roleIds array, or query.
      *
      * @tags Teams
      * @name V1TeamsOrganizationMembersSearchCreate
-     * @summary Search BotWorks organization members by department or role
+     * @summary Search BotWorks organization members by departmentIds, roleIds, or query
      * @request POST:/api/v1/teams/{teamId}/organization/members:search
      */
     v1TeamsOrganizationMembersSearchCreate: (
