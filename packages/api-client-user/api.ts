@@ -1694,7 +1694,7 @@ export interface VoCreateArcubaseDepartmentRequest {
 }
 
 export interface VoCreateArcubaseOrganizationRoleRequest {
-  name?: string;
+  name: string;
 }
 
 export interface VoCreateCloudTeamBrowserInstanceRequest {
@@ -3201,7 +3201,7 @@ export interface VoPutTeamMemberArcubaseDepartmentsRequest {
 }
 
 export interface VoPutTeamMemberArcubaseOrganizationRolesRequest {
-  actorIds?: string[];
+  actorIds: string[];
 }
 
 export interface VoRedeemTicketBenefit {
@@ -3265,7 +3265,7 @@ export interface VoRenameArcubaseDepartmentRequest {
 }
 
 export interface VoRenameArcubaseOrganizationRoleRequest {
-  name?: string;
+  name: string;
 }
 
 export interface VoReportingNeighborItem {
