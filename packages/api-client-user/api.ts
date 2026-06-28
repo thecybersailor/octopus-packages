@@ -951,6 +951,11 @@ export interface BasePinOKVoTeamWebSkillBundleResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamWebSkillDetailResponse {
+  data?: VoTeamWebSkillDetailResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamWebSkillFileReadResponse {
   data?: VoTeamWebSkillFileReadResponse;
   trace_id?: string;
@@ -4000,9 +4005,11 @@ export interface VoTeamWebSkillCloneRequest {
   sourceWebSkillId: string;
 }
 
-export interface VoTeamWebSkillFeedbackRequest {
-  rating: string;
-  reason?: string;
+export interface VoTeamWebSkillDetailResponse {
+  feedbackRecords?: VoWebSkillFeedbackRecord[];
+  package?: VoWebSkillPackageSummary;
+  publishHistory?: VoWebSkillPublishHistoryItem[];
+  usageRecords?: VoWebSkillUsageRecord[];
 }
 
 export interface VoTeamWebSkillFileReadRequest {
@@ -4264,6 +4271,24 @@ export interface VoWebSessionToolResultRequest {
   toolCallId: string;
 }
 
+export interface VoWebSkillDigiEmployeeSummary {
+  avatarUrl?: string;
+  digiEmployeeId?: string;
+  name?: string;
+}
+
+export interface VoWebSkillFeedbackRecord {
+  conversationId?: string;
+  createdAt?: string;
+  digiEmployee?: VoWebSkillDigiEmployeeSummary;
+  digiEmployeeId?: string;
+  id?: string;
+  rating?: string;
+  reason?: string;
+  userId?: string;
+  webSkillId?: string;
+}
+
 export interface VoWebSkillPackageSummary {
   appName?: string;
   dislikes?: number;
@@ -4272,13 +4297,26 @@ export interface VoWebSkillPackageSummary {
   likes?: number;
   manifestJson?: Record<string, any>;
   match?: string;
-  name?: string;
   packageName?: string;
   pathPatterns?: string[];
   status?: string;
   summary?: string;
+  title?: string;
   tools?: VoWebSkillToolSummary[];
   usage90d?: number;
+  version?: string;
+  webSkillId?: string;
+}
+
+export interface VoWebSkillPublishHistoryItem {
+  createdAt?: string;
+  createdBy?: string;
+  entryPath?: string;
+  id?: string;
+  packageName?: string;
+  publishNote?: string;
+  status?: string;
+  title?: string;
   version?: string;
   webSkillId?: string;
 }
@@ -4294,11 +4332,11 @@ export interface VoWebSkillSearchResult {
   entryPath?: string;
   hint?: string;
   matchType?: string;
-  name?: string;
   packageName?: string;
   quality?: VoWebSkillQuality;
   score?: number;
   summary?: string;
+  title?: string;
   tools?: VoWebSkillToolSummary[];
   version?: string;
   webSkillId?: string;
@@ -4307,6 +4345,20 @@ export interface VoWebSkillSearchResult {
 export interface VoWebSkillToolSummary {
   name?: string;
   summary?: string;
+}
+
+export interface VoWebSkillUsageRecord {
+  conversationId?: string;
+  createdAt?: string;
+  digiEmployee?: VoWebSkillDigiEmployeeSummary;
+  digiEmployeeId?: string;
+  errorCode?: string;
+  id?: string;
+  ok?: boolean;
+  runtimeSessionId?: string;
+  tool?: string;
+  url?: string;
+  webSkillId?: string;
 }
 
 export interface VoWebhookEndpoint {
@@ -9923,6 +9975,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       data: {
         /** WebSkill zip package */
         file: File;
+        /** Publish note recorded in WebSkill version history */
+        publishNote: string;
       },
       params: RequestParams = {},
     ) =>
@@ -10001,21 +10055,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
-     * @name V1TeamsWebSkillsFeedbackCreate
-     * @summary Record team web skill feedback
-     * @request POST:/api/v1/teams/{teamId}/web-skills/{webSkillId}/feedback
+     * @name V1TeamsWebSkillsDetailDetail
+     * @summary Get team web skill detail
+     * @request GET:/api/v1/teams/{teamId}/web-skills/{webSkillId}/detail
      */
-    v1TeamsWebSkillsFeedbackCreate: (
-      teamId: string,
-      webSkillId: string,
-      request: VoTeamWebSkillFeedbackRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<VoSimpleOKResponse, any>({
-        path: `/api/v1/teams/${teamId}/web-skills/${webSkillId}/feedback`,
-        method: "POST",
-        body: request,
-        type: ContentType.Json,
+    v1TeamsWebSkillsDetailDetail: (teamId: string, webSkillId: string, params: RequestParams = {}) =>
+      this.request<VoTeamWebSkillDetailResponse, any>({
+        path: `/api/v1/teams/${teamId}/web-skills/${webSkillId}/detail`,
+        method: "GET",
         format: "json",
         ...params,
       }),
