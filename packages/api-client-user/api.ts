@@ -2484,6 +2484,7 @@ export interface VoInternalOrganizationDirectoryItem {
   displayName?: string;
   roleIds?: string[];
   roles?: VoInternalOrganizationDirectoryRef[];
+  status?: string;
   userId?: string;
 }
 
@@ -3302,6 +3303,7 @@ export interface VoRenameArcubaseOrganizationRoleRequest {
 }
 
 export interface VoReportingNeighborItem {
+  arcubaseUserId?: string;
   avatar?: string;
   digiEmployeeId?: string;
   name?: string;
@@ -3310,6 +3312,7 @@ export interface VoReportingNeighborItem {
 }
 
 export interface VoReportingNeighborSelf {
+  arcubaseUserId?: string;
   avatar?: string;
   digiEmployeeId?: string;
   name?: string;
@@ -4270,6 +4273,7 @@ export interface VoWebSkillPackageSummary {
   manifestJson?: Record<string, any>;
   match?: string;
   name?: string;
+  packageName?: string;
   pathPatterns?: string[];
   status?: string;
   summary?: string;
@@ -4291,6 +4295,7 @@ export interface VoWebSkillSearchResult {
   hint?: string;
   matchType?: string;
   name?: string;
+  packageName?: string;
   quality?: VoWebSkillQuality;
   score?: number;
   summary?: string;
@@ -9918,8 +9923,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       data: {
         /** WebSkill zip package */
         file: File;
-        /** Existing WebSkill ID for update */
-        webSkillId?: string;
       },
       params: RequestParams = {},
     ) =>
