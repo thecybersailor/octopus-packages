@@ -931,6 +931,11 @@ export interface BasePinOKVoTeamPrivateDigiWorkerResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamSkillUploadResponse {
+  data?: VoTeamSkillUploadResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamSubscribeSummaryResponse {
   data?: VoTeamSubscribeSummaryResponse;
   trace_id?: string;
@@ -1232,6 +1237,7 @@ export interface VoAdminScanSkillsResponse {
 
 export interface VoAdminSkill {
   assembledToCurrentDigiEmployee?: boolean;
+  assemblyKind?: string;
   assemblyNextSystemAdminArgs?: string[];
   assemblyNextSystemAdminCommand?: string;
   assemblyStatus?: string;
@@ -3930,6 +3936,15 @@ export interface VoTeamRootScope {
   externalUserId?: string;
   uploadId?: string;
   workspaceIdent?: string;
+}
+
+export interface VoTeamSkillUploadRequest {
+  content: string;
+  slug: string;
+}
+
+export interface VoTeamSkillUploadResponse {
+  skill?: VoAdminSkill;
 }
 
 export interface VoTeamStorageEntry {
@@ -9476,6 +9491,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v1TeamsSkillsScanCreate: (teamId: string, request: VoAdminScanSkillsRequest, params: RequestParams = {}) =>
       this.request<BasePinOKVoAdminScanSkillsResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/skills/scan`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsSkillsUploadCreate
+     * @summary Upload one team skill markdown and upsert it into DB (team user, team-scoped)
+     * @request POST:/api/v1/teams/{teamId}/skills/upload
+     */
+    v1TeamsSkillsUploadCreate: (teamId: string, request: VoTeamSkillUploadRequest, params: RequestParams = {}) =>
+      this.request<BasePinOKVoTeamSkillUploadResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/skills/upload`,
         method: "POST",
         body: request,
         type: ContentType.Json,
