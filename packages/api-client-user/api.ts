@@ -1919,6 +1919,7 @@ export interface VoCreateTeamPrivateDigiWorkerRequest {
 export interface VoCreateTeamRequest {
   bootstrapConversationId?: string;
   locale?: string;
+  memberDisplayName?: string;
   name?: string;
 }
 
