@@ -931,6 +931,16 @@ export interface BasePinOKVoTeamPrivateDigiWorkerResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoTeamSkillPackageUploadResponse {
+  data?: VoTeamSkillPackageUploadResponse;
+  trace_id?: string;
+}
+
+export interface BasePinOKVoTeamSkillUploadResponse {
+  data?: VoTeamSkillUploadResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoTeamSubscribeSummaryResponse {
   data?: VoTeamSubscribeSummaryResponse;
   trace_id?: string;
@@ -1232,6 +1242,7 @@ export interface VoAdminScanSkillsResponse {
 
 export interface VoAdminSkill {
   assembledToCurrentDigiEmployee?: boolean;
+  assemblyKind?: string;
   assemblyNextSystemAdminArgs?: string[];
   assemblyNextSystemAdminCommand?: string;
   assemblyStatus?: string;
@@ -3930,6 +3941,28 @@ export interface VoTeamRootScope {
   externalUserId?: string;
   uploadId?: string;
   workspaceIdent?: string;
+}
+
+export interface VoTeamSkillPackageUploadResponse {
+  package?: VoTeamSkillPackageUploadResult;
+  scan?: VoAdminScanSkillsResponse;
+  skill?: VoAdminSkill;
+}
+
+export interface VoTeamSkillPackageUploadResult {
+  fileCount?: number;
+  replaced?: boolean;
+  slug?: string;
+  totalBytes?: number;
+}
+
+export interface VoTeamSkillUploadRequest {
+  content: string;
+  slug: string;
+}
+
+export interface VoTeamSkillUploadResponse {
+  skill?: VoAdminSkill;
 }
 
 export interface VoTeamStorageEntry {
@@ -9469,6 +9502,35 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Teams
+     * @name V1TeamsSkillsPackageUploadCreate
+     * @summary Upload one team skill zip package and upsert it into DB (team user, team-scoped)
+     * @request POST:/api/v1/teams/{teamId}/skills/package-upload
+     */
+    v1TeamsSkillsPackageUploadCreate: (
+      teamId: string,
+      data: {
+        /** Skill zip package */
+        file: File;
+        /** Skill slug */
+        slug: string;
+        /** Replace existing package */
+        replace?: boolean;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<BasePinOKVoTeamSkillPackageUploadResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/skills/package-upload`,
+        method: "POST",
+        body: data,
+        type: ContentType.FormData,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
      * @name V1TeamsSkillsScanCreate
      * @summary Scan team skills from NAS and upsert into DB (team user, team-scoped)
      * @request POST:/api/v1/teams/{teamId}/skills/scan
@@ -9476,6 +9538,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     v1TeamsSkillsScanCreate: (teamId: string, request: VoAdminScanSkillsRequest, params: RequestParams = {}) =>
       this.request<BasePinOKVoAdminScanSkillsResponse, BasePinErr>({
         path: `/api/v1/teams/${teamId}/skills/scan`,
+        method: "POST",
+        body: request,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsSkillsUploadCreate
+     * @summary Upload one team skill markdown and upsert it into DB (team user, team-scoped)
+     * @request POST:/api/v1/teams/{teamId}/skills/upload
+     */
+    v1TeamsSkillsUploadCreate: (teamId: string, request: VoTeamSkillUploadRequest, params: RequestParams = {}) =>
+      this.request<BasePinOKVoTeamSkillUploadResponse, BasePinErr>({
+        path: `/api/v1/teams/${teamId}/skills/upload`,
         method: "POST",
         body: request,
         type: ContentType.Json,
