@@ -136,6 +136,11 @@ export interface BasePinOKVoCommitTeamBrowserLiveLoginResponse {
   trace_id?: string;
 }
 
+export interface BasePinOKVoCompanyProfileOptionsResponse {
+  data?: VoCompanyProfileOptionsResponse;
+  trace_id?: string;
+}
+
 export interface BasePinOKVoContentResponse {
   data?: VoContentResponse;
   trace_id?: string;
@@ -1499,6 +1504,30 @@ export interface VoCommitTeamBrowserLiveLoginResponse {
   newProfileVersion?: string;
 }
 
+export interface VoCompanyEmployeeScaleOption {
+  code?: string;
+  id?: string;
+  label?: string;
+}
+
+export interface VoCompanyIndustryCategoryOption {
+  children?: VoCompanyIndustrySubcategoryOption[];
+  code?: string;
+  id?: string;
+  label?: string;
+}
+
+export interface VoCompanyIndustrySubcategoryOption {
+  code?: string;
+  id?: string;
+  label?: string;
+}
+
+export interface VoCompanyProfileOptionsResponse {
+  employeeScales?: VoCompanyEmployeeScaleOption[];
+  industryCategories?: VoCompanyIndustryCategoryOption[];
+}
+
 export interface VoContentRequest {
   content: string;
 }
@@ -1918,6 +1947,9 @@ export interface VoCreateTeamPrivateDigiWorkerRequest {
 
 export interface VoCreateTeamRequest {
   bootstrapConversationId?: string;
+  employeeScaleId?: string;
+  industryCategoryId?: string;
+  industrySubcategoryId?: string;
   locale?: string;
   memberDisplayName?: string;
   name?: string;
@@ -3530,7 +3562,13 @@ export interface VoTeam {
   creatorPhoneMasked?: string;
   debugEnabled?: boolean;
   digiEmployeeCount?: number;
+  employeeScaleId?: string;
+  employeeScaleLabel?: string;
   id?: string;
+  industryCategoryId?: string;
+  industryCategoryLabel?: string;
+  industrySubcategoryId?: string;
+  industrySubcategoryLabel?: string;
   llmTraceEnabled?: boolean;
   localeDefault?: string;
   name?: string;
@@ -3895,6 +3933,12 @@ export interface VoTeamOrganizationProfile {
   contactEmail?: string;
   contactName?: string;
   contactPhone?: string;
+  employeeScaleId?: string;
+  employeeScaleLabel?: string;
+  industryCategoryId?: string;
+  industryCategoryLabel?: string;
+  industrySubcategoryId?: string;
+  industrySubcategoryLabel?: string;
   organizationType?: string;
   registrationName?: string;
   reviewComment?: string;
@@ -4837,6 +4881,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<any, any>({
         path: `/api/v1/chrome-browser-connections/ws`,
         method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags CompanyProfileOptions
+     * @name V1CompanyProfileOptionsList
+     * @summary Get company profile options
+     * @request GET:/api/v1/company-profile-options
+     */
+    v1CompanyProfileOptionsList: (params: RequestParams = {}) =>
+      this.request<VoCompanyProfileOptionsResponse, any>({
+        path: `/api/v1/company-profile-options`,
+        method: "GET",
+        format: "json",
         ...params,
       }),
 
