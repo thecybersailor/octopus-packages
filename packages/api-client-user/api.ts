@@ -3177,6 +3177,10 @@ export interface VoPatchTeamPrivateDigiWorkerRequest {
   toolkitKeys?: string[];
 }
 
+export interface VoPatchTeamRequest {
+  name: string;
+}
+
 export interface VoPatchTeamWebURLAppRequest {
   description?: string;
   iconUrl?: string;
@@ -5843,6 +5847,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<VoTeam, any>({
         path: `/api/v1/teams/${teamId}`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Teams
+     * @name V1TeamsPartialUpdate
+     * @summary Patch team
+     * @request PATCH:/api/v1/teams/{teamId}
+     */
+    v1TeamsPartialUpdate: (teamId: string, request: VoPatchTeamRequest, params: RequestParams = {}) =>
+      this.request<VoTeam, any>({
+        path: `/api/v1/teams/${teamId}`,
+        method: "PATCH",
+        body: request,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
